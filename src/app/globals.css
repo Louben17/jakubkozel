@@ -14,82 +14,69 @@ html {
 }
 
 body {
-  cursor: none;
   font-family: system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
+  line-height: 1.6;
 }
 
-/* Animace pro kruhy */
-@keyframes float {
-  0%, 100% { 
-    transform: translate(-50%, -50%) translateY(0px); 
-  }
-  50% { 
-    transform: translate(-50%, -50%) translateY(-20px); 
-  }
+/* Smooth transitions pro všechny prvky */
+* {
+  transition: all 0.2s ease-in-out;
 }
 
-/* Animace pro čárkované linky */
-@keyframes dash {
-  0% { 
-    stroke-dashoffset: 0; 
-  }
-  100% { 
-    stroke-dashoffset: 20; 
-  }
-}
-
-/* Pomalé otáčení outer ringů */
-.animate-spin-slow {
-  animation: spin 8s linear infinite;
-}
-
-@keyframes spin {
-  0% { 
-    transform: rotate(0deg); 
-  }
-  100% { 
-    transform: rotate(360deg); 
-  }
-}
-
-/* Responsivní úpravy */
+/* Responsivní úpravy typografie */
 @media (max-width: 768px) {
-  .text-8xl {
-    font-size: 4rem;
+  .text-6xl {
+    font-size: 3rem;
   }
   
-  .text-9xl {
-    font-size: 5rem;
-  }
-  
-  .text-4xl {
-    font-size: 2rem;
+  .text-7xl {
+    font-size: 3.5rem;
   }
   
   .text-5xl {
     font-size: 2.5rem;
   }
+  
+  .text-3xl {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .text-6xl {
+    font-size: 2.5rem;
+  }
+  
+  .text-7xl {
+    font-size: 3rem;
+  }
 }
 
 /* Vylepšení pro touch zařízení */
-@media (hover: none) {
-  body {
-    cursor: auto;
+@media (hover: none) and (pointer: coarse) {
+  .group:hover .group-hover\:scale-110 {
+    transform: scale(1);
   }
   
-  .fixed.w-4.h-4 {
-    display: none;
+  .group:hover .group-hover\:translate-x-1 {
+    transform: translateX(0);
   }
 }
 
-/* Scrollbar styling */
+/* Focus states pro přístupnost */
+a:focus,
+button:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+/* Vylepšení scrollbaru */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f8f9fa;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -99,4 +86,13 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #333;
+}
+
+/* Utility třídy */
+.max-h-32 {
+  max-height: 8rem;
+}
+
+.max-h-0 {
+  max-height: 0;
 }
