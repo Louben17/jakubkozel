@@ -104,15 +104,15 @@ export default function Home() {
         })}
       </div>
 
-      {/* Subtitle a kontakt - objeví se až po animaci - FIXNÍ POZICE DOLE */}
-      <div 
-        className={`fixed bottom-8 left-0 right-0 text-center transition-all duration-1000 z-20 ${
-          showServices ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      {/* PATIČKA - TRVALE DOLE */}
+      <footer 
+        className={`fixed bottom-0 left-0 right-0 bg-black bg-opacity-80 backdrop-blur-sm border-t border-gray-800 py-4 px-6 text-center transition-all duration-1000 z-50 ${
+          showServices ? 'opacity-100' : 'opacity-0'
         }`}
         style={{ transitionDelay: '4000ms' }}
       >
         <p 
-          className="text-xl tracking-widest text-gray-400 mb-6"
+          className="text-sm tracking-widest text-gray-400 mb-3"
           style={{ fontFamily: 'Courier New, monospace' }}
         >
           VISUAL COMMUNICATION
@@ -120,17 +120,13 @@ export default function Home() {
         
         <a 
           href="mailto:jakub@jakubkozel.cz"
-          className="inline-flex items-center space-x-3 border-2 border-white px-8 py-4 hover:bg-white hover:text-black transition-all duration-300 group text-lg"
+          className="inline-flex items-center space-x-2 border border-gray-600 hover:border-white px-4 py-2 hover:bg-white hover:text-black transition-all duration-300 text-sm"
+          style={{ fontFamily: 'Courier New, monospace' }}
         >
-          <Mail className="w-5 h-5" />
-          <span 
-            className="font-mono tracking-wider"
-            style={{ fontFamily: 'Courier New, monospace' }}
-          >
-            JAKUB@JAKUBKOZEL.CZ
-          </span>
+          <Mail className="w-4 h-4" />
+          <span>JAKUB@JAKUBKOZEL.CZ</span>
         </a>
-      </div>
+      </footer>
 
       {/* Pozadí - jemné částice */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
