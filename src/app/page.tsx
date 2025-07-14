@@ -26,7 +26,6 @@ export default function Home() {
     { icon: <Printer className="w-6 h-6" />, text: "DTP", color: "purple" }
   ];
 
-  // Vesmírné pozice pro beztíže
   const getSpacePosition = (letter: string, index: number, isKozel: boolean = false) => {
     if (animationStage === 0) {
       return { x: 0, y: 0, rotation: 0 };
@@ -50,24 +49,6 @@ export default function Home() {
     
     const key = isKozel && letter === 'K' ? 'K2' : letter;
     return spacePositions[key] || { x: 0, y: 0, rotation: 0 };
-  };
-
-  const getServicePosition = (serviceIndex: number) => {
-    if (!showServices) return { opacity: 0, scale: 0 };
-    
-    // Pozice vedle sebe na spodku
-    const positions = [
-      { x: -25, y: 20 },  // Vlevo
-      { x: 0, y: 20 },    // Střed  
-      { x: 25, y: 20 }    // Vpravo
-    ];
-    
-    return {
-      opacity: 1,
-      scale: 1,
-      x: positions[serviceIndex]?.x || 0,
-      y: positions[serviceIndex]?.y || 0
-    };
   };
 
   return (
@@ -156,7 +137,6 @@ export default function Home() {
       {/* Barevné segmenty služeb - FLIP KARTY */}
       <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 flex gap-8 z-20">
         {services.map((service, index) => {
-          const pos = getServicePosition(index);
           return (
             <div
               key={index}
