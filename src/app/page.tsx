@@ -69,7 +69,7 @@ export default function Home() {
           {letters.map((letter, index) => (
             <span
               key={index}
-              className="inline-block text-8xl lg:text-9xl font-black name-animation no-select"
+              className="inline-block text-9xl lg:text-[12rem] xl:text-[15rem] font-black name-animation no-select"
               style={{
                 fontFamily: 'Impact, "Arial Black", sans-serif',
                 transform: `translate(${getLetterPosition(index).x}vw, ${getLetterPosition(index).y}vh)`,
@@ -102,15 +102,15 @@ export default function Home() {
         })}
       </div>
 
-      {/* Subtitle a kontakt - objeví se až po animaci */}
+      {/* Subtitle a kontakt - objeví se až po animaci - FIXNÍ POZICE DOLE */}
       <div 
-        className={`absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center transition-all duration-1000 ${
+        className={`fixed bottom-8 left-0 right-0 text-center transition-all duration-1000 z-20 ${
           showServices ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
         style={{ transitionDelay: '4000ms' }}
       >
         <p 
-          className="text-lg tracking-widest text-gray-400 mb-6"
+          className="text-xl tracking-widest text-gray-400 mb-6"
           style={{ fontFamily: 'Courier New, monospace' }}
         >
           VISUAL COMMUNICATION
@@ -118,11 +118,11 @@ export default function Home() {
         
         <a 
           href="mailto:jakub@jakubkozel.cz"
-          className="inline-flex items-center space-x-3 border-2 border-white px-6 py-3 hover:bg-white hover:text-black transition-all duration-300 group"
+          className="inline-flex items-center space-x-3 border-2 border-white px-8 py-4 hover:bg-white hover:text-black transition-all duration-300 group text-lg"
         >
           <Mail className="w-5 h-5" />
           <span 
-            className="font-mono text-sm tracking-wider"
+            className="font-mono tracking-wider"
             style={{ fontFamily: 'Courier New, monospace' }}
           >
             JAKUB@JAKUBKOZEL.CZ
