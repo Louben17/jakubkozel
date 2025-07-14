@@ -69,12 +69,14 @@ export default function Home() {
           {letters.map((letter, index) => (
             <span
               key={index}
-              className="inline-block text-9xl lg:text-[12rem] xl:text-[15rem] font-black name-animation no-select"
+              className="inline-block font-black name-animation no-select"
               style={{
                 fontFamily: 'Impact, "Arial Black", sans-serif',
+                fontSize: 'clamp(4rem, 15vw, 20rem)', // Responzivní velikost
                 transform: `translate(${getLetterPosition(index).x}vw, ${getLetterPosition(index).y}vh)`,
                 textShadow: '0 0 20px rgba(255,255,255,0.3)',
-                transitionDelay: `${index * 100}ms`
+                transitionDelay: `${index * 100}ms`,
+                lineHeight: '1'
               }}
             >
               {letter}
