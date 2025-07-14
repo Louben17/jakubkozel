@@ -1,12 +1,14 @@
+"use client";
+
 import { useState, useEffect } from 'react';
 import { Palette, Layout, Printer } from 'lucide-react';
 
-export default function JakubKozelMinimal() {
+export default function Home() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [connectionProgress, setConnectionProgress] = useState(0);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
@@ -203,32 +205,6 @@ export default function JakubKozelMinimal() {
           transform: 'translate3d(0, 0, 0)'
         }}
       ></div>
-
-      {/* Custom CSS animations */}
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
-          50% { transform: translate(-50%, -50%) translateY(-20px); }
-        }
-        
-        @keyframes dash {
-          0% { stroke-dashoffset: 0; }
-          100% { stroke-dashoffset: 20; }
-        }
-        
-        .animate-spin-slow {
-          animation: spin 8s linear infinite;
-        }
-        
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        
-        body {
-          cursor: none;
-        }
-      `}</style>
     </div>
   );
 }
