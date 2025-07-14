@@ -55,10 +55,11 @@ export default function Home() {
   const getServicePosition = (serviceIndex: number) => {
     if (!showServices) return { opacity: 0, scale: 0 };
     
+    // Pozice vedle sebe na spodku
     const positions = [
-      { x: -15, y: -5 },  // Vlevo
-      { x: 15, y: -5 },   // Vpravo  
-      { x: 0, y: 10 }     // Dole
+      { x: -25, y: 20 },  // Vlevo
+      { x: 0, y: 20 },    // Střed  
+      { x: 25, y: 20 }    // Vpravo
     ];
     
     return {
@@ -152,22 +153,64 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Barevné segmenty služeb */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      {/* Barevné segmenty služeb - FLIP KARTY */}
+      <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 flex gap-8 z-20">
         {services.map((service, index) => {
           const pos = getServicePosition(index);
           return (
             <div
               key={index}
-              className={`service-circle service-animation ${service.color}`}
+              className={`flip-card transition-all duration-1000 ${
+                showServices ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+              }`}
               style={{
-                transform: `translate(${pos.x}vw, ${pos.y}vh) scale(${pos.scale})`,
-                opacity: pos.opacity,
-                transitionDelay: `${3500 + index * 300}ms`
+                transitionDelay: `${3500 + index * 300}ms`,
+                width: '200px',
+                height: '200px',
+                perspective: '1000px'
               }}
             >
-              {service.icon}
-              <span>{service.text}</span>
+              <div className="flip-card-inner">
+                {/* Přední strana */}
+                <div className={`flip-card-front service-circle-large ${service.color}`}>
+                  <div className="text-white mb-4 transform scale-125">
+                    {service.icon}
+                  </div>
+                  <h3 
+                    className="text-white text-lg font-bold text-center leading-tight"
+                    style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}
+                  >
+                    {service.text}
+                  </h3>
+                </div>
+
+                {/* Zadní strana */}
+                <div className={`flip-card-back service-circle-large ${service.color}`}>
+                  <h3 
+                    className="text-white text-sm font-bold mb-3 text-center"
+                    style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}
+                  >
+                    {service.text}
+                  </h3>
+                  <p 
+                    className="text-white text-xs text-center mb-4 leading-relaxed"
+                    style={{ fontFamily: 'system-ui, sans-serif' }}
+                  >
+                    {service.description}
+                  </p>
+                  <div className="text-center">
+                    {(service.details || []).map((detail, idx) => (
+                      <div
+                        key={idx}
+                        className="text-white text-xs py-1 border-b border-white/20 last:border-b-0"
+                        style={{ fontFamily: 'Courier New, monospace' }}
+                      >
+                        • {detail}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           );
         })}
