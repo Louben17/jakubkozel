@@ -1,55 +1,173 @@
-import { Palette, Layout, Printer } from 'lucide-react';
+"use client";
+
+import { useState, useEffect } from 'react';
+import { Palette, Layout, Printer, Mail } from 'lucide-react';
 
 export default function Home() {
+  const [animationStage, setAnimationStage] = useState(0);
+  const [showServices, setShowServices] = useState(false);
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => setAnimationStage(1), 1000); // Start spreading
+    const timer2 = setTimeout(() => setShowServices(true), 3000); // Show services
+    
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, []);
+
+  const name = "JAKUBKOZEL";
+  const letters = name.split('');
+  
+  const services = [
+    { icon: <Palette className="w-6 h-6" />, text: "GRAFIKA", color: "bg-blue-500" },
+    { icon: <Layout className="w-6 h-6" />, text: "WEB DESIGN", color: "bg-green-500" },
+    { icon: <Printer className="w-6 h-6" />, text: "DTP", color: "bg-purple-500" }
+  ];
+
+  const getLetterPosition = (index: number) => {
+    if (animationStage === 0) {
+      return { x: 0, y: 0 };
+    }
+    
+    // Rozložení písmen po celé šířce
+    const totalWidth = 90; // procenta šířky obrazovky
+    const startOffset = (100 - totalWidth) / 2;
+    const spacing = totalWidth / (letters.length - 1);
+    
+    return {
+      x: startOffset + (index * spacing) - 50, // -50 pro vycentrování
+      y: 0
+    };
+  };
+
+  const getServicePosition = (serviceIndex: number) => {
+    if (!showServices) return { opacity: 0, scale: 0 };
+    
+    // Pozice služeb mezi písmeny
+    const positions = [
+      { x: -25, y: 15 }, // Mezi JAKUB a KOZEL
+      { x: 25, y: -15 },  // Vpravo nahoře
+      { x: 0, y: 25 }     // Dole uprostřed
+    ];
+    
+    return {
+      opacity: 1,
+      scale: 1,
+      x: positions[serviceIndex]?.x || 0,
+      y: positions[serviceIndex]?.y || 0
+    };
+  };
+
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <div className="text-center py-20">
-        <h1 
-          className="text-6xl font-black mb-6"
-          style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}
-        >
-          JAKUB KOZEL
-        </h1>
+    <div className="min-h-screen bg-black text-white relative overflow-hidden flex items-center justify-center">
+      {/* Hlavní animace jména */}
+      <div className="relative">
+        {/* Písmena */}
+        <div className="relative flex items-center justify-center">
+          {letters.map((letter, index) => (
+            <span
+              key={index}
+              className="inline-block text-8xl lg:text-9xl font-black transition-all duration-2000 ease-out"
+              style={{
+                fontFamily: 'Impact, "Arial Black", sans-serif',
+                transform: `translate(${getLetterPosition(index).x}vw, ${getLetterPosition(index).y}vh)`,
+                textShadow: '0 0 20px rgba(255,255,255,0.3)',
+                transitionDelay: `${index * 100}ms`
+              }}
+            >
+              {letter}
+            </span>
+          ))}
+        </div>
+
+        {/* Barevné segmenty služeb */}
+        {services.map((service, index) => {
+          const pos = getServicePosition(index);
+          return (
+            <div
+              key={index}
+              className={`absolute ${service.color} rounded-full p-6 transition-all duration-1000 ease-out flex flex-col items-center justify-center min-w-32 h-32`}
+              style={{
+                transform: `translate(${pos.x}vw, ${pos.y}vh) scale(${pos.scale})`,
+                opacity: pos.opacity,
+                transitionDelay: `${2000 + index * 300}ms`,
+                left: '50%',
+                top: '50%',
+                marginLeft: '-4rem',
+                marginTop: '-4rem'
+              }}
+            >
+              <div className="text-white mb-2">
+                {service.icon}
+              </div>
+              <span 
+                className="text-white text-xs font-bold text-center leading-tight"
+                style={{ fontFamily: 'Courier New, monospace' }}
+              >
+                {service.text}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Subtitle a kontakt - objeví se až po animaci */}
+      <div 
+        className={`absolute bottom-20 left-1/2 transform -translate-x-1/2 text-center transition-all duration-1000 ${
+          showServices ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+        style={{ transitionDelay: '4000ms' }}
+      >
         <p 
-          className="text-xl text-gray-600 tracking-wider"
+          className="text-lg tracking-widest text-gray-400 mb-6"
           style={{ fontFamily: 'Courier New, monospace' }}
         >
           VISUAL COMMUNICATION
         </p>
-      </div>
-
-      {/* Services */}
-      <div className="max-w-4xl mx-auto px-8 py-20">
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <Palette className="w-16 h-16 mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-2">GRAFIKA</h3>
-            <p className="text-gray-600">Loga, vizuální identity, print design</p>
-          </div>
-          <div className="text-center">
-            <Layout className="w-16 h-16 mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-2">WEB DESIGN</h3>
-            <p className="text-gray-600">Moderní weby, UI/UX design</p>
-          </div>
-          <div className="text-center">
-            <Printer className="w-16 h-16 mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-2">DTP</h3>
-            <p className="text-gray-600">Sazba, katalogy, publikace</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Contact */}
-      <div className="text-center py-20 bg-gray-50">
-        <h2 className="text-3xl font-bold mb-8">Pojďme spolupracovat</h2>
+        
         <a 
           href="mailto:jakub@jakubkozel.cz"
-          className="text-lg border-2 border-black px-8 py-4 inline-block hover:bg-black hover:text-white transition-colors"
+          className="inline-flex items-center space-x-3 border-2 border-white px-6 py-3 hover:bg-white hover:text-black transition-all duration-300 group"
         >
-          jakub@jakubkozel.cz
+          <Mail className="w-5 h-5" />
+          <span 
+            className="font-mono text-sm tracking-wider"
+            style={{ fontFamily: 'Courier New, monospace' }}
+          >
+            JAKUB@JAKUBKOZEL.CZ
+          </span>
         </a>
       </div>
+
+      {/* Pozadí - jemné částice */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-20"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `twinkle ${2 + Math.random() * 3}s infinite`,
+              animationDelay: `${Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* CSS pro animace */}
+      <style jsx>{`
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.5); }
+        }
+        
+        .duration-2000 {
+          transition-duration: 2s;
+        }
+      `}</style>
     </div>
   );
 }
