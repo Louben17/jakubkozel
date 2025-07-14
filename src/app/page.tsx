@@ -1,103 +1,234 @@
-import Image from "next/image";
+import { useState, useEffect } from 'react';
+import { Palette, Layout, Printer } from 'lucide-react';
 
-export default function Home() {
+export default function JakubKozelMinimal() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [connectionProgress, setConnectionProgress] = useState(0);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setConnectionProgress(prev => (prev + 1) % 360);
+    }, 50);
+    return () => clearInterval(interval);
+  }, []);
+
+  const services = [
+    {
+      icon: <Palette className="w-12 h-12" />,
+      title: "GRAFIKA",
+      description: "Vizuální identity, loga, print design",
+      color: "border-black hover:bg-black hover:text-white",
+      position: { x: 20, y: 30 }
+    },
+    {
+      icon: <Layout className="w-12 h-12" />,
+      title: "WEB DESIGN",
+      description: "Moderní weby, UI/UX design",
+      color: "border-black hover:bg-black hover:text-white",
+      position: { x: 70, y: 20 }
+    },
+    {
+      icon: <Printer className="w-12 h-12" />,
+      title: "DTP",
+      description: "Sazba, katalogy, publikace",
+      color: "border-black hover:bg-black hover:text-white",
+      position: { x: 50, y: 70 }
+    }
+  ];
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+    <div className="min-h-screen bg-white relative overflow-hidden">
+      {/* Animated background connections */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg className="w-full h-full">
+          {/* Animated connection lines */}
+          {services.map((service, index) => {
+            const nextIndex = (index + 1) % services.length;
+            const current = services[index];
+            const next = services[nextIndex];
+            
+            return (
+              <line
+                key={index}
+                x1={`${current.position.x}%`}
+                y1={`${current.position.y}%`}
+                x2={`${next.position.x}%`}
+                y2={`${next.position.y}%`}
+                stroke="black"
+                strokeWidth="1"
+                strokeDasharray="5,5"
+                className="animate-pulse"
+                style={{
+                  animation: `dash 2s linear infinite`,
+                  animationDelay: `${index * 0.3}s`
+                }}
+              />
+            );
+          })}
+          
+          {/* Floating particles */}
+          {[...Array(5)].map((_, i) => (
+            <circle
+              key={i}
+              cx={`${20 + i * 15}%`}
+              cy={`${30 + Math.sin(connectionProgress * 0.01 + i) * 10}%`}
+              r="2"
+              fill="black"
+              opacity="0.3"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          ))}
+        </svg>
+      </div>
+
+      {/* Main content */}
+      <div className="relative z-10">
+        {/* Header with unique typography */}
+        <header className="text-center py-20 px-4">
+          <h1 
+            className="text-8xl md:text-9xl font-black tracking-tighter leading-none mb-4"
+            style={{ 
+              fontFamily: 'Impact, "Arial Black", sans-serif',
+              textShadow: '2px 2px 0px rgba(0,0,0,0.1)'
+            }}
           >
-            Read our docs
-          </a>
+            JAKUB
+          </h1>
+          <h2 
+            className="text-4xl md:text-5xl font-thin tracking-widest"
+            style={{ 
+              fontFamily: 'Courier New, monospace',
+              letterSpacing: '0.3em'
+            }}
+          >
+            KOZEL
+          </h2>
+          <div className="w-24 h-0.5 bg-black mx-auto mt-8 mb-4"></div>
+          <p 
+            className="text-sm tracking-[0.5em] uppercase"
+            style={{ fontFamily: 'Courier New, monospace' }}
+          >
+            VISUAL COMMUNICATION
+          </p>
+        </header>
+
+        {/* Interactive service circles */}
+        <div className="relative h-screen px-4">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+              style={{
+                left: `${service.position.x}%`,
+                top: `${service.position.y}%`,
+                animation: `float ${3 + index}s ease-in-out infinite`,
+                animationDelay: `${index * 0.5}s`
+              }}
+            >
+              {/* Outer ring */}
+              <div className="absolute inset-0 w-48 h-48 rounded-full border-2 border-black opacity-20 group-hover:opacity-60 transition-opacity duration-300 animate-spin-slow"></div>
+              
+              {/* Main circle */}
+              <div className={`w-40 h-40 rounded-full border-4 ${service.color} transition-all duration-500 flex flex-col items-center justify-center p-6 bg-white hover:shadow-2xl`}>
+                <div className="mb-3 transition-transform duration-300 group-hover:scale-110">
+                  {service.icon}
+                </div>
+                <h3 
+                  className="text-lg font-black tracking-wider mb-2 text-center"
+                  style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}
+                >
+                  {service.title}
+                </h3>
+                <p 
+                  className="text-xs text-center leading-tight opacity-70"
+                  style={{ fontFamily: 'Courier New, monospace' }}
+                >
+                  {service.description}
+                </p>
+              </div>
+
+              {/* Pulse effect */}
+              <div className="absolute inset-0 w-40 h-40 rounded-full border-2 border-black opacity-0 group-hover:opacity-30 animate-ping"></div>
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Footer */}
+        <footer className="text-center py-12 px-4">
+          <div className="mb-8">
+            <div className="w-px h-16 bg-black mx-auto mb-4"></div>
+            <p 
+              className="text-sm tracking-[0.3em] uppercase mb-2"
+              style={{ fontFamily: 'Courier New, monospace' }}
+            >
+              CONTACT
+            </p>
+            <p 
+              className="text-lg font-medium"
+              style={{ fontFamily: 'Courier New, monospace' }}
+            >
+              jakub@jakubkozel.cz
+            </p>
+          </div>
+          
+          <div className="flex justify-center space-x-8 mb-8">
+            <div className="w-2 h-2 bg-black rounded-full animate-pulse"></div>
+            <div className="w-2 h-2 bg-black rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></div>
+            <div className="w-2 h-2 bg-black rounded-full animate-pulse" style={{animationDelay: '0.4s'}}></div>
+          </div>
+          
+          <p 
+            className="text-xs tracking-[0.2em] uppercase opacity-50"
+            style={{ fontFamily: 'Courier New, monospace' }}
+          >
+            © 2024 — ČESKÁ REPUBLIKA
+          </p>
+        </footer>
+      </div>
+
+      {/* Mouse follower */}
+      <div 
+        className="fixed w-4 h-4 bg-black rounded-full pointer-events-none z-50 opacity-30 transition-opacity duration-300"
+        style={{
+          left: mousePosition.x - 8,
+          top: mousePosition.y - 8,
+          transform: 'translate3d(0, 0, 0)'
+        }}
+      ></div>
+
+      {/* Custom CSS animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
+          50% { transform: translate(-50%, -50%) translateY(-20px); }
+        }
+        
+        @keyframes dash {
+          0% { stroke-dashoffset: 0; }
+          100% { stroke-dashoffset: 20; }
+        }
+        
+        .animate-spin-slow {
+          animation: spin 8s linear infinite;
+        }
+        
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        body {
+          cursor: none;
+        }
+      `}</style>
     </div>
   );
 }
