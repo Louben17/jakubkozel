@@ -33,7 +33,7 @@ export default function Home() {
     }
     
     // Různé směry do vesmíru
-    const spacePositions = {
+    const spacePositions: { [key: string]: { x: number; y: number; rotation: number } } = {
       // JAKUB
       'J': { x: -40, y: -30, rotation: 45 },
       'A': { x: -25, y: -45, rotation: -30 },
