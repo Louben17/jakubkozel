@@ -69,7 +69,7 @@ export default function Home() {
           {letters.map((letter, index) => (
             <span
               key={index}
-              className="inline-block text-8xl lg:text-9xl font-black transition-all duration-2000 ease-out"
+              className="inline-block text-8xl lg:text-9xl font-black transition-all duration-2000 ease-out animate-letter select-none"
               style={{
                 fontFamily: 'Impact, "Arial Black", sans-serif',
                 transform: `translate(${getLetterPosition(index).x}vw, ${getLetterPosition(index).y}vh)`,
@@ -88,7 +88,7 @@ export default function Home() {
           return (
             <div
               key={index}
-              className={`absolute ${service.color} rounded-full p-6 transition-all duration-1000 ease-out flex flex-col items-center justify-center min-w-32 h-32`}
+              className={`absolute ${service.color} rounded-full p-6 transition-all duration-1000 ease-out flex flex-col items-center justify-center w-32 h-32 service-segment animate-service`}
               style={{
                 transform: `translate(${pos.x}vw, ${pos.y}vh) scale(${pos.scale})`,
                 opacity: pos.opacity,
