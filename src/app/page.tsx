@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Palette, Layout, Printer, Mail } from 'lucide-react';
+import { Palette, Layout, Printer } from 'lucide-react';
 
 export default function Home() {
   const [animationStage, setAnimationStage] = useState(0);
   const [showServices, setShowServices] = useState(false);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => setAnimationStage(1), 1000); // Start spreading
-    const timer2 = setTimeout(() => setShowServices(true), 3000); // Show services
+    const timer1 = setTimeout(() => setAnimationStage(1), 2000); // Začne beztíže po 2s
+    const timer2 = setTimeout(() => setShowServices(true), 4000); // Služby po 4s
     
     return () => {
       clearTimeout(timer1);
@@ -17,8 +17,8 @@ export default function Home() {
     };
   }, []);
 
-  const name = "JAKUBKOZEL";
-  const letters = name.split('');
+  const jakub = "JAKUB".split('');
+  const kozel = "KOZEL".split('');
   
   const services = [
     { icon: <Palette className="w-6 h-6" />, text: "GRAFIKA", color: "blue" },
@@ -26,30 +26,39 @@ export default function Home() {
     { icon: <Printer className="w-6 h-6" />, text: "DTP", color: "purple" }
   ];
 
-  const getLetterPosition = (index: number) => {
+  // Vesmírné pozice pro beztíže
+  const getSpacePosition = (letter: string, index: number, isKozel: boolean = false) => {
     if (animationStage === 0) {
-      return { x: 0, y: 0 };
+      return { x: 0, y: 0, rotation: 0 };
     }
     
-    // Rozložení písmen po celé šířce
-    const totalWidth = 90; // procenta šířky obrazovky
-    const startOffset = (100 - totalWidth) / 2;
-    const spacing = totalWidth / (letters.length - 1);
-    
-    return {
-      x: startOffset + (index * spacing) - 50, // -50 pro vycentrování
-      y: 0
+    // Různé směry do vesmíru
+    const spacePositions = {
+      // JAKUB
+      'J': { x: -40, y: -30, rotation: 45 },
+      'A': { x: -25, y: -45, rotation: -30 },
+      'K': { x: -10, y: 35, rotation: 60 },
+      'U': { x: 15, y: -40, rotation: -45 },
+      'B': { x: 35, y: -20, rotation: 90 },
+      // KOZEL  
+      'K2': { x: -35, y: 25, rotation: -60 },
+      'O': { x: -15, y: 40, rotation: 120 },
+      'Z': { x: 20, y: 35, rotation: -90 },
+      'E': { x: 40, y: -10, rotation: 30 },
+      'L': { x: 25, y: 45, rotation: -120 }
     };
+    
+    const key = isKozel && letter === 'K' ? 'K2' : letter;
+    return spacePositions[key] || { x: 0, y: 0, rotation: 0 };
   };
 
   const getServicePosition = (serviceIndex: number) => {
     if (!showServices) return { opacity: 0, scale: 0 };
     
-    // Pozice služeb mezi písmeny
     const positions = [
-      { x: -25, y: 15 }, // Mezi JAKUB a KOZEL
-      { x: 25, y: -15 },  // Vpravo nahoře
-      { x: 0, y: 25 }     // Dole uprostřed
+      { x: -15, y: -5 },  // Vlevo
+      { x: 15, y: -5 },   // Vpravo  
+      { x: 0, y: 10 }     // Dole
     ];
     
     return {
@@ -62,29 +71,89 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden flex items-center justify-center">
-      {/* Hlavní animace jména */}
-      <div className="relative">
-        {/* Písmena */}
-        <div className="relative flex items-center justify-center">
-          {letters.map((letter, index) => (
-            <span
-              key={index}
-              className="inline-block font-black name-animation no-select"
-              style={{
-                fontFamily: 'Impact, "Arial Black", sans-serif',
-                fontSize: 'clamp(4rem, 15vw, 20rem)', // Responzivní velikost
-                transform: `translate(${getLetterPosition(index).x}vw, ${getLetterPosition(index).y}vh)`,
-                textShadow: '0 0 20px rgba(255,255,255,0.3)',
-                transitionDelay: `${index * 100}ms`,
-                lineHeight: '1'
-              }}
-            >
-              {letter}
-            </span>
-          ))}
+      
+      {/* Vesmírné pozadí - hvězdy */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-60"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `twinkle ${2 + Math.random() * 3}s infinite`,
+              animationDelay: `${Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+      
+      {/* Hlavní jméno */}
+      <div className="relative text-center">
+        
+        {/* JAKUB - první řádek */}
+        <div className="relative mb-4">
+          {jakub.map((letter, index) => {
+            const pos = getSpacePosition(letter, index);
+            return (
+              <span
+                key={`jakub-${index}`}
+                className="inline-block font-black transition-all duration-3000 ease-out"
+                style={{
+                  fontFamily: 'Impact, "Arial Black", sans-serif',
+                  fontSize: 'clamp(3rem, 12vw, 8rem)',
+                  transform: `translate(${pos.x}vw, ${pos.y}vh) rotate(${pos.rotation}deg)`,
+                  textShadow: '0 0 30px rgba(255,255,255,0.5)',
+                  transitionDelay: `${index * 200}ms`,
+                  marginRight: animationStage === 0 ? '0.1em' : '0'
+                }}
+              >
+                {letter}
+              </span>
+            );
+          })}
         </div>
+        
+        {/* KOZEL - druhý řádek */}
+        <div className="relative">
+          {kozel.map((letter, index) => {
+            const pos = getSpacePosition(letter, index, true);
+            return (
+              <span
+                key={`kozel-${index}`}
+                className="inline-block font-black transition-all duration-3000 ease-out"
+                style={{
+                  fontFamily: 'Impact, "Arial Black", sans-serif',
+                  fontSize: 'clamp(3rem, 12vw, 8rem)',
+                  transform: `translate(${pos.x}vw, ${pos.y}vh) rotate(${pos.rotation}deg)`,
+                  textShadow: '0 0 30px rgba(255,255,255,0.5)',
+                  transitionDelay: `${(index + 5) * 200}ms`,
+                  marginRight: animationStage === 0 ? '0.1em' : '0'
+                }}
+              >
+                {letter}
+              </span>
+            );
+          })}
+        </div>
+        
+        {/* Subtitle při začátku */}
+        <div 
+          className={`mt-8 transition-opacity duration-1000 ${
+            animationStage === 0 ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <p 
+            className="text-lg tracking-widest text-gray-400"
+            style={{ fontFamily: 'Courier New, monospace' }}
+          >
+            VISUAL COMMUNICATION
+          </p>
+        </div>
+      </div>
 
-        {/* Barevné segmenty služeb */}
+      {/* Barevné segmenty služeb */}
+      <div className="absolute inset-0 flex items-center justify-center">
         {services.map((service, index) => {
           const pos = getServicePosition(index);
           return (
@@ -94,7 +163,7 @@ export default function Home() {
               style={{
                 transform: `translate(${pos.x}vw, ${pos.y}vh) scale(${pos.scale})`,
                 opacity: pos.opacity,
-                transitionDelay: `${2000 + index * 300}ms`
+                transitionDelay: `${3500 + index * 300}ms`
               }}
             >
               {service.icon}
@@ -104,44 +173,23 @@ export default function Home() {
         })}
       </div>
 
-      {/* PATIČKA - TRVALE DOLE */}
-      <footer 
-        className={`fixed bottom-0 left-0 right-0 bg-black bg-opacity-80 backdrop-blur-sm border-t border-gray-800 py-4 px-6 text-center transition-all duration-1000 z-50 ${
-          showServices ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{ transitionDelay: '4000ms' }}
-      >
-        <p 
-          className="text-sm tracking-widest text-gray-400 mb-3"
-          style={{ fontFamily: 'Courier New, monospace' }}
-        >
-          VISUAL COMMUNICATION
-        </p>
+      {/* CSS animace */}
+      <style jsx>{`
+        @keyframes twinkle {
+          0%, 100% { 
+            opacity: 0.3; 
+            transform: scale(1); 
+          }
+          50% { 
+            opacity: 1; 
+            transform: scale(1.5); 
+          }
+        }
         
-        <a 
-          href="mailto:jakub@jakubkozel.cz"
-          className="inline-flex items-center space-x-2 border border-gray-600 hover:border-white px-4 py-2 hover:bg-white hover:text-black transition-all duration-300 text-sm"
-          style={{ fontFamily: 'Courier New, monospace' }}
-        >
-          <Mail className="w-4 h-4" />
-          <span>JAKUB@JAKUBKOZEL.CZ</span>
-        </a>
-      </footer>
-
-      {/* Pozadí - jemné částice */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-20 sparkle-particle"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
+        .duration-3000 {
+          transition-duration: 3s;
+        }
+      `}</style>
     </div>
   );
 }
