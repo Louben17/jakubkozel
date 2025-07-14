@@ -21,9 +21,9 @@ export default function Home() {
   const letters = name.split('');
   
   const services = [
-    { icon: <Palette className="w-6 h-6" />, text: "GRAFIKA", color: "bg-blue-500" },
-    { icon: <Layout className="w-6 h-6" />, text: "WEB DESIGN", color: "bg-green-500" },
-    { icon: <Printer className="w-6 h-6" />, text: "DTP", color: "bg-purple-500" }
+    { icon: <Palette className="w-6 h-6" />, text: "GRAFIKA", color: "blue" },
+    { icon: <Layout className="w-6 h-6" />, text: "WEB DESIGN", color: "green" },
+    { icon: <Printer className="w-6 h-6" />, text: "DTP", color: "purple" }
   ];
 
   const getLetterPosition = (index: number) => {
@@ -69,7 +69,7 @@ export default function Home() {
           {letters.map((letter, index) => (
             <span
               key={index}
-              className="inline-block text-8xl lg:text-9xl font-black transition-all duration-2000 ease-out animate-letter select-none"
+              className="inline-block text-8xl lg:text-9xl font-black name-animation no-select"
               style={{
                 fontFamily: 'Impact, "Arial Black", sans-serif',
                 transform: `translate(${getLetterPosition(index).x}vw, ${getLetterPosition(index).y}vh)`,
@@ -88,26 +88,15 @@ export default function Home() {
           return (
             <div
               key={index}
-              className={`absolute ${service.color} rounded-full p-6 transition-all duration-1000 ease-out flex flex-col items-center justify-center w-32 h-32 service-segment animate-service`}
+              className={`service-circle service-animation ${service.color}`}
               style={{
                 transform: `translate(${pos.x}vw, ${pos.y}vh) scale(${pos.scale})`,
                 opacity: pos.opacity,
-                transitionDelay: `${2000 + index * 300}ms`,
-                left: '50%',
-                top: '50%',
-                marginLeft: '-4rem',
-                marginTop: '-4rem'
+                transitionDelay: `${2000 + index * 300}ms`
               }}
             >
-              <div className="text-white mb-2">
-                {service.icon}
-              </div>
-              <span 
-                className="text-white text-xs font-bold text-center leading-tight"
-                style={{ fontFamily: 'Courier New, monospace' }}
-              >
-                {service.text}
-              </span>
+              {service.icon}
+              <span>{service.text}</span>
             </div>
           );
         })}
@@ -146,28 +135,15 @@ export default function Home() {
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-20"
+            className="absolute w-1 h-1 bg-white rounded-full opacity-20 sparkle-particle"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animation: `twinkle ${2 + Math.random() * 3}s infinite`,
               animationDelay: `${Math.random() * 2}s`
             }}
           />
         ))}
       </div>
-
-      {/* CSS pro animace */}
-      <style jsx>{`
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.2; transform: scale(1); }
-          50% { opacity: 0.8; transform: scale(1.5); }
-        }
-        
-        .duration-2000 {
-          transition-duration: 2s;
-        }
-      `}</style>
     </div>
   );
 }
