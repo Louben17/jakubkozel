@@ -2,19 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* FORCE VELIKOST PÍSMA - DEBUG */
-span[style*="fontSize"] {
-  font-size: clamp(4rem, 15vw, 20rem) !important;
-  line-height: 1 !important;
-}
-
-/* Úplně nový CSS - reset všeho */
+/* Reset a základní styly pro bílé pozadí */
 html, body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   font-family: system-ui, sans-serif;
   overflow-x: hidden;
 }
@@ -23,187 +17,116 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Klíčové animace pro jméno */
-.name-animation {
-  transition: transform 2s ease-out, opacity 2s ease-out;
+/* Force velikost písma pro animovaná písmena */
+span[style*="fontSize"] {
+  font-size: clamp(3rem, 12vw, 8rem) !important;
+  line-height: 1 !important;
+}
+
+/* Animace pro pozadí - jemné fade */
+@keyframes fade {
+  0%, 100% { 
+    opacity: 0.2; 
+  }
+  50% { 
+    opacity: 0.6; 
+  }
+}
+
+.fade-particle {
+  animation: fade 3s infinite;
+}
+
+/* Smooth transitions pro písmenka */
+.letter-animation {
+  transition: all 3s ease-out;
   will-change: transform;
   backface-visibility: hidden;
 }
 
-/* Animace pro služby */
-.service-animation {
-  transition: all 1s ease-out;
-  will-change: transform, opacity, scale;
-  backface-visibility: hidden;
-}
-
-/* Twinkle efekt */
-@keyframes sparkle {
-  0% { 
-    opacity: 0.2; 
-    transform: scale(1); 
-  }
-  50% { 
-    opacity: 0.8; 
-    transform: scale(1.5); 
-  }
-  100% { 
-    opacity: 0.2; 
-    transform: scale(1); 
-  }
-}
-
-.sparkle-particle {
-  animation: sparkle 3s infinite;
-}
-
-/* Force barevná kolečka */
-.service-circle {
-  position: absolute !important;
-  width: 8rem !important;
-  height: 8rem !important;
-  border-radius: 50% !important;
-  padding: 1.5rem !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 1s ease-out !important;
-  margin-left: -4rem !important;
-  margin-top: -4rem !important;
-  left: 50% !important;
-  top: 50% !important;
-}
-
-.service-circle.blue {
-  background-color: #3b82f6 !important;
-}
-
-.service-circle.green {
-  background-color: #10b981 !important;
-}
-
-.service-circle.purple {
-  background-color: #8b5cf6 !important;
-}
-
-.service-circle svg {
-  color: white !important;
-  width: 1.5rem !important;
-  height: 1.5rem !important;
-  margin-bottom: 0.5rem !important;
-}
-
-.service-circle span {
-  color: white !important;
-  font-size: 0.75rem !important;
-  font-weight: bold !important;
-  text-align: center !important;
-  line-height: 1.2 !important;
-  font-family: 'Courier New', monospace !important;
-}
-
-/* Responsivní úpravy - VĚTŠÍ PÍSMO */
+/* Responsivní úpravy typografie */
 @media (max-width: 1024px) {
-  .text-9xl {
-    font-size: 6rem !important;
-  }
-  
-  .text-\[12rem\] {
-    font-size: 8rem !important;
-  }
-  
-  .text-\[15rem\] {
-    font-size: 10rem !important;
+  span[style*="fontSize"] {
+    font-size: clamp(2.5rem, 10vw, 6rem) !important;
   }
 }
 
 @media (max-width: 768px) {
-  .text-9xl {
-    font-size: 4rem !important;
+  span[style*="fontSize"] {
+    font-size: clamp(2rem, 8vw, 4rem) !important;
   }
   
-  .text-\[12rem\] {
-    font-size: 5rem !important;
+  /* Menší gap mezi sloupci služeb na mobilech */
+  .service-columns {
+    gap: 2rem !important;
   }
   
-  .text-\[15rem\] {
-    font-size: 6rem !important;
-  }
-  
-  .service-circle {
-    width: 6rem !important;
-    height: 6rem !important;
-    margin-left: -3rem !important;
-    margin-top: -3rem !important;
-    padding: 1rem !important;
-  }
-  
-  .service-circle svg {
-    width: 1.2rem !important;
-    height: 1.2rem !important;
-  }
-  
-  .service-circle span {
-    font-size: 0.65rem !important;
+  .service-columns h3 {
+    font-size: 1.2rem !important;
   }
 }
 
-@media (max-width: 480px) {
-  .text-9xl {
-    font-size: 3rem !important;
+@media (max-width: 640px) {
+  span[style*="fontSize"] {
+    font-size: clamp(1.5rem, 6vw, 3rem) !important;
   }
   
-  .text-\[12rem\] {
-    font-size: 3.5rem !important;
+  /* Ještě menší sloupce na malých mobilech */
+  .service-columns {
+    gap: 1rem !important;
+    flex-direction: column !important;
+    align-items: center !important;
   }
   
-  .text-\[15rem\] {
-    font-size: 4rem !important;
-  }
-  
-  .service-circle {
-    width: 4.5rem !important;
-    height: 4.5rem !important;
-    margin-left: -2.25rem !important;
-    margin-top: -2.25rem !important;
-    padding: 0.75rem !important;
-  }
-  
-  .service-circle svg {
-    width: 1rem !important;
-    height: 1rem !important;
-  }
-  
-  .service-circle span {
-    font-size: 0.5rem !important;
+  .service-columns h3 {
+    font-size: 1rem !important;
+    margin-bottom: 0.5rem !important;
   }
 }
 
-/* Smooth scrollbar */
+/* Smooth scrollbar pro bílé pozadí */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
+  background: #ccc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
 }
 
 /* Focus states */
 a:focus, button:focus {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid #FF9AA2;
   outline-offset: 2px;
 }
 
-/* Prevent text selection on animated elements */
+/* Prevent text selection na animovaných elementech */
 .no-select {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* Utility třídy pro služby */
+.service-columns {
+  display: flex;
+  gap: 4rem;
+  transition: all 1s ease-out;
+}
+
+/* Performance optimalizace */
+.letter-animation,
+.service-columns {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
