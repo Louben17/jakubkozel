@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Palette, Layout, Printer } from 'lucide-react';
 
 export default function Home() {
   const [animationStage, setAnimationStage] = useState(0);
@@ -20,30 +19,23 @@ export default function Home() {
   const jakub = "JAKUB".split('');
   const kozel = "KOZEL".split('');
   
-  // Služby s kompletními informacemi
-  const serviceData = [
-    {
-      icon: <Palette className="w-8 h-8" />,
-      title: "GRAFIKA",
-      color: "blue",
-      description: "Vytváření vizuálních identit, log a kompletního brandingu",
-      items: ["Loga & Branding", "Vizuální identity", "Firemní materiály", "Print design"]
-    },
-    {
-      icon: <Layout className="w-8 h-8" />,
-      title: "WEB DESIGN", 
-      color: "green",
-      description: "Moderní responzivní weby s perfektní uživatelskou zkušeností",
-      items: ["UI/UX Design", "Responzivní weby", "E-commerce", "Landing pages"]
-    },
-    {
-      icon: <Printer className="w-8 h-8" />,
-      title: "DTP",
-      color: "purple", 
-      description: "Profesionální sazba publikací a tiskových materiálů",
-      items: ["Sazba knih", "Časopisy", "Katalogy", "Brožury"]
-    }
-  ];
+  // Pastelové barvy pro písmena
+  const getLetterColor = (letter: string, index: number) => {
+    const pastelColors = [
+      '#FF9AA2', // růžová
+      '#FFB7B2', // lososová  
+      '#FFDAC1', // meruňková
+      '#E2F0CB', // světle zelená
+      '#B5EAD7', // mentolová
+      '#C7CEEA', // levandulová
+      '#A2D2FF', // světle modrá
+      '#BDB2FF', // fialová
+      '#FFC6FF', // magenta
+      '#FFABAB'  // korálová
+    ];
+    
+    return pastelColors[index % pastelColors.length];
+  };
 
   // Vesmírné pozice pro beztíže
   const getSpacePosition = (letter: string, index: number, isKozel: boolean = false) => {
@@ -69,18 +61,18 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-hidden flex items-center justify-center">
+    <div className="min-h-screen bg-white text-black relative overflow-hidden flex items-center justify-center">
       
-      {/* Vesmírné pozadí - hvězdy */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(50)].map((_, i) => (
+      {/* Jemné pozadí - decentní vzor */}
+      <div className="absolute inset-0 overflow-hidden opacity-20">
+        {[...Array(30)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-white rounded-full opacity-60"
+            className="absolute w-1 h-1 bg-gray-300 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animation: `twinkle ${2 + Math.random() * 3}s infinite`,
+              animation: `fade ${3 + Math.random() * 2}s infinite`,
               animationDelay: `${Math.random() * 2}s`
             }}
           />
@@ -101,8 +93,9 @@ export default function Home() {
                 style={{
                   fontFamily: 'Impact, "Arial Black", sans-serif',
                   fontSize: 'clamp(3rem, 12vw, 8rem)',
+                  color: getLetterColor(letter, index),
                   transform: `translate(${pos.x}vw, ${pos.y}vh) rotate(${pos.rotation}deg)`,
-                  textShadow: '0 0 30px rgba(255,255,255,0.5)',
+                  textShadow: '2px 2px 8px rgba(0,0,0,0.1)',
                   transitionDelay: `${index * 200}ms`,
                   marginRight: animationStage === 0 ? '0.1em' : '0'
                 }}
@@ -124,8 +117,9 @@ export default function Home() {
                 style={{
                   fontFamily: 'Impact, "Arial Black", sans-serif',
                   fontSize: 'clamp(3rem, 12vw, 8rem)',
+                  color: getLetterColor(letter, index + 5),
                   transform: `translate(${pos.x}vw, ${pos.y}vh) rotate(${pos.rotation}deg)`,
-                  textShadow: '0 0 30px rgba(255,255,255,0.5)',
+                  textShadow: '2px 2px 8px rgba(0,0,0,0.1)',
                   transitionDelay: `${(index + 5) * 200}ms`,
                   marginRight: animationStage === 0 ? '0.1em' : '0'
                 }}
@@ -143,7 +137,7 @@ export default function Home() {
           }`}
         >
           <p 
-            className="text-lg tracking-widest text-gray-400"
+            className="text-lg tracking-widest text-gray-600"
             style={{ fontFamily: 'Courier New, monospace' }}
           >
             VISUAL COMMUNICATION
@@ -151,76 +145,60 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Flip karty služeb */}
-      <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 flex gap-8 z-20">
-        {serviceData.map((service, index) => (
-          <div
-            key={index}
-            className={`flip-card transition-all duration-1000 ${
-              showServices ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
-            }`}
-            style={{
-              transitionDelay: `${3500 + index * 300}ms`,
-              width: '200px',
-              height: '200px',
-              perspective: '1000px'
-            }}
-          >
-            <div className="flip-card-inner">
-              {/* Přední strana */}
-              <div className={`flip-card-front service-circle-large ${service.color}`}>
-                <div className="text-white mb-4 transform scale-125">
-                  {service.icon}
-                </div>
-                <h3 
-                  className="text-white text-lg font-bold text-center leading-tight"
-                  style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}
-                >
-                  {service.title}
-                </h3>
-              </div>
-
-              {/* Zadní strana */}
-              <div className={`flip-card-back service-circle-large ${service.color}`}>
-                <h3 
-                  className="text-white text-sm font-bold mb-3 text-center"
-                  style={{ fontFamily: 'Impact, "Arial Black", sans-serif' }}
-                >
-                  {service.title}
-                </h3>
-                <p 
-                  className="text-white text-xs text-center mb-4 leading-relaxed"
-                  style={{ fontFamily: 'system-ui, sans-serif' }}
-                >
-                  {service.description}
-                </p>
-                <div className="text-center">
-                  {service.items.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="text-white text-xs py-1 border-b border-white/20 last:border-b-0"
-                      style={{ fontFamily: 'Courier New, monospace' }}
-                    >
-                      • {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+      {/* Jednoduché sloupce služeb */}
+      <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-20">
+        <div 
+          className={`flex gap-16 transition-all duration-1000 ${
+            showServices ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+          style={{ transitionDelay: '3500ms' }}
+        >
+          <div className="text-center">
+            <h3 
+              className="text-2xl font-black tracking-wider"
+              style={{ 
+                fontFamily: 'Impact, "Arial Black", sans-serif',
+                color: '#FF9AA2'
+              }}
+            >
+              GRAFIKA
+            </h3>
           </div>
-        ))}
+          
+          <div className="text-center">
+            <h3 
+              className="text-2xl font-black tracking-wider"
+              style={{ 
+                fontFamily: 'Impact, "Arial Black", sans-serif',
+                color: '#B5EAD7'
+              }}
+            >
+              WEB DESIGN
+            </h3>
+          </div>
+          
+          <div className="text-center">
+            <h3 
+              className="text-2xl font-black tracking-wider"
+              style={{ 
+                fontFamily: 'Impact, "Arial Black", sans-serif',
+                color: '#C7CEEA'
+              }}
+            >
+              DTP
+            </h3>
+          </div>
+        </div>
       </div>
 
       {/* CSS animace */}
       <style jsx>{`
-        @keyframes twinkle {
+        @keyframes fade {
           0%, 100% { 
-            opacity: 0.3; 
-            transform: scale(1); 
+            opacity: 0.2; 
           }
           50% { 
-            opacity: 1; 
-            transform: scale(1.5); 
+            opacity: 0.6; 
           }
         }
         
