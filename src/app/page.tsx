@@ -145,71 +145,99 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Vylepšené sloupce služeb */}
-      <div className="fixed bottom-12 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-5xl px-8">
+      {/* Vyčištěné služby + kontakt */}
+      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-6xl px-8">
         <div 
-          className={`grid grid-cols-1 md:grid-cols-3 gap-12 transition-all duration-1000 ${
+          className={`transition-all duration-1000 ${
             showServices ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
           style={{ transitionDelay: '3500ms' }}
         >
-          {/* GRAFIKA */}
-          <div className="text-center bg-white/70 backdrop-blur-sm rounded-xl p-8 border border-gray-100">
-            <h3 
-              className="text-3xl font-bold tracking-wide mb-6"
-              style={{ 
-                fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-                fontWeight: '700',
-                color: '#FF9AA2'
-              }}
-            >
-              GRAFIKA
-            </h3>
-            <div className="text-sm text-gray-700 space-y-2" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
-              <p>• Loga & vizuální identity</p>
-              <p>• Firemní materiály</p>
-              <p>• Plakáty & letáky</p>
-              <p>• Print design</p>
+          {/* Služby v jednom řádku */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            {/* GRAFIKA */}
+            <div className="text-center">
+              <h3 
+                className="text-2xl font-bold mb-3"
+                style={{ 
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: '700',
+                  color: '#FF9AA2'
+                }}
+              >
+                GRAFIKA
+              </h3>
+              <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
+                <p>Loga & vizuální identity</p>
+                <p>Firemní materiály</p>
+                <p>Plakáty & letáky</p>
+                <p>Print design</p>
+              </div>
+            </div>
+            
+            {/* WEB DESIGN */}
+            <div className="text-center">
+              <h3 
+                className="text-2xl font-bold mb-3"
+                style={{ 
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: '700',
+                  color: '#B5EAD7'
+                }}
+              >
+                WEB DESIGN
+              </h3>
+              <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
+                <p>Responzivní weby</p>
+                <p>UI/UX design</p>
+                <p>E-commerce řešení</p>
+                <p>Landing pages</p>
+              </div>
+            </div>
+            
+            {/* DTP */}
+            <div className="text-center">
+              <h3 
+                className="text-2xl font-bold mb-3"
+                style={{ 
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: '700',
+                  color: '#C7CEEA'
+                }}
+              >
+                DTP
+              </h3>
+              <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
+                <p>Sazba knih & časopisů</p>
+                <p>Katalogy & brožury</p>
+                <p>Výroční zprávy</p>
+                <p>Typografie</p>
+              </div>
             </div>
           </div>
-          
-          {/* WEB DESIGN */}
-          <div className="text-center bg-white/70 backdrop-blur-sm rounded-xl p-8 border border-gray-100">
-            <h3 
-              className="text-3xl font-bold tracking-wide mb-6"
-              style={{ 
-                fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-                fontWeight: '700',
-                color: '#B5EAD7'
-              }}
-            >
-              WEB DESIGN
-            </h3>
-            <div className="text-sm text-gray-700 space-y-2" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
-              <p>• Responzivní weby</p>
-              <p>• UI/UX design</p>
-              <p>• E-commerce řešení</p>
-              <p>• Landing pages</p>
-            </div>
-          </div>
-          
-          {/* DTP */}
-          <div className="text-center bg-white/70 backdrop-blur-sm rounded-xl p-8 border border-gray-100">
-            <h3 
-              className="text-3xl font-bold tracking-wide mb-6"
-              style={{ 
-                fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-                fontWeight: '700',
-                color: '#C7CEEA'
-              }}
-            >
-              DTP
-            </h3>
-            <div className="text-sm text-gray-700 space-y-2" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
-              <p>• Sazba knih & časopisů</p>
-              <p>• Katalogy & brožury</p>
-              <p>• Výroční zprávy</p>
-              <p>• Typografie</p>
+
+          {/* Kontakt */}
+          <div className="text-center">
+            <div className="inline-flex items-center gap-8 bg-white/60 backdrop-blur-sm rounded-full px-8 py-4 border border-gray-200">
+              <a 
+                href="mailto:jakub@jakubkozel.cz"
+                className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors"
+                style={{ fontFamily: 'Inter, sans-serif', fontWeight: '500' }}
+              >
+                <span className="text-lg">✉</span>
+                <span>jakubkozel@seznam.cz</span>
+              </a>
+              
+              <div className="w-px h-6 bg-gray-300"></div>
+              
+              <a 
+                href="tel:+420728890062"
+                className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors"
+                style={{ fontFamily: 'Inter, sans-serif', fontWeight: '500' }}
+              >
+                <span className="text-lg">📞</span>
+                <span>728 890 062</span>
+              </a>
             </div>
           </div>
         </div>
