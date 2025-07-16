@@ -153,10 +153,10 @@ export default function Home() {
           }`}
           style={{ transitionDelay: '3500ms' }}
         >
-          {/* Služby v jednom řádku - SKLENĚNÉ */}
+          {/* Služby v jednom řádku - ČISTÉ BEZ RÁMEČKŮ */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {/* GRAFIKA */}
-            <div className="text-center bg-white/40 backdrop-blur-md rounded-2xl p-6 border border-white/30">
+            <div className="text-center">
               <h3 
                 className="text-2xl font-bold mb-3"
                 style={{ 
@@ -176,7 +176,7 @@ export default function Home() {
             </div>
             
             {/* WEB DESIGN */}
-            <div className="text-center bg-white/40 backdrop-blur-md rounded-2xl p-6 border border-white/30">
+            <div className="text-center">
               <h3 
                 className="text-2xl font-bold mb-3"
                 style={{ 
@@ -196,7 +196,7 @@ export default function Home() {
             </div>
             
             {/* DTP */}
-            <div className="text-center bg-white/40 backdrop-blur-md rounded-2xl p-6 border border-white/30">
+            <div className="text-center">
               <h3 
                 className="text-2xl font-bold mb-3"
                 style={{ 
