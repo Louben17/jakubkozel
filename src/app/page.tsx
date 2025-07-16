@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Palette, Layout, Printer } from 'lucide-react';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Service {
   icon: React.ReactNode;
   text: string;

@@ -3,9 +3,7 @@ const nextConfig = {
   images: {
     domains: ['localhost'],
   },
-  experimental: {
-    appDir: true,
-  },
+  // Odstranil experimental.appDir - není potřeba v Next.js 15
 }
 
 module.exports = nextConfig
