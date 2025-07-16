@@ -116,51 +116,51 @@ a:focus, button:focus {
   user-select: none;
 }
 
-/* Utility třídy pro služby */
+/* Utility třídy pro služby - BEZ STÍNŮ */
 .service-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(8px);
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  border: 1px solid rgba(229, 231, 235, 1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  border: 1px solid rgba(229, 231, 235, 0.6);
   transition: all 0.3s ease;
 }
 
 .service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(229, 231, 235, 0.8);
 }
 
 /* Responsivní úpravy pro service karty */
 @media (max-width: 768px) {
   .service-card {
-    padding: 1rem;
+    padding: 1.5rem;
   }
   
   .service-card h3 {
     font-size: 1.5rem !important;
-    margin-bottom: 0.75rem !important;
+    margin-bottom: 1rem !important;
   }
   
   .service-card p {
-    font-size: 0.75rem !important;
+    font-size: 0.8rem !important;
   }
 }
 
 @media (max-width: 640px) {
   .service-card {
-    padding: 0.75rem;
+    padding: 1rem;
     margin-bottom: 1rem;
   }
   
   .service-card h3 {
     font-size: 1.25rem !important;
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.75rem !important;
   }
   
   .service-card p {
-    font-size: 0.7rem !important;
+    font-size: 0.75rem !important;
   }
   
   /* Na malých mobilech budou karty pod sebou */

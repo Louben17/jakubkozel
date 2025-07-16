@@ -91,13 +91,13 @@ export default function Home() {
                 key={`jakub-${index}`}
                 className="inline-block font-black transition-all duration-3000 ease-out"
                 style={{
-                  fontFamily: 'Impact, "Arial Black", sans-serif',
+                  fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                   fontSize: 'clamp(3rem, 12vw, 8rem)',
                   color: getLetterColor(letter, index),
                   transform: `translate(${pos.x}vw, ${pos.y}vh) rotate(${pos.rotation}deg)`,
-                  textShadow: '2px 2px 8px rgba(0,0,0,0.1)',
                   transitionDelay: `${index * 200}ms`,
-                  marginRight: animationStage === 0 ? '0.1em' : '0'
+                  marginRight: animationStage === 0 ? '0.1em' : '0',
+                  fontWeight: '800'
                 }}
               >
                 {letter}
@@ -115,13 +115,13 @@ export default function Home() {
                 key={`kozel-${index}`}
                 className="inline-block font-black transition-all duration-3000 ease-out"
                 style={{
-                  fontFamily: 'Impact, "Arial Black", sans-serif',
+                  fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
                   fontSize: 'clamp(3rem, 12vw, 8rem)',
                   color: getLetterColor(letter, index + 5),
                   transform: `translate(${pos.x}vw, ${pos.y}vh) rotate(${pos.rotation}deg)`,
-                  textShadow: '2px 2px 8px rgba(0,0,0,0.1)',
                   transitionDelay: `${(index + 5) * 200}ms`,
-                  marginRight: animationStage === 0 ? '0.1em' : '0'
+                  marginRight: animationStage === 0 ? '0.1em' : '0',
+                  fontWeight: '800'
                 }}
               >
                 {letter}
@@ -138,7 +138,7 @@ export default function Home() {
         >
           <p 
             className="text-lg tracking-widest text-gray-600"
-            style={{ fontFamily: 'Courier New, monospace' }}
+            style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}
           >
             VISUAL COMMUNICATION
           </p>
@@ -154,17 +154,18 @@ export default function Home() {
           style={{ transitionDelay: '3500ms' }}
         >
           {/* GRAFIKA */}
-          <div className="text-center bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 shadow-lg">
+          <div className="text-center bg-white/70 backdrop-blur-sm rounded-xl p-8 border border-gray-100">
             <h3 
-              className="text-3xl font-black tracking-wider mb-4"
+              className="text-3xl font-bold tracking-wide mb-6"
               style={{ 
-                fontFamily: 'Impact, "Arial Black", sans-serif',
+                fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                fontWeight: '700',
                 color: '#FF9AA2'
               }}
             >
               GRAFIKA
             </h3>
-            <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
+            <div className="text-sm text-gray-700 space-y-2" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
               <p>• Loga & vizuální identity</p>
               <p>• Firemní materiály</p>
               <p>• Plakáty & letáky</p>
@@ -173,17 +174,18 @@ export default function Home() {
           </div>
           
           {/* WEB DESIGN */}
-          <div className="text-center bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 shadow-lg">
+          <div className="text-center bg-white/70 backdrop-blur-sm rounded-xl p-8 border border-gray-100">
             <h3 
-              className="text-3xl font-black tracking-wider mb-4"
+              className="text-3xl font-bold tracking-wide mb-6"
               style={{ 
-                fontFamily: 'Impact, "Arial Black", sans-serif',
+                fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                fontWeight: '700',
                 color: '#B5EAD7'
               }}
             >
               WEB DESIGN
             </h3>
-            <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
+            <div className="text-sm text-gray-700 space-y-2" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
               <p>• Responzivní weby</p>
               <p>• UI/UX design</p>
               <p>• E-commerce řešení</p>
@@ -192,17 +194,18 @@ export default function Home() {
           </div>
           
           {/* DTP */}
-          <div className="text-center bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 shadow-lg">
+          <div className="text-center bg-white/70 backdrop-blur-sm rounded-xl p-8 border border-gray-100">
             <h3 
-              className="text-3xl font-black tracking-wider mb-4"
+              className="text-3xl font-bold tracking-wide mb-6"
               style={{ 
-                fontFamily: 'Impact, "Arial Black", sans-serif',
+                fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                fontWeight: '700',
                 color: '#C7CEEA'
               }}
             >
               DTP
             </h3>
-            <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
+            <div className="text-sm text-gray-700 space-y-2" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
               <p>• Sazba knih & časopisů</p>
               <p>• Katalogy & brožury</p>
               <p>• Výroční zprávy</p>
