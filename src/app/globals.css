@@ -117,10 +117,59 @@ a:focus, button:focus {
 }
 
 /* Utility třídy pro služby */
-.service-columns {
-  display: flex;
-  gap: 4rem;
-  transition: all 1s ease-out;
+.service-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(229, 231, 235, 1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsivní úpravy pro service karty */
+@media (max-width: 768px) {
+  .service-card {
+    padding: 1rem;
+  }
+  
+  .service-card h3 {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .service-card p {
+    font-size: 0.75rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .service-card {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .service-card h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .service-card p {
+    font-size: 0.7rem !important;
+  }
+  
+  /* Na malých mobilech budou karty pod sebou */
+  .services-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
+  }
 }
 
 /* Performance optimalizace */

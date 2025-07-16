@@ -145,17 +145,18 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Jednoduché sloupce služeb */}
-      <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 z-20">
+      {/* Vylepšené sloupce služeb */}
+      <div className="fixed bottom-12 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-5xl px-8">
         <div 
-          className={`flex gap-16 transition-all duration-1000 ${
+          className={`grid grid-cols-1 md:grid-cols-3 gap-12 transition-all duration-1000 ${
             showServices ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
           style={{ transitionDelay: '3500ms' }}
         >
-          <div className="text-center">
+          {/* GRAFIKA */}
+          <div className="text-center bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 shadow-lg">
             <h3 
-              className="text-2xl font-black tracking-wider"
+              className="text-3xl font-black tracking-wider mb-4"
               style={{ 
                 fontFamily: 'Impact, "Arial Black", sans-serif',
                 color: '#FF9AA2'
@@ -163,11 +164,18 @@ export default function Home() {
             >
               GRAFIKA
             </h3>
+            <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
+              <p>• Loga & vizuální identity</p>
+              <p>• Firemní materiály</p>
+              <p>• Plakáty & letáky</p>
+              <p>• Print design</p>
+            </div>
           </div>
           
-          <div className="text-center">
+          {/* WEB DESIGN */}
+          <div className="text-center bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 shadow-lg">
             <h3 
-              className="text-2xl font-black tracking-wider"
+              className="text-3xl font-black tracking-wider mb-4"
               style={{ 
                 fontFamily: 'Impact, "Arial Black", sans-serif',
                 color: '#B5EAD7'
@@ -175,11 +183,18 @@ export default function Home() {
             >
               WEB DESIGN
             </h3>
+            <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
+              <p>• Responzivní weby</p>
+              <p>• UI/UX design</p>
+              <p>• E-commerce řešení</p>
+              <p>• Landing pages</p>
+            </div>
           </div>
           
-          <div className="text-center">
+          {/* DTP */}
+          <div className="text-center bg-white/80 backdrop-blur-sm rounded-lg p-6 border border-gray-200 shadow-lg">
             <h3 
-              className="text-2xl font-black tracking-wider"
+              className="text-3xl font-black tracking-wider mb-4"
               style={{ 
                 fontFamily: 'Impact, "Arial Black", sans-serif',
                 color: '#C7CEEA'
@@ -187,6 +202,12 @@ export default function Home() {
             >
               DTP
             </h3>
+            <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
+              <p>• Sazba knih & časopisů</p>
+              <p>• Katalogy & brožury</p>
+              <p>• Výroční zprávy</p>
+              <p>• Typografie</p>
+            </div>
           </div>
         </div>
       </div>
