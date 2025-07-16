@@ -116,6 +116,22 @@ a:focus, button:focus {
   user-select: none;
 }
 
+/* Skleněné služby */
+.service-glass {
+  background: rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(12px) !important;
+  border-radius: 1rem !important;
+  padding: 1.5rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.service-glass:hover {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
 /* Kontaktní rámeček */
 .contact-pill {
   background: rgba(255, 255, 255, 0.6) !important;

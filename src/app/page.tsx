@@ -153,10 +153,10 @@ export default function Home() {
           }`}
           style={{ transitionDelay: '3500ms' }}
         >
-          {/* Služby v jednom řádku */}
+          {/* Služby v jednom řádku - SKLENĚNÉ */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {/* GRAFIKA */}
-            <div className="text-center">
+            <div className="text-center bg-white/40 backdrop-blur-md rounded-2xl p-6 border border-white/30">
               <h3 
                 className="text-2xl font-bold mb-3"
                 style={{ 
@@ -167,7 +167,7 @@ export default function Home() {
               >
                 GRAFIKA
               </h3>
-              <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
+              <div className="text-sm text-gray-700 space-y-1" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
                 <p>Loga & vizuální identity</p>
                 <p>Firemní materiály</p>
                 <p>Plakáty & letáky</p>
@@ -176,7 +176,7 @@ export default function Home() {
             </div>
             
             {/* WEB DESIGN */}
-            <div className="text-center">
+            <div className="text-center bg-white/40 backdrop-blur-md rounded-2xl p-6 border border-white/30">
               <h3 
                 className="text-2xl font-bold mb-3"
                 style={{ 
@@ -187,7 +187,7 @@ export default function Home() {
               >
                 WEB DESIGN
               </h3>
-              <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
+              <div className="text-sm text-gray-700 space-y-1" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
                 <p>Responzivní weby</p>
                 <p>UI/UX design</p>
                 <p>E-commerce řešení</p>
@@ -196,7 +196,7 @@ export default function Home() {
             </div>
             
             {/* DTP */}
-            <div className="text-center">
+            <div className="text-center bg-white/40 backdrop-blur-md rounded-2xl p-6 border border-white/30">
               <h3 
                 className="text-2xl font-bold mb-3"
                 style={{ 
@@ -207,7 +207,7 @@ export default function Home() {
               >
                 DTP
               </h3>
-              <div className="text-sm text-gray-600 space-y-1" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
+              <div className="text-sm text-gray-700 space-y-1" style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}>
                 <p>Sazba knih & časopisů</p>
                 <p>Katalogy & brožury</p>
                 <p>Výroční zprávy</p>
