@@ -218,24 +218,22 @@ export default function Home() {
 
           {/* Kontakt */}
           <div className="text-center">
-            <div className="inline-flex items-center gap-8 bg-white/60 backdrop-blur-sm rounded-full px-8 py-4 border border-gray-200">
+            <div className="contact-pill">
               <a 
                 href="mailto:jakub@jakubkozel.cz"
-                className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors"
-                style={{ fontFamily: 'Inter, sans-serif', fontWeight: '500' }}
+                className="contact-link"
               >
-                <span className="text-lg">✉</span>
-                <span>jakubkozel@seznam.cz</span>
+                <span className="contact-icon">✉</span>
+                <span>jakub@jakubkozel.cz</span>
               </a>
               
-              <div className="w-px h-6 bg-gray-300"></div>
+              <div className="contact-divider"></div>
               
               <a 
                 href="tel:+420728890062"
-                className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors"
-                style={{ fontFamily: 'Inter, sans-serif', fontWeight: '500' }}
+                className="contact-link"
               >
-                <span className="text-lg">📞</span>
+                <span className="contact-icon">📞</span>
                 <span>728 890 062</span>
               </a>
             </div>
