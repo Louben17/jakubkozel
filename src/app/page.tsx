@@ -3,15 +3,6 @@
 import { useState, useEffect } from 'react';
 import { Palette, Layout, Printer } from 'lucide-react';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-interface Service {
-  icon: React.ReactNode;
-  text: string;
-  color: string;
-  description: string;
-  details: string[];
-}
-
 export default function Home() {
   const [animationStage, setAnimationStage] = useState(0);
   const [showServices, setShowServices] = useState(false);
