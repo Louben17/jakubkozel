@@ -108,6 +108,106 @@ a:focus, button:focus {
   outline-offset: 2px;
 }
 
+/* NAVIGACE STYLY */
+nav {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5) !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 50 !important;
+}
+
+.nav-container {
+  max-width: 72rem !important;
+  margin: 0 auto !important;
+  padding: 1rem 1.5rem !important;
+}
+
+.nav-flex {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.nav-logo {
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  color: #FF9AA2 !important;
+  text-decoration: none !important;
+  font-family: 'Inter, sans-serif' !important;
+}
+
+.nav-logo:hover {
+  color: #FF9AA2 !important;
+  text-decoration: none !important;
+}
+
+.nav-menu {
+  display: none !important;
+  gap: 2rem !important;
+}
+
+.nav-link {
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  color: #6b7280 !important;
+  text-decoration: none !important;
+  font-family: 'Inter, sans-serif' !important;
+  transition: color 0.3s ease !important;
+}
+
+.nav-link:hover {
+  color: #111827 !important;
+  text-decoration: none !important;
+}
+
+.nav-link.active {
+  color: #111827 !important;
+  border-bottom: 2px solid #111827 !important;
+}
+
+.nav-mobile-btn {
+  display: block !important;
+  color: #6b7280 !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.nav-mobile-menu {
+  margin-top: 1rem !important;
+  padding-bottom: 1rem !important;
+  border-top: 1px solid rgba(229, 231, 235, 0.5) !important;
+}
+
+.nav-mobile-links {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  padding-top: 1rem !important;
+}
+
+/* Desktop menu - zobrazit na větších obrazovkách */
+@media (min-width: 768px) {
+  .nav-menu {
+    display: flex !important;
+  }
+  
+  .nav-mobile-btn {
+    display: none !important;
+  }
+}
+
+/* Mobile menu responsive */
+@media (max-width: 767px) {
+  .nav-mobile-menu {
+    display: block !important;
+  }
+}
+
 /* Prevent text selection na animovaných elementech */
 .no-select {
   -webkit-user-select: none;
