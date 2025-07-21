@@ -2,11 +2,11 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Navigation from '@/components/Navigation';
 
 export default function Home() {
   const [animationStage, setAnimationStage] = useState(0);
   const [showServices, setShowServices] = useState(false);
-  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationStage(1), 2000); // Začne beztíže po 2s
@@ -20,15 +20,6 @@ export default function Home() {
 
   const jakub = "JAKUB".split('');
   const kozel = "KOZEL".split('');
-  
-  const navItems = [
-    { href: '/', label: 'Domů' },
-    { href: '/o-mne', label: 'O mně' },
-    { href: '/sluzby', label: 'Služby' },
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/kontakt', label: 'Kontakt' }
-  ];
   
   // Pastelové barvy pro písmena
   const getLetterColor = (letter: string, index: number) => {
@@ -74,58 +65,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-black relative overflow-hidden">
       
-      {/* Navigace s CSS třídami */}
-      <nav>
-        <div className="nav-container">
-          <div className="nav-flex">
-            {/* Logo */}
-            <a href="/" className="nav-logo">
-              JAKUB KOZEL
-            </a>
-
-            {/* Desktop Menu */}
-            <div className="nav-menu">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="nav-link"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              className="nav-mobile-btn"
-              onClick={() => setIsNavOpen(!isNavOpen)}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
-
-          {/* Mobile Menu */}
-          {isNavOpen && (
-            <div className="nav-mobile-menu">
-              <div className="nav-mobile-links">
-                {navItems.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className="nav-link"
-                    onClick={() => setIsNavOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </nav>
+      {/* Navigace jako komponenta */}
+      <Navigation />
 
       {/* Hlavní obsah s paddingem pro navigaci */}
       <div className="flex items-center justify-center min-h-screen pt-20">
