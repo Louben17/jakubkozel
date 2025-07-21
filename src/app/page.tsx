@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 export default function Home() {
   const [animationStage, setAnimationStage] = useState(0);
   const [showServices, setShowServices] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationStage(1), 2000); // Začne beztíže po 2s
@@ -18,6 +19,15 @@ export default function Home() {
 
   const jakub = "JAKUB".split('');
   const kozel = "KOZEL".split('');
+  
+  const navItems = [
+    { href: '/', label: 'Domů' },
+    { href: '/o-mne', label: 'O mně' },
+    { href: '/sluzby', label: 'Služby' },
+    { href: '/portfolio', label: 'Portfolio' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/kontakt', label: 'Kontakt' }
+  ];
   
   // Pastelové barvy pro písmena
   const getLetterColor = (letter: string, index: number) => {
@@ -61,92 +71,165 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black relative overflow-hidden flex items-center justify-center">
+    <div className="min-h-screen bg-white text-black relative overflow-hidden">
       
-      {/* Jemné pozadí - decentní vzor */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-gray-300 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `fade ${3 + Math.random() * 2}s infinite`,
-              animationDelay: `${Math.random() * 2}s`
-            }}
-          />
-        ))}
-      </div>
-      
-      {/* Hlavní jméno */}
-      <div className="relative text-center">
-        
-        {/* JAKUB - první řádek */}
-        <div className="relative mb-4">
-          {jakub.map((letter, index) => {
-            const pos = getSpacePosition(letter, index);
-            return (
-              <span
-                key={`jakub-${index}`}
-                className="inline-block font-black transition-all duration-3000 ease-out"
-                style={{
-                  fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-                  fontSize: 'clamp(3rem, 12vw, 8rem)',
-                  color: getLetterColor(letter, index),
-                  transform: `translate(${pos.x}vw, ${pos.y}vh) rotate(${pos.rotation}deg)`,
-                  transitionDelay: `${index * 200}ms`,
-                  marginRight: animationStage === 0 ? '0.1em' : '0',
-                  fontWeight: '800'
-                }}
-              >
-                {letter}
-              </span>
-            );
-          })}
+      {/* Navigace */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <a 
+              href="/" 
+              className="text-2xl font-bold"
+              style={{ 
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: '800',
+                color: '#FF9AA2',
+                textDecoration: 'none'
+              }}
+            >
+              JAKUB KOZEL
+            </a>
+
+            {/* Desktop Menu */}
+            <div className="hidden md:flex space-x-8">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-medium transition-colors text-gray-600 hover:text-gray-900"
+                  style={{ 
+                    fontFamily: 'Inter, sans-serif',
+                    textDecoration: 'none'
+                  }}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden text-gray-600"
+              onClick={() => setIsNavOpen(!isNavOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          {isNavOpen && (
+            <div className="md:hidden mt-4 pb-4 border-t border-gray-200">
+              <div className="flex flex-col space-y-3 pt-4">
+                {navItems.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="text-sm font-medium transition-colors text-gray-600 hover:text-gray-900"
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      textDecoration: 'none'
+                    }}
+                    onClick={() => setIsNavOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+
+      {/* Hlavní obsah s paddingem pro navigaci */}
+      <div className="flex items-center justify-center min-h-screen pt-20">
+        {/* Jemné pozadí - decentní vzor */}
+        <div className="absolute inset-0 overflow-hidden opacity-20">
+          {[...Array(30)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-gray-300 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animation: `fade ${3 + Math.random() * 2}s infinite`,
+                animationDelay: `${Math.random() * 2}s`
+              }}
+            />
+          ))}
         </div>
         
-        {/* KOZEL - druhý řádek */}
-        <div className="relative">
-          {kozel.map((letter, index) => {
-            const pos = getSpacePosition(letter, index, true);
-            return (
-              <span
-                key={`kozel-${index}`}
-                className="inline-block font-black transition-all duration-3000 ease-out"
-                style={{
-                  fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-                  fontSize: 'clamp(3rem, 12vw, 8rem)',
-                  color: getLetterColor(letter, index + 5),
-                  transform: `translate(${pos.x}vw, ${pos.y}vh) rotate(${pos.rotation}deg)`,
-                  transitionDelay: `${(index + 5) * 200}ms`,
-                  marginRight: animationStage === 0 ? '0.1em' : '0',
-                  fontWeight: '800'
-                }}
-              >
-                {letter}
-              </span>
-            );
-          })}
-        </div>
-        
-        {/* Subtitle při začátku */}
-        <div 
-          className={`mt-8 transition-opacity duration-1000 ${
-            animationStage === 0 ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <p 
-            className="text-lg tracking-widest text-gray-600"
-            style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}
+        {/* Hlavní jméno */}
+        <div className="relative text-center">
+          
+          {/* JAKUB - první řádek */}
+          <div className="relative mb-4">
+            {jakub.map((letter, index) => {
+              const pos = getSpacePosition(letter, index);
+              return (
+                <span
+                  key={`jakub-${index}`}
+                  className="inline-block font-black transition-all duration-3000 ease-out"
+                  style={{
+                    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                    fontSize: 'clamp(3rem, 12vw, 8rem)',
+                    color: getLetterColor(letter, index),
+                    transform: `translate(${pos.x}vw, ${pos.y}vh) rotate(${pos.rotation}deg)`,
+                    transitionDelay: `${index * 200}ms`,
+                    marginRight: animationStage === 0 ? '0.1em' : '0',
+                    fontWeight: '800'
+                  }}
+                >
+                  {letter}
+                </span>
+              );
+            })}
+          </div>
+          
+          {/* KOZEL - druhý řádek */}
+          <div className="relative">
+            {kozel.map((letter, index) => {
+              const pos = getSpacePosition(letter, index, true);
+              return (
+                <span
+                  key={`kozel-${index}`}
+                  className="inline-block font-black transition-all duration-3000 ease-out"
+                  style={{
+                    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                    fontSize: 'clamp(3rem, 12vw, 8rem)',
+                    color: getLetterColor(letter, index + 5),
+                    transform: `translate(${pos.x}vw, ${pos.y}vh) rotate(${pos.rotation}deg)`,
+                    transitionDelay: `${(index + 5) * 200}ms`,
+                    marginRight: animationStage === 0 ? '0.1em' : '0',
+                    fontWeight: '800'
+                  }}
+                >
+                  {letter}
+                </span>
+              );
+            })}
+          </div>
+          
+          {/* Subtitle při začátku */}
+          <div 
+            className={`mt-8 transition-opacity duration-1000 ${
+              animationStage === 0 ? 'opacity-100' : 'opacity-0'
+            }`}
           >
-            VISUAL COMMUNICATION
-          </p>
+            <p 
+              className="text-lg tracking-widest text-gray-600"
+              style={{ fontFamily: 'Inter, sans-serif', fontWeight: '400' }}
+            >
+              VISUAL COMMUNICATION
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Vyčištěné služby + kontakt */}
-      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-6xl px-8">
+      <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-6xl px-8">
         <div 
           className={`transition-all duration-1000 ${
             showServices ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
