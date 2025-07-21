@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Home() {
   const [animationStage, setAnimationStage] = useState(0);
   const [showServices, setShowServices] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const timer1 = setTimeout(() => setAnimationStage(1), 2000); // Začne beztíže po 2s
@@ -78,33 +81,33 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <a 
+            <Link 
               href="/" 
-              className="text-2xl font-bold"
+              className="text-2xl font-bold no-underline"
               style={{ 
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: '800',
-                color: '#FF9AA2',
-                textDecoration: 'none'
+                color: '#FF9AA2'
               }}
             >
               JAKUB KOZEL
-            </a>
+            </Link>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium transition-colors text-gray-600 hover:text-gray-900"
-                  style={{ 
-                    fontFamily: 'Inter, sans-serif',
-                    textDecoration: 'none'
-                  }}
+                  className={`text-sm font-medium transition-colors no-underline ${
+                    pathname === item.href
+                      ? 'text-gray-900 border-b-2 border-gray-900'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                  style={{ fontFamily: 'Inter, sans-serif' }}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
 
@@ -124,18 +127,19 @@ export default function Home() {
             <div className="md:hidden mt-4 pb-4 border-t border-gray-200">
               <div className="flex flex-col space-y-3 pt-4">
                 {navItems.map((item) => (
-                  <a
+                  <Link
                     key={item.href}
                     href={item.href}
-                    className="text-sm font-medium transition-colors text-gray-600 hover:text-gray-900"
-                    style={{ 
-                      fontFamily: 'Inter, sans-serif',
-                      textDecoration: 'none'
-                    }}
+                    className={`text-sm font-medium transition-colors no-underline ${
+                      pathname === item.href
+                        ? 'text-gray-900'
+                        : 'text-gray-600 hover:text-gray-900'
+                    }`}
+                    style={{ fontFamily: 'Inter, sans-serif' }}
                     onClick={() => setIsNavOpen(false)}
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
