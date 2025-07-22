@@ -10,209 +10,135 @@ export default function KontaktPage() {
   return (
     <React.Fragment>
       <Navigation />
-      <div className="min-h-screen bg-white pt-24 pb-16">
+      
+      <div className="min-h-screen bg-white pt-32 pb-16">
         <div className="max-w-4xl mx-auto px-6">
           
-          {/* Header */}
-          <div className="text-center mb-16">
+          {/* Hlavní nadpis */}
+          <div className="text-center mb-24">
             <h1 
-              className="text-5xl font-bold mb-6"
+              className="text-6xl md:text-8xl font-bold mb-8"
               style={{ 
                 fontFamily: 'Inter, sans-serif',
                 fontWeight: '800',
-                color: '#A2D2FF'
+                background: 'linear-gradient(135deg, #FF9AA2, #A2D2FF)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
               }}
             >
               KONTAKT
             </h1>
             <p 
-              className="text-xl text-gray-600 max-w-2xl mx-auto"
+              className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
-              Pojďme si popovídat o vašem projektu. Napište nebo zavolejte!
+              Pojďme si popovídat o vašem projektu
             </p>
           </div>
 
-          {/* Kontaktní informace */}
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            
-            {/* Email */}
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 border border-blue-100">
-              <div 
-                className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #A2D2FF, #BDB2FF)' }}
-              >
-                <span className="text-white text-2xl">✉</span>
-              </div>
-              <h3 
-                className="text-2xl font-bold mb-4"
-                style={{ 
-                  fontFamily: 'Inter, sans-serif',
-                  color: '#333'
-                }}
-              >
-                Email
-              </h3>
+          {/* Kontaktní informace - čistý design */}
+          <div className="flex justify-center mb-32">
+            <div className="contact-pill">
+              
+              {/* Email */}
               <a 
                 href="mailto:jakubkozel@seznam.cz"
-                className="text-lg text-blue-600 hover:text-blue-800 transition-colors"
-                style={{ 
-                  fontFamily: 'Inter, sans-serif',
-                  textDecoration: 'none'
-                }}
+                className="contact-link group"
               >
-                jakubkozel@seznam.cz
+                <span className="contact-icon">✉</span>
+                <span className="group-hover:scale-105 transition-transform">
+                  jakubkozel@seznam.cz
+                </span>
               </a>
-              <p className="text-gray-600 mt-4" style={{ fontFamily: 'Inter, sans-serif' }}>
-                Odpovídám obvykle do 24 hodin
-              </p>
-            </div>
 
-            {/* Telefon */}
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-green-50 to-blue-50 border border-green-100">
-              <div 
-                className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #B5EAD7, #A2D2FF)' }}
-              >
-                <span className="text-white text-2xl">📞</span>
-              </div>
-              <h3 
-                className="text-2xl font-bold mb-4"
-                style={{ 
-                  fontFamily: 'Inter, sans-serif',
-                  color: '#333'
-                }}
-              >
-                Telefon
-              </h3>
+              {/* Oddělovač */}
+              <div className="contact-divider"></div>
+
+              {/* Telefon */}
               <a 
                 href="tel:+420728890062"
-                className="text-lg text-green-600 hover:text-green-800 transition-colors"
-                style={{ 
-                  fontFamily: 'Inter, sans-serif',
-                  textDecoration: 'none'
-                }}
+                className="contact-link group"
               >
-                728 890 062
-              </a>
-              <p className="text-gray-600 mt-4" style={{ fontFamily: 'Inter, sans-serif' }}>
-                Volejte v pracovní dny 9-18h
-              </p>
-            </div>
-          </div>
-
-          {/* Služby overview */}
-          <div className="text-center mb-16">
-            <h2 
-              className="text-3xl font-bold mb-8"
-              style={{ 
-                fontFamily: 'Inter, sans-serif',
-                color: '#333'
-              }}
-            >
-              Co pro vás můžu udělat
-            </h2>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Grafika */}
-              <div className="p-6">
-                <h3 
-                  className="text-xl font-bold mb-3"
-                  style={{ 
-                    fontFamily: 'Inter, sans-serif',
-                    color: '#FF9AA2'
-                  }}
-                >
-                  GRAFIKA
-                </h3>
-                <div className="text-gray-600 space-y-1" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  <p>• Loga & vizuální identity</p>
-                  <p>• Firemní materiály</p>
-                  <p>• Plakáty & letáky</p>
-                  <p>• Print design</p>
-                </div>
-              </div>
-
-              {/* Web Design */}
-              <div className="p-6">
-                <h3 
-                  className="text-xl font-bold mb-3"
-                  style={{ 
-                    fontFamily: 'Inter, sans-serif',
-                    color: '#B5EAD7'
-                  }}
-                >
-                  WEB DESIGN
-                </h3>
-                <div className="text-gray-600 space-y-1" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  <p>• Responzivní weby</p>
-                  <p>• UI/UX design</p>
-                  <p>• E-commerce řešení</p>
-                  <p>• Landing pages</p>
-                </div>
-              </div>
-
-              {/* DTP */}
-              <div className="p-6">
-                <h3 
-                  className="text-xl font-bold mb-3"
-                  style={{ 
-                    fontFamily: 'Inter, sans-serif',
-                    color: '#C7CEEA'
-                  }}
-                >
-                  DTP
-                </h3>
-                <div className="text-gray-600 space-y-1" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  <p>• Sazba knih & časopisů</p>
-                  <p>• Katalogy & brožury</p>
-                  <p>• Výroční zprávy</p>
-                  <p>• Typografie</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center">
-            <h2 
-              className="text-3xl font-bold mb-6"
-              style={{ 
-                fontFamily: 'Inter, sans-serif',
-                color: '#333'
-              }}
-            >
-              Máte projekt na mysli?
-            </h2>
-            <p className="text-gray-600 mb-8 text-lg" style={{ fontFamily: 'Inter, sans-serif' }}>
-              Rád si s vámi popovídám o vašich potřebách a najdeme společně to nejlepší řešení.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a 
-                href="mailto:jakubkozel@seznam.cz"
-                className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-                style={{ 
-                  fontFamily: 'Inter, sans-serif', 
-                  fontWeight: '600',
-                  textDecoration: 'none'
-                }}
-              >
-                Napište email
+                <span className="contact-icon">📞</span>
+                <span className="group-hover:scale-105 transition-transform">
+                  728 890 062
+                </span>
               </a>
               
-              <a 
-                href="tel:+420728890062"
-                className="border-2 border-green-500 text-green-600 px-8 py-4 rounded-lg hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
+            </div>
+          </div>
+
+          {/* Služby přehled - tři sloupce ve skleněném designu */}
+          <div className="grid md:grid-cols-3 gap-8 mb-24 services-grid">
+            
+            {/* Grafika */}
+            <div className="service-glass service-card">
+              <h3 
+                className="text-2xl font-bold mb-6 text-center"
                 style={{ 
-                  fontFamily: 'Inter, sans-serif', 
-                  fontWeight: '600',
-                  textDecoration: 'none'
+                  fontFamily: 'Inter, sans-serif',
+                  color: '#FF9AA2'
                 }}
               >
-                Zavolejte
-              </a>
+                GRAFIKA
+              </h3>
+              <div className="text-gray-700 space-y-3 text-center" style={{ fontFamily: 'Inter, sans-serif' }}>
+                <p className="text-sm leading-relaxed">Loga & vizuální identity</p>
+                <p className="text-sm leading-relaxed">Firemní materiály</p>
+                <p className="text-sm leading-relaxed">Plakáty & letáky</p>
+                <p className="text-sm leading-relaxed">Print design</p>
+              </div>
             </div>
+
+            {/* Web Design */}
+            <div className="service-glass service-card">
+              <h3 
+                className="text-2xl font-bold mb-6 text-center"
+                style={{ 
+                  fontFamily: 'Inter, sans-serif',
+                  color: '#B5EAD7'
+                }}
+              >
+                WEB DESIGN
+              </h3>
+              <div className="text-gray-700 space-y-3 text-center" style={{ fontFamily: 'Inter, sans-serif' }}>
+                <p className="text-sm leading-relaxed">Responzivní weby</p>
+                <p className="text-sm leading-relaxed">UI/UX design</p>
+                <p className="text-sm leading-relaxed">E-commerce řešení</p>
+                <p className="text-sm leading-relaxed">Landing pages</p>
+              </div>
+            </div>
+
+            {/* DTP */}
+            <div className="service-glass service-card">
+              <h3 
+                className="text-2xl font-bold mb-6 text-center"
+                style={{ 
+                  fontFamily: 'Inter, sans-serif',
+                  color: '#C7CEEA'
+                }}
+              >
+                DTP
+              </h3>
+              <div className="text-gray-700 space-y-3 text-center" style={{ fontFamily: 'Inter, sans-serif' }}>
+                <p className="text-sm leading-relaxed">Sazba knih & časopisů</p>
+                <p className="text-sm leading-relaxed">Katalogy & brožury</p>
+                <p className="text-sm leading-relaxed">Výroční zprávy</p>
+                <p className="text-sm leading-relaxed">Typografie</p>
+              </div>
+            </div>
+            
+          </div>
+
+          {/* Jednoduchý CTA */}
+          <div className="text-center">
+            <p 
+              className="text-lg text-gray-600 mb-8"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              Máte projekt na mysli? Napište nebo zavolejte.
+            </p>
           </div>
 
         </div>
