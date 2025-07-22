@@ -7,8 +7,6 @@ export default function Home() {
   const [showServices, setShowServices] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-
-
   const getLetterColor = (index: number) => {
     const colors = [
       '#FF9AA2', '#FFB7B2', '#FFDAC1', '#E2F0CB', '#B5EAD7', 
@@ -25,18 +23,13 @@ export default function Home() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Simple canvas size
-    const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    
-    updateCanvasSize();
-    window.addEventListener('resize', updateCanvasSize);
+    // Canvas setup
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     let animationId: number;
     let progress = 0;
-    const duration = 4000; // 4 sekundy
+    const duration = 3000;
     let startTime: number | null = null;
 
     const drawBrushStroke = (timestamp: number) => {
@@ -47,22 +40,21 @@ export default function Home() {
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
-      // Simulace brush stroke efektu
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // BIG FIXED FONT SIZE
-      const fontSize = 150; // Much bigger fixed size
+      // MASSIVE FONT SIZE
+      const fontSize = Math.min(canvas.width * 0.12, 200);
+      const letterSpacing = fontSize * 0.8;
 
       // JAKUB
       const jakubText = 'JAKUB';
-      const letterSpacing = 120; // Fixed reasonable spacing
       const startX = centerX - (jakubText.length * letterSpacing) / 2;
 
       jakubText.split('').forEach((letter, i) => {
-        const letterProgress = Math.max(0, Math.min(1, (progress - i * 0.1) * 2));
+        const letterProgress = Math.max(0, Math.min(1, (progress - i * 0.15) * 3));
         if (letterProgress > 0) {
-          drawAnimatedLetter(ctx, letter, startX + i * letterSpacing, centerY - 100, letterProgress, getLetterColor(i), fontSize);
+          drawLetter(ctx, letter, startX + i * letterSpacing, centerY - 80, letterProgress, getLetterColor(i), fontSize);
         }
       });
 
@@ -71,17 +63,16 @@ export default function Home() {
       const kozelStartX = centerX - (kozelText.length * letterSpacing) / 2;
       
       kozelText.split('').forEach((letter, i) => {
-        const letterProgress = Math.max(0, Math.min(1, (progress - (i + 5) * 0.1) * 2));
+        const letterProgress = Math.max(0, Math.min(1, (progress - (i + 5) * 0.15) * 3));
         if (letterProgress > 0) {
-          drawAnimatedLetter(ctx, letter, kozelStartX + i * letterSpacing, centerY + 100, letterProgress, getLetterColor(i + 5), fontSize);
+          drawLetter(ctx, letter, kozelStartX + i * letterSpacing, centerY + 80, letterProgress, getLetterColor(i + 5), fontSize);
         }
       });
 
       if (progress < 1) {
         animationId = requestAnimationFrame(drawBrushStroke);
       } else {
-        // Animation complete, show services
-        setTimeout(() => setShowServices(true), 1000);
+        setTimeout(() => setShowServices(true), 500);
       }
     };
 
@@ -91,12 +82,11 @@ export default function Home() {
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('resize', updateCanvasSize);
       if (animationId) cancelAnimationFrame(animationId);
     };
   }, []);
 
-  const drawAnimatedLetter = (
+  const drawLetter = (
     ctx: CanvasRenderingContext2D, 
     letter: string, 
     x: number, 
@@ -107,56 +97,43 @@ export default function Home() {
   ) => {
     ctx.save();
     
-    // Brush texture effect
-    const gradient = ctx.createLinearGradient(x, y - fontSize/2, x, y + fontSize/2);
-    gradient.addColorStop(0, color + 'ff');
-    gradient.addColorStop(0.5, color + 'dd');
-    gradient.addColorStop(1, color + 'aa');
-    
-    ctx.fillStyle = gradient;
+    ctx.fillStyle = color;
     ctx.strokeStyle = color;
-    ctx.lineWidth = 6;
+    ctx.lineWidth = 4;
     
-    // Letter drawing with progress - BIGGER FONT SIZE
-    ctx.font = `bold ${fontSize}px var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif`;
+    // HUGE FONT
+    ctx.font = `bold ${fontSize}px var(--font-inter), sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     
-    // Brush stroke effect
     ctx.globalAlpha = progress;
-    ctx.filter = `blur(${(1 - progress) * 3}px)`;
+    ctx.filter = `blur(${(1 - progress) * 2}px)`;
     
-    // Drawing with shake effect for brush feel
-    const shake = (1 - progress) * 4;
+    // Brush shake
+    const shake = (1 - progress) * 3;
     const shakeX = (Math.random() - 0.5) * shake;
     const shakeY = (Math.random() - 0.5) * shake;
     
-    ctx.strokeText(letter, x + shakeX, y + shakeY);
     ctx.fillText(letter, x + shakeX, y + shakeY);
     
     ctx.restore();
   };
 
   return (
-    <div className="min-h-screen bg-white text-black relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden">
       
-      {/* Navigace */}
       <Navigation />
 
-      {/* Canvas pro brush stroke animaci - ISOLATED */}
+      {/* ONLY CANVAS - nothing else! */}
       <canvas
         ref={canvasRef}
         className="fixed inset-0 pointer-events-none"
-        style={{ 
-          mixBlendMode: 'normal',
-          zIndex: 15, // Higher than background, lower than nav
-          isolation: 'isolate' // CSS isolation
-        }}
+        style={{ zIndex: 15 }}
       />
 
-      {/* Jemné pozadí */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        {[...Array(30)].map((_, i) => (
+      {/* Pozadí částice */}
+      <div className="absolute inset-0 overflow-hidden opacity-20 -z-10">
+        {[...Array(20)].map((_, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-gray-300 rounded-full"
@@ -170,118 +147,58 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Fallback text - COMPLETELY HIDDEN */}
-      <div style={{ display: 'none' }}>
-        <div className="relative text-center">
-          <div className="relative mb-4">
-            {'JAKUB'.split('').map((letter, index) => (
-              <span
-                key={`jakub-${index}`}
-                className="inline-block font-black"
-                style={{
-                  fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif',
-                  fontSize: 'clamp(3rem, 12vw, 8rem)',
-                  color: getLetterColor(index),
-                  marginRight: '0.1em',
-                  fontWeight: '800'
-                }}
-              >
-                {letter}
-              </span>
-            ))}
-          </div>
-          
-          <div className="relative">
-            {'KOZEL'.split('').map((letter, index) => (
-              <span
-                key={`kozel-${index}`}
-                className="inline-block font-black"
-                style={{
-                  fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif',
-                  fontSize: 'clamp(3rem, 12vw, 8rem)',
-                  color: getLetterColor(index + 5),
-                  marginRight: '0.1em',
-                  fontWeight: '800'
-                }}
-              >
-                {letter}
-              </span>
-            ))}
-          </div>
-          
-          <div className="mt-8">
-            <p 
-              className="text-lg tracking-widest text-gray-600"
-              style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '400' }}
-            >
-              VISUAL COMMUNICATION
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Služby + kontakt */}
-      <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-6xl px-8">
-        <div 
-          className={`transition-all duration-1000 ${
-            showServices ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
-        >
-          {/* Služby */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '700', color: '#FF9AA2' }}>
-                GRAFIKA
-              </h3>
-              <div className="text-sm text-gray-700 space-y-1" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '400' }}>
-                <p>Loga & vizuální identity</p>
-                <p>Firemní materiály</p>
-                <p>Plakáty & letáky</p>
-                <p>Print design</p>
-              </div>
-            </div>
+      {/* Služby + kontakt - POUZE když animace skončí */}
+      {showServices && (
+        <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-6xl px-8">
+          <div className="opacity-100 translate-y-0 transition-all duration-1000">
             
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '700', color: '#B5EAD7' }}>
-                WEB DESIGN
-              </h3>
-              <div className="text-sm text-gray-700 space-y-1" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '400' }}>
-                <p>Responzivní weby</p>
-                <p>UI/UX design</p>
-                <p>E-commerce řešení</p>
-                <p>Landing pages</p>
+            {/* Služby */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold mb-3" style={{ color: '#FF9AA2' }}>GRAFIKA</h3>
+                <div className="text-sm text-gray-700 space-y-1">
+                  <p>Loga & vizuální identity</p>
+                  <p>Firemní materiály</p>
+                  <p>Print design</p>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <h3 className="text-2xl font-bold mb-3" style={{ color: '#B5EAD7' }}>WEB DESIGN</h3>
+                <div className="text-sm text-gray-700 space-y-1">
+                  <p>Responzivní weby</p>
+                  <p>UI/UX design</p>
+                  <p>E-commerce řešení</p>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <h3 className="text-2xl font-bold mb-3" style={{ color: '#C7CEEA' }}>DTP</h3>
+                <div className="text-sm text-gray-700 space-y-1">
+                  <p>Sazba knih & časopisů</p>
+                  <p>Katalogy & brožury</p>
+                  <p>Typografie</p>
+                </div>
               </div>
             </div>
-            
-            <div className="text-center">
-              <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '700', color: '#C7CEEA' }}>
-                DTP
-              </h3>
-              <div className="text-sm text-gray-700 space-y-1" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '400' }}>
-                <p>Sazba knih & časopisů</p>
-                <p>Katalogy & brožury</p>
-                <p>Výroční zprávy</p>
-                <p>Typografie</p>
-              </div>
-            </div>
-          </div>
 
-          {/* Kontakt */}
-          <div className="text-center">
-            <div className="contact-pill">
-              <a href="mailto:jakubkozel@seznam.cz" className="contact-link">
-                <span className="contact-icon">✉</span>
-                <span>jakubkozel@seznam.cz</span>
-              </a>
-              <div className="contact-divider"></div>
-              <a href="tel:+420728890062" className="contact-link">
-                <span className="contact-icon">📞</span>
-                <span>728 890 062</span>
-              </a>
+            {/* Kontakt */}
+            <div className="text-center">
+              <div className="contact-pill">
+                <a href="mailto:jakubkozel@seznam.cz" className="contact-link">
+                  <span className="contact-icon">✉</span>
+                  <span>jakubkozel@seznam.cz</span>
+                </a>
+                <div className="contact-divider"></div>
+                <a href="tel:+420728890062" className="contact-link">
+                  <span className="contact-icon">📞</span>
+                  <span>728 890 062</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       <style jsx>{`
         @keyframes fade {
