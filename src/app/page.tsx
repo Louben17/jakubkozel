@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 
 export default function Home() {
-  const [animationComplete, setAnimationComplete] = useState(false);
   const [showServices, setShowServices] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -81,7 +80,7 @@ export default function Home() {
       if (progress < 1) {
         animationId = requestAnimationFrame(drawBrushStroke);
       } else {
-        setAnimationComplete(true);
+        // Animation complete, show services
         setTimeout(() => setShowServices(true), 1000);
       }
     };
@@ -144,11 +143,15 @@ export default function Home() {
       {/* Navigace */}
       <Navigation />
 
-      {/* Canvas pro brush stroke animaci */}
+      {/* Canvas pro brush stroke animaci - ISOLATED */}
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 pointer-events-none z-10"
-        style={{ mixBlendMode: 'normal' }}
+        className="fixed inset-0 pointer-events-none"
+        style={{ 
+          mixBlendMode: 'normal',
+          zIndex: 15, // Higher than background, lower than nav
+          isolation: 'isolate' // CSS isolation
+        }}
       />
 
       {/* Jemné pozadí */}
@@ -167,8 +170,8 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Fallback text - SKRYTÉ během animace */}
-      <div className={`flex items-center justify-center min-h-screen pt-20 transition-opacity duration-1000 ${animationComplete ? 'opacity-0' : 'opacity-0'}`}>
+      {/* Fallback text - COMPLETELY HIDDEN */}
+      <div style={{ display: 'none' }}>
         <div className="relative text-center">
           <div className="relative mb-4">
             {'JAKUB'.split('').map((letter, index) => (
