@@ -108,109 +108,224 @@ a:focus, button:focus {
   outline-offset: 2px;
 }
 
-/* POKROČILÁ NAVIGACE CSS */
-/* Smooth transitions pro všechny navigační prvky */
-nav * {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Glassmorphism efekt pro floating nav */
-.nav-glass {
+/* MODERNÍ FLOATING NAVIGACE */
+.floating-nav {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  border-radius: 2rem !important;
+  padding: 0.75rem !important;
+  position: fixed !important;
+  top: 1.5rem !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 50 !important;
+  transition: all 0.5s ease-out !important;
 }
 
-/* Hover efekty pro nav položky */
-.nav-item {
-  position: relative;
-  overflow: hidden;
+.floating-nav.hidden {
+  transform: translateX(-50%) translateY(-100%) !important;
+  opacity: 0 !important;
 }
 
-.nav-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+.floating-nav.visible {
+  transform: translateX(-50%) translateY(0) !important;
+  opacity: 1 !important;
 }
 
-.nav-item:hover::before {
-  left: 100%;
+/* Nav items container */
+.nav-items-container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  position: relative !important;
 }
 
-/* Animace pro sliding indicator */
+/* Animovaný pozadí indikátor */
 .nav-indicator {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform, background;
+  position: absolute !important;
+  height: 3rem !important;
+  width: 80px !important;
+  border-radius: 0.75rem !important;
+  transition: all 0.3s ease-out !important;
+  z-index: 1 !important;
 }
 
-/* Tooltip animace */
-.tooltip {
-  transform: translateX(-50%) translateY(8px);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0;
-  pointer-events: none;
+/* Nav item styling */
+.nav-item {
+  position: relative !important;
+  z-index: 10 !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  font-family: 'Inter, sans-serif' !important;
+  color: #6b7280 !important;
+  display: block !important;
 }
 
-.tooltip.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+.nav-item:hover {
+  color: #111827 !important;
+  text-decoration: none !important;
+}
+
+.nav-item.active {
+  color: #111827 !important;
+  transform: scale(1.05) !important;
+}
+
+/* Tooltip styling */
+.nav-tooltip {
+  position: absolute !important;
+  top: 100% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  margin-top: 0.5rem !important;
+  background-color: #111827 !important;
+  color: white !important;
+  font-size: 0.75rem !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 0.25rem !important;
+  opacity: 0 !important;
+  transition: opacity 0.2s ease !important;
+  pointer-events: none !important;
+  white-space: nowrap !important;
+  font-family: 'Inter, sans-serif' !important;
+  z-index: 100 !important;
+}
+
+.nav-item:hover .nav-tooltip {
+  opacity: 1 !important;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  display: none !important;
+  margin-left: 0.5rem !important;
+  padding: 0.5rem !important;
+  border-radius: 0.75rem !important;
+  color: #6b7280 !important;
+  transition: all 0.3s ease !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.mobile-menu-btn:hover {
+  color: #111827 !important;
+}
+
+.mobile-menu-btn svg {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  transition: transform 0.3s ease !important;
+}
+
+.mobile-menu-btn.open svg {
+  transform: rotate(90deg) !important;
+}
+
+/* Mobile dropdown */
+.mobile-dropdown {
+  position: fixed !important;
+  top: 5rem !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 40 !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  border-radius: 1rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  padding: 1rem !important;
+  min-width: 200px !important;
+  animation: fadeInUp 0.2s ease-out !important;
+}
+
+.mobile-nav-item {
+  display: block !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0.5rem !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  transition: all 0.2s ease !important;
+  margin-bottom: 0.25rem !important;
+  text-decoration: none !important;
+  font-family: 'Inter, sans-serif' !important;
+  color: #6b7280 !important;
+}
+
+.mobile-nav-item:hover {
+  color: #111827 !important;
+  background-color: #f3f4f6 !important;
+  text-decoration: none !important;
+}
+
+.mobile-nav-item.active {
+  color: #111827 !important;
+  transform: scale(1.02) !important;
+}
+
+.mobile-nav-description {
+  font-size: 0.75rem !important;
+  color: #9ca3af !important;
+  margin-top: 0.25rem !important;
 }
 
 /* Cursor follower */
 .cursor-follower {
-  pointer-events: none;
-  mix-blend-mode: difference;
-  z-index: 9999;
+  position: fixed !important;
+  pointer-events: none !important;
+  z-index: 30 !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  opacity: 0.6 !important;
+  transition: all 0.15s ease-out !important;
 }
 
-/* Mobile menu animace */
-.mobile-menu-enter {
-  opacity: 0;
-  transform: translateY(-10px) scale(0.95);
-}
-
-.mobile-menu-enter-active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition: all 0.2s ease-out;
-}
-
-/* Responsive navigation */
+/* Responsive */
 @media (max-width: 768px) {
-  .nav-glass {
+  .floating-nav {
     padding: 0.5rem !important;
-    border-radius: 1.5rem !important;
+  }
+  
+  .mobile-menu-btn {
+    display: block !important;
   }
   
   .nav-item {
-    padding: 0.5rem 0.75rem !important;
-    font-size: 0.8rem !important;
+    display: none !important;
+  }
+  
+  .nav-indicator {
+    display: none !important;
+  }
+}
+
+/* Animace */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
   }
 }
 
 /* Performance optimalizace */
-.nav-optimized {
-  transform: translateZ(0);
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-}
-
-/* Scroll hide efekt */
-.nav-hidden {
-  transform: translateX(-50%) translateY(-100%);
-  opacity: 0;
-}
-
-.nav-visible {
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
+.floating-nav,
+.nav-indicator,
+.nav-item,
+.cursor-follower {
+  will-change: transform, opacity !important;
+  backface-visibility: hidden !important;
 }
 
 /* Prevent text selection na animovaných elementech */
