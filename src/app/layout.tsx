@@ -51,16 +51,17 @@ export default function RootLayout({
           {children}
         </main>
         
-        {/* Globální patička */}
-        <footer className="bg-white border-t border-gray-100 py-6">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <p 
-              className="text-sm text-gray-600"
-              style={{ fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif' }}
-            >
-              © {currentYear} Jakub Kozel. Všechna práva vyhrazena.
-            </p>
-          </div>
+        {/* Globální patička - nenápadná */}
+        <footer className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-10 pointer-events-none">
+          <p 
+            className="text-xs text-gray-400"
+            style={{ 
+              fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif',
+              fontSize: '0.7rem'
+            }}
+          >
+            © {currentYear} Jakub Kozel
+          </p>
         </footer>
       </body>
     </html>
