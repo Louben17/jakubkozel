@@ -26,8 +26,14 @@ export default function Home() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Responsive canvas size
+    const updateCanvasSize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    
+    updateCanvasSize();
+    window.addEventListener('resize', updateCanvasSize);
 
     let animationId: number;
     let progress = 0;
@@ -46,26 +52,29 @@ export default function Home() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
+      // Responsive font size
+      const fontSize = Math.min(canvas.width * 0.15, 150);
+
       // JAKUB
       const jakubText = 'JAKUB';
-      const letterWidth = 120;
-      const startX = centerX - (jakubText.length * letterWidth) / 2;
+      const letterSpacing = fontSize * 0.8;
+      const startX = centerX - (jakubText.length * letterSpacing) / 2;
 
       jakubText.split('').forEach((letter, i) => {
         const letterProgress = Math.max(0, Math.min(1, (progress - i * 0.1) * 2));
         if (letterProgress > 0) {
-          drawAnimatedLetter(ctx, letter, startX + i * letterWidth, centerY - 60, letterProgress, getLetterColor(i));
+          drawAnimatedLetter(ctx, letter, startX + i * letterSpacing, centerY - fontSize * 0.6, letterProgress, getLetterColor(i), fontSize);
         }
       });
 
       // KOZEL
       const kozelText = 'KOZEL';
-      const kozelStartX = centerX - (kozelText.length * letterWidth) / 2;
+      const kozelStartX = centerX - (kozelText.length * letterSpacing) / 2;
       
       kozelText.split('').forEach((letter, i) => {
         const letterProgress = Math.max(0, Math.min(1, (progress - (i + 5) * 0.1) * 2));
         if (letterProgress > 0) {
-          drawAnimatedLetter(ctx, letter, kozelStartX + i * letterWidth, centerY + 60, letterProgress, getLetterColor(i + 5));
+          drawAnimatedLetter(ctx, letter, kozelStartX + i * letterSpacing, centerY + fontSize * 0.6, letterProgress, getLetterColor(i + 5), fontSize);
         }
       });
 
@@ -83,6 +92,7 @@ export default function Home() {
 
     return () => {
       clearTimeout(timer);
+      window.removeEventListener('resize', updateCanvasSize);
       if (animationId) cancelAnimationFrame(animationId);
     };
   }, []);
@@ -93,31 +103,32 @@ export default function Home() {
     x: number, 
     y: number, 
     progress: number, 
-    color: string
+    color: string,
+    fontSize: number
   ) => {
     ctx.save();
     
     // Brush texture effect
-    const gradient = ctx.createLinearGradient(x, y - 50, x, y + 50);
+    const gradient = ctx.createLinearGradient(x, y - fontSize/2, x, y + fontSize/2);
     gradient.addColorStop(0, color + 'ff');
     gradient.addColorStop(0.5, color + 'dd');
     gradient.addColorStop(1, color + 'aa');
     
     ctx.fillStyle = gradient;
     ctx.strokeStyle = color;
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 6;
     
-    // Letter drawing with progress
-    ctx.font = `bold ${Math.min(100 * progress, 100)}px var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif`;
+    // Letter drawing with progress - BIGGER FONT SIZE
+    ctx.font = `bold ${fontSize}px var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     
     // Brush stroke effect
     ctx.globalAlpha = progress;
-    ctx.filter = `blur(${(1 - progress) * 2}px)`;
+    ctx.filter = `blur(${(1 - progress) * 3}px)`;
     
     // Drawing with shake effect for brush feel
-    const shake = (1 - progress) * 3;
+    const shake = (1 - progress) * 4;
     const shakeX = (Math.random() - 0.5) * shake;
     const shakeY = (Math.random() - 0.5) * shake;
     
@@ -156,8 +167,8 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Fallback text (skryté během animace) */}
-      <div className={`flex items-center justify-center min-h-screen pt-20 transition-opacity duration-1000 ${animationComplete ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Fallback text - SKRYTÉ během animace */}
+      <div className={`flex items-center justify-center min-h-screen pt-20 transition-opacity duration-1000 ${animationComplete ? 'opacity-0' : 'opacity-0'}`}>
         <div className="relative text-center">
           <div className="relative mb-4">
             {'JAKUB'.split('').map((letter, index) => (
