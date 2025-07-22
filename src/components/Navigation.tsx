@@ -8,10 +8,9 @@ export default function Navigation() {
 
   const navItems = [
     { href: '/', label: 'Domů' },
-    { href: '/o-mne', label: 'O mně' },
-    { href: '/sluzby', label: 'Služby' },
-    { href: '/portfolio', label: 'Portfolio' },
-    { href: '/blog', label: 'Blog' },
+    { href: '/grafika', label: 'Grafika' },
+    { href: '/webdesign', label: 'Web Design' },
+    { href: '/dtp', label: 'DTP' },
     { href: '/kontakt', label: 'Kontakt' }
   ];
 
