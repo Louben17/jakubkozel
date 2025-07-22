@@ -52,18 +52,19 @@ export default function Home() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // Responsive font size
-      const fontSize = Math.min(canvas.width * 0.15, 150);
+      // Responsive font size - MUCH BIGGER!
+      const fontSize = Math.min(canvas.width * 0.08, canvas.height * 0.12, 200);
+      console.log('Canvas size:', canvas.width, canvas.height, 'Font size:', fontSize);
 
       // JAKUB
       const jakubText = 'JAKUB';
-      const letterSpacing = fontSize * 0.8;
+      const letterSpacing = fontSize * 1.2; // Bigger spacing
       const startX = centerX - (jakubText.length * letterSpacing) / 2;
 
       jakubText.split('').forEach((letter, i) => {
         const letterProgress = Math.max(0, Math.min(1, (progress - i * 0.1) * 2));
         if (letterProgress > 0) {
-          drawAnimatedLetter(ctx, letter, startX + i * letterSpacing, centerY - fontSize * 0.6, letterProgress, getLetterColor(i), fontSize);
+          drawAnimatedLetter(ctx, letter, startX + i * letterSpacing, centerY - fontSize * 0.8, letterProgress, getLetterColor(i), fontSize);
         }
       });
 
@@ -74,7 +75,7 @@ export default function Home() {
       kozelText.split('').forEach((letter, i) => {
         const letterProgress = Math.max(0, Math.min(1, (progress - (i + 5) * 0.1) * 2));
         if (letterProgress > 0) {
-          drawAnimatedLetter(ctx, letter, kozelStartX + i * letterSpacing, centerY + fontSize * 0.6, letterProgress, getLetterColor(i + 5), fontSize);
+          drawAnimatedLetter(ctx, letter, kozelStartX + i * letterSpacing, centerY + fontSize * 0.8, letterProgress, getLetterColor(i + 5), fontSize);
         }
       });
 
