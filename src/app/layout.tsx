@@ -42,10 +42,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <html lang="cs" className="scroll-smooth">
       <body className={`${inter.variable} antialiased overflow-x-hidden`} style={{ fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif' }}>
-        {children}
+        <main>
+          {children}
+        </main>
+        
+        {/* Globální patička */}
+        <footer className="bg-white border-t border-gray-100 py-6">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <p 
+              className="text-sm text-gray-600"
+              style={{ fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif' }}
+            >
+              © {currentYear} Jakub Kozel. Všechna práva vyhrazena.
+            </p>
+          </div>
+        </footer>
       </body>
     </html>
   );
