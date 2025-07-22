@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 
 export default function Home() {
-  const [showServices, setShowServices] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const getLetterColor = (index: number) => {
@@ -71,9 +70,8 @@ export default function Home() {
 
       if (progress < 1) {
         animationId = requestAnimationFrame(drawBrushStroke);
-      } else {
-        setTimeout(() => setShowServices(true), 500);
       }
+      // Animation complete - no more actions needed
     };
 
     const timer = setTimeout(() => {
@@ -146,59 +144,6 @@ export default function Home() {
           />
         ))}
       </div>
-
-      {/* Služby + kontakt - POUZE když animace skončí */}
-      {showServices && (
-        <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-6xl px-8">
-          <div className="opacity-100 translate-y-0 transition-all duration-1000">
-            
-            {/* Služby */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-3" style={{ color: '#FF9AA2' }}>GRAFIKA</h3>
-                <div className="text-sm text-gray-700 space-y-1">
-                  <p>Loga & vizuální identity</p>
-                  <p>Firemní materiály</p>
-                  <p>Print design</p>
-                </div>
-              </div>
-              
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-3" style={{ color: '#B5EAD7' }}>WEB DESIGN</h3>
-                <div className="text-sm text-gray-700 space-y-1">
-                  <p>Responzivní weby</p>
-                  <p>UI/UX design</p>
-                  <p>E-commerce řešení</p>
-                </div>
-              </div>
-              
-              <div className="text-center">
-                <h3 className="text-2xl font-bold mb-3" style={{ color: '#C7CEEA' }}>DTP</h3>
-                <div className="text-sm text-gray-700 space-y-1">
-                  <p>Sazba knih & časopisů</p>
-                  <p>Katalogy & brožury</p>
-                  <p>Typografie</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Kontakt */}
-            <div className="text-center">
-              <div className="contact-pill">
-                <a href="mailto:jakubkozel@seznam.cz" className="contact-link">
-                  <span className="contact-icon">✉</span>
-                  <span>jakubkozel@seznam.cz</span>
-                </a>
-                <div className="contact-divider"></div>
-                <a href="tel:+420728890062" className="contact-link">
-                  <span className="contact-icon">📞</span>
-                  <span>728 890 062</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       <style jsx>{`
         @keyframes fade {
