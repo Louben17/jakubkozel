@@ -115,7 +115,7 @@ a:focus, button:focus {
   -webkit-backdrop-filter: blur(20px) !important;
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
-  border-radius: 1rem !important;
+  border-radius: 9999px !important;
   padding: 0.75rem !important;
   position: fixed !important;
   top: 1.5rem !important;
@@ -147,8 +147,7 @@ a:focus, button:focus {
 .nav-indicator {
   position: absolute !important;
   height: 3rem !important;
-  width: 80px !important;
-  border-radius: 0.75rem !important;
+  border-radius: 9999px !important;
   transition: all 0.3s ease-out !important;
   z-index: 1 !important;
 }
@@ -158,7 +157,7 @@ a:focus, button:focus {
   position: relative !important;
   z-index: 10 !important;
   padding: 0.75rem 1rem !important;
-  border-radius: 0.75rem !important;
+  border-radius: 9999px !important;
   font-weight: 500 !important;
   font-size: 0.875rem !important;
   transition: all 0.3s ease !important;
@@ -207,7 +206,7 @@ a:focus, button:focus {
   display: none !important;
   margin-left: 0.5rem !important;
   padding: 0.5rem !important;
-  border-radius: 0.75rem !important;
+  border-radius: 9999px !important;
   color: #6b7280 !important;
   transition: all 0.3s ease !important;
   background: none !important;

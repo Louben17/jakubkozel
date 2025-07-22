@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -10,7 +10,9 @@ export default function Navigation() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const pathname = usePathname();
+  const navItemsRef = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const navItems = useMemo(() => [
     { href: '/', label: 'Domů', color: '#FF9AA2', description: 'Hlavní stránka' },
@@ -19,6 +21,17 @@ export default function Navigation() {
     { href: '/dtp', label: 'DTP', color: '#C7CEEA', description: 'Sazba & Print' },
     { href: '/kontakt', label: 'Kontakt', color: '#A2D2FF', description: 'Spojme se' }
   ], []);
+
+  // Funkce pro aktualizaci pozice indikátoru
+  const updateIndicatorPosition = (index: number) => {
+    const navItem = navItemsRef.current[index];
+    if (navItem) {
+      setIndicatorStyle({
+        left: navItem.offsetLeft,
+        width: navItem.offsetWidth
+      });
+    }
+  };
 
   // Auto-hide navigace při scrollování
   useEffect(() => {
@@ -42,28 +55,47 @@ export default function Navigation() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Aktivní index na základě pathname
+  // Aktivní index na základě pathname + aktualizace pozice indikátoru
   useEffect(() => {
     const currentIndex = navItems.findIndex(item => item.href === pathname);
-    setActiveIndex(currentIndex >= 0 ? currentIndex : 0);
+    const newActiveIndex = currentIndex >= 0 ? currentIndex : 0;
+    setActiveIndex(newActiveIndex);
+    
+    // Aktualizace pozice indikátoru po malém zpoždění (aby se komponenta stihla vykreslit)
+    setTimeout(() => updateIndicatorPosition(newActiveIndex), 100);
   }, [pathname, navItems]);
+
+  // Handle mouse enter/leave
+  const handleMouseEnter = (index: number) => {
+    setActiveIndex(index);
+    updateIndicatorPosition(index);
+  };
+
+  const handleMouseLeave = () => {
+    const currentIndex = navItems.findIndex(nav => nav.href === pathname);
+    const newActiveIndex = currentIndex >= 0 ? currentIndex : 0;
+    setActiveIndex(newActiveIndex);
+    updateIndicatorPosition(newActiveIndex);
+  };
 
   return (
     <>
-      {/* Floating navigation - používá CSS třídy z globals.css */}
+      {/* Floating navigation - pill shape */}
       <nav className={`floating-nav ${isVisible ? 'visible' : 'hidden'}`}>
         <div className="nav-items-container">
-          {/* Animated background indicator - používá CSS z globals.css */}
+          {/* Animated background indicator - přesné pozicování */}
           <div
             className="nav-indicator"
             style={{
               background: `linear-gradient(135deg, ${navItems[activeIndex]?.color}40, ${navItems[activeIndex]?.color}20)`,
-              transform: `translateX(${activeIndex * 85}px)`,
               border: `1px solid ${navItems[activeIndex]?.color}60`,
+              transform: `translateX(${indicatorStyle.left}px)`,
+              width: `${indicatorStyle.width}px`,
+              borderRadius: '9999px' // Pill shape
             }}
           />
 
-          {/* Navigation items - používá CSS třídy z globals.css */}
+          {/* Navigation items */}
           {navItems.map((item, index) => {
             const isActive = pathname === item.href;
             
@@ -71,19 +103,18 @@ export default function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
+                ref={(el) => { navItemsRef.current[index] = el; }}
                 className={`nav-item ${isActive ? 'active' : ''}`}
-                onMouseEnter={() => setActiveIndex(index)}
-                onMouseLeave={() => {
-                  const currentIndex = navItems.findIndex(nav => nav.href === pathname);
-                  setActiveIndex(currentIndex >= 0 ? currentIndex : 0);
-                }}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
                 style={{
                   textShadow: isActive ? `0 0 20px ${item.color}40` : 'none',
+                  borderRadius: '9999px' // Pill shape pro nav items
                 }}
               >
                 {item.label}
                 
-                {/* Tooltip - používá CSS třídu z globals.css */}
+                {/* Tooltip */}
                 <div className="nav-tooltip">
                   {item.description}
                 </div>
@@ -91,10 +122,11 @@ export default function Navigation() {
             );
           })}
 
-          {/* Mobile menu button - používá CSS třídu z globals.css */}
+          {/* Mobile menu button */}
           <button
             className={`mobile-menu-btn ${isNavOpen ? 'open' : ''}`}
             onClick={() => setIsNavOpen(!isNavOpen)}
+            style={{ borderRadius: '9999px' }} // Pill shape
           >
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -103,9 +135,9 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* Mobile dropdown menu - používá CSS třídu z globals.css */}
+      {/* Mobile dropdown menu - pill shape */}
       {isNavOpen && (
-        <div className="mobile-dropdown">
+        <div className="mobile-dropdown" style={{ borderRadius: '1.5rem' }}>
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             
@@ -118,6 +150,7 @@ export default function Navigation() {
                 style={{
                   background: isActive ? `${item.color}20` : 'transparent',
                   borderLeft: isActive ? `3px solid ${item.color}` : 'none',
+                  borderRadius: '0.75rem' // Pill shape pro mobile items
                 }}
               >
                 <div>{item.label}</div>
@@ -128,7 +161,7 @@ export default function Navigation() {
         </div>
       )}
 
-      {/* Cursor follower - používá CSS třídu z globals.css */}
+      {/* Cursor follower */}
       <div
         className="cursor-follower"
         style={{
