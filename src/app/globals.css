@@ -108,104 +108,109 @@ a:focus, button:focus {
   outline-offset: 2px;
 }
 
-/* NAVIGACE STYLY */
-nav {
-  background: rgba(255, 255, 255, 0.8) !important;
-  backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid rgba(229, 231, 235, 0.5) !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  z-index: 50 !important;
+/* POKROČILÁ NAVIGACE CSS */
+/* Smooth transitions pro všechny navigační prvky */
+nav * {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-container {
-  max-width: 72rem !important;
-  margin: 0 auto !important;
-  padding: 1rem 1.5rem !important;
+/* Glassmorphism efekt pro floating nav */
+.nav-glass {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
 }
 
-.nav-flex {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
+/* Hover efekty pro nav položky */
+.nav-item {
+  position: relative;
+  overflow: hidden;
 }
 
-.nav-logo {
-  font-size: 1.5rem !important;
-  font-weight: 800 !important;
-  color: #FF9AA2 !important;
-  text-decoration: none !important;
-  font-family: 'Inter, sans-serif' !important;
+.nav-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
 }
 
-.nav-logo:hover {
-  color: #FF9AA2 !important;
-  text-decoration: none !important;
+.nav-item:hover::before {
+  left: 100%;
 }
 
-.nav-menu {
-  display: none !important;
-  gap: 2rem !important;
+/* Animace pro sliding indicator */
+.nav-indicator {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background;
 }
 
-.nav-link {
-  font-size: 0.875rem !important;
-  font-weight: 500 !important;
-  color: #6b7280 !important;
-  text-decoration: none !important;
-  font-family: 'Inter, sans-serif' !important;
-  transition: color 0.3s ease !important;
+/* Tooltip animace */
+.tooltip {
+  transform: translateX(-50%) translateY(8px);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  pointer-events: none;
 }
 
-.nav-link:hover {
-  color: #111827 !important;
-  text-decoration: none !important;
+.tooltip.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
-.nav-link.active {
-  color: #111827 !important;
-  border-bottom: 2px solid #111827 !important;
+/* Cursor follower */
+.cursor-follower {
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 9999;
 }
 
-.nav-mobile-btn {
-  display: block !important;
-  color: #6b7280 !important;
-  background: none !important;
-  border: none !important;
-  cursor: pointer !important;
+/* Mobile menu animace */
+.mobile-menu-enter {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
 }
 
-.nav-mobile-menu {
-  margin-top: 1rem !important;
-  padding-bottom: 1rem !important;
-  border-top: 1px solid rgba(229, 231, 235, 0.5) !important;
+.mobile-menu-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: all 0.2s ease-out;
 }
 
-.nav-mobile-links {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.75rem !important;
-  padding-top: 1rem !important;
-}
-
-/* Desktop menu - zobrazit na větších obrazovkách */
-@media (min-width: 768px) {
-  .nav-menu {
-    display: flex !important;
+/* Responsive navigation */
+@media (max-width: 768px) {
+  .nav-glass {
+    padding: 0.5rem !important;
+    border-radius: 1.5rem !important;
   }
   
-  .nav-mobile-btn {
-    display: none !important;
+  .nav-item {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.8rem !important;
   }
 }
 
-/* Mobile menu responsive */
-@media (max-width: 767px) {
-  .nav-mobile-menu {
-    display: block !important;
-  }
+/* Performance optimalizace */
+.nav-optimized {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+/* Scroll hide efekt */
+.nav-hidden {
+  transform: translateX(-50%) translateY(-100%);
+  opacity: 0;
+}
+
+.nav-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
 }
 
 /* Prevent text selection na animovaných elementech */
