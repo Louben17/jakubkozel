@@ -201,21 +201,25 @@ a:focus, button:focus {
   opacity: 1 !important;
 }
 
-/* Mobile menu button */
+/* Mobile menu button - krásné kolečko */
 .mobile-menu-btn {
   display: none !important;
-  margin-left: 0.5rem !important;
-  padding: 0.5rem !important;
+  width: 3rem !important;
+  height: 3rem !important;
   border-radius: 9999px !important;
   color: #6b7280 !important;
   transition: all 0.3s ease !important;
-  background: none !important;
-  border: none !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
   cursor: pointer !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .mobile-menu-btn:hover {
   color: #111827 !important;
+  background: rgba(255, 255, 255, 0.2) !important;
 }
 
 .mobile-menu-btn svg {
@@ -291,17 +295,20 @@ a:focus, button:focus {
 @media (max-width: 768px) {
   .floating-nav {
     padding: 0.5rem !important;
+    width: auto !important;
+    min-width: auto !important;
+  }
+  
+  .nav-items-container {
+    gap: 0 !important;
   }
   
   .mobile-menu-btn {
-    display: block !important;
+    display: flex !important;
   }
   
-  .nav-item {
-    display: none !important;
-  }
-  
-  .nav-indicator {
+  /* Skrýt desktop elementy na mobilu */
+  .desktop-only {
     display: none !important;
   }
 }

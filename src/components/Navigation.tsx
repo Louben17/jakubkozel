@@ -83,19 +83,19 @@ export default function Navigation() {
       {/* Floating navigation - pill shape */}
       <nav className={`floating-nav ${isVisible ? 'visible' : 'hidden'}`}>
         <div className="nav-items-container">
-          {/* Animated background indicator - přesné pozicování */}
+          {/* Desktop: Animated background indicator - přesné pozicování */}
           <div
-            className="nav-indicator"
+            className="nav-indicator desktop-only"
             style={{
               background: `linear-gradient(135deg, ${navItems[activeIndex]?.color}40, ${navItems[activeIndex]?.color}20)`,
               border: `1px solid ${navItems[activeIndex]?.color}60`,
               transform: `translateX(${indicatorStyle.left}px)`,
               width: `${indicatorStyle.width}px`,
-              borderRadius: '9999px' // Pill shape
+              borderRadius: '9999px'
             }}
           />
 
-          {/* Navigation items */}
+          {/* Desktop: Navigation items */}
           {navItems.map((item, index) => {
             const isActive = pathname === item.href;
             
@@ -104,12 +104,12 @@ export default function Navigation() {
                 key={item.href}
                 href={item.href}
                 ref={(el) => { navItemsRef.current[index] = el; }}
-                className={`nav-item ${isActive ? 'active' : ''}`}
+                className={`nav-item desktop-only ${isActive ? 'active' : ''}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
                 style={{
                   textShadow: isActive ? `0 0 20px ${item.color}40` : 'none',
-                  borderRadius: '9999px' // Pill shape pro nav items
+                  borderRadius: '9999px'
                 }}
               >
                 {item.label}
@@ -122,14 +122,35 @@ export default function Navigation() {
             );
           })}
 
-          {/* Mobile menu button */}
+          {/* Mobile: Pouze sendvič button v krásném kolečku */}
           <button
             className={`mobile-menu-btn ${isNavOpen ? 'open' : ''}`}
             onClick={() => setIsNavOpen(!isNavOpen)}
-            style={{ borderRadius: '9999px' }} // Pill shape
+            style={{ 
+              borderRadius: '9999px',
+              width: '3rem',
+              height: '3rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
           >
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+              style={{
+                width: '1.5rem',
+                height: '1.5rem',
+                transition: 'transform 0.3s ease'
+              }}
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d={isNavOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} 
+              />
             </svg>
           </button>
         </div>
