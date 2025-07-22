@@ -9,7 +9,7 @@ html, body {
   box-sizing: border-box;
   background-color: #ffffff;
   color: #000000;
-  font-family: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
   overflow-x: hidden;
 }
 
@@ -163,7 +163,7 @@ a:focus, button:focus {
   font-size: 0.875rem !important;
   transition: all 0.3s ease !important;
   text-decoration: none !important;
-  font-family: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' !important;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif !important;
   color: #6b7280 !important;
   display: block !important;
 }
@@ -194,7 +194,7 @@ a:focus, button:focus {
   transition: opacity 0.2s ease !important;
   pointer-events: none !important;
   white-space: nowrap !important;
-  font-family: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' !important;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif !important;
   z-index: 100 !important;
 }
 
@@ -255,7 +255,7 @@ a:focus, button:focus {
   transition: all 0.2s ease !important;
   margin-bottom: 0.25rem !important;
   text-decoration: none !important;
-  font-family: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' !important;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif !important;
   color: #6b7280 !important;
 }
 
@@ -376,7 +376,7 @@ a:focus, button:focus {
   gap: 0.5rem !important;
   color: #374151 !important;
   text-decoration: none !important;
-  font-family: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' !important;
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 500 !important;
   transition: color 0.3s ease !important;
 }
