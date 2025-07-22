@@ -26,19 +26,10 @@ export default function Home() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Responsive canvas size with device pixel ratio
+    // Simple canvas size
     const updateCanvasSize = () => {
-      const rect = canvas.getBoundingClientRect();
-      const dpr = window.devicePixelRatio || 1;
-      
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      
-      ctx.scale(dpr, dpr);
-      
-      // Set CSS size
-      canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
     
     updateCanvasSize();
@@ -58,22 +49,21 @@ export default function Home() {
       ctx.lineJoin = 'round';
 
       // Simulace brush stroke efektu
-      const centerX = window.innerWidth / 2;  // Use window size, not canvas
-      const centerY = window.innerHeight / 2;
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
 
-      // FIXED LARGE FONT SIZE - no more calculations!
-      const fontSize = 120; // Fixed big size
-      console.log('Using fixed font size:', fontSize);
+      // BIG FIXED FONT SIZE
+      const fontSize = 150; // Much bigger fixed size
 
       // JAKUB
       const jakubText = 'JAKUB';
-      const letterSpacing = 100; // Fixed spacing
+      const letterSpacing = 120; // Fixed reasonable spacing
       const startX = centerX - (jakubText.length * letterSpacing) / 2;
 
       jakubText.split('').forEach((letter, i) => {
         const letterProgress = Math.max(0, Math.min(1, (progress - i * 0.1) * 2));
         if (letterProgress > 0) {
-          drawAnimatedLetter(ctx, letter, startX + i * letterSpacing, centerY - 80, letterProgress, getLetterColor(i), fontSize);
+          drawAnimatedLetter(ctx, letter, startX + i * letterSpacing, centerY - 100, letterProgress, getLetterColor(i), fontSize);
         }
       });
 
@@ -84,7 +74,7 @@ export default function Home() {
       kozelText.split('').forEach((letter, i) => {
         const letterProgress = Math.max(0, Math.min(1, (progress - (i + 5) * 0.1) * 2));
         if (letterProgress > 0) {
-          drawAnimatedLetter(ctx, letter, kozelStartX + i * letterSpacing, centerY + 80, letterProgress, getLetterColor(i + 5), fontSize);
+          drawAnimatedLetter(ctx, letter, kozelStartX + i * letterSpacing, centerY + 100, letterProgress, getLetterColor(i + 5), fontSize);
         }
       });
 
