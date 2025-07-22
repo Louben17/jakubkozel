@@ -1,146 +1,201 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 
 export default function Home() {
-  const [paintingStage, setPaintingStage] = useState(0); // 0 = nic, 1-10 = písmena postupně
+  const [animationComplete, setAnimationComplete] = useState(false);
   const [showServices, setShowServices] = useState(false);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
+
+
+  const getLetterColor = (index: number) => {
+    const colors = [
+      '#FF9AA2', '#FFB7B2', '#FFDAC1', '#E2F0CB', '#B5EAD7', 
+      '#C7CEEA', '#A2D2FF', '#BDB2FF', '#FFC6FF', '#FFABAB'
+    ];
+    return colors[index % colors.length];
+  };
+
+  // Canvas brush efekt
   useEffect(() => {
-    // Postupné "malování" písmen každých 300ms
-    const timers: NodeJS.Timeout[] = [];
-    
-    // Spuštění malování po 500ms
-    timers.push(setTimeout(() => setPaintingStage(1), 500));
-    
-    // Každé další písmeno po 300ms
-    for (let i = 2; i <= 10; i++) {
-      timers.push(setTimeout(() => setPaintingStage(i), 500 + (i - 1) * 300));
-    }
-    
-    // Služby po dokončení malování + 1s
-    timers.push(setTimeout(() => setShowServices(true), 500 + 10 * 300 + 1000));
-    
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let animationId: number;
+    let progress = 0;
+    const duration = 4000; // 4 sekundy
+    let startTime: number | null = null;
+
+    const drawBrushStroke = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      progress = Math.min((timestamp - startTime) / duration, 1);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+
+      // Simulace brush stroke efektu
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+
+      // JAKUB
+      const jakubText = 'JAKUB';
+      const letterWidth = 120;
+      const startX = centerX - (jakubText.length * letterWidth) / 2;
+
+      jakubText.split('').forEach((letter, i) => {
+        const letterProgress = Math.max(0, Math.min(1, (progress - i * 0.1) * 2));
+        if (letterProgress > 0) {
+          drawAnimatedLetter(ctx, letter, startX + i * letterWidth, centerY - 60, letterProgress, getLetterColor(i));
+        }
+      });
+
+      // KOZEL
+      const kozelText = 'KOZEL';
+      const kozelStartX = centerX - (kozelText.length * letterWidth) / 2;
+      
+      kozelText.split('').forEach((letter, i) => {
+        const letterProgress = Math.max(0, Math.min(1, (progress - (i + 5) * 0.1) * 2));
+        if (letterProgress > 0) {
+          drawAnimatedLetter(ctx, letter, kozelStartX + i * letterWidth, centerY + 60, letterProgress, getLetterColor(i + 5));
+        }
+      });
+
+      if (progress < 1) {
+        animationId = requestAnimationFrame(drawBrushStroke);
+      } else {
+        setAnimationComplete(true);
+        setTimeout(() => setShowServices(true), 1000);
+      }
+    };
+
+    const timer = setTimeout(() => {
+      animationId = requestAnimationFrame(drawBrushStroke);
+    }, 500);
+
     return () => {
-      timers.forEach(timer => clearTimeout(timer));
+      clearTimeout(timer);
+      if (animationId) cancelAnimationFrame(animationId);
     };
   }, []);
 
-  const jakub = "JAKUB".split('');
-  const kozel = "KOZEL".split('');
-  
-  // Pastelové barvy pro písmena
-  const getLetterColor = (letter: string, index: number) => {
-    const pastelColors = [
-      '#FF9AA2', // růžová
-      '#FFB7B2', // lososová  
-      '#FFDAC1', // meruňková
-      '#E2F0CB', // světle zelená
-      '#B5EAD7', // mentolová
-      '#C7CEEA', // levandulová
-      '#A2D2FF', // světle modrá
-      '#BDB2FF', // fialová
-      '#FFC6FF', // magenta
-      '#FFABAB'  // korálová
-    ];
+  const drawAnimatedLetter = (
+    ctx: CanvasRenderingContext2D, 
+    letter: string, 
+    x: number, 
+    y: number, 
+    progress: number, 
+    color: string
+  ) => {
+    ctx.save();
     
-    return pastelColors[index % pastelColors.length];
-  };
-
-  // Kontrola, zda má být písmeno viditelné (namalované)
-  const isLetterPainted = (letterIndex: number) => {
-    return paintingStage > letterIndex;
+    // Brush texture effect
+    const gradient = ctx.createLinearGradient(x, y - 50, x, y + 50);
+    gradient.addColorStop(0, color + 'ff');
+    gradient.addColorStop(0.5, color + 'dd');
+    gradient.addColorStop(1, color + 'aa');
+    
+    ctx.fillStyle = gradient;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 4;
+    
+    // Letter drawing with progress
+    ctx.font = `bold ${Math.min(100 * progress, 100)}px var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    // Brush stroke effect
+    ctx.globalAlpha = progress;
+    ctx.filter = `blur(${(1 - progress) * 2}px)`;
+    
+    // Drawing with shake effect for brush feel
+    const shake = (1 - progress) * 3;
+    const shakeX = (Math.random() - 0.5) * shake;
+    const shakeY = (Math.random() - 0.5) * shake;
+    
+    ctx.strokeText(letter, x + shakeX, y + shakeY);
+    ctx.fillText(letter, x + shakeX, y + shakeY);
+    
+    ctx.restore();
   };
 
   return (
     <div className="min-h-screen bg-white text-black relative overflow-hidden">
       
-      {/* Navigace jako komponenta */}
+      {/* Navigace */}
       <Navigation />
 
-      {/* Hlavní obsah s paddingem pro navigaci */}
-      <div className="flex items-center justify-center min-h-screen pt-20">
-        {/* Jemné pozadí - decentní vzor */}
-        <div className="absolute inset-0 overflow-hidden opacity-20">
-          {[...Array(30)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-gray-300 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animation: `fade ${3 + Math.random() * 2}s infinite`,
-                animationDelay: `${Math.random() * 2}s`
-              }}
-            />
-          ))}
-        </div>
-        
-        {/* Hlavní jméno */}
+      {/* Canvas pro brush stroke animaci */}
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 pointer-events-none z-10"
+        style={{ mixBlendMode: 'normal' }}
+      />
+
+      {/* Jemné pozadí */}
+      <div className="absolute inset-0 overflow-hidden opacity-20">
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-gray-300 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `fade ${3 + Math.random() * 2}s infinite`,
+              animationDelay: `${Math.random() * 2}s`
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Fallback text (skryté během animace) */}
+      <div className={`flex items-center justify-center min-h-screen pt-20 transition-opacity duration-1000 ${animationComplete ? 'opacity-100' : 'opacity-0'}`}>
         <div className="relative text-center">
-          
-          {/* JAKUB - první řádek */}
           <div className="relative mb-4">
-            {jakub.map((letter, index) => {
-              const isPainted = isLetterPainted(index);
-              return (
-                <span
-                  key={`jakub-${index}`}
-                  className="inline-block font-black painting-letter"
-                  style={{
-                    fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif',
-                    fontSize: 'clamp(3rem, 12vw, 8rem)',
-                    color: getLetterColor(letter, index),
-                    marginRight: '0.1em',
-                    fontWeight: '800',
-                    opacity: isPainted ? 1 : 0,
-                    transform: isPainted ? 'scale(1) rotate(0deg)' : 'scale(0.3) rotate(-10deg)',
-                    transition: 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                    transitionDelay: '0s',
-                    filter: isPainted ? 'blur(0px)' : 'blur(2px)',
-                  }}
-                >
-                  {letter}
-                </span>
-              );
-            })}
+            {'JAKUB'.split('').map((letter, index) => (
+              <span
+                key={`jakub-${index}`}
+                className="inline-block font-black"
+                style={{
+                  fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif',
+                  fontSize: 'clamp(3rem, 12vw, 8rem)',
+                  color: getLetterColor(index),
+                  marginRight: '0.1em',
+                  fontWeight: '800'
+                }}
+              >
+                {letter}
+              </span>
+            ))}
           </div>
           
-          {/* KOZEL - druhý řádek */}
           <div className="relative">
-            {kozel.map((letter, index) => {
-              const isPainted = isLetterPainted(index + 5); // KOZEL začíná po JAKUB (index 5)
-              return (
-                <span
-                  key={`kozel-${index}`}
-                  className="inline-block font-black painting-letter"
-                  style={{
-                    fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif',
-                    fontSize: 'clamp(3rem, 12vw, 8rem)',
-                    color: getLetterColor(letter, index + 5),
-                    marginRight: '0.1em',
-                    fontWeight: '800',
-                    opacity: isPainted ? 1 : 0,
-                    transform: isPainted ? 'scale(1) rotate(0deg)' : 'scale(0.3) rotate(10deg)',
-                    transition: 'all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                    transitionDelay: '0s',
-                    filter: isPainted ? 'blur(0px)' : 'blur(2px)',
-                  }}
-                >
-                  {letter}
-                </span>
-              );
-            })}
+            {'KOZEL'.split('').map((letter, index) => (
+              <span
+                key={`kozel-${index}`}
+                className="inline-block font-black"
+                style={{
+                  fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif',
+                  fontSize: 'clamp(3rem, 12vw, 8rem)',
+                  color: getLetterColor(index + 5),
+                  marginRight: '0.1em',
+                  fontWeight: '800'
+                }}
+              >
+                {letter}
+              </span>
+            ))}
           </div>
           
-          {/* Subtitle při začátku */}
-          <div 
-            className={`mt-8 transition-all duration-1000 ${
-              paintingStage >= 10 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-            style={{ transitionDelay: '800ms' }}
-          >
+          <div className="mt-8">
             <p 
               className="text-lg tracking-widest text-gray-600"
               style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '400' }}
@@ -151,26 +206,17 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Vyčištěné služby + kontakt */}
+      {/* Služby + kontakt */}
       <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-20 w-full max-w-6xl px-8">
         <div 
           className={`transition-all duration-1000 ${
             showServices ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
-          style={{ transitionDelay: '500ms' }}
         >
-          {/* Služby v jednom řádku - ČISTÉ BEZ RÁMEČKŮ */}
+          {/* Služby */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            {/* GRAFIKA */}
             <div className="text-center">
-              <h3 
-                className="text-2xl font-bold mb-3"
-                style={{ 
-                  fontFamily: 'var(--font-inter), sans-serif',
-                  fontWeight: '700',
-                  color: '#FF9AA2'
-                }}
-              >
+              <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '700', color: '#FF9AA2' }}>
                 GRAFIKA
               </h3>
               <div className="text-sm text-gray-700 space-y-1" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '400' }}>
@@ -181,16 +227,8 @@ export default function Home() {
               </div>
             </div>
             
-            {/* WEB DESIGN */}
             <div className="text-center">
-              <h3 
-                className="text-2xl font-bold mb-3"
-                style={{ 
-                  fontFamily: 'var(--font-inter), sans-serif',
-                  fontWeight: '700',
-                  color: '#B5EAD7'
-                }}
-              >
+              <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '700', color: '#B5EAD7' }}>
                 WEB DESIGN
               </h3>
               <div className="text-sm text-gray-700 space-y-1" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '400' }}>
@@ -201,16 +239,8 @@ export default function Home() {
               </div>
             </div>
             
-            {/* DTP */}
             <div className="text-center">
-              <h3 
-                className="text-2xl font-bold mb-3"
-                style={{ 
-                  fontFamily: 'var(--font-inter), sans-serif',
-                  fontWeight: '700',
-                  color: '#C7CEEA'
-                }}
-              >
+              <h3 className="text-2xl font-bold mb-3" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '700', color: '#C7CEEA' }}>
                 DTP
               </h3>
               <div className="text-sm text-gray-700 space-y-1" style={{ fontFamily: 'var(--font-inter), sans-serif', fontWeight: '400' }}>
@@ -225,20 +255,12 @@ export default function Home() {
           {/* Kontakt */}
           <div className="text-center">
             <div className="contact-pill">
-              <a 
-                href="mailto:jakubkozel@seznam.cz"
-                className="contact-link"
-              >
+              <a href="mailto:jakubkozel@seznam.cz" className="contact-link">
                 <span className="contact-icon">✉</span>
                 <span>jakubkozel@seznam.cz</span>
               </a>
-              
               <div className="contact-divider"></div>
-              
-              <a 
-                href="tel:+420728890062"
-                className="contact-link"
-              >
+              <a href="tel:+420728890062" className="contact-link">
                 <span className="contact-icon">📞</span>
                 <span>728 890 062</span>
               </a>
@@ -247,20 +269,10 @@ export default function Home() {
         </div>
       </div>
 
-      {/* CSS animace */}
       <style jsx>{`
         @keyframes fade {
-          0%, 100% { 
-            opacity: 0.2; 
-          }
-          50% { 
-            opacity: 0.6; 
-          }
-        }
-        
-        .painting-letter {
-          will-change: transform, opacity, filter;
-          backface-visibility: hidden;
+          0%, 100% { opacity: 0.2; }
+          50% { opacity: 0.6; }
         }
       `}</style>
     </div>
