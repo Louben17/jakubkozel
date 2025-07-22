@@ -51,13 +51,14 @@ export default function RootLayout({
           {children}
         </main>
         
-        {/* Globální patička - nenápadná */}
+        {/* Globální patička - nenápadná ale viditelná */}
         <footer className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-10 pointer-events-none">
           <p 
-            className="text-xs text-gray-400"
+            className="text-xs"
             style={{ 
               fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif',
-              fontSize: '0.7rem'
+              fontSize: '0.7rem',
+              color: '#9CA3AF'
             }}
           >
             © {currentYear} Jakub Kozel
