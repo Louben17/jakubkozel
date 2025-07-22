@@ -26,10 +26,19 @@ export default function Home() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Responsive canvas size
+    // Responsive canvas size with device pixel ratio
     const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      
+      ctx.scale(dpr, dpr);
+      
+      // Set CSS size
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
     };
     
     updateCanvasSize();
@@ -49,22 +58,22 @@ export default function Home() {
       ctx.lineJoin = 'round';
 
       // Simulace brush stroke efektu
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
+      const centerX = window.innerWidth / 2;  // Use window size, not canvas
+      const centerY = window.innerHeight / 2;
 
-      // Responsive font size - MUCH BIGGER!
-      const fontSize = Math.min(canvas.width * 0.08, canvas.height * 0.12, 200);
-      console.log('Canvas size:', canvas.width, canvas.height, 'Font size:', fontSize);
+      // FIXED LARGE FONT SIZE - no more calculations!
+      const fontSize = 120; // Fixed big size
+      console.log('Using fixed font size:', fontSize);
 
       // JAKUB
       const jakubText = 'JAKUB';
-      const letterSpacing = fontSize * 1.2; // Bigger spacing
+      const letterSpacing = 100; // Fixed spacing
       const startX = centerX - (jakubText.length * letterSpacing) / 2;
 
       jakubText.split('').forEach((letter, i) => {
         const letterProgress = Math.max(0, Math.min(1, (progress - i * 0.1) * 2));
         if (letterProgress > 0) {
-          drawAnimatedLetter(ctx, letter, startX + i * letterSpacing, centerY - fontSize * 0.8, letterProgress, getLetterColor(i), fontSize);
+          drawAnimatedLetter(ctx, letter, startX + i * letterSpacing, centerY - 80, letterProgress, getLetterColor(i), fontSize);
         }
       });
 
@@ -75,7 +84,7 @@ export default function Home() {
       kozelText.split('').forEach((letter, i) => {
         const letterProgress = Math.max(0, Math.min(1, (progress - (i + 5) * 0.1) * 2));
         if (letterProgress > 0) {
-          drawAnimatedLetter(ctx, letter, kozelStartX + i * letterSpacing, centerY + fontSize * 0.8, letterProgress, getLetterColor(i + 5), fontSize);
+          drawAnimatedLetter(ctx, letter, kozelStartX + i * letterSpacing, centerY + 80, letterProgress, getLetterColor(i + 5), fontSize);
         }
       });
 
