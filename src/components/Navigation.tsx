@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -12,13 +12,13 @@ export default function Navigation() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { href: '/', label: 'Domů', color: '#FF9AA2', description: 'Hlavní stránka' },
     { href: '/grafika', label: 'Grafika', color: '#FFB7B2', description: 'Loga & Branding' },
     { href: '/webdesign', label: 'Web Design', color: '#B5EAD7', description: 'Moderní weby' },
     { href: '/dtp', label: 'DTP', color: '#C7CEEA', description: 'Sazba & Print' },
     { href: '/kontakt', label: 'Kontakt', color: '#A2D2FF', description: 'Spojme se' }
-  ];
+  ], []);
 
   // Auto-hide navigace při scrollování
   useEffect(() => {
@@ -154,7 +154,7 @@ export default function Navigation() {
             minWidth: '200px',
           }}
         >
-          {navItems.map((item, index) => {
+          {navItems.map((item) => {
             const isActive = pathname === item.href;
             
             return (
