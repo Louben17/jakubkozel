@@ -2,14 +2,8 @@ import React from 'react';
 import Navigation from '@/components/Navigation';
 
 export const metadata = {
-  title: 'Grafický design | Loga, vizuální identity, print design | Jakub Kozel',
-  description: 'Profesionální grafický design v Hradci Králové. Vytvářím loga, vizuální identity, firemní materiály, plakáty a print design. Každý projekt individuálně s důrazem na kvalitu.',
-  keywords: 'grafický design, logo, vizuální identita, firemní materiály, plakáty, letáky, print design, Hradec Králové',
-  openGraph: {
-    title: 'Grafický design | Jakub Kozel',
-    description: 'Profesionální grafický design - loga, vizuální identity, print design',
-    type: 'website'
-  }
+  title: 'Grafika | Jakub Kozel - Grafický design',
+  description: 'Grafický design - loga, vizuální identity, firemní materiály, plakáty a print design.',
 };
 
 export default function GrafikaPage() {
@@ -17,83 +11,31 @@ export default function GrafikaPage() {
     <div>
       <Navigation />
       
-      <main className="min-h-screen bg-white pt-40 pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="min-h-screen bg-white pt-40 flex items-center justify-center">
+        <div className="text-center max-w-2xl px-6">
           
-          <div className="text-center mb-20">
-            <h1 
-              className="grafika-hero mb-8"
-              style={{ fontFamily: 'var(--font-inter), sans-serif' }}
-            >
-              GRAFIKA
-            </h1>
-            
-            <div className="max-w-3xl mx-auto">
-              <p 
-                className="grafika-subtitle text-gray-600"
-                style={{ fontFamily: 'var(--font-inter), sans-serif' }}
-              >
-                Vytvářím vizuální identity, které vaší značce dodají jedinečnost a zapamatovatelnost
-              </p>
-            </div>
+          <h1 
+            className="text-6xl md:text-8xl font-bold mb-12"
+            style={{ 
+              fontFamily: 'var(--font-inter), sans-serif',
+              fontWeight: '800',
+              color: '#FF9AA2'
+            }}
+          >
+            GRAFIKA
+          </h1>
+          
+          <div 
+            className="text-lg text-gray-700 space-y-4 leading-relaxed"
+            style={{ fontFamily: 'var(--font-inter), sans-serif' }}
+          >
+            <p>Vytvářím loga a vizuální identity, které vaši značku odliší od konkurence.</p>
+            <p>Navrhuji firemní materiály, plakáty, letáky a veškerý print design.</p>
+            <p>Každý projekt řeším individuálně s důrazem na detail a kvalitu.</p>
           </div>
 
-          <div className="flex items-center justify-center min-h-[60vh] px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              
-              <div className="grafika-card">
-                <div className="text-center">
-                  <div className="text-4xl mb-4">🎨</div>
-                  <h3 className="font-bold text-xl text-white mb-3">Vizuální Identity</h3>
-                  <p className="text-pink-100 text-sm leading-relaxed">Komplexní vizuální systémy, které odlišují vaši značku</p>
-                </div>
-              </div>
-
-              <div className="grafika-card grafika-card-alt">
-                <div className="text-center">
-                  <div className="text-4xl mb-4">📄</div>
-                  <h3 className="font-bold text-xl text-white mb-3">Firemní Materiály</h3>
-                  <p className="text-pink-100 text-sm leading-relaxed">Vizitky, hlavičkové papíry, prezentace a kancelářské potřeby</p>
-                </div>
-              </div>
-
-              <div className="grafika-card">
-                <div className="text-center">
-                  <div className="text-4xl mb-4">📢</div>
-                  <h3 className="font-bold text-xl text-white mb-3">Propagační Materiály</h3>
-                  <p className="text-pink-100 text-sm leading-relaxed">Plakáty, letáky, bannery a veškeré marketingové materiály</p>
-                </div>
-              </div>
-
-              <div className="grafika-card grafika-card-alt">
-                <div className="text-center">
-                  <div className="text-4xl mb-4">🖨️</div>
-                  <h3 className="font-bold text-xl text-white mb-3">Print Design</h3>
-                  <p className="text-pink-100 text-sm leading-relaxed">Vše připravené pro profesionální tisk ve vysoké kvalitě</p>
-                </div>
-              </div>
-
-              <div className="grafika-card">
-                <div className="text-center">
-                  <div className="text-4xl mb-4">📚</div>
-                  <h3 className="font-bold text-xl text-white mb-3">Katalogy</h3>
-                  <p className="text-pink-100 text-sm leading-relaxed">Profesionální katalogy produktů a služeb</p>
-                </div>
-              </div>
-
-              <div className="grafika-card grafika-card-alt">
-                <div className="text-center">
-                  <div className="text-4xl mb-4">📦</div>
-                  <h3 className="font-bold text-xl text-white mb-3">Balení</h3>
-                  <p className="text-pink-100 text-sm leading-relaxed">Design obalů a balení produktů</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          
         </div>
-      </main>
+      </div>
     </div>
   );
 }
