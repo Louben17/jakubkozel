@@ -563,6 +563,7 @@ a:focus, button:focus {
 @media (max-width: 768px) {
   .grafika-card {
     padding: 1.5rem;
+    max-width: 100% !important;
   }
   
   .grafika-hero {
