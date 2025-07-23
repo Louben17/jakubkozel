@@ -158,14 +158,15 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* CTA Button - samostatně za menu */}
+      {/* CTA Button - pravý horní roh, ve středu výšky menu */}
       <button
         className={`cta-button-separate ${isVisible ? 'visible' : 'hidden'}`}
         onClick={() => {/* zatím nic */}}
         style={{
           position: 'fixed',
-          top: '1rem',
-          right: '6rem',
+          top: '50%',
+          right: '2rem',
+          transform: isVisible ? 'translateY(-50%)' : 'translateY(calc(-50% - 20px))',
           padding: '0.5rem 1.2rem',
           background: 'linear-gradient(135deg, #FFD700, #FFA500)',
           color: '#333',
@@ -178,14 +179,13 @@ export default function Navigation() {
           boxShadow: '0 2px 8px rgba(255, 215, 0, 0.3)',
           zIndex: '1000',
           opacity: isVisible ? '1' : '0',
-          transform: isVisible ? 'translateY(0)' : 'translateY(-20px)',
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.transform = isVisible ? 'translateY(-1px)' : 'translateY(-20px)';
+          e.currentTarget.style.transform = isVisible ? 'translateY(calc(-50% - 1px))' : 'translateY(calc(-50% - 20px))';
           e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 215, 0, 0.4)';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.transform = isVisible ? 'translateY(0)' : 'translateY(-20px)';
+          e.currentTarget.style.transform = isVisible ? 'translateY(-50%)' : 'translateY(calc(-50% - 20px))';
           e.currentTarget.style.boxShadow = '0 2px 8px rgba(255, 215, 0, 0.3)';
         }}
       >
@@ -230,4 +230,4 @@ export default function Navigation() {
       />
     </>
   );
-}
+} 
