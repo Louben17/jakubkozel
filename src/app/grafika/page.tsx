@@ -1,4 +1,12 @@
-import React from 'react';
+<div className="flex items-center justify-center min-h-[60vh] px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              
+              {/* Loga */}
+              <div className="grafika-card">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">🎨</div>
+                  <h3 className="font-bold text-xl text-white mb-3">Loga</h3>
+                  <p className="import React from 'react';
 import Navigation from '@/components/Navigation';
 
 export const metadata = {
@@ -26,7 +34,7 @@ export default function GrafikaPage() {
               style={{ fontFamily: 'var(--font-inter), sans-serif' }}
             >
               GRAFIKA
-            </h1>
+            </h1> 
             
             <div className="max-w-3xl mx-auto">
               <p 
@@ -39,91 +47,59 @@ export default function GrafikaPage() {
           </div>
 
           <div className="flex items-center justify-center min-h-[60vh] px-4">
-            <div className="flex flex-col lg:flex-row gap-12 justify-center items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               
-              <div className="grafika-card w-80 flex-shrink-0">
-                <h2 className="grafika-card-title text-white" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
-                  CO VYTVÁŘÍM
-                </h2>
-                
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="grafika-service-icon">
-                      <span>🎨</span>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-white mb-1">Loga & Vizuální Identity</h3>
-                      <p className="text-pink-100 leading-relaxed">Komplexní vizuální systémy, které odlišují vaši značku</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="grafika-service-icon">
-                      <span>📄</span>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-white mb-1">Firemní Materiály</h3>
-                      <p className="text-pink-100 leading-relaxed">Vizitky, hlavičkové papíry, prezentace a kancelářské potřeby</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="grafika-service-icon">
-                      <span>📢</span>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-white mb-1">Propagační Materiály</h3>
-                      <p className="text-pink-100 leading-relaxed">Plakáty, letáky, bannery a veškeré marketingové materiály</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="grafika-service-icon">
-                      <span>🖨️</span>
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg text-white mb-1">Print Design</h3>
-                      <p className="text-pink-100 leading-relaxed">Vše připravené pro profesionální tisk ve vysoké kvalitě</p>
-                    </div>
-                  </div>
+              {/* Loga & Vizuální Identity */}
+              <div className="grafika-card">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">🎨</div>
+                  <h3 className="font-bold text-xl text-white mb-3">Vizuální Identity</h3>
+                  <p className="text-pink-100 text-sm leading-relaxed">Komplexní vizuální systémy, které odlišují vaši značku</p>
                 </div>
               </div>
 
-              <div className="grafika-card grafika-card-alt w-80 flex-shrink-0">
-                <h2 className="grafika-card-title text-white" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
-                  MŮJ PŘÍSTUP
-                </h2>
-                
-                <div className="space-y-8">
-                  <div>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="grafika-step-number">1</div>
-                      <h3 className="font-bold text-lg text-white">Analýza & Strategie</h3>
-                    </div>
-                    <p className="text-pink-100 leading-relaxed pl-11">Pečlivě analyzuji vaše potřeby, cílovou skupinu a konkurenci</p>
-                  </div>
-                  
-                  <div>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="grafika-step-number">2</div>
-                      <h3 className="font-bold text-lg text-white">Kreativní Proces</h3>
-                    </div>
-                    <p className="text-pink-100 leading-relaxed pl-11">Vytvářím návrhy, které nejen krásně vypadají, ale také efektivně komunikují</p>
-                  </div>
-                  
-                  <div>
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="grafika-step-number">3</div>
-                      <h3 className="font-bold text-lg text-white">Precizní Realizace</h3>
-                    </div>
-                    <p className="text-pink-100 leading-relaxed pl-11">Všechny návrhy připravuji s důrazem na detail a možnost budoucího rozvoje</p>
-                  </div>
-                  
-                  <div className="pt-4 border-t border-pink-200">
-                    <p className="text-pink-100 font-medium italic">
-                      &ldquo;Každý projekt je pro mě výzvou vytvořit něco jedinečného a funkčního&rdquo;
-                    </p>
-                  </div>
+              {/* Firemní Materiály */}
+              <div className="grafika-card grafika-card-alt">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">📄</div>
+                  <h3 className="font-bold text-xl text-white mb-3">Firemní Materiály</h3>
+                  <p className="text-pink-100 text-sm leading-relaxed">Vizitky, hlavičkové papíry, prezentace a kancelářské potřeby</p>
+                </div>
+              </div>
+
+              {/* Propagační Materiály */}
+              <div className="grafika-card">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">📢</div>
+                  <h3 className="font-bold text-xl text-white mb-3">Propagační Materiály</h3>
+                  <p className="text-pink-100 text-sm leading-relaxed">Plakáty, letáky, bannery a veškeré marketingové materiály</p>
+                </div>
+              </div>
+
+              {/* Print Design */}
+              <div className="grafika-card grafika-card-alt">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">🖨️</div>
+                  <h3 className="font-bold text-xl text-white mb-3">Print Design</h3>
+                  <p className="text-pink-100 text-sm leading-relaxed">Vše připravené pro profesionální tisk ve vysoké kvalitě</p>
+                </div>
+              </div>
+
+              {/* Katalogy */}
+              <div className="grafika-card">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">📚</div>
+                  <h3 className="font-bold text-xl text-white mb-3">Katalogy</h3>
+                  <p className="text-pink-100 text-sm leading-relaxed">Profesionální katalogy produktů a služeb</p>
+                </div>
+              </div>
+
+              {/* Balení */}
+              <div className="grafika-card grafika-card-alt">
+                <div className="text-center">
+                  <div className="text-4xl mb-4">📦</div>
+                  <h3 className="font-bold text-xl text-white mb-3">Balení</h3>
+                  <p className="text-pink-100 text-sm leading-relaxed">Design obalů a balení produktů</p>
                 </div>
               </div>
 
@@ -134,4 +110,4 @@ export default function GrafikaPage() {
       </main>
     </div>
   );
-} 
+}
