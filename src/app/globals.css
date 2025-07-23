@@ -470,10 +470,9 @@ a:focus, button:focus {
 }
 
 .grafika-service-tile:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(255, 154, 162, 0.15);
+  transform: scale(1.03);
   border-color: #FF9AA2;
-  background: linear-gradient(135deg, rgba(255, 154, 162, 0.05), rgba(255, 154, 162, 0.02));
+  background: linear-gradient(135deg, rgba(255, 154, 162, 0.08), rgba(255, 154, 162, 0.04));
 }
 
 .grafika-service-icon {
@@ -487,8 +486,7 @@ a:focus, button:focus {
 }
 
 .grafika-service-tile:hover .grafika-service-icon {
-  transform: scale(1.1) rotate(5deg);
-  color: #f472b6;
+  color: #FF9AA2;
 }
 
 .grafika-service-title {
@@ -590,23 +588,9 @@ a:focus, button:focus {
   letter-spacing: -0.02em;
 }
 
-/* Animace pro hover efekty */
-@keyframes grafika-bounce {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-4px) scale(1.02);
-  }
-}
-
-.grafika-service-tile:hover {
-  animation: grafika-bounce 0.6s ease-in-out;
-}
-
 /* Performance optimalizace */
 .grafika-service-tile,
 .grafika-service-icon {
-  will-change: transform, box-shadow;
+  will-change: transform;
   backface-visibility: hidden;
 } 
