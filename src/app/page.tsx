@@ -19,11 +19,12 @@ export default function Home() {
       const length = pathElement.getTotalLength();
       
       // Rozlišení mezi JAKUB (0-4) a KOZEL (5-9)
-      const isJakub = index < 5;
-      const letterIndex = isJakub ? index : index - 5;
+      const isKozel = index < 5; // První skupina v SVG je KOZEL
+      const isJakub = index >= 5; // Druhá skupina v SVG je JAKUB
+      const letterIndex = index % 5;
       
       // Timing: JAKUB nejdřív, pak KOZEL
-      const baseDelay = isJakub ? 0 : 1.8; // KOZEL začne po 1.8s
+      const baseDelay = isJakub ? 0 : 1.8; // JAKUB začne první (0s), KOZEL po 1.8s
       const letterDelay = letterIndex * 0.3; // 0.3s mezi písmeny
       const totalDelay = baseDelay + letterDelay;
       
