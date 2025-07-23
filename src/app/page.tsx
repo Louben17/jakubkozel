@@ -23,52 +23,63 @@ export default function Home() {
       const letterIndex = index % 5;
       
       // Timing: JAKUB nejdřív, pak KOZEL
-      const baseDelay = isJakub ? 0 : 1.8; // JAKUB začne první (0s), KOZEL po 1.8s
-      const letterDelay = letterIndex * 0.3; // 0.3s mezi písmeny
+      const baseDelay = isJakub ? 0 : 2.5; // JAKUB začne první (0s), KOZEL po 2.5s
+      const letterDelay = letterIndex * 0.4; // 0.4s mezi písmeny
       const totalDelay = baseDelay + letterDelay;
       
       // Nastavení gradientu
       const gradientId = isJakub ? 'jakubGradient' : 'kozelGradient';
       
       // Skryj originální fill na začátku
-      pathElement.style.fill = `url(#${gradientId})`;
+      pathElement.style.fill = 'transparent';
       pathElement.style.stroke = 'none';
       pathElement.style.opacity = '0';
-      pathElement.style.transition = 'opacity 0.8s ease';
       
       // Vytvoř animovaný stroke
       const animatedStroke = pathElement.cloneNode(true) as SVGPathElement;
       animatedStroke.style.fill = 'none';
-      animatedStroke.style.stroke = isJakub ? '#FF9AA2' : '#B5EAD7';
-      animatedStroke.style.strokeWidth = '3px';
+      animatedStroke.style.stroke = isJakub ? '#FF6B73' : '#4ECDC4';
+      animatedStroke.style.strokeWidth = '2.5px';
       animatedStroke.style.strokeLinecap = 'round';
       animatedStroke.style.strokeLinejoin = 'round';
       animatedStroke.style.strokeDasharray = `${length}`;
       animatedStroke.style.strokeDashoffset = `${length}`;
-      animatedStroke.style.animation = `drawPath 2s ease-out ${totalDelay}s forwards`;
+      animatedStroke.style.animation = `drawPath 1.8s ease-out ${totalDelay}s forwards`;
+      animatedStroke.style.opacity = '1';
       
       // Vložit stroke animaci
       pathElement.parentNode?.insertBefore(animatedStroke, pathElement);
       
-      // Po dokončení stroke animace - zobraz gradient fill
+      // Po dokončení stroke animace - hezky vyplň gradientem
       setTimeout(() => {
+        // Nejdřív zobraz prázdný tvar
         pathElement.style.opacity = '1';
+        pathElement.style.fill = 'transparent';
+        pathElement.style.stroke = isJakub ? '#FF6B73' : '#4ECDC4';
+        pathElement.style.strokeWidth = '1px';
         
-        // Po chvíli schovat stroke
+        // Pak animovaně vyplň gradientem
         setTimeout(() => {
-          animatedStroke.style.transition = 'opacity 0.5s ease';
-          animatedStroke.style.opacity = '0';
-        }, 800);
-      }, (totalDelay * 1000) + 2000);
+          pathElement.style.transition = 'fill 1.2s ease-in-out';
+          pathElement.style.fill = `url(#${gradientId})`;
+          
+          // Schovat stroke po vyplnění
+          setTimeout(() => {
+            pathElement.style.stroke = 'none';
+            animatedStroke.style.transition = 'opacity 0.8s ease';
+            animatedStroke.style.opacity = '0';
+          }, 1200);
+        }, 200);
+      }, (totalDelay * 1000) + 1800);
       
       const wordName = isJakub ? 'JAKUB' : 'KOZEL';
       console.log(`${wordName} ${letterIndex + 1}: délka = ${Math.round(length)}px, delay = ${totalDelay}s`);
     });
 
-    // Spustí animaci po 300ms
+    // Spustí animaci po 500ms
     const timer = setTimeout(() => {
       svg.style.opacity = '1';
-    }, 300);
+    }, 500);
 
     return () => {
       clearTimeout(timer);
@@ -102,22 +113,24 @@ export default function Home() {
             width: 'min(85vw, 700px)',
             height: 'auto',
             opacity: '0',
-            transition: 'opacity 0.3s ease',
+            transition: 'opacity 0.5s ease',
           }}
         >
           {/* Gradient definice */}
           <defs>
             <linearGradient id="jakubGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FF9AA2"/>
-              <stop offset="30%" stopColor="#FFB7B2"/>
-              <stop offset="60%" stopColor="#FFDAC1"/>
-              <stop offset="100%" stopColor="#E2F0CB"/>
+              <stop offset="0%" stopColor="#FF6B73"/>
+              <stop offset="25%" stopColor="#FF8E8E"/>
+              <stop offset="50%" stopColor="#FFB3B3"/>
+              <stop offset="75%" stopColor="#FFDDD9"/>
+              <stop offset="100%" stopColor="#E8F5E8"/>
             </linearGradient>
             <linearGradient id="kozelGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#B5EAD7"/>
-              <stop offset="30%" stopColor="#C7CEEA"/>
-              <stop offset="60%" stopColor="#A2D2FF"/>
-              <stop offset="100%" stopColor="#BDB2FF"/>
+              <stop offset="0%" stopColor="#4ECDC4"/>
+              <stop offset="25%" stopColor="#7BDBD5"/>
+              <stop offset="50%" stopColor="#A8E9E4"/>
+              <stop offset="75%" stopColor="#C7F2EF"/>
+              <stop offset="100%" stopColor="#E0F8F7"/>
             </linearGradient>
           </defs>
 
@@ -130,7 +143,7 @@ export default function Home() {
             <path d="M447.62,245.05c-.86.21-2,.27-3.39.16-1.4-.11-3.18-.27-5.33-.48-4.1,0-9.49-2.7-16.16-8.08-6.68-5.17-11.42-13.36-14.22-24.57-.21-1.08-.37-2.26-.48-3.56-.11-1.29-.16-2.59-.16-3.88-.43-7.97.27-17.35,2.1-28.13,1.83-10.77,4.9-22.95,9.21-36.53,4.09-13.58,8.94-27.21,14.55-40.9,5.6-13.68,11.85-27.42,18.75-41.22,6.9-13.58,13.52-25.05,19.88-34.43,6.35-9.38,12.33-16.65,17.94-21.82,1.72-1.08,3.34-1.62,4.85-1.62,1.72,0,3.82.43,6.3,1.29,2.47.86,5.22,2.48,8.24,4.85l1.94.97c5.82,3.45,8.94,6.9,9.38,10.34.21,1.08-.43,2.37-1.94,3.88-11.43,10.34-22.52,24.57-33.3,42.67-10.56,18.32-19.51,37.39-26.83,57.22-7.76,19.83-13.25,39.01-16.49,57.54-2.59,13.15-3.67,24.79-3.23,34.92.21,1.73.49,3.93.81,6.63.32,2.7.81,5.88,1.46,9.54,1.72,7.32,7.32,11.1,16.81,11.31-3.02,2.59-6.58,3.88-10.67,3.88Z"/>
           </g>
 
-          {/* KOZEL - dolní řádek, mírně doprava (paths 5-9) */}
+          {/* KOZEL - dolní řádek (paths 5-9) */}
           <g transform="translate(120, 170)">
             <path d="M174.99,150.78c1.74-.75,3.37-.5,4.87.75,1.5,1.25,2.56,2.87,3.18,4.87.62,2,.81,4.06.56,6.18-.25,2.12-1.12,3.81-2.62,5.06-4.5,3.5-10.55,8.8-18.17,15.92-7.62,7.12-15.17,14.42-22.67,21.92-7.49,7.49-14.24,14.42-20.23,20.79-5.99,6.37-9.49,10.81-10.49,13.3-4.5,10.24-9.42,21.04-14.8,32.41-5.37,11.36-10.92,22.04-16.67,32.03-5.74,9.99-11.61,18.73-17.61,26.22-5.99,7.49-12.11,12.36-18.36,14.61-3,1.25-7.49,1.06-13.49-.56-5.99-1.63-11.48-4.31-16.48-8.05-4.99-3.75-8.62-8.43-10.86-14.05-2.25-5.62-1.25-12.05,3-19.29,5.24-9.24,11.86-17.98,19.85-26.22,8-8.24,15.8-15.79,23.41-22.67,7.62-6.87,14.3-12.8,20.04-17.79,5.75-4.99,9.24-8.74,10.49-11.24,3.25-6.49,6.99-14.92,11.24-25.29,4.25-10.36,8.49-20.85,12.74-31.47,4.25-10.61,8.18-20.42,11.8-29.41,3.62-8.99,6.18-15.48,7.68-19.48,1.5-3.49,4.24-5.62,8.24-6.37,3.99-.75,8.05-.56,12.18.56,4.12,1.12,7.49,3,10.11,5.62,2.62,2.62,3.43,5.56,2.44,8.8-1.5,4.5-3.44,9.55-5.81,15.17-2.38,5.62-4.81,11.24-7.31,16.86-2.5,5.62-4.87,10.99-7.12,16.11-2.25,5.12-4,9.55-5.24,13.3,2.49-2.25,6.05-5.43,10.68-9.55,4.62-4.12,9.37-8.24,14.24-12.36,4.87-4.12,9.3-7.8,13.3-11.05,3.99-3.24,6.61-5.12,7.87-5.62Z"/>
             <path d="M319.59,124.55c.75-1,2.18-1.43,4.31-1.31,2.12.13,4.12.69,5.99,1.69,1.87,1,3.37,2.31,4.5,3.93,1.12,1.63,1.18,3.31.19,5.06-4.75,8.24-10.18,17.42-16.3,27.54-6.12,10.11-12.61,20.04-19.48,29.78-6.87,9.74-13.93,18.54-21.17,26.41-7.25,7.87-14.36,13.43-21.35,16.67-3.75,1.75-7.68,2.31-11.8,1.69-4.12-.62-7.87-2-11.24-4.12-3.37-2.12-6.25-4.74-8.62-7.87-2.38-3.12-3.69-6.18-3.93-9.18-.5-3.99,0-9.49,1.5-16.48,1.5-6.99,3.12-13.36,4.87-19.11-3,3.5-6.18,7.56-9.55,12.18-3.37,4.62-7.06,9.55-11.05,14.8-4,5.25-8.18,10.49-12.55,15.73-4.37,5.25-8.93,10.12-13.67,14.61-2.25,2.25-5.68,3.13-10.3,2.62-4.62-.5-9.18-1.81-13.67-3.93-4.5-2.12-8.43-4.87-11.8-8.24-3.37-3.37-4.81-6.93-4.31-10.68.75-9.49,3-19.6,6.74-30.34,3.75-10.74,8.31-21.17,13.67-31.28,5.37-10.12,11.36-19.54,17.98-28.28,6.61-8.74,13.17-15.86,19.67-21.35,4.74-3.75,9.11-5.87,13.11-6.37,3.99-.5,7.87-.06,11.61,1.31,3.75,1.38,7.49,3.37,11.24,5.99,3.75,2.62,7.74,5.19,11.99,7.68,2.75-3,5.43-6.18,8.05-9.55,2.62-3.37,5.43-6.68,8.43-9.93,1.74-2.25,4.55-3.12,8.43-2.62,3.87.5,7.55,1.87,11.05,4.12,3.49,2.25,6.3,4.93,8.43,8.05,2.12,3.13,2.31,6.06.56,8.8-8.49,14.49-15.3,27.35-20.42,38.59-5.12,11.24-8.87,20.73-11.24,28.47-2.38,7.74-3.5,13.62-3.37,17.61.12,4,1.06,5.99,2.81,5.99,4.99-.25,12.61-6.99,22.85-20.23,10.24-13.23,22.85-32.71,37.84-58.44Z"/>
