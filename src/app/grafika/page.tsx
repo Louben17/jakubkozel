@@ -156,7 +156,7 @@ export default function GrafikaPage() {
                 
                 <div className="pt-4 border-t border-pink-100">
                   <p className="text-gray-700 font-medium italic">
-                    "Každý projekt je pro mě výzvou vytvořit něco jedinečného a funkčního"
+                    &ldquo;Každý projekt je pro mě výzvou vytvořit něco jedinečného a funkčního&rdquo;
                   </p>
                 </div>
               </div>
