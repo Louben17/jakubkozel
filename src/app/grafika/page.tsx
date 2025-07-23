@@ -1,12 +1,4 @@
-<div className="flex items-center justify-center min-h-[60vh] px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              
-              {/* Loga */}
-              <div className="grafika-card">
-                <div className="text-center">
-                  <div className="text-4xl mb-4">🎨</div>
-                  <h3 className="font-bold text-xl text-white mb-3">Loga</h3>
-                  <p className="import React from 'react';
+import React from 'react';
 import Navigation from '@/components/Navigation';
 
 export const metadata = {
@@ -34,7 +26,7 @@ export default function GrafikaPage() {
               style={{ fontFamily: 'var(--font-inter), sans-serif' }}
             >
               GRAFIKA
-            </h1> 
+            </h1>
             
             <div className="max-w-3xl mx-auto">
               <p 
@@ -49,7 +41,6 @@ export default function GrafikaPage() {
           <div className="flex items-center justify-center min-h-[60vh] px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               
-              {/* Loga & Vizuální Identity */}
               <div className="grafika-card">
                 <div className="text-center">
                   <div className="text-4xl mb-4">🎨</div>
@@ -58,7 +49,6 @@ export default function GrafikaPage() {
                 </div>
               </div>
 
-              {/* Firemní Materiály */}
               <div className="grafika-card grafika-card-alt">
                 <div className="text-center">
                   <div className="text-4xl mb-4">📄</div>
@@ -67,7 +57,6 @@ export default function GrafikaPage() {
                 </div>
               </div>
 
-              {/* Propagační Materiály */}
               <div className="grafika-card">
                 <div className="text-center">
                   <div className="text-4xl mb-4">📢</div>
@@ -76,7 +65,6 @@ export default function GrafikaPage() {
                 </div>
               </div>
 
-              {/* Print Design */}
               <div className="grafika-card grafika-card-alt">
                 <div className="text-center">
                   <div className="text-4xl mb-4">🖨️</div>
@@ -85,7 +73,6 @@ export default function GrafikaPage() {
                 </div>
               </div>
 
-              {/* Katalogy */}
               <div className="grafika-card">
                 <div className="text-center">
                   <div className="text-4xl mb-4">📚</div>
@@ -94,7 +81,6 @@ export default function GrafikaPage() {
                 </div>
               </div>
 
-              {/* Balení */}
               <div className="grafika-card grafika-card-alt">
                 <div className="text-center">
                   <div className="text-4xl mb-4">📦</div>
