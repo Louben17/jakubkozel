@@ -23,24 +23,16 @@ export default function GrafikaPage() {
           {/* Hero s originálním designem */}
           <div className="text-center mb-20">
             <h1 
-              className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tight"
-              style={{ 
-                fontFamily: 'var(--font-inter), sans-serif',
-                fontWeight: '900',
-                color: '#FF9AA2',
-                lineHeight: '0.9'
-              }}
+              className="grafika-hero mb-8"
+              style={{ fontFamily: 'var(--font-inter), sans-serif' }}
             >
               GRAFIKA
             </h1>
             
             <div className="max-w-3xl mx-auto">
               <p 
-                className="text-xl md:text-2xl text-gray-600 font-light tracking-wide"
-                style={{ 
-                  fontFamily: 'var(--font-inter), sans-serif',
-                  letterSpacing: '0.02em'
-                }}
+                className="grafika-subtitle text-gray-600"
+                style={{ fontFamily: 'var(--font-inter), sans-serif' }}
               >
                 Vytvářím vizuální identity, které vaší značce dodají jedinečnost a zapamatovatelnost
               </p>
@@ -51,27 +43,15 @@ export default function GrafikaPage() {
           <div className="grid lg:grid-cols-2 gap-8 mb-20">
             
             {/* Levý sloupec - Co dělám */}
-            <div 
-              className="p-8 md:p-12 rounded-3xl border-2 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-              style={{ 
-                borderColor: '#FF9AA2',
-                background: 'linear-gradient(135deg, rgba(255, 154, 162, 0.05), rgba(255, 154, 162, 0.02))'
-              }}
-            >
-              <h2 
-                className="text-3xl md:text-4xl font-black mb-8 tracking-tight"
-                style={{ 
-                  fontFamily: 'var(--font-inter), sans-serif',
-                  color: '#FF9AA2'
-                }}
-              >
+            <div className="grafika-card">
+              <h2 className="grafika-card-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
                 CO VYTVÁŘÍM
               </h2>
               
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
-                    <span className="text-xl">🎨</span>
+                  <div className="grafika-service-icon">
+                    <span>🎨</span>
                   </div>
                   <div>
                     <h3 className="font-bold text-lg text-gray-900 mb-1">Loga & Vizuální Identity</h3>
@@ -80,8 +60,8 @@ export default function GrafikaPage() {
                 </div>
                 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
-                    <span className="text-xl">📄</span>
+                  <div className="grafika-service-icon">
+                    <span>📄</span>
                   </div>
                   <div>
                     <h3 className="font-bold text-lg text-gray-900 mb-1">Firemní Materiály</h3>
@@ -90,8 +70,8 @@ export default function GrafikaPage() {
                 </div>
                 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
-                    <span className="text-xl">📢</span>
+                  <div className="grafika-service-icon">
+                    <span>📢</span>
                   </div>
                   <div>
                     <h3 className="font-bold text-lg text-gray-900 mb-1">Propagační Materiály</h3>
@@ -100,8 +80,8 @@ export default function GrafikaPage() {
                 </div>
                 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-pink-100 flex items-center justify-center flex-shrink-0">
-                    <span className="text-xl">🖨️</span>
+                  <div className="grafika-service-icon">
+                    <span>🖨️</span>
                   </div>
                   <div>
                     <h3 className="font-bold text-lg text-gray-900 mb-1">Print Design</h3>
@@ -112,20 +92,8 @@ export default function GrafikaPage() {
             </div>
 
             {/* Pravý sloupec - Můj přístup */}
-            <div 
-              className="p-8 md:p-12 rounded-3xl border-2 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-              style={{ 
-                borderColor: '#FF9AA2',
-                background: 'linear-gradient(135deg, rgba(255, 154, 162, 0.02), rgba(255, 154, 162, 0.05))'
-              }}
-            >
-              <h2 
-                className="text-3xl md:text-4xl font-black mb-8 tracking-tight"
-                style={{ 
-                  fontFamily: 'var(--font-inter), sans-serif',
-                  color: '#FF9AA2'
-                }}
-              >
+            <div className="grafika-card grafika-card-alt">
+              <h2 className="grafika-card-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
                 MŮJ PŘÍSTUP
               </h2>
               
@@ -165,20 +133,8 @@ export default function GrafikaPage() {
           </div>
 
           {/* Spodní zvýrazněná sekce */}
-          <div 
-            className="text-center p-8 md:p-12 rounded-3xl border-2"
-            style={{ 
-              borderColor: '#FF9AA2',
-              background: 'linear-gradient(135deg, rgba(255, 154, 162, 0.08), rgba(255, 154, 162, 0.03))'
-            }}
-          >
-            <h2 
-              className="text-2xl md:text-3xl font-black mb-4 tracking-tight"
-              style={{ 
-                fontFamily: 'var(--font-inter), sans-serif',
-                color: '#FF9AA2'
-              }}
-            >
+          <div className="grafika-cta">
+            <h2 className="grafika-cta-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
               PŘIPRAVEN NA VÁŠ PROJEKT?
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
