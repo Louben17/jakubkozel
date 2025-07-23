@@ -13,40 +13,47 @@ export default function Home() {
     // Najdi všechny path elementy
     const paths = svg.querySelectorAll('path');
     
-    // Duplikuj každý path - jeden pro animaci, jeden pro fill
+    // Vytvoř mask pro každý path
     paths.forEach((path, index) => {
       const pathElement = path as SVGPathElement;
       const length = pathElement.getTotalLength();
       
-      // ORIGINÁLNÍ path - pouze fill (bude viditelný až po animaci)
+      // Vytvoř jedinečné ID pro mask
+      const maskId = `mask-${index}`;
+      
+      // Vytvoř mask element
+      const mask = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
+      mask.id = maskId;
+      mask.setAttribute('maskUnits', 'userSpaceOnUse');
+      
+      // Vytvoř mask path (bílý stroke = viditelná oblast)
+      const maskPath = pathElement.cloneNode(true) as SVGPathElement;
+      maskPath.style.fill = 'none';
+      maskPath.style.stroke = 'white';
+      maskPath.style.strokeWidth = '8px'; // Tlustší pro lepší pokrytí
+      maskPath.style.strokeLinecap = 'round';
+      maskPath.style.strokeLinejoin = 'round';
+      maskPath.style.strokeDasharray = `${length}`;
+      maskPath.style.strokeDashoffset = `${length}`;
+      maskPath.style.animation = `drawPath 2s ease-out ${index * 0.3}s forwards`;
+      
+      // Přidej mask path do mask
+      mask.appendChild(maskPath);
+      
+      // Přidej mask do SVG defs
+      let defs = svg.querySelector('defs');
+      if (!defs) {
+        defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        svg.appendChild(defs);
+      }
+      defs.appendChild(mask);
+      
+      // Nastav originální path s fill a mask
       pathElement.style.fill = '#333';
       pathElement.style.stroke = 'none';
-      pathElement.style.opacity = '0';
-      pathElement.style.transition = 'opacity 0.5s ease';
+      pathElement.style.mask = `url(#${maskId})`;
       
-      // NOVÝ path - pouze stroke pro animaci
-      const animatedPath = pathElement.cloneNode(true) as SVGPathElement;
-      animatedPath.style.stroke = '#333';
-      animatedPath.style.strokeWidth = '2px';
-      animatedPath.style.fill = 'none';
-      animatedPath.style.strokeLinecap = 'round';
-      animatedPath.style.strokeLinejoin = 'round';
-      animatedPath.style.strokeDasharray = `${length}`;
-      animatedPath.style.strokeDashoffset = `${length}`;
-      animatedPath.style.animation = `drawPath 2s ease-out ${index * 0.3}s forwards`;
-      
-      // Vložit animovaný path před originální
-      pathElement.parentNode?.insertBefore(animatedPath, pathElement);
-      
-      // Po dokončení animace každého písmene - zobraz fill a skryj stroke
-      setTimeout(() => {
-        pathElement.style.opacity = '1'; // Zobraz fill
-        setTimeout(() => {
-          animatedPath.style.opacity = '0'; // Skryj stroke
-        }, 500);
-      }, (index * 300) + 2000); // delay + duration animace
-      
-      console.log(`Path ${index + 1}: délka = ${Math.round(length)}px`);
+      console.log(`Path ${index + 1}: délka = ${Math.round(length)}px, mask = ${maskId}`);
     });
 
     // Spustí animaci po 300ms
