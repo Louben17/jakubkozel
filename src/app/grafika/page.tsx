@@ -188,6 +188,80 @@ export default function GrafikaPage() {
 
         </div>
       </main>
+      
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+        
+        .hover\\:shadow-2xl:hover {
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+        }
+        
+        .hover\\:-translate-y-2:hover {
+          transform: translateY(-8px) !important;
+        }
+        
+        .transition-all {
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        
+        .tracking-tight {
+          letter-spacing: -0.025em !important;
+        }
+        
+        .tracking-wide {
+          letter-spacing: 0.025em !important;
+        }
+        
+        .rounded-3xl {
+          border-radius: 1.5rem !important;
+        }
+        
+        .font-black {
+          font-weight: 900 !important;
+        }
+        
+        .font-light {
+          font-weight: 300 !important;
+        }
+        
+        .leading-relaxed {
+          line-height: 1.625 !important;
+        }
+        
+        .flex-shrink-0 {
+          flex-shrink: 0 !important;
+        }
+        
+        .bg-gradient-to-br {
+          background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)) !important;
+        }
+        
+        .from-pink-100 {
+          --tw-gradient-from: #fce7f3 !important;
+          --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(252, 231, 243, 0)) !important;
+        }
+        
+        .to-pink-200 {
+          --tw-gradient-to: #fbcfe8 !important;
+        }
+        
+        .from-pink-400 {
+          --tw-gradient-from: #f472b6 !important;
+          --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(244, 114, 182, 0)) !important;
+        }
+        
+        .to-pink-500 {
+          --tw-gradient-to: #ec4899 !important;
+        }
+        
+        .border-pink-100 {
+          border-color: #fce7f3 !important;
+        }
+      `}</style>
     </React.Fragment>
   );
 }
