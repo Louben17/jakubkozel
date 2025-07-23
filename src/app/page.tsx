@@ -61,10 +61,10 @@ export default function Home() {
       const subFontSize = 12; // Menší font pro "design a grafika"
       const isMobile = window.innerWidth <= 768;
       const letterSpacing = isMobile ? 80 : 150; // Mezery mezi písmeny
-      const subLetterSpacing = isMobile ? 40 : 80; // Menší mezery pro podnadpis
-      const lineSpacing = isMobile ? 80 : 160; // VĚTŠÍ mezera mezi řádky
+      const subLetterSpacing = isMobile ? 20 : 40; // MENŠÍ mezery pro podnadpis
+      const lineSpacing = isMobile ? 120 : 240; // OBŘÍ mezera mezi řádky
       
-      console.log('Font:', baseFontSize, 'Sub:', subFontSize, 'Mobile:', isMobile);
+      console.log('Font:', baseFontSize, 'Sub:', subFontSize, 'LineSpacing:', lineSpacing);
 
       // JAKUB - první řádek - PŘESNĚ VYSTŘEDĚNÝ
       const jakubText = 'JAKUB';
@@ -84,7 +84,7 @@ export default function Home() {
             ctx, 
             letter, 
             jakubStartX + i * letterSpacing, 
-            centerY - lineSpacing/2, 
+            centerY - lineSpacing/3, // JAKUB výš 
             letterProgress, 
             getLetterColor(i), 
             baseFontSize
@@ -110,7 +110,7 @@ export default function Home() {
             ctx, 
             letter, 
             kozelStartX + i * letterSpacing, 
-            centerY - lineSpacing/8, // Posun KOZEL blíž ke středu 
+            centerY, // KOZEL ve středu 
             letterProgress, 
             getLetterColor(i + 5), 
             baseFontSize
@@ -118,30 +118,35 @@ export default function Home() {
         }
       });
 
-      // DESIGN A GRAFIKA - třetí řádek
+      // DESIGN A GRAFIKA - třetí řádek - SPRÁVNĚ
       const subText = 'design a grafika';
-      const subDelay = 0.8; // Start po KOZEL
+      const subDelay = 0.8;
       
+      // Počítání jen viditelných znaků (bez mezer)
+      const visibleChars = subText.replace(/ /g, ''); // Odstraň mezery pro počítání
+      const totalWidth = visibleChars.length * subLetterSpacing;
+      const startX = centerX - totalWidth / 2;
+      
+      let visibleIndex = 0;
       subText.split('').forEach((char, i) => {
-        // Přeskočit mezery - jen vizuální
-        if (char === ' ') return;
+        if (char === ' ') return; // Přeskočit mezery
         
-        const letterStart = subDelay + i * 0.08;
+        const letterStart = subDelay + visibleIndex * 0.08;
         const letterDuration = 0.3;
         const letterProgress = Math.max(0, Math.min(1, (progress - letterStart) / letterDuration));
         
         if (letterProgress > 0) {
-          const textStartX = centerX - (subText.length * subLetterSpacing) / 2;
           drawLetter(
             ctx, 
             char, 
-            textStartX + i * subLetterSpacing, 
-            centerY + lineSpacing/2, 
+            startX + visibleIndex * subLetterSpacing, 
+            centerY + lineSpacing/3, // Pod KOZEL s velkou mezerou
             letterProgress, 
             '#333333', 
             subFontSize
           );
         }
+        visibleIndex++;
       });
 
       if (progress < 1) {
