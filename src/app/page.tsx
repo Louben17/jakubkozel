@@ -58,15 +58,15 @@ export default function Home() {
       let baseFontSize, letterSpacing, lineSpacing;
       
       if (isMobile) {
-        baseFontSize = Math.min(window.width * 0.12, 60);
+        baseFontSize = Math.min(window.innerWidth * 0.12, 60);
         letterSpacing = window.innerWidth * 0.15;
         lineSpacing = window.innerHeight * 0.15;
       } else if (isTablet) {
-        baseFontSize = Math.min(window.width * 0.08, 80);
+        baseFontSize = Math.min(window.innerWidth * 0.08, 80);
         letterSpacing = window.innerWidth * 0.12;
         lineSpacing = window.innerHeight * 0.12;
       } else {
-        baseFontSize = Math.min(window.width * 0.06, 120);
+        baseFontSize = Math.min(window.innerWidth * 0.06, 120);
         letterSpacing = window.innerWidth * 0.1;
         lineSpacing = window.innerHeight * 0.1;
       }
