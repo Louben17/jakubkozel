@@ -6,14 +6,6 @@ import Navigation from '@/components/Navigation';
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const getLetterColor = (index: number) => {
-    const colors = [
-      '#FF9AA2', '#FFB7B2', '#FFDAC1', '#E2F0CB', '#B5EAD7', 
-      '#C7CEEA', '#A2D2FF', '#BDB2FF', '#FFC6FF', '#FFABAB'
-    ];
-    return colors[index % colors.length];
-  };
-
   // Video auto-play efekt
   useEffect(() => {
     const video = videoRef.current;
