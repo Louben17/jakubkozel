@@ -609,4 +609,4 @@ a:focus, button:focus {
 .grafika-service-icon {
   will-change: transform, box-shadow;
   backface-visibility: hidden;
-}
+} 
