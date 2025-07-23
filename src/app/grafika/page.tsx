@@ -39,9 +39,9 @@ export default function GrafikaPage() {
           </div>
 
           <div className="flex items-center justify-center min-h-[60vh] px-4">
-            <div className="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto w-full">
+            <div className="flex flex-col lg:flex-row gap-12 justify-center items-center">
               
-              <div className="grafika-card flex-1 min-w-0">
+              <div className="grafika-card w-80 flex-shrink-0">
                 <h2 className="grafika-card-title text-white" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
                   CO VYTVÁŘÍM
                 </h2>
@@ -89,7 +89,7 @@ export default function GrafikaPage() {
                 </div>
               </div>
 
-              <div className="grafika-card grafika-card-alt flex-1 min-w-0">
+              <div className="grafika-card grafika-card-alt w-80 flex-shrink-0">
                 <h2 className="grafika-card-title text-white" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
                   MŮJ PŘÍSTUP
                 </h2>
@@ -134,4 +134,4 @@ export default function GrafikaPage() {
       </main>
     </div>
   );
-}
+} 
