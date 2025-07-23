@@ -39,11 +39,12 @@ export default function GrafikaPage() {
             </div>
           </div>
 
-          {/* Moderní grid s rámečky */}
-          <div className="grid lg:grid-cols-2 gap-8 mb-20">
-            
-            {/* Levý sloupec - Co dělám */}
-            <div className="grafika-card">
+          {/* Moderní grid s rámečky - vystředěný */}
+          <div className="flex items-center justify-center min-h-[60vh]">
+            <div className="grid lg:grid-cols-2 gap-8 w-full">
+              
+              {/* Levý sloupec - Co dělám */}
+              <div className="grafika-card">
               <h2 className="grafika-card-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
                 CO VYTVÁŘÍM
               </h2>
@@ -128,20 +129,12 @@ export default function GrafikaPage() {
                   </p>
                 </div>
               </div>
+                </div>
+              </div>
             </div>
-
+            
           </div>
-
-          {/* Spodní zvýrazněná sekce */}
-          <div className="grafika-cta">
-            <h2 className="grafika-cta-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
-              PŘIPRAVEN NA VÁŠ PROJEKT?
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Pojďme společně vytvořit vizuální identitu, která vaši značku posune na další úroveň
-            </p>
-          </div>
-
+          
         </div>
       </main>
     </React.Fragment>
