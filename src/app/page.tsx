@@ -18,8 +18,7 @@ export default function Home() {
       const pathElement = path as SVGPathElement;
       const length = pathElement.getTotalLength();
       
-      // Rozlišení mezi JAKUB (0-4) a KOZEL (5-9)
-      const isKozel = index < 5; // První skupina v SVG je KOZEL
+      // Rozlišení mezi JAKUB (5-9) a KOZEL (0-4) 
       const isJakub = index >= 5; // Druhá skupina v SVG je JAKUB
       const letterIndex = index % 5;
       
