@@ -1,12 +1,9 @@
-"use client";
-
-import { useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 
 export default function Home() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [showFallback, setShowFallback] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);"use client";
+
+import { useEffect, useRef } from 'react';
 
   const getLetterColor = (index: number) => {
     const colors = [
@@ -168,4 +165,4 @@ export default function Home() {
       `}</style>
     </div>
   );
-}
+} 
