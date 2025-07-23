@@ -1,20 +1,18 @@
 "use client";
 
 import { useEffect, useRef } from 'react';
-import Navigation from '@/components/Navigation';
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const getLetterColor = (index: number) => {
     const colors = [
-      '#FF9AA2', '#FFB7B2', '#FFDAC1', '#E2F0CB', '#B5EAD7', 
-      '#C7CEEA', '#A2D2FF', '#BDB2FF', '#FFC6FF', '#FFABAB'
+      '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+      '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9'
     ];
     return colors[index % colors.length];
   };
 
-  // Canvas brush efekt
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -22,12 +20,10 @@ export default function Home() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Jednoduchý canvas setup - FORCE OVERRIDES
     const setupCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       
-      // FORCE canvas styles
       canvas.style.width = '100vw';
       canvas.style.height = '100vh';
       canvas.style.position = 'fixed';
@@ -41,14 +37,13 @@ export default function Home() {
 
     let animationId: number;
     let progress = 0;
-    const duration = 4000; // Delší animace pro oba řádky
+    const duration = 3500;
     let startTime: number | null = null;
 
     const drawBrushStroke = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       progress = Math.min((timestamp - startTime) / duration, 1);
 
-      // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
@@ -56,33 +51,42 @@ export default function Home() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // MALÝ FONT + RESPONSIVE pro mobil
-      const baseFontSize = 20; // Hlavní font
+      // Responsive font sizing
       const isMobile = window.innerWidth <= 768;
-      const letterSpacing = isMobile ? 80 : 150; // Mezery mezi písmeny
-      const lineSpacing = isMobile ? 120 : 240; // OBŘÍ mezera mezi řádky
+      const isTablet = window.innerWidth <= 1024;
       
-      console.log('Font:', baseFontSize, 'LineSpacing:', lineSpacing);
+      let baseFontSize, letterSpacing, lineSpacing;
+      
+      if (isMobile) {
+        baseFontSize = Math.min(window.width * 0.12, 60);
+        letterSpacing = window.innerWidth * 0.15;
+        lineSpacing = window.innerHeight * 0.15;
+      } else if (isTablet) {
+        baseFontSize = Math.min(window.width * 0.08, 80);
+        letterSpacing = window.innerWidth * 0.12;
+        lineSpacing = window.innerHeight * 0.12;
+      } else {
+        baseFontSize = Math.min(window.width * 0.06, 120);
+        letterSpacing = window.innerWidth * 0.1;
+        lineSpacing = window.innerHeight * 0.1;
+      }
 
-      // JAKUB - první řádek - PŘESNĚ VYSTŘEDĚNÝ
+      // JAKUB - první řádek
       const jakubText = 'JAKUB';
       const jakubWidth = jakubText.length * letterSpacing;
-      const jakubStartX = centerX - jakubWidth / 2 + letterSpacing / 2; // Kompenzace pro center align
+      const jakubStartX = centerX - jakubWidth / 2 + letterSpacing / 2;
 
       jakubText.split('').forEach((letter, i) => {
-        // KLASICKÁ ANIMACE - písmeno po písmenu zleva doprava
-        const letterStart = i * 0.15; // Kratší delay mezi písmeny
-        const letterDuration = 0.5; // Kratší kreslení písmene
+        const letterStart = i * 0.12;
+        const letterDuration = 0.6;
         const letterProgress = Math.max(0, Math.min(1, (progress - letterStart) / letterDuration));
-        
-        console.log(`JAKUB ${i} (${letter}): start=${letterStart}, progress=${progress}, letterProgress=${letterProgress}`);
         
         if (letterProgress > 0) {
           drawLetter(
             ctx, 
             letter, 
             jakubStartX + i * letterSpacing, 
-            centerY - lineSpacing/4, // JAKUB výš 
+            centerY - lineSpacing/2, 
             letterProgress, 
             getLetterColor(i), 
             baseFontSize
@@ -90,25 +94,23 @@ export default function Home() {
         }
       });
 
-      // KOZEL - druhý řádek - PŘESNĚ VYSTŘEDĚNÝ
+      // KOZEL - druhý řádek
       const kozelText = 'KOZEL';
       const kozelWidth = kozelText.length * letterSpacing;
-      const kozelStartX = centerX - kozelWidth / 2 + letterSpacing / 2; // Kompenzace pro center align
-      const kozelDelay = 0.3; // Rychlejší start KOZEL
+      const kozelStartX = centerX - kozelWidth / 2 + letterSpacing / 2;
+      const kozelDelay = 0.4;
       
       kozelText.split('').forEach((letter, i) => {
-        const letterStart = kozelDelay + i * 0.15; // Kratší delay
-        const letterDuration = 0.5; // Kratší kreslení
+        const letterStart = kozelDelay + i * 0.12;
+        const letterDuration = 0.6;
         const letterProgress = Math.max(0, Math.min(1, (progress - letterStart) / letterDuration));
-        
-        console.log(`KOZEL ${i} (${letter}): start=${letterStart}, progress=${progress}, letterProgress=${letterProgress}`);
         
         if (letterProgress > 0) {
           drawLetter(
             ctx, 
             letter, 
             kozelStartX + i * letterSpacing, 
-            centerY + lineSpacing/4, // KOZEL níž 
+            centerY + lineSpacing/2, 
             letterProgress, 
             getLetterColor(i + 5), 
             baseFontSize
@@ -121,12 +123,10 @@ export default function Home() {
       }
     };
 
-    // Start animace po 300ms
     const timer = setTimeout(() => {
       animationId = requestAnimationFrame(drawBrushStroke);
     }, 300);
 
-    // Resize handler
     const handleResize = () => {
       setupCanvas();
     };
@@ -150,29 +150,65 @@ export default function Home() {
   ) => {
     ctx.save();
     
-    // ČISTÁ BARVA - bez okrajů a gradientů
-    ctx.fillStyle = color;
+    // Hlavní text s gradientem
+    const gradient = ctx.createLinearGradient(x - fontSize/2, y - fontSize/2, x + fontSize/2, y + fontSize/2);
+    gradient.addColorStop(0, color);
+    gradient.addColorStop(1, adjustBrightness(color, -20));
     
-    // MALÝ FONT bez okrajů
-    ctx.font = `900 ${fontSize}px Arial Black, Impact, Helvetica, sans-serif`;
+    ctx.fillStyle = gradient;
+    ctx.font = `900 ${fontSize}px 'Arial Black', Impact, system-ui, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     
-    // Jen fade-in bez efektů
+    // Animační efekty
+    const scale = 0.3 + (progress * 0.7);
+    const rotation = (1 - progress) * 0.1;
+    
+    ctx.translate(x, y);
+    ctx.rotate(rotation);
+    ctx.scale(scale, scale);
     ctx.globalAlpha = progress;
     
-    // POUZE FILL - žádný stroke
-    ctx.fillText(letter, x, y);
+    // Stín
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetX = 3;
+    ctx.shadowOffsetY = 3;
+    
+    ctx.fillText(letter, 0, 0);
+    
+    // Světelný efekt
+    ctx.shadowColor = 'transparent';
+    ctx.fillStyle = `rgba(255, 255, 255, ${progress * 0.3})`;
+    ctx.fillText(letter, -1, -1);
     
     ctx.restore();
   };
 
-      return (
-    <div className="min-h-screen bg-white relative overflow-hidden" style={{ isolation: 'isolate' }}>
-      
-      <Navigation />
+  const adjustBrightness = (color: string, amount: number) => {
+    const hex = color.replace('#', '');
+    const r = Math.max(0, Math.min(255, parseInt(hex.substr(0, 2), 16) + amount));
+    const g = Math.max(0, Math.min(255, parseInt(hex.substr(2, 2), 16) + amount));
+    const b = Math.max(0, Math.min(255, parseInt(hex.substr(4, 2), 16) + amount));
+    return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+  };
 
-      {/* ISOLATED Canvas - COMPLETE CSS ISOLATION */}
+  return (
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      
+      {/* Navigation placeholder */}
+      <nav className="absolute top-0 left-0 right-0 z-20 p-6">
+        <div className="flex justify-between items-center max-w-7xl mx-auto">
+          <div className="text-lg font-semibold text-slate-700">Portfolio</div>
+          <div className="hidden md:flex space-x-6 text-slate-600">
+            <a href="#about" className="hover:text-slate-900 transition-colors">O mně</a>
+            <a href="#projects" className="hover:text-slate-900 transition-colors">Projekty</a>
+            <a href="#contact" className="hover:text-slate-900 transition-colors">Kontakt</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Canvas pro animaci */}
       <canvas
         ref={canvasRef}
         style={{ 
@@ -183,33 +219,79 @@ export default function Home() {
           height: '100vh',
           zIndex: 15,
           pointerEvents: 'none',
-          isolation: 'isolate',
-          contain: 'layout style paint size',
-          transform: 'translateZ(0)',
-          willChange: 'auto'
         }}
       />
 
-      {/* Jemné pozadí */}
-      <div className="absolute inset-0 overflow-hidden opacity-15 -z-10">
-        {[...Array(25)].map((_, i) => (
+      {/* Animované pozadí */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Floating shapes */}
+        {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-gray-300 rounded-full"
+            className="absolute opacity-20"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animation: `fade ${3 + Math.random() * 2}s infinite`,
+              animation: `float ${8 + Math.random() * 4}s infinite ease-in-out`,
               animationDelay: `${Math.random() * 2}s`
             }}
-          />
+          >
+            <div 
+              className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
+              style={{
+                transform: `scale(${0.5 + Math.random() * 1.5})`
+              }}
+            />
+          </div>
+        ))}
+        
+        {/* Larger accent shapes */}
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={`large-${i}`}
+            className="absolute opacity-10"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `float ${12 + Math.random() * 6}s infinite ease-in-out`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDirection: i % 2 === 0 ? 'normal' : 'reverse'
+            }}
+          >
+            <div 
+              className="w-8 h-8 bg-gradient-to-br from-pink-300 to-blue-300 rounded-full blur-sm"
+            />
+          </div>
         ))}
       </div>
 
+      {/* Jemný overlay gradient */}
+      <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-white/30 pointer-events-none" />
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="flex flex-col items-center text-slate-500 animate-bounce">
+          <span className="text-sm mb-2">Scroll</span>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
+        </div>
+      </div>
+
       <style jsx>{`
-        @keyframes fade {
-          0%, 100% { opacity: 0.1; }
-          50% { opacity: 0.3; }
+        @keyframes float {
+          0%, 100% { 
+            transform: translateY(0px) rotate(0deg); 
+          }
+          25% { 
+            transform: translateY(-20px) rotate(5deg); 
+          }
+          50% { 
+            transform: translateY(-10px) rotate(-3deg); 
+          }
+          75% { 
+            transform: translateY(-15px) rotate(2deg); 
+          }
         }
       `}</style>
     </div>
