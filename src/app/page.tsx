@@ -77,14 +77,20 @@ export default function Home() {
         // Clear canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        // Vykresli aktuální frame
+        // Vykresli aktuální frame se zmenšením
         if (images[currentFrame] && images[currentFrame].complete) {
-          // Vystředit obrázek
           const img = images[currentFrame];
-          const x = (canvas.width - img.width) / 2;
-          const y = (canvas.height - img.height) / 2;
           
-          ctx.drawImage(img, x, y);
+          // SCALING - zmenšení obrázků
+          const scale = 0.8; // 80% velikosti (změň podle potřeby: 0.5 = 50%, 1.2 = 120%)
+          const scaledWidth = img.width * scale;
+          const scaledHeight = img.height * scale;
+          
+          // Vystředit zmenšený obrázek
+          const x = (canvas.width - scaledWidth) / 2;
+          const y = (canvas.height - scaledHeight) / 2;
+          
+          ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
         }
         
         currentFrame++;
@@ -137,8 +143,8 @@ export default function Home() {
         }}
       />
 
-      {/* Loading indikátor s progress */}
-      {!isAnimating && (
+      {/* Loading indikátor - SKRYTÝ */}
+      {false && !isAnimating && (
         <div style={{
           position: 'fixed',
           top: '50%',
