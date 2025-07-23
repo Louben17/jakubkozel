@@ -8,12 +8,21 @@ export default function Home() {
 
   // Video auto-play efekt
   useEffect(() => {
+    console.log('useEffect started');
     const video = videoRef.current;
-    if (!video) return;
+    console.log('Video element:', video);
+    
+    if (!video) {
+      console.log('No video element found!');
+      return;
+    }
 
     // Start video po 300ms (stejně jako původní animace)
     const timer = setTimeout(() => {
-      video.play().catch(console.log);
+      console.log('Trying to play video...');
+      video.play().catch((error) => {
+        console.log('Video play error:', error);
+      });
     }, 300);
 
     return () => {
@@ -32,6 +41,9 @@ export default function Home() {
         muted
         playsInline
         preload="auto"
+        onError={(e) => console.log('Video error:', e)}
+        onLoadStart={() => console.log('Video loading started')}
+        onCanPlay={() => console.log('Video can play')}
         style={{ 
           position: 'fixed',
           top: 0,
@@ -46,6 +58,7 @@ export default function Home() {
       >
         <source src="/animace.mov" type="video/quicktime" />
         <source src="/animace.mp4" type="video/mp4" />
+        Tvůj prohlížeč nepodporuje video.
       </video>
 
       {/* Jemné pozadí */}
