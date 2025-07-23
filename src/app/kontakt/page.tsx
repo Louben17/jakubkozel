@@ -11,8 +11,8 @@ export default function KontaktPage() {
       <div className="min-h-screen bg-white pt-40 flex items-center justify-center">
         <div className="text-center">
           
-          {/* Desktop layout - horizontální */}
-          <div className="contact-pill hidden md:flex">
+          {/* Pouze email a telefon */}
+          <div className="contact-pill">
             
             {/* Email */}
             <a 
@@ -25,8 +25,8 @@ export default function KontaktPage() {
               </span>
             </a>
 
-            {/* Oddělovač */}
-            <div className="contact-divider"></div>
+            {/* Oddělovač - skrytý na mobilu */}
+            <div className="contact-divider hidden md:block"></div>
 
             {/* Telefon */}
             <a 
@@ -35,33 +35,6 @@ export default function KontaktPage() {
             >
               <span className="contact-icon">📞</span>
               <span className="group-hover:scale-105 transition-transform">
-                728 890 062
-              </span>
-            </a>
-            
-          </div>
-
-          {/* Mobile layout - vertikální */}
-          <div className="md:hidden flex flex-col gap-6">
-            
-            {/* Email - mobile */}
-            <a 
-              href="mailto:jakubkozel@seznam.cz"
-              className="contact-link-mobile group"
-            >
-              <span className="contact-icon text-2xl mb-2">✉</span>
-              <span className="group-hover:scale-105 transition-transform text-lg">
-                jakubkozel@seznam.cz
-              </span>
-            </a>
-
-            {/* Telefon - mobile */}
-            <a 
-              href="tel:+420728890062"
-              className="contact-link-mobile group"
-            >
-              <span className="contact-icon text-2xl mb-2">📞</span>
-              <span className="group-hover:scale-105 transition-transform text-lg">
                 728 890 062
               </span>
             </a>
@@ -83,6 +56,16 @@ export default function KontaktPage() {
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
         }
 
+        /* Mobil - vertikální layout */
+        @media (max-width: 768px) {
+          .contact-pill {
+            flex-direction: column;
+            gap: 20px;
+            border-radius: 25px;
+            padding: 30px 40px;
+          }
+        }
+
         .contact-link {
           display: flex;
           align-items: center;
@@ -96,30 +79,6 @@ export default function KontaktPage() {
 
         .contact-link:hover {
           color: #000;
-        }
-
-        .contact-link-mobile {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          color: #333;
-          text-decoration: none;
-          font-weight: 500;
-          transition: all 0.3s ease;
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          border-radius: 25px;
-          padding: 30px 40px;
-          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-          min-width: 280px;
-        }
-
-        .contact-link-mobile:hover {
-          color: #000;
-          transform: translateY(-2px);
-          box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
         }
 
         .contact-icon {
