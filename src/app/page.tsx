@@ -57,12 +57,14 @@ export default function Home() {
       const centerY = canvas.height / 2;
 
       // MALÝ FONT + RESPONSIVE pro mobil
-      const baseFontSize = 20; // Ještě menší
+      const baseFontSize = 20; // Hlavní font
+      const subFontSize = 12; // Menší font pro "design a grafika"
       const isMobile = window.innerWidth <= 768;
-      const letterSpacing = isMobile ? 80 : 150; // Menší mezery na mobilu
-      const lineSpacing = isMobile ? 60 : 120; // Větší mezera mezi řádky
+      const letterSpacing = isMobile ? 80 : 150; // Mezery mezi písmeny
+      const subLetterSpacing = isMobile ? 40 : 80; // Menší mezery pro podnadpis
+      const lineSpacing = isMobile ? 80 : 160; // VĚTŠÍ mezera mezi řádky
       
-      console.log('Font:', baseFontSize, 'Mobile:', isMobile, 'Spacing:', letterSpacing);
+      console.log('Font:', baseFontSize, 'Sub:', subFontSize, 'Mobile:', isMobile);
 
       // JAKUB - první řádek - PŘESNĚ VYSTŘEDĚNÝ
       const jakubText = 'JAKUB';
@@ -108,10 +110,36 @@ export default function Home() {
             ctx, 
             letter, 
             kozelStartX + i * letterSpacing, 
-            centerY + lineSpacing/2, 
+            centerY - lineSpacing/8, // Posun KOZEL blíž ke středu 
             letterProgress, 
             getLetterColor(i + 5), 
             baseFontSize
+          );
+        }
+      });
+
+      // DESIGN A GRAFIKA - třetí řádek
+      const subText = 'design a grafika';
+      const subDelay = 0.8; // Start po KOZEL
+      
+      subText.split('').forEach((char, i) => {
+        // Přeskočit mezery - jen vizuální
+        if (char === ' ') return;
+        
+        const letterStart = subDelay + i * 0.08;
+        const letterDuration = 0.3;
+        const letterProgress = Math.max(0, Math.min(1, (progress - letterStart) / letterDuration));
+        
+        if (letterProgress > 0) {
+          const textStartX = centerX - (subText.length * subLetterSpacing) / 2;
+          drawLetter(
+            ctx, 
+            char, 
+            textStartX + i * subLetterSpacing, 
+            centerY + lineSpacing/2, 
+            letterProgress, 
+            '#333333', 
+            subFontSize
           );
         }
       });
