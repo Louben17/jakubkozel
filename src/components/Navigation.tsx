@@ -122,34 +122,7 @@ export default function Navigation() {
             );
           })}
 
-          {/* Desktop: CTA Button */}
-          <button
-            className="cta-button desktop-only"
-            onClick={() => {/* zatím nic */}}
-            style={{
-              marginLeft: '1rem',
-              padding: '0.5rem 1.2rem',
-              background: 'linear-gradient(135deg, #FFD700, #FFA500)',
-              color: '#333',
-              border: '1px solid #FFB84D',
-              borderRadius: '9999px',
-              fontSize: '0.875rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 2px 8px rgba(255, 215, 0, 0.3)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-1px)';
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 215, 0, 0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 2px 8px rgba(255, 215, 0, 0.3)';
-            }}
-          >
-            Premium
-          </button>
+
 
           {/* Mobile: Pouze sendvič button v krásném kolečku */}
           <button
@@ -185,6 +158,40 @@ export default function Navigation() {
         </div>
       </nav>
 
+      {/* CTA Button - samostatně za menu */}
+      <button
+        className={`cta-button-separate ${isVisible ? 'visible' : 'hidden'}`}
+        onClick={() => {/* zatím nic */}}
+        style={{
+          position: 'fixed',
+          top: '1rem',
+          right: '6rem',
+          padding: '0.5rem 1.2rem',
+          background: 'linear-gradient(135deg, #FFD700, #FFA500)',
+          color: '#333',
+          border: '1px solid #FFB84D',
+          borderRadius: '9999px',
+          fontSize: '0.875rem',
+          fontWeight: '600',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          boxShadow: '0 2px 8px rgba(255, 215, 0, 0.3)',
+          zIndex: '1000',
+          opacity: isVisible ? '1' : '0',
+          transform: isVisible ? 'translateY(0)' : 'translateY(-20px)',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = isVisible ? 'translateY(-1px)' : 'translateY(-20px)';
+          e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 215, 0, 0.4)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = isVisible ? 'translateY(0)' : 'translateY(-20px)';
+          e.currentTarget.style.boxShadow = '0 2px 8px rgba(255, 215, 0, 0.3)';
+        }}
+      >
+        Premium
+      </button>
+
       {/* Mobile dropdown menu - pill shape */}
       {isNavOpen && (
         <div className="mobile-dropdown" style={{ borderRadius: '1.5rem' }}>
@@ -208,29 +215,7 @@ export default function Navigation() {
               </Link>
             );
           })}
-          
-          {/* Mobile: CTA Button */}
-          <button
-            className="mobile-cta-button"
-            onClick={() => {/* zatím nic */}}
-            style={{
-              margin: '1rem',
-              padding: '0.75rem 1.5rem',
-              background: 'linear-gradient(135deg, #FFD700, #FFA500)',
-              color: '#333',
-              border: '1px solid #FFB84D',
-              borderRadius: '9999px',
-              fontSize: '0.875rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 2px 8px rgba(255, 215, 0, 0.3)',
-              width: 'calc(100% - 2rem)',
-              textAlign: 'center'
-            }}
-          >
-            Premium
-          </button>
+
         </div>
       )}
 
