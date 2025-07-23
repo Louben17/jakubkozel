@@ -188,16 +188,16 @@ export default function Home() {
       <canvas
         ref={canvasRef}
         style={{ 
-          position: 'fixed !important' as any,
-          top: '0 !important' as any,
-          left: '0 !important' as any,
-          width: '100vw !important' as any,
-          height: '100vh !important' as any,
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
           zIndex: 15,
           pointerEvents: 'none',
           isolation: 'isolate',
           contain: 'layout style paint size',
-          transform: 'translateZ(0)', // Force GPU layer
+          transform: 'translateZ(0)',
           willChange: 'auto'
         }}
       />
