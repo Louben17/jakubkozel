@@ -56,11 +56,11 @@ export default function Home() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // UPRAVENÉ ROZESTUPY - menší mezery mezi písmeny, větší mezi slovy
+      // VELKÉ ROZESTUPY - jméno vyplní skoro celou obrazovku
       const baseFontSize = 20; // Hlavní font
       const isMobile = window.innerWidth <= 768;
-      const letterSpacing = isMobile ? 50 : 90; // MENŠÍ mezery mezi písmeny
-      const lineSpacing = isMobile ? 80 : 140; // MENŠÍ mezera mezi řádky
+      const letterSpacing = isMobile ? canvas.width * 0.18 : canvas.width * 0.16; // Dynamické podle šířky obrazovky
+      const lineSpacing = isMobile ? 100 : 160; // Mezera mezi řádky
       
       console.log('Font:', baseFontSize, 'LineSpacing:', lineSpacing);
 
@@ -214,4 +214,4 @@ export default function Home() {
       `}</style>
     </div>
   );
-}
+}  
