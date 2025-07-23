@@ -1,166 +1,167 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 
 export default function Home() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const jakubRef = useRef<HTMLDivElement>(null);
+  const kozelRef = useRef<HTMLDivElement>(null);
 
-  // PNG sekvence animace
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    // Načti GSAP z CDN
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js';
+    script.onload = () => {
+      // GSAP je načtené, spusť animaci
+      const gsap = (window as any).gsap;
+      
+      // Timeline s 300ms delay
+      const tl = gsap.timeline({ delay: 0.3 });
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+      // Animace JAKUB - elegant bounce
+      tl.fromTo(
+        ".jakub-letter",
+        {
+          opacity: 0,
+          y: 100,
+          scale: 0.5,
+          rotation: -15
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          duration: 0.8,
+          stagger: 0.12,
+          ease: "back.out(2)"
+        }
+      )
+      // Animace KOZEL - elastic drop
+      .fromTo(
+        ".kozel-letter",
+        {
+          opacity: 0,
+          y: -100,
+          scale: 1.5,
+          rotation: 15
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          duration: 1,
+          stagger: 0.12,
+          ease: "elastic.out(1, 0.4)"
+        },
+        "-=0.4"
+      );
 
-    // Setup canvas
-    const setupCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      canvas.style.width = '100vw';
-      canvas.style.height = '100vh';
-      canvas.style.position = 'fixed';
-      canvas.style.top = '0';
-      canvas.style.left = '0';
-      canvas.style.zIndex = '15';
-      canvas.style.pointerEvents = 'none';
+      // Hover efekty po dokončení
+      setTimeout(() => {
+        document.querySelectorAll('.letter').forEach((letter) => {
+          letter.addEventListener('mouseenter', () => {
+            gsap.to(letter, {
+              scale: 1.3,
+              rotation: Math.random() * 30 - 15,
+              y: -10,
+              duration: 0.3,
+              ease: "power2.out"
+            });
+          });
+
+          letter.addEventListener('mouseleave', () => {
+            gsap.to(letter, {
+              scale: 1,
+              rotation: 0,
+              y: 0,
+              duration: 0.4,
+              ease: "elastic.out(1, 0.3)"
+            });
+          });
+        });
+      }, 3000);
     };
-
-    setupCanvas();
-
-    // PNG sekvence settings
-    const startFrame = 1007; // První frame
-    const endFrame = 1197;   // Poslední frame
-    const totalFrames = endFrame - startFrame + 1; // 191 snímků
-    const frameRate = 60; // 60 FPS
-    const frameDuration = 1000 / frameRate; // ms per frame
     
-    let currentFrame = 0;
-    let lastTime = 0;
-    let animationId: number;
-
-    // Preload všech obrázků
-    const images: HTMLImageElement[] = [];
-    let imagesLoaded = 0;
-
-    const preloadImages = () => {
-      for (let i = 0; i < totalFrames; i++) {
-        const img = new Image();
-        const frameNumber = startFrame + i; // 1007, 1008, 1009, etc.
-        img.src = `/animace/Comp ${frameNumber}.png`; // Tvoje názvy souborů
-        
-        img.onload = () => {
-          imagesLoaded++;
-          console.log(`Načten frame ${frameNumber} (${imagesLoaded}/${totalFrames})`);
-          if (imagesLoaded === totalFrames) {
-            console.log('Všechny PNG načteny, spouštím animaci');
-            // Všechny obrázky načteny, spusť animaci po 300ms
-            setTimeout(() => {
-              setIsAnimating(true);
-              animationId = requestAnimationFrame(animate);
-            }, 300);
-          }
-        };
-        
-        img.onerror = () => {
-          console.log(`Chyba při načítání: Comp ${frameNumber}.png`);
-        };
-        
-        images[i] = img;
-      }
-    };
-
-    const animate = (timestamp: number) => {
-      if (timestamp - lastTime >= frameDuration) {
-        // Clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Vykresli aktuální frame se zmenšením
-        if (images[currentFrame] && images[currentFrame].complete) {
-          const img = images[currentFrame];
-          
-          // SCALING - zmenšení obrázků
-          const scale = 0.8; // 80% velikosti (změň podle potřeby: 0.5 = 50%, 1.2 = 120%)
-          const scaledWidth = img.width * scale;
-          const scaledHeight = img.height * scale;
-          
-          // Vystředit zmenšený obrázek
-          const x = (canvas.width - scaledWidth) / 2;
-          const y = (canvas.height - scaledHeight) / 2;
-          
-          ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
-        }
-        
-        currentFrame++;
-        lastTime = timestamp;
-        
-        // Opakovat animaci nebo zastavit
-        if (currentFrame < totalFrames) {
-          animationId = requestAnimationFrame(animate);
-        } else {
-          setIsAnimating(false);
-          console.log('Animace dokončena');
-        }
-      } else {
-        animationId = requestAnimationFrame(animate);
-      }
-    };
-
-    // Spusť preload
-    preloadImages();
-
-    // Resize handler
-    const handleResize = () => {
-      setupCanvas();
-    };
-    window.addEventListener('resize', handleResize);
+    document.head.appendChild(script);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
-      if (animationId) cancelAnimationFrame(animationId);
+      document.head.removeChild(script);
     };
   }, []);
+
+  const renderLetters = (word: string, className: string) => {
+    return word.split('').map((letter, index) => (
+      <span
+        key={index}
+        className={`letter ${className}`}
+        style={{
+          display: 'inline-block',
+          fontSize: 'clamp(4rem, 15vw, 12rem)',
+          fontWeight: '900',
+          margin: '0 0.5vw',
+          cursor: 'pointer',
+          background: className === 'jakub-letter' 
+            ? 'linear-gradient(135deg, #FF9AA2, #FFB7B2, #FFDAC1)'
+            : 'linear-gradient(135deg, #B5EAD7, #C7CEEA, #A2D2FF)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.1))'
+        }}
+      >
+        {letter}
+      </span>
+    ));
+  };
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden" style={{ isolation: 'isolate' }}>
       
       <Navigation />
 
-      {/* Canvas pro PNG sekvenci */}
-      <canvas
-        ref={canvasRef}
-        style={{ 
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          zIndex: 15,
-          pointerEvents: 'none',
-          isolation: 'isolate',
-        }}
-      />
-
-      {/* Loading indikátor - SKRYTÝ */}
-      {false && !isAnimating && (
-        <div style={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 16,
-          color: '#666',
-          fontSize: '18px',
-          textAlign: 'center'
-        }}>
-          <div>Načítám animaci...</div>
-          <div style={{ fontSize: '14px', marginTop: '10px' }}>
-            191 PNG snímků @ 60 FPS
-          </div>
+      {/* GSAP Animovaný text */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 15,
+        pointerEvents: 'none',
+        gap: 'clamp(2rem, 8vh, 6rem)'
+      }}>
+        
+        {/* JAKUB */}
+        <div 
+          ref={jakubRef}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            pointerEvents: 'auto' // Povolit hover
+          }}
+        >
+          {renderLetters('JAKUB', 'jakub-letter')}
         </div>
-      )}
+
+        {/* KOZEL */}
+        <div 
+          ref={kozelRef}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            pointerEvents: 'auto' // Povolit hover
+          }}
+        >
+          {renderLetters('KOZEL', 'kozel-letter')}
+        </div>
+
+      </div>
 
       {/* Jemné pozadí */}
       <div className="absolute inset-0 overflow-hidden opacity-15 -z-10">
