@@ -56,12 +56,12 @@ export default function Home() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // MASSIVE FIXED FONT - ignore everything else!
-      const baseFontSize = 200; // JEŠTĚ VĚTŠÍ
-      console.log('MASSIVE Canvas:', canvas.width, 'x', canvas.height, 'MASSIVE Font:', baseFontSize);
+      // OPTIMÁLNÍ VELIKOST - menší ale pořád velká
+      const baseFontSize = 120; // Zmenšeno z 200px
+      console.log('OPTIMÁLNÍ Canvas:', canvas.width, 'x', canvas.height, 'Font:', baseFontSize);
       
-      const letterSpacing = 150; // Větší spacing
-      const lineSpacing = 200; // Větší line spacing
+      const letterSpacing = 140; // Větší mezery mezi písmeny
+      const lineSpacing = 160;
 
       // JAKUB - první řádek - PŘESNĚ VYSTŘEDĚNÝ
       const jakubText = 'JAKUB';
@@ -69,9 +69,9 @@ export default function Home() {
       const jakubStartX = centerX - jakubWidth / 2 + letterSpacing / 2; // Kompenzace pro center align
 
       jakubText.split('').forEach((letter, i) => {
-        // Pomalejší, plynulejší progress pro každé písmeno
-        const letterStart = i * 0.08; // Menší delay mezi písmeny
-        const letterDuration = 0.4; // Delší kreslení každého písmene
+        // KLASICKÁ ANIMACE - písmeno po písmenu zleva doprava
+        const letterStart = i * 0.2; // 200ms mezi písmeny
+        const letterDuration = 0.6; // 600ms pro kreslení písmene
         const letterProgress = Math.max(0, Math.min(1, (progress - letterStart) / letterDuration));
         
         if (letterProgress > 0) {
@@ -91,11 +91,11 @@ export default function Home() {
       const kozelText = 'KOZEL';
       const kozelWidth = kozelText.length * letterSpacing;
       const kozelStartX = centerX - kozelWidth / 2 + letterSpacing / 2; // Kompenzace pro center align
-      const kozelDelay = 0.4; // Start KOZEL až po části JAKUB
+      const kozelDelay = 1.2; // Start KOZEL po dokončení JAKUB
       
       kozelText.split('').forEach((letter, i) => {
-        const letterStart = kozelDelay + i * 0.08;
-        const letterDuration = 0.4;
+        const letterStart = kozelDelay + i * 0.2; // 200ms mezi písmeny
+        const letterDuration = 0.6; // 600ms pro kreslení písmene
         const letterProgress = Math.max(0, Math.min(1, (progress - letterStart) / letterDuration));
         
         if (letterProgress > 0) {
@@ -163,18 +163,12 @@ export default function Home() {
     // FORCE font load test
     console.log('Drawing letter:', letter, 'size:', fontSize, 'font loaded:', ctx.font);
     
-    // Smooth brush efekt
-    ctx.globalAlpha = Math.pow(progress, 0.5); // Rychlejší fade-in
-    ctx.filter = `blur(${(1 - progress) * 1.5}px)`;
+    // Smooth appear efekt - bez zbytečného blur a shake
+    ctx.globalAlpha = progress;
     
-    // Jemný brush shake
-    const shake = (1 - progress) * 2;
-    const shakeX = (Math.random() - 0.5) * shake;
-    const shakeY = (Math.random() - 0.5) * shake;
-    
-    // Stroke i fill pro plnější vzhled
-    ctx.strokeText(letter, x + shakeX, y + shakeY);
-    ctx.fillText(letter, x + shakeX, y + shakeY);
+    // Stroke i fill pro plný vzhled
+    ctx.strokeText(letter, x, y);
+    ctx.fillText(letter, x, y);
     
     ctx.restore();
   };
