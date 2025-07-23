@@ -56,12 +56,13 @@ export default function Home() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // MENŠÍ FONT S VELKÝMI MEZERAMI
-      const baseFontSize = 40; // Malý font jak chcete
-      console.log('MALÝ Font Canvas:', canvas.width, 'x', canvas.height, 'Font:', baseFontSize);
+      // MALÝ FONT + RESPONSIVE pro mobil
+      const baseFontSize = 20; // Ještě menší
+      const isMobile = window.innerWidth <= 768;
+      const letterSpacing = isMobile ? 80 : 150; // Menší mezery na mobilu
+      const lineSpacing = isMobile ? 60 : 120; // Větší mezera mezi řádky
       
-      const letterSpacing = 150; // Velké mezery jak chcete
-      const lineSpacing = 80;
+      console.log('Font:', baseFontSize, 'Mobile:', isMobile, 'Spacing:', letterSpacing);
 
       // JAKUB - první řádek - PŘESNĚ VYSTŘEDĚNÝ
       const jakubText = 'JAKUB';
@@ -149,29 +150,18 @@ export default function Home() {
   ) => {
     ctx.save();
     
-    // Gradient pro brush efekt
-    const gradient = ctx.createLinearGradient(x, y - fontSize/2, x, y + fontSize/2);
-    gradient.addColorStop(0, color);
-    gradient.addColorStop(0.5, color + 'dd');
-    gradient.addColorStop(1, color + 'aa');
+    // ČISTÁ BARVA - bez okrajů a gradientů
+    ctx.fillStyle = color;
     
-    ctx.fillStyle = gradient;
-    ctx.strokeStyle = color;
-    ctx.lineWidth = Math.max(2, fontSize / 30);
-    
-    // MASSIVE FONT with NO CSS dependencies
+    // MALÝ FONT bez okrajů
     ctx.font = `900 ${fontSize}px Arial Black, Impact, Helvetica, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     
-    // FORCE font load test
-    console.log('Drawing letter:', letter, 'size:', fontSize, 'font loaded:', ctx.font);
-    
-    // Smooth appear efekt - bez zbytečného blur a shake
+    // Jen fade-in bez efektů
     ctx.globalAlpha = progress;
     
-    // Stroke i fill pro plný vzhled
-    ctx.strokeText(letter, x, y);
+    // POUZE FILL - žádný stroke
     ctx.fillText(letter, x, y);
     
     ctx.restore();
