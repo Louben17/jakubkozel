@@ -1,5 +1,6 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
+import { FaBook, FaNewspaper, FaFileAlt, FaFont, FaLayerGroup, FaPrint } from 'react-icons/fa';
 
 export const metadata = {
   title: 'DTP | Jakub Kozel - Grafický design',
@@ -7,35 +8,47 @@ export const metadata = {
 };
 
 export default function DTPPage() {
+  const services = [
+    { title: 'Sazba knih', description: 'Profesionální sazba knih s důrazem na typografii.', icon: <FaBook /> },
+    { title: 'Časopisy', description: 'Kompletní sazba časopisů a periodik.', icon: <FaNewspaper /> },
+    { title: 'Katalogy', description: 'Atraktivní katalogy produktů a služeb.', icon: <FaLayerGroup /> },
+    { title: 'Brožury', description: 'Informační brožury a prezentační materiály.', icon: <FaFileAlt /> },
+    { title: 'Výroční zprávy', description: 'Reprezentativní zpracování výročních zpráv.', icon: <FaPrint /> },
+    { title: 'Typografie', description: 'Odborná úprava textu a typografické řešení.', icon: <FaFont /> },
+  ];
+
   return (
-    <React.Fragment>
+    <div>
       <Navigation />
       
       <div className="min-h-screen bg-white pt-40 flex items-center justify-center">
-        <div className="text-center max-w-2xl px-6">
+        <div className="px-6 w-full">
           
-          <h1 
-            className="text-6xl md:text-8xl font-bold mb-12"
-            style={{ 
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: '800',
-              color: '#C7CEEA'
-            }}
-          >
+          <h1 className="dtp-main-title">
             DTP
           </h1>
           
-          <div 
-            className="text-lg text-gray-700 space-y-4 leading-relaxed"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
-            <p>Sazbou knih, časopisů a katalogů se zabývám s důrazem na typografii.</p>
-            <p>Připravuji brožury, výroční zprávy a další tiskoviny pro tisk.</p>
-            <p>Dbám na správnou úpravu textu a harmonii celkového vzhledu.</p>
+          <div className="dtp-services-grid">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="dtp-service-tile"
+              >
+                <div className="dtp-service-icon">
+                  {service.icon}
+                </div>
+                <h2 className="dtp-service-title">
+                  {service.title}
+                </h2>
+                <p className="dtp-service-description">
+                  {service.description}
+                </p>
+              </div>
+            ))}
           </div>
-
+          
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
-}
+} 
