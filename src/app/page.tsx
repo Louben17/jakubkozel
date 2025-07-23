@@ -13,7 +13,7 @@ export default function Home() {
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js';
     script.onload = () => {
       // GSAP je načtené, spusť animaci
-      // @ts-ignore - GSAP z CDN
+      // @ts-expect-error - GSAP z CDN
       const gsap = window.gsap;
       
       if (!gsap) {
@@ -193,4 +193,4 @@ export default function Home() {
       `}</style>
     </div>
   );
-} 
+}
