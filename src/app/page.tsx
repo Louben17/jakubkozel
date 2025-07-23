@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef,} from 'react';
 import Navigation from '@/components/Navigation';
 
 export default function Home() {
   const svgRef = useRef<SVGSVGElement>(null);
-  const [animationCompleted, setAnimationCompleted] = useState(false);
+ 
 
   useEffect(() => {
     const svg = svgRef.current;
@@ -25,7 +25,6 @@ export default function Home() {
     
     // Označ animaci jako dokončenou po jejím skončení
     setTimeout(() => {
-      setAnimationCompleted(true);
       sessionStorage.setItem('handwritingAnimated', 'true');
     }, 7000); // Celková délka animace
   }, []);
