@@ -1,10 +1,7 @@
+"use client";
+
 import React from 'react';
 import Navigation from '@/components/Navigation';
-
-export const metadata = {
-  title: 'Kontakt | Jakub Kozel - Grafický design',
-  description: 'Spojte se s námi. Email: jakubkozel@seznam.cz, Telefon: 728 890 062.',
-};
 
 export default function KontaktPage() {
   return (
