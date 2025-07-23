@@ -128,7 +128,7 @@ export default function Home() {
       const startX = centerX - totalWidth / 2;
       
       let visibleIndex = 0;
-      subText.split('').forEach((char, i) => {
+      subText.split('').forEach((char) => {
         if (char === ' ') return; // Přeskočit mezery
         
         const letterStart = subDelay + visibleIndex * 0.08;
