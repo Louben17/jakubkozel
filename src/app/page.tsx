@@ -41,7 +41,7 @@ export default function Home() {
 
     let animationId: number;
     let progress = 0;
-    const duration = 5000; // Delší animace pro všechna písmena
+    const duration = 4000; // Delší animace pro oba řádky
     let startTime: number | null = null;
 
     const drawBrushStroke = (timestamp: number) => {
@@ -56,12 +56,12 @@ export default function Home() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // OPTIMÁLNÍ VELIKOST - menší ale pořád velká
-      const baseFontSize = 120; // Zmenšeno z 200px
-      console.log('OPTIMÁLNÍ Canvas:', canvas.width, 'x', canvas.height, 'Font:', baseFontSize);
+      // MENŠÍ FONT S VELKÝMI MEZERAMI
+      const baseFontSize = 40; // Malý font jak chcete
+      console.log('MALÝ Font Canvas:', canvas.width, 'x', canvas.height, 'Font:', baseFontSize);
       
-      const letterSpacing = 140; // Větší mezery mezi písmeny
-      const lineSpacing = 160;
+      const letterSpacing = 150; // Velké mezery jak chcete
+      const lineSpacing = 80;
 
       // JAKUB - první řádek - PŘESNĚ VYSTŘEDĚNÝ
       const jakubText = 'JAKUB';
@@ -70,9 +70,11 @@ export default function Home() {
 
       jakubText.split('').forEach((letter, i) => {
         // KLASICKÁ ANIMACE - písmeno po písmenu zleva doprava
-        const letterStart = i * 0.2; // 200ms mezi písmeny
-        const letterDuration = 0.6; // 600ms pro kreslení písmene
+        const letterStart = i * 0.15; // Kratší delay mezi písmeny
+        const letterDuration = 0.5; // Kratší kreslení písmene
         const letterProgress = Math.max(0, Math.min(1, (progress - letterStart) / letterDuration));
+        
+        console.log(`JAKUB ${i} (${letter}): start=${letterStart}, progress=${progress}, letterProgress=${letterProgress}`);
         
         if (letterProgress > 0) {
           drawLetter(
@@ -91,12 +93,14 @@ export default function Home() {
       const kozelText = 'KOZEL';
       const kozelWidth = kozelText.length * letterSpacing;
       const kozelStartX = centerX - kozelWidth / 2 + letterSpacing / 2; // Kompenzace pro center align
-      const kozelDelay = 1.2; // Start KOZEL po dokončení JAKUB
+      const kozelDelay = 0.3; // Rychlejší start KOZEL
       
       kozelText.split('').forEach((letter, i) => {
-        const letterStart = kozelDelay + i * 0.2; // 200ms mezi písmeny
-        const letterDuration = 0.6; // 600ms pro kreslení písmene
+        const letterStart = kozelDelay + i * 0.15; // Kratší delay
+        const letterDuration = 0.5; // Kratší kreslení
         const letterProgress = Math.max(0, Math.min(1, (progress - letterStart) / letterDuration));
+        
+        console.log(`KOZEL ${i} (${letter}): start=${letterStart}, progress=${progress}, letterProgress=${letterProgress}`);
         
         if (letterProgress > 0) {
           drawLetter(
