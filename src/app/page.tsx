@@ -60,7 +60,7 @@ export default function Home() {
       const baseFontSize = 20; // Hlavní font
       const isMobile = window.innerWidth <= 768;
       const letterSpacing = isMobile ? canvas.width * 0.18 : canvas.width * 0.16; // Dynamické podle šířky obrazovky
-      const lineSpacing = isMobile ? 100 : 160; // Mezera mezi řádky
+      const lineSpacing = isMobile ? 200 : 300; // VĚTŠÍ mezera mezi řádky
       
       console.log('Font:', baseFontSize, 'LineSpacing:', lineSpacing);
 
@@ -214,4 +214,4 @@ export default function Home() {
       `}</style>
     </div>
   );
-}  
+}   
