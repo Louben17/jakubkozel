@@ -1,5 +1,6 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
+import { FaLaptopCode, FaMobile, FaShoppingCart, FaRocket, FaUsers, FaSearch } from 'react-icons/fa';
 
 export const metadata = {
   title: 'Web Design | Jakub Kozel - Grafický design',
@@ -7,35 +8,47 @@ export const metadata = {
 };
 
 export default function WebDesignPage() {
+  const services = [
+    { title: 'Responzivní weby', description: 'Weby, které perfektně fungují na všech zařízeních.', icon: <FaLaptopCode /> },
+    { title: 'UI/UX Design', description: 'Intuitivní rozhraní zaměřené na uživatele.', icon: <FaUsers /> },
+    { title: 'E-commerce', description: 'Online obchody, které skutečně prodávají.', icon: <FaShoppingCart /> },
+    { title: 'Landing Pages', description: 'Stránky s vysokou mírou konverze.', icon: <FaRocket /> },
+    { title: 'Mobilní optimalizace', description: 'Perfektní zobrazení na mobilních zařízeních.', icon: <FaMobile /> },
+    { title: 'SEO optimalizace', description: 'Weby připravené pro vyhledávače.', icon: <FaSearch /> },
+  ];
+
   return (
-    <React.Fragment>
+    <div>
       <Navigation />
       
       <div className="min-h-screen bg-white pt-40 flex items-center justify-center">
-        <div className="text-center max-w-2xl px-6">
+        <div className="px-6 w-full">
           
-          <h1 
-            className="text-6xl md:text-8xl font-bold mb-12"
-            style={{ 
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: '800',
-              color: '#B5EAD7'
-            }}
-          >
+          <h1 className="webdesign-main-title">
             WEB DESIGN
           </h1>
           
-          <div 
-            className="text-lg text-gray-700 space-y-4 leading-relaxed"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
-            <p>Navrhuji moderní responzivní weby, které fungují na všech zařízeních.</p>
-            <p>Specializuji se na UI/UX design a e-commerce řešení pro malé i velké firmy.</p>
-            <p>Každý web optimalizuji pro rychlost a uživatelský zážitek.</p>
+          <div className="webdesign-services-grid">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="webdesign-service-tile"
+              >
+                <div className="webdesign-service-icon">
+                  {service.icon}
+                </div>
+                <h2 className="webdesign-service-title">
+                  {service.title}
+                </h2>
+                <p className="webdesign-service-description">
+                  {service.description}
+                </p>
+              </div>
+            ))}
           </div>
-
+          
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
-}
+} 
