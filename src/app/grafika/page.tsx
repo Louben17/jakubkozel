@@ -14,13 +14,12 @@ export const metadata = {
 
 export default function GrafikaPage() {
   return (
-    <>
+    <div>
       <Navigation />
       
       <main className="min-h-screen bg-white pt-40 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           
-          {/* Hero s originálním designem */}
           <div className="text-center mb-20">
             <h1 
               className="grafika-hero mb-8"
@@ -39,104 +38,100 @@ export default function GrafikaPage() {
             </div>
           </div>
 
-          {/* Moderní grid s rámečky - vystředěný */}
           <div className="flex items-center justify-center min-h-[60vh]">
             <div className="grid lg:grid-cols-2 gap-8 w-full">
               
-              {/* Levý sloupec - Co dělám */}
               <div className="grafika-card">
-              <h2 className="grafika-card-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
-                CO VYTVÁŘÍM
-              </h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="grafika-service-icon">
-                    <span>🎨</span>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-gray-900 mb-1">Loga & Vizuální Identity</h3>
-                    <p className="text-gray-600 leading-relaxed">Komplexní vizuální systémy, které odlišují vaši značku</p>
-                  </div>
-                </div>
+                <h2 className="grafika-card-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
+                  CO VYTVÁŘÍM
+                </h2>
                 
-                <div className="flex items-start gap-4">
-                  <div className="grafika-service-icon">
-                    <span>📄</span>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="grafika-service-icon">
+                      <span>🎨</span>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-1">Loga & Vizuální Identity</h3>
+                      <p className="text-gray-600 leading-relaxed">Komplexní vizuální systémy, které odlišují vaši značku</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-gray-900 mb-1">Firemní Materiály</h3>
-                    <p className="text-gray-600 leading-relaxed">Vizitky, hlavičkové papíry, prezentace a kancelářské potřeby</p>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="grafika-service-icon">
+                      <span>📄</span>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-1">Firemní Materiály</h3>
+                      <p className="text-gray-600 leading-relaxed">Vizitky, hlavičkové papíry, prezentace a kancelářské potřeby</p>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="grafika-service-icon">
-                    <span>📢</span>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="grafika-service-icon">
+                      <span>📢</span>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-1">Propagační Materiály</h3>
+                      <p className="text-gray-600 leading-relaxed">Plakáty, letáky, bannery a veškeré marketingové materiály</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-gray-900 mb-1">Propagační Materiály</h3>
-                    <p className="text-gray-600 leading-relaxed">Plakáty, letáky, bannery a veškeré marketingové materiály</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-4">
-                  <div className="grafika-service-icon">
-                    <span>🖨️</span>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-gray-900 mb-1">Print Design</h3>
-                    <p className="text-gray-600 leading-relaxed">Vše připravené pro profesionální tisk ve vysoké kvalitě</p>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="grafika-service-icon">
+                      <span>🖨️</span>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-1">Print Design</h3>
+                      <p className="text-gray-600 leading-relaxed">Vše připravené pro profesionální tisk ve vysoké kvalitě</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Pravý sloupec - Můj přístup */}
-            <div className="grafika-card grafika-card-alt">
-              <h2 className="grafika-card-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
-                MŮJ PŘÍSTUP
-              </h2>
-              
-              <div className="space-y-8">
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-pink-500 text-white flex items-center justify-center text-sm font-bold">1</div>
-                    <h3 className="font-bold text-lg text-gray-900">Analýza & Strategie</h3>
-                  </div>
-                  <p className="text-gray-600 leading-relaxed pl-11">Pečlivě analyzuji vaše potřeby, cílovou skupinu a konkurenci</p>
-                </div>
+              <div className="grafika-card grafika-card-alt">
+                <h2 className="grafika-card-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
+                  MŮJ PŘÍSTUP
+                </h2>
                 
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-pink-500 text-white flex items-center justify-center text-sm font-bold">2</div>
-                    <h3 className="font-bold text-lg text-gray-900">Kreativní Proces</h3>
+                <div className="space-y-8">
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="grafika-step-number">1</div>
+                      <h3 className="font-bold text-lg text-gray-900">Analýza & Strategie</h3>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed pl-11">Pečlivě analyzuji vaše potřeby, cílovou skupinu a konkurenci</p>
                   </div>
-                  <p className="text-gray-600 leading-relaxed pl-11">Vytvářím návrhy, které nejen krásně vypadají, ale také efektivně komunikují</p>
-                </div>
-                
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-pink-500 text-white flex items-center justify-center text-sm font-bold">3</div>
-                    <h3 className="font-bold text-lg text-gray-900">Precizní Realizace</h3>
+                  
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="grafika-step-number">2</div>
+                      <h3 className="font-bold text-lg text-gray-900">Kreativní Proces</h3>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed pl-11">Vytvářím návrhy, které nejen krásně vypadají, ale také efektivně komunikují</p>
                   </div>
-                  <p className="text-gray-600 leading-relaxed pl-11">Všechny návrhy připravuji s důrazem na detail a možnost budoucího rozvoje</p>
-                </div>
-                
-                <div className="pt-4 border-t border-pink-100">
-                  <p className="text-gray-700 font-medium italic">
-                    &ldquo;Každý projekt je pro mě výzvou vytvořit něco jedinečného a funkčního&rdquo;
-                  </p>
+                  
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="grafika-step-number">3</div>
+                      <h3 className="font-bold text-lg text-gray-900">Precizní Realizace</h3>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed pl-11">Všechny návrhy připravuji s důrazem na detail a možnost budoucího rozvoje</p>
+                  </div>
+                  
+                  <div className="pt-4 border-t border-pink-100">
+                    <p className="text-gray-700 font-medium italic">
+                      &ldquo;Každý projekt je pro mě výzvou vytvořit něco jedinečného a funkčního&rdquo;
+                    </p>
+                  </div>
                 </div>
               </div>
-                </div>
-              </div>
+
             </div>
-            
           </div>
           
         </div>
       </main>
-    </>
+    </div>
   );
 }
