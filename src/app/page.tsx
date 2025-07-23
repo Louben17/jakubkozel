@@ -155,13 +155,13 @@ export default function Home() {
     ctx.strokeStyle = color;
     ctx.lineWidth = Math.max(2, fontSize / 30);
     
-    // MASSIVE FONT with multiple fallbacks
-    ctx.font = `900 ${fontSize}px var(--font-inter), Arial Black, Arial, Helvetica, sans-serif`;
+    // MASSIVE FONT with NO CSS dependencies
+    ctx.font = `900 ${fontSize}px Arial Black, Impact, Helvetica, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     
     // FORCE font load test
-    console.log('Drawing letter:', letter, 'at', x, y, 'with font size:', fontSize);
+    console.log('Drawing letter:', letter, 'size:', fontSize, 'font loaded:', ctx.font);
     
     // Smooth brush efekt
     ctx.globalAlpha = Math.pow(progress, 0.5); // Rychlejší fade-in
@@ -179,24 +179,26 @@ export default function Home() {
     ctx.restore();
   };
 
-  return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+      return (
+    <div className="min-h-screen bg-white relative overflow-hidden" style={{ isolation: 'isolate' }}>
       
       <Navigation />
 
-      {/* ISOLATED Canvas - NO CSS INTERFERENCE */}
+      {/* ISOLATED Canvas - COMPLETE CSS ISOLATION */}
       <canvas
         ref={canvasRef}
         style={{ 
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
+          position: 'fixed !important' as any,
+          top: '0 !important' as any,
+          left: '0 !important' as any,
+          width: '100vw !important' as any,
+          height: '100vh !important' as any,
           zIndex: 15,
           pointerEvents: 'none',
           isolation: 'isolate',
-          contain: 'layout style paint'
+          contain: 'layout style paint size',
+          transform: 'translateZ(0)', // Force GPU layer
+          willChange: 'auto'
         }}
       />
 
