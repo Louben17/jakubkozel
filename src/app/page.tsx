@@ -22,23 +22,12 @@ export default function Home() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // HIGH DPI canvas setup
+    // Jednoduchý canvas setup
     const setupCanvas = () => {
-      const rect = canvas.getBoundingClientRect();
-      const dpr = window.devicePixelRatio || 1;
-      
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      
-      canvas.style.width = rect.width + 'px';
-      canvas.style.height = rect.height + 'px';
-      
-      ctx.scale(dpr, dpr);
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
 
-    // Set canvas to full window
-    canvas.style.width = '100vw';
-    canvas.style.height = '100vh';
     setupCanvas();
 
     let animationId: number;
@@ -50,25 +39,25 @@ export default function Home() {
       if (!startTime) startTime = timestamp;
       progress = Math.min((timestamp - startTime) / duration, 1);
 
-      // Clear with proper DPI
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
 
-      // OBŘÍ FONT - fixed velikost
-      const baseFontSize = Math.min(window.innerWidth / 8, 180);
-      console.log('Font size:', baseFontSize); // Debug
+      // FIXED OBŘÍ FONT
+      const baseFontSize = 140; // Fixed velikost
+      console.log('Canvas size:', canvas.width, 'x', canvas.height, 'Font:', baseFontSize);
       
-      // Optimalizované spacing
-      const letterSpacing = baseFontSize * 0.9;
-      const lineSpacing = baseFontSize * 1.2;
+      const letterSpacing = 110; // Fixed spacing
+      const lineSpacing = 160; // Fixed line spacing
 
-      // JAKUB - první řádek
+      // JAKUB - první řádek - PŘESNĚ VYSTŘEDĚNÝ
       const jakubText = 'JAKUB';
-      const jakubStartX = centerX - (jakubText.length * letterSpacing) / 2;
+      const jakubWidth = jakubText.length * letterSpacing;
+      const jakubStartX = centerX - jakubWidth / 2 + letterSpacing / 2; // Kompenzace pro center align
 
       jakubText.split('').forEach((letter, i) => {
         // Pomalejší, plynulejší progress pro každé písmeno
@@ -89,9 +78,10 @@ export default function Home() {
         }
       });
 
-      // KOZEL - druhý řádek s pozdějším startem
+      // KOZEL - druhý řádek - PŘESNĚ VYSTŘEDĚNÝ
       const kozelText = 'KOZEL';
-      const kozelStartX = centerX - (kozelText.length * letterSpacing) / 2;
+      const kozelWidth = kozelText.length * letterSpacing;
+      const kozelStartX = centerX - kozelWidth / 2 + letterSpacing / 2; // Kompenzace pro center align
       const kozelDelay = 0.4; // Start KOZEL až po části JAKUB
       
       kozelText.split('').forEach((letter, i) => {
