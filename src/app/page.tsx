@@ -13,47 +13,57 @@ export default function Home() {
     // Najdi všechny path elementy
     const paths = svg.querySelectorAll('path');
     
-    // Vytvoř mask pro každý path
+    // Pro každý path vytvoř animovaný clip-path
     paths.forEach((path, index) => {
       const pathElement = path as SVGPathElement;
       const length = pathElement.getTotalLength();
       
-      // Vytvoř jedinečné ID pro mask
-      const maskId = `mask-${index}`;
-      
-      // Vytvoř mask element
-      const mask = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
-      mask.id = maskId;
-      mask.setAttribute('maskUnits', 'userSpaceOnUse');
-      
-      // Vytvoř mask path (bílý stroke = viditelná oblast)
-      const maskPath = pathElement.cloneNode(true) as SVGPathElement;
-      maskPath.style.fill = 'none';
-      maskPath.style.stroke = 'white';
-      maskPath.style.strokeWidth = '8px'; // Tlustší pro lepší pokrytí
-      maskPath.style.strokeLinecap = 'round';
-      maskPath.style.strokeLinejoin = 'round';
-      maskPath.style.strokeDasharray = `${length}`;
-      maskPath.style.strokeDashoffset = `${length}`;
-      maskPath.style.animation = `drawPath 2s ease-out ${index * 0.3}s forwards`;
-      
-      // Přidej mask path do mask
-      mask.appendChild(maskPath);
-      
-      // Přidej mask do SVG defs
-      let defs = svg.querySelector('defs');
-      if (!defs) {
-        defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-        svg.appendChild(defs);
-      }
-      defs.appendChild(mask);
-      
-      // Nastav originální path s fill a mask
+      // Nastav fill na originální path
       pathElement.style.fill = '#333';
       pathElement.style.stroke = 'none';
-      pathElement.style.mask = `url(#${maskId})`;
       
-      console.log(`Path ${index + 1}: délka = ${Math.round(length)}px, mask = ${maskId}`);
+      // Vytvoř animující se překrývající element pro "odhalování"
+      const revealElement = document.createElement('div');
+      revealElement.style.position = 'absolute';
+      revealElement.style.top = '0';
+      revealElement.style.left = '0';
+      revealElement.style.width = '100%';
+      revealElement.style.height = '100%';
+      revealElement.style.background = 'white';
+      revealElement.style.clipPath = 'polygon(0 0, 0 0, 0 100%, 0 100%)'; // Začíná skrytý
+      revealElement.style.animation = `revealText 2s ease-out ${index * 0.3}s forwards`;
+      
+      // Alternativní řešení - použij stroke animation + fill na konci
+      const animatedStroke = pathElement.cloneNode(true) as SVGPathElement;
+      animatedStroke.style.fill = 'none';
+      animatedStroke.style.stroke = '#333';
+      animatedStroke.style.strokeWidth = '3px';
+      animatedStroke.style.strokeLinecap = 'round';
+      animatedStroke.style.strokeLinejoin = 'round';
+      animatedStroke.style.strokeDasharray = `${length}`;
+      animatedStroke.style.strokeDashoffset = `${length}`;
+      animatedStroke.style.animation = `drawPath 2s ease-out ${index * 0.3}s forwards`;
+      
+      // Skryj originální fill na začátku
+      pathElement.style.opacity = '0';
+      
+      // Vložit stroke animaci
+      pathElement.parentNode?.insertBefore(animatedStroke, pathElement);
+      
+      // Po dokončení stroke animace - postupně zobraz fill
+      setTimeout(() => {
+        // Postupné zobrazení fill písmeno po písmeno
+        pathElement.style.transition = 'opacity 0.8s ease';
+        pathElement.style.opacity = '1';
+        
+        // Po chvíli schovat stroke
+        setTimeout(() => {
+          animatedStroke.style.transition = 'opacity 0.5s ease';
+          animatedStroke.style.opacity = '0';
+        }, 800);
+      }, (index * 300) + 2000);
+      
+      console.log(`Path ${index + 1}: délka = ${Math.round(length)}px`);
     });
 
     // Spustí animaci po 300ms
