@@ -122,6 +122,35 @@ export default function Navigation() {
             );
           })}
 
+          {/* Desktop: CTA Button */}
+          <button
+            className="cta-button desktop-only"
+            onClick={() => {/* zatím nic */}}
+            style={{
+              marginLeft: '1rem',
+              padding: '0.5rem 1.2rem',
+              background: 'linear-gradient(135deg, #FFD700, #FFA500)',
+              color: '#333',
+              border: '1px solid #FFB84D',
+              borderRadius: '9999px',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 2px 8px rgba(255, 215, 0, 0.3)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-1px)';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 215, 0, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 2px 8px rgba(255, 215, 0, 0.3)';
+            }}
+          >
+            Premium
+          </button>
+
           {/* Mobile: Pouze sendvič button v krásném kolečku */}
           <button
             className={`mobile-menu-btn ${isNavOpen ? 'open' : ''}`}
@@ -179,6 +208,29 @@ export default function Navigation() {
               </Link>
             );
           })}
+          
+          {/* Mobile: CTA Button */}
+          <button
+            className="mobile-cta-button"
+            onClick={() => {/* zatím nic */}}
+            style={{
+              margin: '1rem',
+              padding: '0.75rem 1.5rem',
+              background: 'linear-gradient(135deg, #FFD700, #FFA500)',
+              color: '#333',
+              border: '1px solid #FFB84D',
+              borderRadius: '9999px',
+              fontSize: '0.875rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 2px 8px rgba(255, 215, 0, 0.3)',
+              width: 'calc(100% - 2rem)',
+              textAlign: 'center'
+            }}
+          >
+            Premium
+          </button>
         </div>
       )}
 
