@@ -22,10 +22,19 @@ export default function Home() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Jednoduchý canvas setup
+    // Jednoduchý canvas setup - FORCE OVERRIDES
     const setupCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      
+      // FORCE canvas styles
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.zIndex = '15';
+      canvas.style.pointerEvents = 'none';
     };
 
     setupCanvas();
@@ -47,12 +56,12 @@ export default function Home() {
       const centerX = canvas.width / 2;
       const centerY = canvas.height / 2;
 
-      // FIXED OBŘÍ FONT
-      const baseFontSize = 140; // Fixed velikost
-      console.log('Canvas size:', canvas.width, 'x', canvas.height, 'Font:', baseFontSize);
+      // MASSIVE FIXED FONT - ignore everything else!
+      const baseFontSize = 200; // JEŠTĚ VĚTŠÍ
+      console.log('MASSIVE Canvas:', canvas.width, 'x', canvas.height, 'MASSIVE Font:', baseFontSize);
       
-      const letterSpacing = 110; // Fixed spacing
-      const lineSpacing = 160; // Fixed line spacing
+      const letterSpacing = 150; // Větší spacing
+      const lineSpacing = 200; // Větší line spacing
 
       // JAKUB - první řádek - PŘESNĚ VYSTŘEDĚNÝ
       const jakubText = 'JAKUB';
@@ -146,10 +155,13 @@ export default function Home() {
     ctx.strokeStyle = color;
     ctx.lineWidth = Math.max(2, fontSize / 30);
     
-    // OBŘÍ FONT s fallback
-    ctx.font = `bold ${fontSize}px var(--font-inter), Arial, sans-serif`;
+    // MASSIVE FONT with multiple fallbacks
+    ctx.font = `900 ${fontSize}px var(--font-inter), Arial Black, Arial, Helvetica, sans-serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
+    
+    // FORCE font load test
+    console.log('Drawing letter:', letter, 'at', x, y, 'with font size:', fontSize);
     
     // Smooth brush efekt
     ctx.globalAlpha = Math.pow(progress, 0.5); // Rychlejší fade-in
@@ -172,11 +184,20 @@ export default function Home() {
       
       <Navigation />
 
-      {/* Full screen canvas */}
+      {/* ISOLATED Canvas - NO CSS INTERFERENCE */}
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 pointer-events-none"
-        style={{ zIndex: 15 }}
+        style={{ 
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          zIndex: 15,
+          pointerEvents: 'none',
+          isolation: 'isolate',
+          contain: 'layout style paint'
+        }}
       />
 
       {/* Jemné pozadí */}
