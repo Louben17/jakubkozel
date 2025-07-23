@@ -28,7 +28,7 @@ export default function Home() {
       const totalDelay = baseDelay + letterDelay;
       
       // Nastavení gradientu
-      const gradientId = isJakub ? 'jakubGradient' : 'kozelGradient';
+      const fillColor = isJakub ? '#FF6B73' : '#4ECDC4';
       
       // Skryj originální fill na začátku
       pathElement.style.fill = 'transparent';
@@ -61,7 +61,7 @@ export default function Home() {
         // Pak animovaně vyplň gradientem
         setTimeout(() => {
           pathElement.style.transition = 'fill 1.2s ease-in-out';
-          pathElement.style.fill = `url(#${gradientId})`;
+          pathElement.style.fill = fillColor;
           
           // Schovat stroke po vyplnění
           setTimeout(() => {
