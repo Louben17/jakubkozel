@@ -13,22 +13,38 @@ export default function Home() {
     // Najdi všechny path elementy
     const paths = svg.querySelectorAll('path');
     
-    // Nastav délku každého path pro animaci
+    // Duplikuj každý path - jeden pro animaci, jeden pro fill
     paths.forEach((path, index) => {
       const pathElement = path as SVGPathElement;
       const length = pathElement.getTotalLength();
       
-      // Nastav stroke properties pro animaci
-      pathElement.style.stroke = '#333';
-      pathElement.style.strokeWidth = '3px';
-      pathElement.style.fill = 'none';
-      pathElement.style.strokeLinecap = 'round';
-      pathElement.style.strokeLinejoin = 'round';
-      pathElement.style.strokeDasharray = `${length}`;
-      pathElement.style.strokeDashoffset = `${length}`;
+      // ORIGINÁLNÍ path - pouze fill (bude viditelný až po animaci)
+      pathElement.style.fill = '#333';
+      pathElement.style.stroke = 'none';
+      pathElement.style.opacity = '0';
+      pathElement.style.transition = 'opacity 0.5s ease';
       
-      // CSS animace s postupným delay
-      pathElement.style.animation = `drawPath 2s ease-out ${index * 0.3}s forwards`;
+      // NOVÝ path - pouze stroke pro animaci
+      const animatedPath = pathElement.cloneNode(true) as SVGPathElement;
+      animatedPath.style.stroke = '#333';
+      animatedPath.style.strokeWidth = '2px';
+      animatedPath.style.fill = 'none';
+      animatedPath.style.strokeLinecap = 'round';
+      animatedPath.style.strokeLinejoin = 'round';
+      animatedPath.style.strokeDasharray = `${length}`;
+      animatedPath.style.strokeDashoffset = `${length}`;
+      animatedPath.style.animation = `drawPath 2s ease-out ${index * 0.3}s forwards`;
+      
+      // Vložit animovaný path před originální
+      pathElement.parentNode?.insertBefore(animatedPath, pathElement);
+      
+      // Po dokončení animace každého písmene - zobraz fill a skryj stroke
+      setTimeout(() => {
+        pathElement.style.opacity = '1'; // Zobraz fill
+        setTimeout(() => {
+          animatedPath.style.opacity = '0'; // Skryj stroke
+        }, 500);
+      }, (index * 300) + 2000); // delay + duration animace
       
       console.log(`Path ${index + 1}: délka = ${Math.round(length)}px`);
     });
