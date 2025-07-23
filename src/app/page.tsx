@@ -145,7 +145,7 @@ export default function Home() {
         <svg 
           ref={svgRef}
           xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 800 500"
+          viewBox="0 0 800 700"
           style={{
             width: 'min(85vw, 700px)',
             height: 'auto',
