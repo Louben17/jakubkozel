@@ -1,15 +1,53 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Navigation from '@/components/Navigation';
 
 export default function Home() {
   const svgRef = useRef<SVGSVGElement>(null);
+  const [animationCompleted, setAnimationCompleted] = useState(false);
 
   useEffect(() => {
     const svg = svgRef.current;
     if (!svg) return;
 
+    // Zkontroluj, jestli už animace proběhla
+    const hasAnimated = sessionStorage.getItem('handwritingAnimated') === 'true';
+    
+    if (hasAnimated) {
+      // Rovnou zobraz finální stav bez animace
+      showFinalState(svg);
+      return;
+    }
+
+    // Spusť animaci
+    animatePaths(svg);
+    
+    // Označ animaci jako dokončenou po jejím skončení
+    setTimeout(() => {
+      setAnimationCompleted(true);
+      sessionStorage.setItem('handwritingAnimated', 'true');
+    }, 7000); // Celková délka animace
+  }, []);
+
+  const showFinalState = (svg: SVGSVGElement) => {
+    const paths = svg.querySelectorAll('path');
+    
+    paths.forEach((path, index) => {
+      const pathElement = path as SVGPathElement;
+      const isJakub = index < 5;
+      const fillColor = isJakub ? '#FF6B73' : '#4ECDC4';
+      
+      // Rovnou zobraz finální stav
+      pathElement.style.fill = fillColor;
+      pathElement.style.stroke = 'none';
+      pathElement.style.opacity = '1';
+    });
+    
+    svg.style.opacity = '1';
+  };
+
+  const animatePaths = (svg: SVGSVGElement) => {
     // Najdi všechny path elementy
     const paths = svg.querySelectorAll('path');
     
@@ -27,7 +65,7 @@ export default function Home() {
       const letterDelay = letterIndex * 0.4; // 0.4s mezi písmeny
       const totalDelay = baseDelay + letterDelay;
       
-      // Nastavení gradientu
+      // Nastavení barvy
       const fillColor = isJakub ? '#FF6B73' : '#4ECDC4';
       
       // Skryj originální fill na začátku
@@ -38,7 +76,7 @@ export default function Home() {
       // Vytvoř animovaný stroke
       const animatedStroke = pathElement.cloneNode(true) as SVGPathElement;
       animatedStroke.style.fill = 'none';
-      animatedStroke.style.stroke = isJakub ? '#FF6B73' : '#4ECDC4';
+      animatedStroke.style.stroke = fillColor;
       animatedStroke.style.strokeWidth = '2.5px';
       animatedStroke.style.strokeLinecap = 'round';
       animatedStroke.style.strokeLinejoin = 'round';
@@ -50,15 +88,15 @@ export default function Home() {
       // Vložit stroke animaci
       pathElement.parentNode?.insertBefore(animatedStroke, pathElement);
       
-      // Po dokončení stroke animace - hezky vyplň gradientem
+      // Po dokončení stroke animace - hezky vyplň barvou
       setTimeout(() => {
         // Nejdřív zobraz prázdný tvar
         pathElement.style.opacity = '1';
         pathElement.style.fill = 'transparent';
-        pathElement.style.stroke = isJakub ? '#FF6B73' : '#4ECDC4';
+        pathElement.style.stroke = fillColor;
         pathElement.style.strokeWidth = '1px';
         
-        // Pak animovaně vyplň gradientem
+        // Pak animovaně vyplň barvou
         setTimeout(() => {
           pathElement.style.transition = 'fill 1.2s ease-in-out';
           pathElement.style.fill = fillColor;
@@ -84,7 +122,7 @@ export default function Home() {
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  };
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden" style={{ isolation: 'isolate' }}>
@@ -108,7 +146,7 @@ export default function Home() {
         <svg 
           ref={svgRef}
           xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 800 600"
+          viewBox="0 0 800 500"
           style={{
             width: 'min(85vw, 700px)',
             height: 'auto',
@@ -142,7 +180,6 @@ export default function Home() {
             <path d="M558.59,140.29c.75-1.25,1.93-1.81,3.56-1.69,1.62.13,3.24.63,4.87,1.5,1.62.88,3,1.94,4.12,3.18,1.12,1.25,1.56,2.25,1.31,3-1.75,4-4.06,9.24-6.93,15.73-2.87,6.5-6.25,13.49-10.11,20.98-3.88,7.49-8,14.93-12.36,22.29-4.37,7.37-8.93,13.8-13.67,19.29-4.75,5.5-9.5,9.68-14.24,12.55-4.75,2.87-9.37,3.31-13.86,1.31-8-3.75-14.05-8.11-18.17-13.11-4.12-4.99-5.68-12.23-4.68-21.73-4.5,6.74-8.75,12.99-12.74,18.73-4,5.75-9.87,12.61-17.61,20.6-2.75,3-6.62,4.75-11.61,5.24-5,.5-9.93.06-14.8-1.31-4.87-1.37-9.18-3.56-12.92-6.56s-5.74-6.49-5.99-10.49c-.25-4.5.25-10.24,1.5-17.23,1.25-6.99,2.94-14.55,5.06-22.67,2.12-8.11,4.62-16.3,7.49-24.54,2.87-8.24,5.75-15.92,8.62-23.04,2.87-7.12,5.56-13.11,8.05-17.98,2.49-4.87,4.62-8.05,6.37-9.55,1.74-1.74,4.37-2.44,7.87-2.06,3.49.37,6.8,1.31,9.93,2.81,3.12,1.5,5.62,3.31,7.49,5.43,1.87,2.12,2.31,4.06,1.31,5.81-2,3.5-4.75,9.43-8.24,17.79-3.5,8.37-7,17.36-10.49,26.97-3.5,9.62-6.62,18.86-9.37,27.72-2.75,8.87-4.25,15.42-4.5,19.67,1.25-.25,3.31-2.12,6.18-5.62,2.87-3.49,6.24-8.18,10.11-14.05,3.87-5.87,8.05-12.67,12.55-20.42,4.5-7.74,9.18-15.92,14.05-24.54,4.87-8.62,9.61-17.42,14.24-26.41,4.62-8.99,8.93-17.85,12.92-26.6,1.5-3.24,4.18-4.87,8.05-4.87s7.68.88,11.43,2.62c3.75,1.75,6.8,4.06,9.18,6.93,2.37,2.87,3.06,5.43,2.06,7.68-2.75,5.99-5.87,13.8-9.37,23.41-3.5,9.62-6.68,19.61-9.55,29.97-2.87,10.37-5.19,20.17-6.93,29.41-1.75,9.24-2.25,16.24-1.5,20.98,4.74-3,9.61-7.74,14.61-14.24,4.99-6.49,9.8-13.49,14.42-20.98,4.62-7.49,8.86-15.04,12.74-22.66,3.87-7.62,7.05-14.05,9.55-19.29Z"/>
             <path d="M666.86,138.79c14.48-8.74,26.35-13.49,35.59-14.24,9.24-.75,17.1,1.63,23.6,7.12-4.5,1.25-10.37,3.81-17.61,7.68-7.25,3.88-14.55,8.31-21.92,13.3-7.37,5-14.18,10.18-20.42,15.55-6.25,5.37-10.49,10.18-12.74,14.42-1.75,3-4.44,7.56-8.05,13.67-3.62,6.12-7.87,12.61-12.74,19.48-4.87,6.87-10.18,13.67-15.92,20.42-5.75,6.74-11.49,12.24-17.23,16.48-5.5,4-10.81,6.56-15.92,7.68-5.12,1.12-9.8-.06-14.05-3.56-4.75-3.75-7.25-7.87-7.49-12.36-.25-4.5,1-9.18,3.75-14.05,2.75-4.87,6.56-9.93,11.43-15.17,4.87-5.24,9.99-10.3,15.36-15.17,5.37-4.87,10.49-9.55,15.36-14.05,4.87-4.5,8.8-8.62,11.8-12.36,2.75-3.24,5.18-7.24,7.3-11.99,2.12-4.74,3.75-9.49,4.87-14.24,1.12-4.74,1.69-8.99,1.69-12.74s-.75-6.24-2.25-7.49c-8,3.5-15.68,9.62-23.04,18.36-7.37,8.75-14.05,18.3-20.04,28.66-5.99,10.37-11.18,20.86-15.55,31.47-4.37,10.62-7.56,19.54-9.55,26.79-.75,2.75-3.18,4.19-7.3,4.31-4.12.13-8.37-.56-12.74-2.06-4.37-1.5-8.05-3.75-11.05-6.74s-3.75-6.37-2.25-10.12c5.99-15.48,12.43-33.09,19.29-52.82,6.87-19.73,14.05-39.52,21.54-59.38,7.49-19.85,15.42-38.71,23.79-56.57,8.36-17.85,17.17-32.53,26.41-44.02,2.49-3,6.24-3.99,11.24-3,4.99,1,9.68,3,14.05,5.99,4.37,3,7.62,6.37,9.74,10.11,2.12,3.75,1.56,6.74-1.69,8.99-4.25,3-8.68,7.56-13.3,13.67-4.62,6.12-9.24,13.24-13.86,21.35-4.62,8.12-9.05,16.8-13.3,26.04-4.25,9.24-8.12,18.36-11.61,27.35,2.75-2,5.37-3.87,7.87-5.62,2.49-1.74,4.99-3.18,7.49-4.31,2.49-1.12,5.18-1.69,8.05-1.69s6.18.63,9.93,1.87c6.24,2,11.48,3.56,15.73,4.68,4.24,1.12,7.55,2.62,9.93,4.5,2.37,1.87,3.99,4.56,4.87,8.05.87,3.5,1.18,8.75.94,15.73Z"/>
           </g>
-
 
           {/* KOZEL - dolní řádek (paths 5-9) - DRUHÝ V POŘADÍ! */}
           <g transform="translate(150, 270)">
