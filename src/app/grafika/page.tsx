@@ -38,11 +38,11 @@ export default function GrafikaPage() {
             </div>
           </div>
 
-          <div className="flex items-center justify-center min-h-[60vh]">
-            <div className="flex gap-8 max-w-6xl mx-auto">
+          <div className="flex items-center justify-center min-h-[60vh] px-4">
+            <div className="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto w-full">
               
-              <div className="grafika-card flex-1 min-w-[400px]">
-                <h2 className="grafika-card-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
+              <div className="grafika-card flex-1 min-w-0">
+                <h2 className="grafika-card-title text-white" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
                   CO VYTVÁŘÍM
                 </h2>
                 
@@ -52,8 +52,8 @@ export default function GrafikaPage() {
                       <span>🎨</span>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-1">Loga & Vizuální Identity</h3>
-                      <p className="text-gray-600 leading-relaxed">Komplexní vizuální systémy, které odlišují vaši značku</p>
+                      <h3 className="font-bold text-lg text-white mb-1">Loga & Vizuální Identity</h3>
+                      <p className="text-pink-100 leading-relaxed">Komplexní vizuální systémy, které odlišují vaši značku</p>
                     </div>
                   </div>
                   
@@ -62,8 +62,8 @@ export default function GrafikaPage() {
                       <span>📄</span>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-1">Firemní Materiály</h3>
-                      <p className="text-gray-600 leading-relaxed">Vizitky, hlavičkové papíry, prezentace a kancelářské potřeby</p>
+                      <h3 className="font-bold text-lg text-white mb-1">Firemní Materiály</h3>
+                      <p className="text-pink-100 leading-relaxed">Vizitky, hlavičkové papíry, prezentace a kancelářské potřeby</p>
                     </div>
                   </div>
                   
@@ -72,8 +72,8 @@ export default function GrafikaPage() {
                       <span>📢</span>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-1">Propagační Materiály</h3>
-                      <p className="text-gray-600 leading-relaxed">Plakáty, letáky, bannery a veškeré marketingové materiály</p>
+                      <h3 className="font-bold text-lg text-white mb-1">Propagační Materiály</h3>
+                      <p className="text-pink-100 leading-relaxed">Plakáty, letáky, bannery a veškeré marketingové materiály</p>
                     </div>
                   </div>
                   
@@ -82,15 +82,15 @@ export default function GrafikaPage() {
                       <span>🖨️</span>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-1">Print Design</h3>
-                      <p className="text-gray-600 leading-relaxed">Vše připravené pro profesionální tisk ve vysoké kvalitě</p>
+                      <h3 className="font-bold text-lg text-white mb-1">Print Design</h3>
+                      <p className="text-pink-100 leading-relaxed">Vše připravené pro profesionální tisk ve vysoké kvalitě</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="grafika-card grafika-card-alt flex-1 min-w-[400px]">
-                <h2 className="grafika-card-title" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
+              <div className="grafika-card grafika-card-alt flex-1 min-w-0">
+                <h2 className="grafika-card-title text-white" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
                   MŮJ PŘÍSTUP
                 </h2>
                 
@@ -98,29 +98,29 @@ export default function GrafikaPage() {
                   <div>
                     <div className="flex items-center gap-3 mb-3">
                       <div className="grafika-step-number">1</div>
-                      <h3 className="font-bold text-lg text-gray-900">Analýza & Strategie</h3>
+                      <h3 className="font-bold text-lg text-white">Analýza & Strategie</h3>
                     </div>
-                    <p className="text-gray-600 leading-relaxed pl-11">Pečlivě analyzuji vaše potřeby, cílovou skupinu a konkurenci</p>
+                    <p className="text-pink-100 leading-relaxed pl-11">Pečlivě analyzuji vaše potřeby, cílovou skupinu a konkurenci</p>
                   </div>
                   
                   <div>
                     <div className="flex items-center gap-3 mb-3">
                       <div className="grafika-step-number">2</div>
-                      <h3 className="font-bold text-lg text-gray-900">Kreativní Proces</h3>
+                      <h3 className="font-bold text-lg text-white">Kreativní Proces</h3>
                     </div>
-                    <p className="text-gray-600 leading-relaxed pl-11">Vytvářím návrhy, které nejen krásně vypadají, ale také efektivně komunikují</p>
+                    <p className="text-pink-100 leading-relaxed pl-11">Vytvářím návrhy, které nejen krásně vypadají, ale také efektivně komunikují</p>
                   </div>
                   
                   <div>
                     <div className="flex items-center gap-3 mb-3">
                       <div className="grafika-step-number">3</div>
-                      <h3 className="font-bold text-lg text-gray-900">Precizní Realizace</h3>
+                      <h3 className="font-bold text-lg text-white">Precizní Realizace</h3>
                     </div>
-                    <p className="text-gray-600 leading-relaxed pl-11">Všechny návrhy připravuji s důrazem na detail a možnost budoucího rozvoje</p>
+                    <p className="text-pink-100 leading-relaxed pl-11">Všechny návrhy připravuji s důrazem na detail a možnost budoucího rozvoje</p>
                   </div>
                   
-                  <div className="pt-4 border-t border-pink-100">
-                    <p className="text-gray-700 font-medium italic">
+                  <div className="pt-4 border-t border-pink-200">
+                    <p className="text-pink-100 font-medium italic">
                       &ldquo;Každý projekt je pro mě výzvou vytvořit něco jedinečného a funkčního&rdquo;
                     </p>
                   </div>
