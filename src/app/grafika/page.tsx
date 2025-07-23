@@ -14,7 +14,7 @@ export const metadata = {
 
 export default function GrafikaPage() {
   return (
-    <React.Fragment>
+    <>
       <Navigation />
       
       <main className="min-h-screen bg-white pt-40 pb-16">
@@ -137,6 +137,6 @@ export default function GrafikaPage() {
           
         </div>
       </main>
-    </React.Fragment>
+    </>
   );
 }
