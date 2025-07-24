@@ -50,13 +50,13 @@ export default function RootLayout({
          {children}
        </main>
        
-       <footer className="fixed bottom-4 left-4 z-10 pointer-events-none">
-          <p className="text-xs text-gray-400 font-light">
+        <footer className="fixed bottom-4 left-4 z-20">
+          <p className="text-lg text-red-500 bg-white p-2 border">
             © 2025 / jakubkozel@seznam.cz / 728890062
           </p>
-      </footer>
+        </footer>
      </body>
-   </html>
+   </html> 
  );
 } 
  

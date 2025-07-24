@@ -124,7 +124,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden" style={{ isolation: 'isolate' }}>
+    <div className="min-h-screen bg-white relative overflow-visible" style={{ isolation: 'isolate' }}>
       
       <Navigation />
 
