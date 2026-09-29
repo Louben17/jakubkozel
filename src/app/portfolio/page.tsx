@@ -10,6 +10,9 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
 
+// stránka v přípravě – zatím mimo vyhledávače
+export const metadata = { robots: { index: false, follow: true } };
+
 export default function Page() {
   return (
     <React.Fragment>

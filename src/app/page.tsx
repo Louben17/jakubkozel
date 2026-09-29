@@ -5,6 +5,8 @@ import ServiceStack from '@/components/home/ServiceStack';
 import Process from '@/components/home/Process';
 import Cta from '@/components/home/Cta';
 
+export const metadata = { alternates: { canonical: '/' } };
+
 export default function Home() {
   return (
     <div className="home">

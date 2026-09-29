@@ -1,4 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { jsonLd, NAME, SITE_URL } from "@/components/seo";
 import { Inter } from 'next/font/google';
 import "./globals.css";
 import "./site.css";
@@ -11,33 +12,49 @@ const inter = Inter({
  variable: '--font-inter',
 });
 
+const DESCRIPTION =
+  'Jakub Kozel – grafický designér. Loga a vizuální identity, DTP sazba knih a katalogů, tvorba webů a tiskoviny. Přes 10 let praxe.';
+
 export const metadata: Metadata = {
- title: "Jakub Kozel | Grafický design, Web design, DTP",
- description: "Profesionální grafický design, webdesign a DTP služby. Vizuální identity, moderní weby a precizní sazba.",
- keywords: "grafický design, webdesign, DTP, vizuální identita, logo, sazba, Jakub Kozel",
- authors: [{ name: "Jakub Kozel" }],
- creator: "Jakub Kozel",
- openGraph: {
-   title: "Jakub Kozel | Visual Communication",
-   description: "Grafický design, Web design, DTP",
-   url: "https://jakubkozel.cz",
-   siteName: "Jakub Kozel",
-   locale: "cs_CZ",
-   type: "website",
- },
- robots: {
-   index: true,
-   follow: true,
-   googleBot: {
-     index: true,
-     follow: true,
-   },
- },
- viewport: {
-   width: "device-width",
-   initialScale: 1,
-   maximumScale: 1,
- },
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Jakub Kozel – grafik, DTP, tvorba webů a tiskoviny',
+    template: '%s | Jakub Kozel',
+  },
+  description: DESCRIPTION,
+  applicationName: NAME,
+  authors: [{ name: NAME, url: SITE_URL }],
+  creator: NAME,
+  publisher: NAME,
+  keywords: [
+    'Jakub Kozel', 'grafik', 'grafický designér', 'grafický design', 'logo', 'vizuální identita',
+    'DTP', 'sazba knih', 'tvorba webů', 'webdesign', 'tiskoviny', 'vizitky', 'letáky',
+  ],
+  openGraph: {
+    type: 'website',
+    locale: 'cs_CZ',
+    url: SITE_URL,
+    siteName: NAME,
+    title: 'Jakub Kozel – grafik, DTP, tvorba webů a tiskoviny',
+    description: DESCRIPTION,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Jakub Kozel – grafik, DTP, tvorba webů a tiskoviny',
+    description: DESCRIPTION,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
+  formatDetection: { telephone: true, email: true },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({
@@ -48,13 +65,18 @@ export default function RootLayout({
  return (
    <html lang="cs" className="scroll-smooth">
      <body className={`${inter.variable} antialiased overflow-x-clip`} style={{ fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif' }}>
+       <script
+         type="application/ld+json"
+         // eslint-disable-next-line react/no-danger
+         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+       />
        <main>
          {children}
        </main>
        
       <footer className="site-footer">
         <p>
-          © {new Date().getFullYear()} / jakubkozel@seznam.cz / 728890062
+          © {new Date().getFullYear()} Jakub Kozel – grafika, DTP, weby a tiskoviny / jakubkozel@seznam.cz / 728 890 062
         </p>
       </footer>
      </body>

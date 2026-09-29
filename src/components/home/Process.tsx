@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { animate, motion, useInView, useScroll, useSpring } from 'framer-motion';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { animate, motion, useInView, useMotionValueEvent, useScroll, useSpring } from 'framer-motion';
 import { SERVICES } from '../services';
 
 const STEPS = [
@@ -31,9 +31,14 @@ function Counter({ to, suffix = '' }: { to: number; suffix?: string }) {
 }
 
 export default function Process() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 80%', 'end 60%'] });
+  const ref = useRef<HTMLOListElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 85%', 'end 55%'] });
   const line = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
+  // kolik bodů osy už čára minula (bod i leží na i / (n - 1) délky)
+  const [reached, setReached] = useState(-1);
+  useMotionValueEvent(line, 'change', (v) => {
+    setReached(Math.floor(v * (STEPS.length - 1) + 0.02));
+  });
 
   return (
     <section className="process">
@@ -53,7 +58,6 @@ export default function Process() {
       </div>
 
       <motion.div
-        ref={ref}
         className="process-panel"
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -61,38 +65,43 @@ export default function Process() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="process-stat">
-          <p className="stat-num">
+          <p className="stat-num" aria-label="10+">
             <Counter to={10} suffix="+" />
           </p>
-          <p className="stat-label">let praxe v grafice, sazbě a webech</p>
+          <div className="stat-side">
+            <p className="stat-label">
+              let praxe v&nbsp;grafice, sazbě a&nbsp;webech
+            </p>
+            <ul className="stat-tags">
+              {SERVICES.map((s) => (
+                <li key={s.slug}>
+                  <i style={{ background: s.accent }} />
+                  {s.label}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div className="process-steps">
-          <div className="steps-track">
-            <motion.div className="steps-line" style={{ scaleX: line }} />
-          </div>
-          <ol className="steps">
-            {STEPS.map((s, i) => {
-              const accent = SERVICES[i].accent;
-              return (
-                <motion.li
-                  key={s.t}
-                  className="step"
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-15% 0px' }}
-                  transition={{ delay: 0.2 + i * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <span className="step-no" style={{ background: accent }}>
-                    0{i + 1}
-                  </span>
-                  <h3>{s.t}</h3>
-                  <p>{s.d}</p>
-                </motion.li>
-              );
-            })}
-          </ol>
-        </div>
+        <ol ref={ref} className="timeline">
+          <li className="timeline-track" aria-hidden="true">
+            <motion.span className="timeline-line h" style={{ scaleX: line }} />
+            <motion.span className="timeline-line v" style={{ scaleY: line }} />
+          </li>
+          {STEPS.map((s, i) => {
+            const accent = SERVICES[i].accent;
+            const on = reached >= i;
+            return (
+              <li key={s.t} className={`tl-step ${on ? 'on' : ''}`} style={{ '--accent': accent } as CSSProperties}>
+                <span className="tl-node">
+                  <span className="tl-no">0{i + 1}</span>
+                </span>
+                <h3>{s.t}</h3>
+                <p>{s.d}</p>
+              </li>
+            );
+          })}
+        </ol>
       </motion.div>
     </section>
   );

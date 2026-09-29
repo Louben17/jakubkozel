@@ -4,6 +4,8 @@ import Navigation from '@/components/Navigation';
 export const metadata = {
   title: 'O mně | Jakub Kozel - Grafický design',
   description: 'Poznáte mě lépe. Více než 10 let zkušeností v grafickém designu, webdesignu a DTP sazbě.',
+  // stránka čeká na redesign – zatím mimo vyhledávače
+  robots: { index: false, follow: true },
 };
 
 export default function AboutPage() {
