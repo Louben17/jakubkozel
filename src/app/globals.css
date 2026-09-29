@@ -10,7 +10,7 @@ html, body {
   background-color: #ffffff;
   color: #000000;
   font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 *, *::before, *::after {
@@ -882,3 +882,7 @@ a:focus, button:focus {
   will-change: transform;
   backface-visibility: hidden;
 }  
+
+/* Patička */
+.site-footer { padding: 1.5rem 16px; text-align: center; }
+.site-footer p { margin: 0; font-size: 0.75rem; font-weight: 300; color: #9ca3af; }

@@ -45,14 +45,14 @@ export default function RootLayout({
 }>) {
  return (
    <html lang="cs" className="scroll-smooth">
-     <body className={`${inter.variable} antialiased overflow-x-hidden`} style={{ fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif' }}>
+     <body className={`${inter.variable} antialiased overflow-x-clip`} style={{ fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif' }}>
        <main>
          {children}
        </main>
        
-      <footer className="fixed bottom-4 left-4 z-20">
-        <p className="text-xs text-gray-400 font-light">
-          © 2025 / jakubkozel@seznam.cz / 728890062
+      <footer className="site-footer">
+        <p>
+          © {new Date().getFullYear()} / jakubkozel@seznam.cz / 728890062
         </p>
       </footer>
      </body>
