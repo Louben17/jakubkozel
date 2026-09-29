@@ -1,233 +1,125 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useState, type CSSProperties } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { AnimatePresence, motion } from 'framer-motion';
+import { SignatureMark } from './home/Signature';
+import { brandColor } from './brand';
+import { SERVICES } from './services';
+
+const LINKS = SERVICES.map((s) => ({ href: s.href, label: s.label, accent: s.accent }));
 
 export default function Navigation() {
-  const [isNavOpen, setIsNavOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const pathname = usePathname();
-  const navItemsRef = useRef<(HTMLAnchorElement | null)[]>([]);
+  const dark = pathname === '/kontakt'; // stránka s tmavým pozadím
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
-  const navItems = useMemo(() => [
-    { href: '/', label: 'Domů', color: '#FF9AA2', description: 'Hlavní stránka' },
-    { href: '/grafika', label: 'Grafika', color: '#FFB7B2', description: 'Loga & Branding' },
-    { href: '/webdesign', label: 'Web Design', color: '#B5EAD7', description: 'Moderní weby' },
-    { href: '/dtp', label: 'DTP', color: '#C7CEEA', description: 'Sazba & Print' },
-    { href: '/kontakt', label: 'Kontakt', color: '#A2D2FF', description: 'Spojme se' }
-  ], []);
-
-  // Funkce pro aktualizaci pozice indikátoru
-  const updateIndicatorPosition = (index: number) => {
-    const navItem = navItemsRef.current[index];
-    if (navItem) {
-      setIndicatorStyle({
-        left: navItem.offsetLeft,
-        width: navItem.offsetWidth
-      });
-    }
-  };
-
-  // Auto-hide navigace při scrollování
+  // po odscrollování dostane lišta pozadí; při jízdě dolů se schová, nahoru se vrátí
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsVisible(currentScrollY < lastScrollY || currentScrollY < 100);
-      setLastScrollY(currentScrollY);
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      setHidden(y > last && y > 240);
+      last = y;
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
-
-  // Mouse tracking pro interaktivní efekty
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Aktivní index na základě pathname + aktualizace pozice indikátoru
+  useEffect(() => setOpen(false), [pathname]);
+
   useEffect(() => {
-    const currentIndex = navItems.findIndex(item => item.href === pathname);
-    const newActiveIndex = currentIndex >= 0 ? currentIndex : 0;
-    setActiveIndex(newActiveIndex);
-    
-    // Aktualizace pozice indikátoru po malém zpoždění (aby se komponenta stihla vykreslit)
-    setTimeout(() => updateIndicatorPosition(newActiveIndex), 100);
-  }, [pathname, navItems]);
-
-  // Handle mouse enter/leave
-  const handleMouseEnter = (index: number) => {
-    setActiveIndex(index);
-    updateIndicatorPosition(index);
-  };
-
-  const handleMouseLeave = () => {
-    const currentIndex = navItems.findIndex(nav => nav.href === pathname);
-    const newActiveIndex = currentIndex >= 0 ? currentIndex : 0;
-    setActiveIndex(newActiveIndex);
-    updateIndicatorPosition(newActiveIndex);
-  };
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
 
   return (
     <>
-      {/* Floating navigation - pill shape */}
-      <nav className={`floating-nav ${isVisible ? 'visible' : 'hidden'}`}>
-        <div className="nav-items-container">
-          {/* Desktop: Animated background indicator - přesné pozicování */}
-          <div
-            className="nav-indicator desktop-only"
-            style={{
-              background: `linear-gradient(135deg, ${navItems[activeIndex]?.color}40, ${navItems[activeIndex]?.color}20)`,
-              border: `1px solid ${navItems[activeIndex]?.color}60`,
-              transform: `translateX(${indicatorStyle.left}px)`,
-              width: `${indicatorStyle.width}px`,
-              borderRadius: '9999px'
-            }}
-          />
+      <header className={`site-nav ${dark ? 'is-dark' : ''} ${scrolled ? 'is-scrolled' : ''} ${hidden && !open ? 'is-hidden' : ''}`}>
+        <div className="nav-bar">
+          <Link href="/" className="nav-logo" aria-label="Jakub Kozel – úvod">
+            <SignatureMark className="nav-logo-mark" />
+          </Link>
 
-          {/* Desktop: Navigation items */}
-          {navItems.map((item, index) => {
-            const isActive = pathname === item.href;
-            
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                ref={(el) => { navItemsRef.current[index] = el; }}
-                className={`nav-item desktop-only ${isActive ? 'active' : ''}`}
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={handleMouseLeave}
-                style={{
-                  textShadow: isActive ? `0 0 20px ${item.color}40` : 'none',
-                  borderRadius: '9999px'
-                }}
-              >
-                {item.label}
-                
-                {/* Tooltip */}
-                <div className="nav-tooltip">
-                  {item.description}
-                </div>
-              </Link>
-            );
-          })}
+          <nav className="nav-links" aria-label="Hlavní menu">
+            {LINKS.map((l) => {
+              const active = pathname === l.href;
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`nav-link ${active ? 'active' : ''}`}
+                  style={{ '--accent': l.accent } as CSSProperties}
+                >
+                  {l.label}
+                </Link>
+              );
+            })}
+          </nav>
 
+          <Link href="/kontakt" className={`nav-cta ${pathname === '/kontakt' ? 'active' : ''}`}>
+            Kontakt <span aria-hidden="true">→</span>
+          </Link>
 
-
-          {/* Mobile: Pouze sendvič button v krásném kolečku */}
           <button
-            className={`mobile-menu-btn ${isNavOpen ? 'open' : ''}`}
-            onClick={() => setIsNavOpen(!isNavOpen)}
-            style={{ 
-              borderRadius: '9999px',
-              width: '3rem',
-              height: '3rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
+            className={`nav-burger ${open ? 'open' : ''}`}
+            onClick={() => setOpen((o) => !o)}
+            aria-label={open ? 'Zavřít menu' : 'Otevřít menu'}
+            aria-expanded={open}
           >
-            <svg 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-              style={{
-                width: '1.5rem',
-                height: '1.5rem',
-                transition: 'transform 0.3s ease'
-              }}
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d={isNavOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} 
-              />
-            </svg>
+            <span />
+            <span />
           </button>
         </div>
-      </nav>
+      </header>
 
-      {/* CTA Button - vpravo dole */}
-      <button
-        className={`cta-button-separate ${isVisible ? 'visible' : 'hidden'}`}
-        onClick={() => {/* zatím nic */}}
-        style={{
-          position: 'fixed',
-          bottom: '2rem',
-          right: '2rem',
-          transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-          padding: '0.5rem 1.2rem',
-          background: 'linear-gradient(135deg, #FFD700, #FFA500)',
-          color: '#333',
-          border: '1px solid #FFB84D',
-          borderRadius: '9999px',
-          fontSize: '0.875rem',
-          fontWeight: '600',
-          cursor: 'pointer',
-          transition: 'all 0.3s ease',
-          boxShadow: '0 2px 8px rgba(255, 215, 0, 0.3)',
-          zIndex: '1000',
-          opacity: isVisible ? '1' : '0',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = isVisible ? 'translateY(-1px)' : 'translateY(20px)';
-          e.currentTarget.style.boxShadow = '0 4px 12px rgba(255, 215, 0, 0.4)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = isVisible ? 'translateY(0)' : 'translateY(20px)';
-          e.currentTarget.style.boxShadow = '0 2px 8px rgba(255, 215, 0, 0.3)';
-        }}
-      >
-        Premium
-      </button>
-
-      {/* Mobile dropdown menu - pill shape */}
-      {isNavOpen && (
-        <div className="mobile-dropdown" style={{ borderRadius: '1.5rem' }}>
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
-            
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`mobile-nav-item ${isActive ? 'active' : ''}`}
-                onClick={() => setIsNavOpen(false)}
-                style={{
-                  background: isActive ? `${item.color}20` : 'transparent',
-                  borderLeft: isActive ? `3px solid ${item.color}` : 'none',
-                  borderRadius: '0.75rem' // Pill shape pro mobile items
-                }}
-              >
-                <div>{item.label}</div>
-                <div className="mobile-nav-description">{item.description}</div>
-              </Link>
-            );
-          })}
-
-        </div>
-      )}
-
-      {/* Cursor follower */}
-      <div
-        className="cursor-follower"
-        style={{
-          left: mousePosition.x - 6,
-          top: mousePosition.y - 6,
-          background: `radial-gradient(circle, ${navItems[activeIndex]?.color}60, transparent)`,
-        }}
-      />
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="nav-overlay"
+            initial={{ clipPath: 'circle(0% at calc(100% - 40px) 40px)' }}
+            animate={{ clipPath: 'circle(150% at calc(100% - 40px) 40px)' }}
+            exit={{ clipPath: 'circle(0% at calc(100% - 40px) 40px)' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <nav className="overlay-links" aria-label="Mobilní menu">
+              {[{ href: '/', label: 'Úvod' }, ...LINKS, { href: '/kontakt', label: 'Kontakt' }].map((l, i, arr) => (
+                <motion.div
+                  key={l.href}
+                  initial={{ y: 40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.15 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <Link
+                    href={l.href}
+                    className={`overlay-link ${pathname === l.href ? 'active' : ''}`}
+                    style={{ color: brandColor(i / (arr.length - 1)) }}
+                    onClick={() => setOpen(false)}
+                  >
+                    {l.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+            <motion.div
+              className="overlay-contact"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <a href="mailto:jakubkozel@seznam.cz">jakubkozel@seznam.cz</a>
+              <a href="tel:+420728890062">728 890 062</a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

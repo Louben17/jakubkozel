@@ -1,12 +1,14 @@
-/* ===================== HOMEPAGE (motion) ===================== */
-.home {
+/* ===================== WEB (motion) ===================== */
+:root {
   --ink: #1d1d24;
   --ink-soft: #5d6070;
+  --line: #ececf0;
   --coral: #FF6B73;
   --teal: #4ECDC4;
-  background: #fff;
-  color: var(--ink);
+  --brand-gradient: linear-gradient(100deg, hsl(357 88% 70%), hsl(297 78% 66%) 35%, hsl(236 68% 62%) 68%, hsl(176 58% 58%));
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
+.home, .page { background: #fff; color: var(--ink); }
 
 .sr-only {
   position: absolute;
@@ -236,42 +238,6 @@
   .svc-items { margin-bottom: 1.25rem; }
 }
 
-/* ---------- PROCES ---------- */
-.process {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 6rem 16px;
-  display: grid;
-  grid-template-columns: 1fr 2.2fr;
-  gap: 4rem;
-  align-items: start;
-}
-.stat-num {
-  font-size: clamp(5rem, 13vw, 10rem);
-  font-weight: 800;
-  letter-spacing: -0.06em;
-  line-height: 0.9;
-  margin: 0;
-  background: linear-gradient(120deg, var(--coral) 10%, #B872D6 45%, #6C7BD0 65%, var(--teal) 95%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-variant-numeric: tabular-nums;
-}
-.stat-label { color: var(--ink-soft); font-size: 1.05rem; margin: 0.8rem 0 0; max-width: 22ch; }
-.steps-track { height: 2px; background: #ececf0; border-radius: 2px; margin-bottom: 2rem; overflow: hidden; }
-.steps-line { height: 100%; background: linear-gradient(90deg, var(--coral), #6C7BD0, var(--teal)); transform-origin: left; }
-.steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-.steps h3 { font-size: 1.2rem; font-weight: 700; margin: 0.4rem 0 0.5rem; letter-spacing: -0.02em; }
-.steps p { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.55; margin: 0; }
-.step-no { font-size: 0.8rem; font-weight: 800; color: var(--coral); letter-spacing: 0.1em; }
-@media (max-width: 860px) {
-  .process { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 16px; }
-  .steps { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 480px) {
-  .steps { grid-template-columns: 1fr; }
-}
 
 /* ---------- CTA ---------- */
 .cta {

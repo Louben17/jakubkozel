@@ -1,68 +1,9 @@
 "use client";
 
 import Link from 'next/link';
-import { useRef, type ComponentType } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
-import { DtpAnim, GrafikaAnim, PrintAnim, WebAnim } from './Illustrations';
-
-type Service = {
-  no: string;
-  title: string;
-  lead: string;
-  items: string[];
-  href: string;
-  cta: string;
-  bg: string;
-  accent: string;
-  Anim: ComponentType;
-};
-
-const SERVICES: Service[] = [
-  {
-    no: '01',
-    title: 'Grafika',
-    lead: 'Loga a vizuální identity, které si lidé zapamatují. Od první skici po manuál značky.',
-    items: ['Loga', 'Vizuální identity', 'Firemní materiály', 'Plakáty'],
-    href: '/grafika',
-    cta: 'Více o grafice',
-    bg: '#FFE3E0',
-    accent: '#FF6B73',
-    Anim: GrafikaAnim,
-  },
-  {
-    no: '02',
-    title: 'DTP & sazba',
-    lead: 'Knihy, časopisy a katalogy sázené s citem pro typografii — připravené přesně pro tiskárnu.',
-    items: ['Sazba knih', 'Časopisy', 'Katalogy', 'Výroční zprávy'],
-    href: '/dtp',
-    cta: 'Více o DTP',
-    bg: '#E4E8FA',
-    accent: '#6C7BD0',
-    Anim: DtpAnim,
-  },
-  {
-    no: '03',
-    title: 'Stavba webů',
-    lead: 'Rychlé, moderní a responzivní weby, které dobře vypadají na mobilu i na monitoru.',
-    items: ['Responzivní weby', 'UI/UX design', 'E-shopy', 'SEO'],
-    href: '/webdesign',
-    cta: 'Více o webech',
-    bg: '#DDF5EC',
-    accent: '#2BB39A',
-    Anim: WebAnim,
-  },
-  {
-    no: '04',
-    title: 'Tiskoviny',
-    lead: 'Vizitky, letáky, plakáty i obaly. Hlídám data, ořezy a barvy, aby tisk dopadl na jedničku.',
-    items: ['Vizitky', 'Letáky', 'Plakáty', 'Obaly a etikety'],
-    href: '/kontakt',
-    cta: 'Poptat tiskoviny',
-    bg: '#FFEBD6',
-    accent: '#F29E4C',
-    Anim: PrintAnim,
-  },
-];
+import { SERVICES, type Service } from '../services';
 
 function Card({ s, i, progress }: { s: Service; i: number; progress: MotionValue<number> }) {
   const n = SERVICES.length;

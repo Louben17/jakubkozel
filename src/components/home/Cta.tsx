@@ -2,9 +2,10 @@
 
 import { useRef, type ReactNode } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { brandColor } from '../brand';
 
 // Tlačítko, které se lehce „přisaje" ke kurzoru
-function Magnetic({ href, children, variant }: { href: string; children: ReactNode; variant: 'solid' | 'ghost' }) {
+export function Magnetic({ href, children, variant }: { href: string; children: ReactNode; variant: 'solid' | 'ghost' }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const x = useSpring(useMotionValue(0), { stiffness: 200, damping: 15 });
   const y = useSpring(useMotionValue(0), { stiffness: 200, damping: 15 });
@@ -33,11 +34,8 @@ function Magnetic({ href, children, variant }: { href: string; children: ReactNo
 const LINE_1 = 'Máte projekt?';
 const LINE_2 = 'Pojďme ho udělat.';
 
-// barva písmene podél přechodu korálová → tyrkysová
-// (přes fialovou, aby střed přechodu nezšedl)
-const mix = (k: number) => `hsl(${357 - 181 * k} ${88 - 30 * k}% ${70 - 12 * k}%)`;
 
-function Letters({ text, delay = 0, className, gradient }: { text: string; delay?: number; className?: string; gradient?: boolean }) {
+export function Letters({ text, delay = 0, className, gradient }: { text: string; delay?: number; className?: string; gradient?: boolean }) {
   // slova drží pohromadě, aby se nezalomila uprostřed
   let k = 0;
   return (
@@ -56,7 +54,7 @@ function Letters({ text, delay = 0, className, gradient }: { text: string; delay
               <motion.span
                 key={i}
                 className="cta-letter"
-                style={gradient ? { color: mix(i / (text.length - 1)) } : undefined}
+                style={gradient ? { color: brandColor(i / (text.length - 1)) } : undefined}
                 variants={{ hidden: { y: '110%', rotate: 8 }, show: { y: '0%', rotate: 0 } }}
                 transition={{ delay: delay + i * 0.025, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               >

@@ -4,7 +4,6 @@ import Marquee from '@/components/home/Marquee';
 import ServiceStack from '@/components/home/ServiceStack';
 import Process from '@/components/home/Process';
 import Cta from '@/components/home/Cta';
-import './home.css';
 
 export default function Home() {
   return (
