@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return [
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: 'monthly', priority: 1 },
-    ...['/grafika', '/dtp', '/webdesign', '/tiskoviny'].map((path) => ({
+    ...['/grafika', '/dtp', '/webdesign', '/tiskoviny', '/o-mne'].map((path) => ({
       url: `${SITE_URL}${path}`,
       lastModified: now,
       changeFrequency: 'monthly' as const,

@@ -8,11 +8,14 @@ import { SignatureMark } from './home/Signature';
 import { brandColor } from './brand';
 import { SERVICES } from './services';
 
-const LINKS = SERVICES.map((s) => ({ href: s.href, label: s.label, accent: s.accent }));
+const LINKS = [
+  ...SERVICES.map((s) => ({ href: s.href, label: s.label, accent: s.accent })),
+  { href: '/o-mne', label: 'O mně', accent: '#B872D6' },
+];
 
 export default function Navigation() {
   const pathname = usePathname();
-  const dark = pathname === '/kontakt'; // stránka s tmavým pozadím
+  const dark = pathname === '/kontakt' || pathname === '/o-mne'; // stránky s tmavým úvodem
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);

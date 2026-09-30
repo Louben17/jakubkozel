@@ -20,7 +20,7 @@ export const jsonLd = {
       url: SITE_URL,
       email: `mailto:${EMAIL}`,
       telephone: PHONE,
-      image: `${SITE_URL}/opengraph-image`,
+      image: `${SITE_URL}/jakub-kozel.webp`,
       knowsAbout: ['Grafický design', 'Vizuální identita', 'Logo', 'DTP', 'Sazba knih', 'Tvorba webů', 'Webdesign', 'Tiskoviny'],
       nationality: { '@type': 'Country', name: 'Česko' },
     },

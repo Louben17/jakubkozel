@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import Navigation from './Navigation';
 import Cta from './home/Cta';
 import Gallery from './Gallery';
+import FaqList from './FaqList';
 import { SERVICES, type Service } from './services';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -82,6 +83,8 @@ export default function ServicePage({ slug }: { slug: Service['slug'] }) {
           ))}
         </div>
       </section>
+
+      <FaqList items={s.faq} accent={s.accent} bg={s.bg} />
 
       <section className="others">
         <p className="eyebrow">Další obory</p>

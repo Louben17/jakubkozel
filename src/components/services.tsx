@@ -9,6 +9,8 @@ export type Tile = { title: string; description: string; icon: ReactNode };
 
 export type Photo = { src: string; alt: string; caption: string };
 
+export type Faq = { q: string; a: string };
+
 export type Service = {
   slug: 'grafika' | 'dtp' | 'webdesign' | 'tiskoviny';
   no: string;
@@ -23,6 +25,7 @@ export type Service = {
   Anim: ComponentType;
   tiles: Tile[];
   gallery?: Photo[];
+  faq: Faq[];
 };
 
 // Jeden zdroj pravdy pro homepage, menu i podstránky oborů
@@ -64,6 +67,24 @@ export const SERVICES: Service[] = [
         caption: 'Plakát',
       },
     ],
+    faq: [
+      {
+        q: 'Co všechno dostanu k novému logu?',
+        a: 'Logo v barevné, černobílé i inverzní verzi, ve formátech pro tisk (PDF, SVG) i pro web (PNG, SVG). Na přání připravím i jednoduchý manuál s barvami a písmy.',
+      },
+      {
+        q: 'Kolik návrhů loga uvidím?',
+        a: 'Připravím několik odlišných směrů a ten vybraný pak společně dolaďujeme. Počet kol úprav domluvíme předem v nabídce, abyste věděli, na čem jste.',
+      },
+      {
+        q: 'Jak dlouho tvorba loga trvá?',
+        a: 'Záleží na rozsahu a na tom, jak rychle si předáváme zpětnou vazbu. Konkrétní termín dostanete spolu s nabídkou ještě před zahájením práce.',
+      },
+      {
+        q: 'Můžete navázat na moje stávající logo?',
+        a: 'Ano. Stávající logo umím převést do vektorů, citlivě modernizovat nebo k němu dotvořit zbytek vizuální identity.',
+      },
+    ],
   },
   {
     slug: 'dtp',
@@ -100,6 +121,24 @@ export const SERVICES: Service[] = [
         src: '/portfolio/dtp-3.webp',
         alt: 'Typografický nátisk s písmem Aa, sazebním rastrem a lupou',
         caption: 'Typografie a sazba',
+      },
+    ],
+    faq: [
+      {
+        q: 'V jakém formátu mám dodat texty a obrázky?',
+        a: 'Texty stačí ve Wordu nebo Google Docs, obrázky v co nejvyšším rozlišení – ideálně originály z fotoaparátu nebo od fotografa. Když si nejste jistí, pošlete, co máte, a domluvíme se.',
+      },
+      {
+        q: 'Připravíte data přímo pro tiskárnu?',
+        a: 'Ano. Připravím tiskové PDF podle požadavků konkrétní tiskárny – se spadávkou, ořezovými značkami a správně převedenými barvami.',
+      },
+      {
+        q: 'Co když je potřeba text upravit až po sazbě?',
+        a: 'Korektury jsou běžnou součástí práce. Opravy zapracuji do sazby a pošlu nový náhled ke schválení.',
+      },
+      {
+        q: 'Pomůžete s výběrem papíru a vazby?',
+        a: 'Rád poradím s papírem, vazbou i povrchovou úpravou podle toho, k čemu tiskovina slouží a kolik kusů potřebujete.',
       },
     ],
   },
@@ -140,6 +179,24 @@ export const SERVICES: Service[] = [
         caption: 'Od skici k webu',
       },
     ],
+    faq: [
+      {
+        q: 'Budu si moct web upravovat sám?',
+        a: 'Podle toho, co vám vyhovuje. Web může mít jednoduchou administraci, nebo ho spravuji já a změny mi jen pošlete e-mailem.',
+      },
+      {
+        q: 'Bude web fungovat i na mobilu?',
+        a: 'Ano. Každý web navrhuji responzivně, takže se přizpůsobí mobilu, tabletu i velkému monitoru.',
+      },
+      {
+        q: 'Postaráte se o doménu a hosting?',
+        a: 'Poradím s výběrem a pomůžu vše nastavit tak, aby web běžel rychle a spolehlivě.',
+      },
+      {
+        q: 'Bude web vidět ve vyhledávačích?',
+        a: 'Web dostane technický základ pro SEO: rychlé načítání, správnou strukturu nadpisů, popisy stránek, mapu webu a strukturovaná data pro Google.',
+      },
+    ],
   },
   {
     slug: 'tiskoviny',
@@ -176,6 +233,24 @@ export const SERVICES: Service[] = [
         src: '/portfolio/tiskoviny-3.webp',
         alt: 'Oříznuté letáky v tiskárně vedle řezačky, odřezky s ořezovými značkami a CMYK pruhem',
         caption: 'Letáky z tiskárny',
+      },
+    ],
+    faq: [
+      {
+        q: 'Jaká data potřebuje tiskárna?',
+        a: 'Nejčastěji tiskové PDF v barevném prostoru CMYK se spadávkou (obvykle 3 mm) a ořezovými značkami. Připravím je přesně podle požadavků vaší tiskárny.',
+      },
+      {
+        q: 'Proč barvy na monitoru a na papíře vypadají jinak?',
+        a: 'Monitor světlo vyzařuje (RGB), papír ho odráží (CMYK). Při přípravě dat barvy převádím a hlídám, aby výsledek odpovídal návrhu co nejvěrněji.',
+      },
+      {
+        q: 'Můžu tisknout ve své tiskárně?',
+        a: 'Samozřejmě. Data připravím podle jejích technických požadavků a případné detaily s ní rád doladím.',
+      },
+      {
+        q: 'Pomůžete s výběrem papíru?',
+        a: 'Ano. Doporučím papír i povrchovou úpravu podle účelu – jinak se chová vizitka, jinak leták nebo obal.',
       },
     ],
   },
