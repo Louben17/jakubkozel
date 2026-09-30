@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { jsonLd, NAME, SITE_URL } from "@/components/seo";
+import Consent, { CookieSettings } from "@/components/Consent";
 import { Inter } from 'next/font/google';
 import "./globals.css";
 import "./site.css";
@@ -77,8 +78,11 @@ export default function RootLayout({
       <footer className="site-footer">
         <p>
           © {new Date().getFullYear()} Jakub Kozel – grafika, DTP, weby a tiskoviny / jakubkozel@seznam.cz / 728 890 062
+          {' / '}
+          <CookieSettings />
         </p>
       </footer>
+      <Consent />
      </body>
    </html>   
  );

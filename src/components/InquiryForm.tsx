@@ -3,6 +3,7 @@
 import { useEffect, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SERVICES } from './services';
+import { track } from './Consent';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const BUDGETS = ['do 10 000 Kč', '10–30 000 Kč', '30–80 000 Kč', 'nad 80 000 Kč', 'nevím'];
@@ -74,6 +75,7 @@ export default function InquiryForm() {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || 'Zprávu se nepodařilo odeslat.');
+      track('generate_lead', { services: services.join(', ') || 'neuvedeno', budget: budget || 'neuvedeno' });
       setStatus('done');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Zprávu se nepodařilo odeslat.');
