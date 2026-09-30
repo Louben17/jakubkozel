@@ -85,6 +85,23 @@ export const SERVICES: Service[] = [
       { title: 'Výroční zprávy', description: 'Reprezentativní zpracování výročních zpráv.', icon: <FaPrint /> },
       { title: 'Typografie', description: 'Odborná úprava textu a typografické řešení.', icon: <FaFont /> },
     ],
+    gallery: [
+      {
+        src: '/portfolio/dtp-1.webp',
+        alt: 'Balíky čerstvě vytištěných časopisů z tiskárny, jeden rozbalený',
+        caption: 'Časopis z tiskárny',
+      },
+      {
+        src: '/portfolio/dtp-2.webp',
+        alt: 'Otevřená brožura s fotografií a sazbou textu na mramorovém stolku v kavárně',
+        caption: 'Brožura',
+      },
+      {
+        src: '/portfolio/dtp-3.webp',
+        alt: 'Typografický nátisk s písmem Aa, sazebním rastrem a lupou',
+        caption: 'Typografie a sazba',
+      },
+    ],
   },
   {
     slug: 'webdesign',
