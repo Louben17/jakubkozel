@@ -42,7 +42,7 @@ function Shot({ p, i, big, accent, onOpen }: { p: Photo; i: number; big: boolean
         </motion.div>
       </motion.div>
       <span className="shot-caption">
-        <i style={{ background: accent }} />
+        <span className="dot" style={{ background: accent }} />
         {p.caption}
       </span>
     </motion.button>
@@ -105,7 +105,7 @@ export default function Gallery({ photos, accent }: { photos: Photo[]; accent: s
                 />
                 <figcaption>
                   <span>
-                    <i style={{ background: accent }} />
+                    <span className="dot" style={{ background: accent }} />
                     {photos[open].caption}
                   </span>
                   <span className="lightbox-count">

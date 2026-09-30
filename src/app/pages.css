@@ -62,7 +62,7 @@
   font-size: 0.85rem;
   font-weight: 500;
 }
-.stat-tags i { width: 7px; height: 7px; border-radius: 50%; }
+.stat-tags .dot { width: 7px; height: 7px; border-radius: 50%; }
 
 .timeline {
   position: relative;
@@ -418,7 +418,7 @@
   font-size: 0.9rem;
 }
 .contact-services span { display: inline-flex; align-items: center; gap: 0.5rem; }
-.contact-services i { width: 8px; height: 8px; border-radius: 50%; }
+.contact-services .dot { width: 8px; height: 8px; border-radius: 50%; }
 @media (max-width: 640px) {
   .contact { padding-top: 110px; }
   .channel { flex-direction: column; }
@@ -477,7 +477,7 @@
   transition: transform 0.4s var(--ease), opacity 0.4s ease;
 }
 .shot:hover .shot-caption { transform: translateY(0); opacity: 1; }
-.shot-caption i, .lightbox figcaption i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.shot-caption .dot, .lightbox figcaption .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 @media (max-width: 860px) {
   .gallery-wrap { padding-top: 4rem; }
   .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
@@ -596,11 +596,11 @@
   cursor: pointer;
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s var(--ease);
 }
-.chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); transition: background 0.25s ease; }
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); transition: background 0.25s ease; }
 .chip:hover { border-color: rgba(255, 255, 255, 0.4); }
 .chip:active { transform: scale(0.96); }
 .chip.on { background: var(--accent); border-color: var(--accent); color: var(--ink); font-weight: 700; }
-.chip.on i { background: #fff; }
+.chip.on .dot { background: #fff; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .inquiry-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 0.5rem; }
 .gdpr { margin: 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.45); }

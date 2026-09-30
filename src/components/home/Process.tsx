@@ -75,7 +75,7 @@ export default function Process() {
             <ul className="stat-tags">
               {SERVICES.map((s) => (
                 <li key={s.slug}>
-                  <i style={{ background: s.accent }} />
+                  <span className="dot" style={{ background: s.accent }} />
                   {s.label}
                 </li>
               ))}

@@ -36,21 +36,6 @@ function Gradients({ prefix }: { prefix: string }) {
   );
 }
 
-/** Statický podpis jako logo (menu) */
-export function SignatureMark({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 40 800 520" className={className} role="img" aria-label="Jakub Kozel">
-      <Gradients prefix="mark" />
-      <g transform="translate(50, 50)" fill="url(#mark-jakub)">
-        {JAKUB_PATHS.map((d, i) => <path key={i} d={d} />)}
-      </g>
-      <g transform="translate(150, 270)" fill="url(#mark-kozel)">
-        {KOZEL_PATHS.map((d, i) => <path key={i} d={d} />)}
-      </g>
-    </svg>
-  );
-}
-
 // Ručně psaný podpis: obrys se nakreslí písmeno po písmenu, pak se vyplní.
 // V rámci jedné session se animace přehraje jen jednou.
 export default function Signature({ decorative = false }: { decorative?: boolean }) {

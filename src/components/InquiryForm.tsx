@@ -30,7 +30,7 @@ function Chip({
       aria-pressed={active}
       onClick={onClick}
     >
-      {accent && <i />}
+      {accent && <span className="dot" />}
       {children}
     </button>
   );

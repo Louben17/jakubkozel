@@ -4,7 +4,6 @@ import { useEffect, useState, type CSSProperties } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
-import { SignatureMark } from './home/Signature';
 import { brandColor } from './brand';
 import { SERVICES } from './services';
 
@@ -48,7 +47,8 @@ export default function Navigation() {
       <header className={`site-nav ${dark ? 'is-dark' : ''} ${scrolled ? 'is-scrolled' : ''} ${hidden && !open ? 'is-hidden' : ''}`}>
         <div className="nav-bar">
           <Link href="/" className="nav-logo" aria-label="Jakub Kozel – úvod">
-            <SignatureMark className="nav-logo-mark" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="" width={68} height={44} className="nav-logo-mark" />
           </Link>
 
           <nav className="nav-links" aria-label="Hlavní menu">

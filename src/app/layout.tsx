@@ -29,10 +29,6 @@ export const metadata: Metadata = {
   authors: [{ name: NAME, url: SITE_URL }],
   creator: NAME,
   publisher: NAME,
-  keywords: [
-    'Jakub Kozel', 'grafik', 'grafický designér', 'grafický design', 'logo', 'vizuální identita',
-    'DTP', 'sazba knih', 'tvorba webů', 'webdesign', 'tiskoviny', 'vizitky', 'letáky',
-  ],
   openGraph: {
     type: 'website',
     locale: 'cs_CZ',

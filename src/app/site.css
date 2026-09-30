@@ -155,7 +155,7 @@
   line-height: 1.15;
   color: var(--ink);
 }
-.marquee-item i { display: inline-block; width: 0.28em; height: 0.28em; border-radius: 50%; }
+.marquee-item .dot { display: inline-block; width: 0.28em; height: 0.28em; border-radius: 50%; }
 .marquee-item.outline { font-weight: 300; font-style: italic; color: var(--ink-soft); }
 
 /* ---------- SLUŽBY (sticky stack) ---------- */

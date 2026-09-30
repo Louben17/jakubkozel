@@ -47,7 +47,7 @@ function Row({ items, base, outline }: { items: string[]; base: number; outline?
           seq.map((w, j) => (
             <span key={`${k}-${j}`} className={`marquee-item ${outline ? 'outline' : ''}`}>
               {w}
-              <i style={{ background: DOTS[j % DOTS.length] }} />
+              <span className="dot" style={{ background: DOTS[j % DOTS.length] }} />
             </span>
           ))
         )}

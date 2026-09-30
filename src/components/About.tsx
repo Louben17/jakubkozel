@@ -7,7 +7,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import Navigation from './Navigation';
 import { breadcrumbLd, ld } from './seo';
 import Cta, { Letters } from './home/Cta';
-import { SignatureMark } from './home/Signature';
 import { SERVICES } from './services';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -85,7 +84,8 @@ export default function About() {
             animate={{ opacity: 1, y: 0, rotate: -6 }}
             transition={{ delay: 1.4, duration: 0.9, ease: EASE }}
           >
-            <SignatureMark className="about-sign-mark" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="" width={230} height={150} className="about-sign-mark" />
           </motion.div>
         </motion.div>
       </section>
