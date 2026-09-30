@@ -7,6 +7,8 @@ import { DtpAnim, GrafikaAnim, PrintAnim, WebAnim } from './home/Illustrations';
 
 export type Tile = { title: string; description: string; icon: ReactNode };
 
+export type Photo = { src: string; alt: string; caption: string };
+
 export type Service = {
   slug: 'grafika' | 'dtp' | 'webdesign' | 'tiskoviny';
   no: string;
@@ -20,6 +22,7 @@ export type Service = {
   accent: string;
   Anim: ComponentType;
   tiles: Tile[];
+  gallery?: Photo[];
 };
 
 // Jeden zdroj pravdy pro homepage, menu i podstránky oborů
@@ -43,6 +46,23 @@ export const SERVICES: Service[] = [
       { title: 'Plakáty', description: 'Poutavé plakáty pro akce i kampaně.', icon: <FaBullhorn /> },
       { title: 'Print design', description: 'Kvalitní tiskoviny na míru.', icon: <FaPrint /> },
       { title: 'Katalogy', description: 'Profesionální katalogy a brožury.', icon: <FaBook /> },
+    ],
+    gallery: [
+      {
+        src: '/portfolio/grafika-1.webp',
+        alt: 'Vizuální identita – vizitky, hlavičkový papír, obálka a zápisník se stejným logem',
+        caption: 'Vizuální identita',
+      },
+      {
+        src: '/portfolio/grafika-2.webp',
+        alt: 'Skici a konstrukce loga na pauzovacím papíře se vzorníkem barev',
+        caption: 'Od skici k logu',
+      },
+      {
+        src: '/portfolio/grafika-3.webp',
+        alt: 'Sítotiskový plakát s abstraktními tvary na zdi ateliéru',
+        caption: 'Plakát',
+      },
     ],
   },
   {

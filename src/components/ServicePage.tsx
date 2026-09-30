@@ -5,6 +5,7 @@ import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from './Navigation';
 import Cta from './home/Cta';
+import Gallery from './Gallery';
 import { SERVICES, type Service } from './services';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -47,6 +48,16 @@ export default function ServicePage({ slug }: { slug: Service['slug'] }) {
           </div>
         </motion.div>
       </section>
+
+      {s.gallery && (
+        <div className="gallery-wrap">
+          <div className="section-head">
+            <p className="eyebrow">Ukázky</p>
+            <h2 className="section-title">Jak to vypadá naživo.</h2>
+          </div>
+          <Gallery photos={s.gallery} accent={s.accent} />
+        </div>
+      )}
 
       <section id="nabidka" className="offer">
         <div className="section-head">
