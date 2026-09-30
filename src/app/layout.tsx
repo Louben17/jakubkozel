@@ -48,6 +48,10 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
   formatDetection: { telephone: true, email: true },
+  // ověření vlastnictví webu ve vyhledávačích
+  verification: {
+    other: { 'seznam-wmt': 'Gj6LAmtJaPDZcq2Mp2Z8QcevOttZagCN' },
+  },
 };
 
 export const viewport: Viewport = {
