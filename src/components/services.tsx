@@ -161,5 +161,22 @@ export const SERVICES: Service[] = [
       { title: 'Firemní tiskoviny', description: 'Hlavičkové papíry, obálky, formuláře.', icon: <FaSwatchbook /> },
       { title: 'Tisková data', description: 'Spadávka, ořezové značky a správné barvy pro tiskárnu.', icon: <FaPrint /> },
     ],
+    gallery: [
+      {
+        src: '/portfolio/tiskoviny-1.webp',
+        alt: 'Obal, sklenice s etiketami a visačky v jednotném designu na polici',
+        caption: 'Obaly a etikety',
+      },
+      {
+        src: '/portfolio/tiskoviny-2.webp',
+        alt: 'Stoh silných vizitek s barevnou ořízkou a slepotiskem na rubu',
+        caption: 'Vizitky',
+      },
+      {
+        src: '/portfolio/tiskoviny-3.webp',
+        alt: 'Oříznuté letáky v tiskárně vedle řezačky, odřezky s ořezovými značkami a CMYK pruhem',
+        caption: 'Letáky z tiskárny',
+      },
+    ],
   },
 ];
