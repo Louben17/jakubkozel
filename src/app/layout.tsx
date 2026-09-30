@@ -8,8 +8,8 @@ import "./pages.css";
 
 
 const inter = Inter({
- subsets: ['latin'],
- weight: ['300', '400', '500', '600', '700', '800', '900'],
+ subsets: ['latin', 'latin-ext'],
+ weight: ['300', '400', '500', '600', '700', '800'],
  variable: '--font-inter',
 });
 
@@ -64,8 +64,8 @@ export default function RootLayout({
  children: React.ReactNode;
 }>) {
  return (
-   <html lang="cs" className="scroll-smooth">
-     <body className={`${inter.variable} antialiased overflow-x-clip`} style={{ fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif' }}>
+   <html lang="cs">
+     <body className={inter.variable} style={{ fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif' }}>
        <script
          type="application/ld+json"
          // eslint-disable-next-line react/no-danger
