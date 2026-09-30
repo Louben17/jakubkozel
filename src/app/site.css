@@ -106,6 +106,8 @@
   min-width: 5ch;
 }
 .rotator-word { display: inline-block; font-weight: 800; white-space: nowrap; }
+.rotator-verb { min-width: 0; }
+.rotator-verb .rotator-word { font-weight: 300; }
 
 .scroll-cue {
   position: absolute;

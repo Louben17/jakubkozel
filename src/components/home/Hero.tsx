@@ -4,13 +4,16 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import Signature from './Signature';
 
+// sloveso + obor – obojí se střídá, ať to není pořád „Navrhuji"
 const WORDS = [
-  { text: 'loga', color: '#FF6B73' },
-  { text: 'vizuální identity', color: '#E0569B' },
-  { text: 'sazbu knih', color: '#6C7BD0' },
-  { text: 'weby', color: '#2BB39A' },
-  { text: 'tiskoviny', color: '#F29E4C' },
-  { text: 'katalogy', color: '#4ECDC4' },
+  { verb: 'Navrhuji', text: 'loga', color: '#FF6B73' },
+  { verb: 'Tvořím', text: 'vizuální identity', color: '#E0569B' },
+  { verb: 'Sázím', text: 'knihy a časopisy', color: '#6C7BD0' },
+  { verb: 'Stavím', text: 'weby', color: '#2BB39A' },
+  { verb: 'Chystám', text: 'tiskoviny', color: '#F29E4C' },
+  { verb: 'Ladím', text: 'katalogy', color: '#4ECDC4' },
+  { verb: 'Dělám', text: 'e-shopy', color: '#B872D6' },
+  { verb: 'Kreslím', text: 'plakáty', color: '#FF6B73' },
 ];
 
 export default function Hero() {
@@ -86,7 +89,20 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.8 }}
         >
-          Navrhuji{' '}
+          <span className="rotator rotator-verb">
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.span
+                key={WORDS[i].verb}
+                className="rotator-word"
+                initial={{ y: '100%', opacity: 0, filter: 'blur(6px)' }}
+                animate={{ y: '0%', opacity: 1, filter: 'blur(0px)' }}
+                exit={{ y: '-100%', opacity: 0, filter: 'blur(6px)' }}
+                transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+              >
+                {WORDS[i].verb}
+              </motion.span>
+            </AnimatePresence>
+          </span>{' '}
           <span className="rotator">
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
@@ -96,7 +112,7 @@ export default function Hero() {
                 initial={{ y: '100%', opacity: 0, filter: 'blur(6px)' }}
                 animate={{ y: '0%', opacity: 1, filter: 'blur(0px)' }}
                 exit={{ y: '-100%', opacity: 0, filter: 'blur(6px)' }}
-                transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 26, delay: 0.08 }}
               >
                 {WORDS[i].text}
               </motion.span>
