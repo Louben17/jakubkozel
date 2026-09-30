@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   formatDetection: { telephone: true, email: true },
   // ověření vlastnictví webu ve vyhledávačích
   verification: {
-    other: { 'seznam-wmt': 'Gj6LAmtJaPDZcq2Mp2Z8QcevOttZagCN' },
+    other: { 'seznam-wmt': 'OmHOZpT5tIz1UG5Uz4399dygt5wOII6e' },
   },
 };
 
