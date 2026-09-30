@@ -35,7 +35,7 @@ export default function ServicePage({ slug }: { slug: Service['slug'] }) {
             <h1 className="svc-title svc-title-xl">{s.title}</h1>
             <p className="svc-lead">{s.lead}</p>
             <div className="svc-actions">
-              <Link href="/kontakt" className="svc-link" style={{ background: s.accent }}>
+              <Link href={`/kontakt?obor=${s.slug}#poptavka`} className="svc-link" style={{ background: s.accent }}>
                 Nezávazně poptat <span aria-hidden="true">→</span>
               </Link>
               <a href="#nabidka" className="svc-link ghost">

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Navigation from './Navigation';
 import { Letters } from './home/Cta';
 import { SERVICES } from './services';
+import InquiryForm from './InquiryForm';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -82,6 +83,8 @@ export default function Contact() {
             </span>
           ))}
         </motion.div>
+
+        <InquiryForm />
       </section>
     </div>
   );
