@@ -123,6 +123,23 @@ export const SERVICES: Service[] = [
       { title: 'Mobilní optimalizace', description: 'Perfektní zobrazení na mobilních zařízeních.', icon: <FaMobileAlt /> },
       { title: 'SEO optimalizace', description: 'Weby připravené pro vyhledávače.', icon: <FaSearch /> },
     ],
+    gallery: [
+      {
+        src: '/portfolio/weby-1.webp',
+        alt: 'Stejný web na notebooku, tabletu a mobilu – responzivní design',
+        caption: 'Responzivní web',
+      },
+      {
+        src: '/portfolio/weby-2.webp',
+        alt: 'Moderní web otevřený na notebooku na dřevěném stole',
+        caption: 'Web na míru',
+      },
+      {
+        src: '/portfolio/weby-3.webp',
+        alt: 'Ručně kreslené wireframy webu a hotová mobilní verze na telefonu',
+        caption: 'Od skici k webu',
+      },
+    ],
   },
   {
     slug: 'tiskoviny',
