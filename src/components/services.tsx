@@ -22,6 +22,8 @@ export type Service = {
   cta: string;
   bg: string;
   accent: string;
+  ink: string; // tmavší odstín pro text na pastelovém pozadí (kontrast WCAG AA)
+  button: string; // pozadí tlačítka s tmavým textem
   Anim: ComponentType;
   tiles: Tile[];
   gallery?: Photo[];
@@ -41,6 +43,8 @@ export const SERVICES: Service[] = [
     cta: 'Více o grafice',
     bg: '#FFE3E0',
     accent: '#FF6B73',
+    ink: '#B8313B',
+    button: '#FF6B73',
     Anim: GrafikaAnim,
     tiles: [
       { title: 'Loga', description: 'Unikátní loga, která zanechají dojem.', icon: <FaPenNib /> },
@@ -97,6 +101,8 @@ export const SERVICES: Service[] = [
     cta: 'Více o DTP',
     bg: '#E4E8FA',
     accent: '#6C7BD0',
+    ink: '#4957C0',
+    button: '#8591DE',
     Anim: DtpAnim,
     tiles: [
       { title: 'Sazba knih', description: 'Profesionální sazba knih s důrazem na typografii.', icon: <FaBook /> },
@@ -153,6 +159,8 @@ export const SERVICES: Service[] = [
     cta: 'Více o webech',
     bg: '#DDF5EC',
     accent: '#2BB39A',
+    ink: '#1D7968',
+    button: '#2BB39A',
     Anim: WebAnim,
     tiles: [
       { title: 'Responzivní weby', description: 'Weby, které perfektně fungují na všech zařízeních.', icon: <FaLaptopCode /> },
@@ -209,6 +217,8 @@ export const SERVICES: Service[] = [
     cta: 'Více o tiskovinách',
     bg: '#FFEBD6',
     accent: '#F29E4C',
+    ink: '#A3570C',
+    button: '#F29E4C',
     Anim: PrintAnim,
     tiles: [
       { title: 'Vizitky', description: 'Vizitky, které se neztratí v šuplíku.', icon: <FaIdCard /> },

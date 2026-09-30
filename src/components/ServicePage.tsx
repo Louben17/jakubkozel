@@ -8,6 +8,7 @@ import Cta from './home/Cta';
 import Gallery from './Gallery';
 import FaqList from './FaqList';
 import { SERVICES, type Service } from './services';
+import { breadcrumbLd, ld, serviceLd } from './seo';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -19,24 +20,26 @@ export default function ServicePage({ slug }: { slug: Service['slug'] }) {
 
   return (
     <div className="page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={ld(serviceLd(s))} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={ld(breadcrumbLd([{ name: s.title, path: s.href }]))} />
       <Navigation />
 
       <section className="svc-hero">
         <motion.div
           className="svc-hero-card"
           style={{ background: s.bg }}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 40, scale: 0.98 }}
+          animate={{ y: 0, scale: 1 }}
           transition={{ duration: 0.9, ease: EASE }}
         >
           <div className="svc-text">
-            <span className="svc-no" style={{ color: s.accent }}>
+            <span className="svc-no" style={{ color: s.ink }}>
               {s.no} — Služby
             </span>
             <h1 className="svc-title svc-title-xl">{s.title}</h1>
             <p className="svc-lead">{s.lead}</p>
             <div className="svc-actions">
-              <Link href={`/kontakt?obor=${s.slug}#poptavka`} className="svc-link" style={{ background: s.accent }}>
+              <Link href={`/kontakt?obor=${s.slug}#poptavka`} className="svc-link" style={{ background: s.button }}>
                 Nezávazně poptat <span aria-hidden="true">→</span>
               </Link>
               <a href="#nabidka" className="svc-link ghost">
@@ -91,7 +94,7 @@ export default function ServicePage({ slug }: { slug: Service['slug'] }) {
         <div className="others-list">
           {others.map((o) => (
             <Link key={o.slug} href={o.href} className="other" style={{ background: o.bg }}>
-              <span className="other-no" style={{ color: o.accent }}>
+              <span className="other-no" style={{ color: o.ink }}>
                 {o.no}
               </span>
               <span className="other-title">{o.title}</span>

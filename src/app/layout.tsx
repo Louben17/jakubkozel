@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import Link from "next/link";
 import { jsonLd, NAME, SITE_URL } from "@/components/seo";
 import Consent, { CookieSettings } from "@/components/Consent";
+import { CONSENT_BOOT } from "@/components/consentKey";
 import { Inter } from 'next/font/google';
 import "./globals.css";
 import "./site.css";
@@ -64,7 +66,10 @@ export default function RootLayout({
  children: React.ReactNode;
 }>) {
  return (
-   <html lang="cs">
+   <html lang="cs" suppressHydrationWarning>
+     <head>
+       <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOT }} />
+     </head>
      <body className={inter.variable} style={{ fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif' }}>
        <script
          type="application/ld+json"
@@ -76,6 +81,22 @@ export default function RootLayout({
        </main>
        
       <footer className="site-footer">
+        <nav aria-label="Patička">
+          <ul className="footer-nav">
+            {[
+              ['/grafika', 'Grafika'],
+              ['/dtp', 'DTP a sazba'],
+              ['/webdesign', 'Tvorba webů'],
+              ['/tiskoviny', 'Tiskoviny'],
+              ['/o-mne', 'O mně'],
+              ['/kontakt', 'Kontakt'],
+            ].map(([href, label]) => (
+              <li key={href}>
+                <Link href={href}>{label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <p>
           © {new Date().getFullYear()} Jakub Kozel – grafika, DTP, weby a tiskoviny / jakubkozel@seznam.cz / 728 890 062
           {' / '}

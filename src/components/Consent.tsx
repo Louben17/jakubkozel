@@ -3,10 +3,10 @@
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { CONSENT_KEY as KEY } from './consentKey';
 
 // Google Analytics se načte AŽ po souhlasu (bez souhlasu se nepošle nic, ani bezcookiesové pingy)
 export const GA_ID = 'G-ZKYRCNPZ9D';
-const KEY = 'cookie-consent-v1';
 const OPEN_EVENT = 'cookie-consent:open';
 
 type Choice = 'granted' | 'denied';
@@ -47,13 +47,19 @@ export function track(event: string, params?: Record<string, unknown>) {
 
 export default function Consent() {
   const [choice, setChoice] = useState<Choice | null>(null);
-  const [open, setOpen] = useState(false);
+  // lišta je vykreslená už v HTML ze serveru (rychlé LCP); kdo už volil, tomu ji
+  // ještě před prvním vykreslením skryje inline skript CONSENT_BOOT přes třídu na <html>
+  const [open, setOpen] = useState(true);
+  const [reopened, setReopened] = useState(false);
 
   useEffect(() => {
     const c = readChoice();
     setChoice(c);
-    if (!c) setOpen(true);
-    const reopen = () => setOpen(true);
+    if (c) setOpen(false);
+    const reopen = () => {
+      setReopened(true);
+      setOpen(true);
+    };
     window.addEventListener(OPEN_EVENT, reopen);
     return () => window.removeEventListener(OPEN_EVENT, reopen);
   }, []);
@@ -89,11 +95,11 @@ gtag('config', '${GA_ID}', { anonymize_ip: true });`}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="consent"
+            className={`consent ${reopened ? 'reopened' : ''}`}
             role="dialog"
             aria-live="polite"
             aria-label="Souhlas s cookies"
-            initial={{ opacity: 0, y: 40 }}
+            initial={reopened ? { opacity: 0, y: 40 } : false}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}

@@ -67,3 +67,43 @@ export function pageMetadata({ title, description, path }: { title: string; desc
     twitter: { card: 'summary_large_image', title: full, description, images: [image.url] },
   } as const;
 }
+
+/** Drobečková navigace pro Google (zobrazuje se ve výsledcích místo URL) */
+export function breadcrumbLd(items: { name: string; path: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ name: 'Úvod', path: '/' }, ...items].map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: it.name,
+      item: `${SITE_URL}${it.path === '/' ? '' : it.path}`,
+    })),
+  };
+}
+
+/** Schéma konkrétní služby (obor) navázané na osobu Jakuba Kozla */
+export function serviceLd(s: { title: string; lead: string; href: string; tiles: { title: string; description: string }[]; gallery?: { src: string }[] }) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: s.title,
+    serviceType: s.title,
+    description: s.lead,
+    url: `${SITE_URL}${s.href}`,
+    provider: { '@id': `${SITE_URL}/#person` },
+    areaServed: { '@type': 'Country', name: 'Česko' },
+    ...(s.gallery?.length ? { image: s.gallery.map((g) => `${SITE_URL}${g.src}`) } : {}),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: s.title,
+      itemListElement: s.tiles.map((t) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: t.title, description: t.description },
+      })),
+    },
+  };
+}
+
+/** <script type="application/ld+json"> obsah */
+export const ld = (data: unknown) => ({ __html: JSON.stringify(data) });

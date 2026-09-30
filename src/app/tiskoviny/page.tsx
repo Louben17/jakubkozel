@@ -2,8 +2,9 @@ import ServicePage from '@/components/ServicePage';
 import { pageMetadata } from '@/components/seo';
 
 export const metadata = pageMetadata({
-  title: 'Tiskoviny – vizitky, letáky, plakáty',
-  description: 'Jakub Kozel – tiskoviny: vizitky, letáky, plakáty, obaly a etikety včetně přípravy tiskových dat.',
+  title: 'Tiskoviny – vizitky, letáky, plakáty, obaly',
+  description:
+    'Tiskoviny od Jakuba Kozla: vizitky, letáky, brožury, plakáty, obaly a etikety. Grafický návrh i příprava tiskových dat se spadávkou a správnými barvami.',
   path: '/tiskoviny',
 });
 

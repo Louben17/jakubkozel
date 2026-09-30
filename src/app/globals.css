@@ -29,6 +29,6 @@ a:focus-visible, button:focus-visible {
 
 /* Patička */
 .site-footer { padding: 1.5rem 16px; text-align: center; }
-.site-footer p { margin: 0; font-size: 0.75rem; font-weight: 300; color: #9ca3af; }
+.site-footer p { margin: 0; font-size: 0.75rem; font-weight: 400; color: #6b7280; }
 .cookie-settings { border: none; background: none; padding: 0; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
 .cookie-settings:hover { color: #1d1d24; }

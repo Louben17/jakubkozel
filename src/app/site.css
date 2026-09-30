@@ -83,6 +83,7 @@
   color: var(--ink-soft);
   margin: 0 0 1rem;
 }
+.hero-title { margin: 0; font-size: inherit; line-height: 0; }
 .signature { width: min(86vw, 640px); height: auto; aspect-ratio: 800 / 520; }
 .hero-line {
   margin: 1.5rem 0 0;
@@ -208,7 +209,7 @@
   gap: 0.6rem;
   padding: 0.8rem 1.4rem;
   border-radius: 999px;
-  color: #fff;
+  color: var(--ink);
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;

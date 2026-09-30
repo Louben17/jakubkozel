@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from './Navigation';
+import { breadcrumbLd, ld } from './seo';
 import { Letters } from './home/Cta';
 import { SERVICES } from './services';
 import InquiryForm from './InquiryForm';
@@ -49,6 +50,7 @@ function Channel({ c, i }: { c: (typeof CHANNELS)[number]; i: number }) {
 export default function Contact() {
   return (
     <div className="page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={ld(breadcrumbLd([{ name: 'Kontakt', path: '/kontakt' }]))} />
       <Navigation />
       <section className="contact">
         <motion.p

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRef, type CSSProperties } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Navigation from './Navigation';
+import { breadcrumbLd, ld } from './seo';
 import Cta, { Letters } from './home/Cta';
 import { SignatureMark } from './home/Signature';
 import { SERVICES } from './services';
@@ -24,6 +25,7 @@ export default function About() {
 
   return (
     <div className="page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={ld(breadcrumbLd([{ name: 'O mně', path: '/o-mne' }]))} />
       <Navigation />
 
       {/* úvod – tmavý panel v barvě pozadí fotky, aby portrét splynul */}
@@ -63,8 +65,8 @@ export default function About() {
         <motion.div
           ref={photoRef}
           className="about-photo"
-          initial={{ opacity: 0, scale: 1.06 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ scale: 1.06, filter: 'brightness(0)' }}
+          animate={{ scale: 1, filter: 'brightness(1)' }}
           transition={{ duration: 1.6, ease: EASE }}
         >
           <motion.div className="about-photo-inner" style={{ y: photoY }}>
@@ -147,7 +149,7 @@ export default function About() {
         <div className="about-services">
           {SERVICES.map((s) => (
             <Link key={s.slug} href={s.href} className="other" style={{ background: s.bg }}>
-              <span className="other-no" style={{ color: s.accent }}>
+              <span className="other-no" style={{ color: s.ink }}>
                 {s.no}
               </span>
               <span className="other-title">{s.title}</span>

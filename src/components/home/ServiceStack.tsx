@@ -22,7 +22,7 @@ function Card({ s, i, progress }: { s: Service; i: number; progress: MotionValue
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="svc-text">
-          <span className="svc-no" style={{ color: s.accent }}>
+          <span className="svc-no" style={{ color: s.ink }}>
             {s.no}
           </span>
           <h3 className="svc-title">{s.title}</h3>
@@ -34,7 +34,7 @@ function Card({ s, i, progress }: { s: Service; i: number; progress: MotionValue
               </li>
             ))}
           </ul>
-          <Link href={s.href} className="svc-link" style={{ background: s.accent }}>
+          <Link href={s.href} className="svc-link" style={{ background: s.button }}>
             {s.cta}
             <span aria-hidden="true">→</span>
           </Link>

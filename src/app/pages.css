@@ -829,3 +829,33 @@
 .consent-btn:hover { background: #E4E4EC; }
 .consent-btn.solid { background: var(--ink); color: #fff; }
 .consent-btn.solid:hover { background: #000; }
+/* kdo už volil, tomu se lišta ze serveru vůbec nevykreslí (třídu přidá skript v <head>) */
+.consent-set .consent:not(.reopened) { display: none; }
+.consent:not(.reopened) { animation: consent-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes consent-in { from { transform: translateY(24px); } }
+
+/* ---------- 404 ---------- */
+.nf { max-width: 1200px; margin: 0 auto; padding: 130px 16px 5rem; text-align: center; }
+.nf-code {
+  margin: 0;
+  font-size: clamp(7rem, 24vw, 16rem);
+  font-weight: 800;
+  letter-spacing: -0.07em;
+  line-height: 0.85;
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.nf-title { margin: 1.5rem auto 0.75rem; max-width: 18ch; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; }
+.nf-text { margin: 0 0 2.5rem; color: var(--ink-soft); font-size: 1.1rem; }
+.nf-links { grid-template-columns: repeat(4, 1fr); text-align: left; }
+.nf-home { display: inline-block; margin-top: 2.5rem; color: var(--ink); font-weight: 600; text-decoration: none; }
+.nf-home:hover { text-decoration: underline; }
+@media (max-width: 960px) { .nf-links { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .nf-links { grid-template-columns: 1fr; } }
+
+/* ---------- PATIČKA – odkazy ---------- */
+.footer-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.25rem 1.25rem; margin: 0 0 0.6rem; padding: 0; list-style: none; }
+.footer-nav a { color: #4b5063; font-size: 0.85rem; font-weight: 500; text-decoration: none; }
+.footer-nav a:hover { color: var(--ink); text-decoration: underline; }

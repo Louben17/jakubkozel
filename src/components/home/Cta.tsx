@@ -41,13 +41,12 @@ export function Letters({ text, delay = 0, className, gradient }: { text: string
   return (
     <motion.span
       className={className}
-      aria-label={text}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: '-10% 0px' }}
     >
       {text.split(' ').map((word, w) => (
-        <span key={w} className="cta-word" aria-hidden="true">
+        <span key={w} className="cta-word">
           {word.split('').map((ch) => {
             const i = k++;
             return (

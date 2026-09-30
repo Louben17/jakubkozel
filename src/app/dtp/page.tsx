@@ -3,7 +3,8 @@ import { pageMetadata } from '@/components/seo';
 
 export const metadata = pageMetadata({
   title: 'DTP a sazba knih, časopisů a katalogů',
-  description: 'Jakub Kozel – DTP: sazba knih a časopisů, katalogy, brožury, výroční zprávy a typografie.',
+  description:
+    'DTP a sazba od Jakuba Kozla: knihy, časopisy, katalogy, brožury a výroční zprávy s citem pro typografii. Tisková data připravená přesně pro tiskárnu.',
   path: '/dtp',
 });
 

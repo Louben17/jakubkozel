@@ -53,7 +53,7 @@ export function SignatureMark({ className }: { className?: string }) {
 
 // Ručně psaný podpis: obrys se nakreslí písmeno po písmenu, pak se vyplní.
 // V rámci jedné session se animace přehraje jen jednou.
-export default function Signature() {
+export default function Signature({ decorative = false }: { decorative?: boolean }) {
   const [skip, setSkip] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -85,7 +85,11 @@ export default function Signature() {
   );
 
   return (
-    <svg viewBox="0 40 800 520" className="signature" role="img" aria-label="Jakub Kozel">
+    <svg
+      viewBox="0 40 800 520"
+      className="signature"
+      {...(decorative ? { 'aria-hidden': true } : { role: 'img', 'aria-label': 'Jakub Kozel' })}
+    >
       <Gradients prefix="sig" />
       <g transform="translate(50, 50)">{JAKUB_PATHS.map((d, i) => letter(d, i, 0.2 + i * 0.3, 'url(#sig-jakub)'))}</g>
       <g transform="translate(150, 270)">{KOZEL_PATHS.map((d, i) => letter(d, i + 5, 1.6 + i * 0.3, 'url(#sig-kozel)'))}</g>

@@ -73,20 +73,23 @@ export default function Hero() {
       <motion.div className="hero-inner" style={{ scale, y, opacity }}>
         <motion.p
           className="hero-kicker"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 12, filter: 'blur(6px)' }}
+          animate={{ y: 0, filter: 'blur(0px)' }}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
           Grafika · DTP · Weby · Tiskoviny
         </motion.p>
 
-        <h1 className="sr-only">Jakub Kozel — grafický design, DTP, webdesign a tiskoviny</h1>
-        <Signature />
+        {/* hlavní nadpis stránky = podpis; text pro Google a čtečky je v sr-only */}
+        <h1 className="hero-title">
+          <span className="sr-only">Jakub Kozel – grafický designér: grafika, DTP, tvorba webů a tiskoviny</span>
+          <Signature decorative />
+        </h1>
 
         <motion.p
           className="hero-line"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ y: 16, filter: 'blur(8px)' }}
+          animate={{ y: 0, filter: 'blur(0px)' }}
           transition={{ delay: 0.9, duration: 0.8 }}
         >
           <span className="rotator rotator-verb">
