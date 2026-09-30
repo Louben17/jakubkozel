@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { jsonLd, NAME, SITE_URL } from "@/components/seo";
 import Consent, { CookieSettings } from "@/components/Consent";
-import { CONSENT_BOOT } from "@/components/consentKey";
+import { CONSENT_BOOT, SIG_BOOT } from "@/components/consentKey";
 import { Inter } from 'next/font/google';
 import "./globals.css";
 import "./site.css";
@@ -68,7 +68,7 @@ export default function RootLayout({
  return (
    <html lang="cs" suppressHydrationWarning>
      <head>
-       <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOT }} />
+       <script dangerouslySetInnerHTML={{ __html: CONSENT_BOOT + SIG_BOOT }} />
      </head>
      <body className={inter.variable} style={{ fontFamily: 'var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif' }}>
        <script

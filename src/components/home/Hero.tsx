@@ -52,9 +52,16 @@ export default function Hero() {
       }}
     >
       <div className="hero-bg" aria-hidden="true">
-        <motion.div className="blob blob-coral" style={{ x: bx1, y: by1 }} />
-        <motion.div className="blob blob-teal" style={{ x: bx2, y: by2 }} />
-        <motion.div className="blob blob-lilac" style={{ x: by1, y: bx2 }} />
+        {/* vnější vrstva = paralaxa za myší, vnitřní = pomalé CSS plutí (obojí transform, proto zvlášť) */}
+        <motion.div className="blob-layer" style={{ x: bx1, y: by1 }}>
+          <div className="blob blob-coral" />
+        </motion.div>
+        <motion.div className="blob-layer" style={{ x: bx2, y: by2 }}>
+          <div className="blob blob-teal" />
+        </motion.div>
+        <motion.div className="blob-layer" style={{ x: by1, y: bx2 }}>
+          <div className="blob blob-lilac" />
+        </motion.div>
       </div>
 
       {/* ořezové značky v rozích – odkaz na tisk */}
@@ -73,8 +80,8 @@ export default function Hero() {
       <motion.div className="hero-inner" style={{ scale, y, opacity }}>
         <motion.p
           className="hero-kicker"
-          initial={{ y: 12, filter: 'blur(6px)' }}
-          animate={{ y: 0, filter: 'blur(0px)' }}
+          initial={{ y: 12 }}
+          animate={{ y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
         >
           Grafika · DTP · Weby · Tiskoviny
@@ -88,8 +95,8 @@ export default function Hero() {
 
         <motion.p
           className="hero-line"
-          initial={{ y: 16, filter: 'blur(8px)' }}
-          animate={{ y: 0, filter: 'blur(0px)' }}
+          initial={{ y: 16 }}
+          animate={{ y: 0 }}
           transition={{ delay: 0.9, duration: 0.8 }}
         >
           <span className="rotator rotator-verb">
@@ -97,9 +104,9 @@ export default function Hero() {
               <motion.span
                 key={WORDS[i].verb}
                 className="rotator-word"
-                initial={{ y: '100%', opacity: 0, filter: 'blur(6px)' }}
-                animate={{ y: '0%', opacity: 1, filter: 'blur(0px)' }}
-                exit={{ y: '-100%', opacity: 0, filter: 'blur(6px)' }}
+                initial={{ y: '100%', opacity: 0 }}
+                animate={{ y: '0%', opacity: 1 }}
+                exit={{ y: '-100%', opacity: 0 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 26 }}
               >
                 {WORDS[i].verb}
@@ -112,9 +119,9 @@ export default function Hero() {
                 key={WORDS[i].text}
                 className="rotator-word"
                 style={{ color: WORDS[i].color }}
-                initial={{ y: '100%', opacity: 0, filter: 'blur(6px)' }}
-                animate={{ y: '0%', opacity: 1, filter: 'blur(0px)' }}
-                exit={{ y: '-100%', opacity: 0, filter: 'blur(6px)' }}
+                initial={{ y: '100%', opacity: 0 }}
+                animate={{ y: '0%', opacity: 1 }}
+                exit={{ y: '-100%', opacity: 0 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 26, delay: 0.08 }}
               >
                 {WORDS[i].text}

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, type CSSProperties } from 'react';
+import { SIG_KEY } from '../consentKey';
 import { JAKUB_PATHS, KOZEL_PATHS } from './signaturePaths';
 import { BRAND_STOPS } from '../brand';
 
@@ -37,35 +37,32 @@ function Gradients({ prefix }: { prefix: string }) {
 }
 
 // Ručně psaný podpis: obrys se nakreslí písmeno po písmenu, pak se vyplní.
-// V rámci jedné session se animace přehraje jen jednou.
+// Kreslí čisté CSS (třída .sig-path v site.css), ne JavaScript – na mobilu plynule
+// a hned z HTML. V rámci jedné návštěvy se přehraje jen jednou: inline skript SIG_BOOT
+// v <head> přidá <html> třídu .sig-seen, která animaci vypne.
 export default function Signature({ decorative = false }: { decorative?: boolean }) {
-  const [skip, setSkip] = useState<boolean | null>(null);
-
   useEffect(() => {
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const seen = sessionStorage.getItem('handwritingAnimated') === 'true';
-    setSkip(reduced || seen);
-    if (!seen) sessionStorage.setItem('handwritingAnimated', 'true');
+    try {
+      sessionStorage.setItem(SIG_KEY, 'true');
+    } catch {}
+    // po dokreslení (nebo odchodu ze stránky) už se při návratu nepřehrává
+    const root = document.documentElement;
+    const t = setTimeout(() => root.classList.add('sig-seen'), 5000);
+    return () => {
+      clearTimeout(t);
+      root.classList.add('sig-seen');
+    };
   }, []);
 
-  if (skip === null) return <svg viewBox="0 40 800 520" className="signature" aria-hidden="true" />;
-
   const letter = (d: string, i: number, delay: number, grad: string) => (
-    <motion.path
+    <path
       key={i}
       d={d}
+      pathLength={1}
+      className="sig-path"
       stroke={grad}
-      strokeWidth={2.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      initial={skip ? false : { pathLength: 0, fillOpacity: 0, strokeOpacity: 1 }}
-      animate={{ pathLength: 1, fillOpacity: 1, strokeOpacity: 0 }}
       fill={grad}
-      transition={{
-        pathLength: { duration: 1.4, ease: 'easeOut', delay },
-        fillOpacity: { duration: 0.8, ease: 'easeInOut', delay: delay + 1.1 },
-        strokeOpacity: { duration: 0.6, delay: delay + 1.6 },
-      }}
+      style={{ '--d': `${delay}s` } as CSSProperties}
     />
   );
 

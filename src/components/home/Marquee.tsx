@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import {
   motion,
   useAnimationFrame,
+  useInView,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -30,9 +31,12 @@ function Row({ items, base, outline }: { items: string[]; base: number; outline?
   const dir = useRef(1);
   const reduced = useReducedMotion();
   const tx = useTransform(x, (v) => `${wrap(-25, 0, v)}%`);
+  // mimo obrazovku se pás nehýbe (šetří výkon na mobilu)
+  const rowRef = useRef<HTMLDivElement>(null);
+  const visible = useInView(rowRef);
 
   useAnimationFrame((_, delta) => {
-    if (reduced) return;
+    if (reduced || !visible) return;
     const f = factor.get();
     if (f < 0) dir.current = -1;
     else if (f > 0) dir.current = 1;
@@ -41,7 +45,7 @@ function Row({ items, base, outline }: { items: string[]; base: number; outline?
 
   const seq = [...items, ...items];
   return (
-    <div className="marquee-row">
+    <div ref={rowRef} className="marquee-row">
       <motion.div className="marquee-track" style={{ x: tx }}>
         {[0, 1].map((k) =>
           seq.map((w, j) => (
