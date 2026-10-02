@@ -3,6 +3,7 @@
 import { useState, type CSSProperties } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { Faq } from './services';
+import { faqLd, ld } from './seo';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -10,15 +11,9 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export default function FaqList({ items, accent, bg }: { items: Faq[]; accent: string; bg: string }) {
   const [open, setOpen] = useState<number | null>(null);
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-  };
-
   return (
     <section className="faq" style={{ '--accent': accent, '--bg': bg } as CSSProperties}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={ld(faqLd(items))} />
       <div className="section-head">
         <p className="eyebrow">Časté otázky</p>
         <h2 className="section-title">Na co se lidé ptají.</h2>

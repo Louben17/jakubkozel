@@ -7,6 +7,7 @@ import { Inter } from 'next/font/google';
 import "./globals.css";
 import "./site.css";
 import "./pages.css";
+import "./poradna.css";
 
 
 const inter = Inter({
@@ -88,6 +89,7 @@ export default function RootLayout({
               ['/dtp', 'DTP a sazba'],
               ['/webdesign', 'Tvorba webů'],
               ['/tiskoviny', 'Tiskoviny'],
+              ['/poradna', 'Poradna'],
               ['/o-mne', 'O mně'],
               ['/kontakt', 'Kontakt'],
             ].map(([href, label]) => (

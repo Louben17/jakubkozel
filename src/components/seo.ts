@@ -56,14 +56,29 @@ export const jsonLd = {
 };
 
 /** Kompletní metadata podstránky (Next metadata se slučují jen mělce, openGraph by se jinak přepsal celý) */
-export function pageMetadata({ title, description, path }: { title: string; description: string; path: string }) {
+export function pageMetadata({
+  title,
+  description,
+  path,
+  image: imageUrl = '/opengraph-image',
+  article,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  article?: { published: string; updated?: string };
+}) {
   const full = `${title} | ${NAME}`;
-  const image = { url: '/opengraph-image', width: 1200, height: 630, alt: `${NAME} – grafika, DTP, weby a tiskoviny` };
+  const image = { url: imageUrl, width: 1200, height: 630, alt: imageUrl === '/opengraph-image' ? `${NAME} – grafika, DTP, weby a tiskoviny` : title };
+  const og = article
+    ? { type: 'article', publishedTime: article.published, modifiedTime: article.updated ?? article.published, authors: [`${SITE_URL}/o-mne`] }
+    : { type: 'website' };
   return {
     title,
     description,
     alternates: { canonical: path },
-    openGraph: { type: 'website', locale: 'cs_CZ', siteName: NAME, url: path, title: full, description, images: [image] },
+    openGraph: { ...og, locale: 'cs_CZ', siteName: NAME, url: path, title: full, description, images: [image] },
     twitter: { card: 'summary_large_image', title: full, description, images: [image.url] },
   } as const;
 }
@@ -102,6 +117,36 @@ export function serviceLd(s: { title: string; lead: string; href: string; tiles:
         itemOffered: { '@type': 'Service', name: t.title, description: t.description },
       })),
     },
+  };
+}
+
+/** Článek v poradně – autor je Jakub Kozel (posiluje vazbu jména na odborná témata) */
+export function articleLd(a: { slug: string; title: string; description: string; published: string; updated?: string }) {
+  const url = `${SITE_URL}/poradna/${a.slug}`;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${url}#article`,
+    headline: a.title,
+    description: a.description,
+    url,
+    mainEntityOfPage: url,
+    inLanguage: 'cs-CZ',
+    datePublished: a.published,
+    dateModified: a.updated ?? a.published,
+    image: `${url}/opengraph-image`,
+    author: { '@id': `${SITE_URL}/#person`, '@type': 'Person', name: NAME, url: `${SITE_URL}/o-mne` },
+    publisher: { '@id': `${SITE_URL}/#person` },
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+  };
+}
+
+/** Časté otázky jako FAQPage */
+export function faqLd(items: { q: string; a: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   };
 }
 

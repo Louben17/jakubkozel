@@ -13,11 +13,13 @@ npm run build    # produkční build
 
 ## Struktura
 
-- `src/app/` – stránky (`/`, `/grafika`, `/dtp`, `/webdesign`, `/tiskoviny`, `/o-mne`, `/kontakt`),
+- `src/app/` – stránky (`/`, `/grafika`, `/dtp`, `/webdesign`, `/tiskoviny`, `/poradna`, `/o-mne`, `/kontakt`),
   API pro poptávku (`api/poptavka`), SEO (`sitemap.ts`, `robots.ts`, `opengraph-image.tsx`), styly
 - `src/components/services.tsx` – obsah oborů (texty, dlaždice, galerie, FAQ) na jednom místě
 - `src/components/home/` – sekce úvodní stránky a animované ilustrace
 - `public/portfolio/` – fotky do galerií (WebP)
+- `src/content/articles.ts` – seznam článků poradny (`/poradna/*`): názvy, popisy, obor, FAQ
+- `src/content/poradna/` – těla článků; nový článek = záznam v `articles.ts` + soubor zde + řádek v `poradna/index.ts`
 
 ## Proměnné prostředí
 

@@ -27,7 +27,8 @@ const nextConfig: NextConfig = {
       { source: '/sluzby/webdesign', destination: '/webdesign', permanent: true },
       // zrušené stránky v přípravě
       { source: '/portfolio', destination: '/#sluzby', permanent: true },
-      { source: '/blog', destination: '/', permanent: true },
+      { source: '/blog', destination: '/poradna', permanent: true },
+      { source: '/blog/:path*', destination: '/poradna', permanent: true },
     ];
   },
 };

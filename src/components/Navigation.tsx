@@ -9,6 +9,7 @@ import { SERVICES } from './services';
 
 const LINKS = [
   ...SERVICES.map((s) => ({ href: s.href, label: s.label, accent: s.accent })),
+  { href: '/poradna', label: 'Poradna', accent: '#E58AC8' },
   { href: '/o-mne', label: 'O mně', accent: '#B872D6' },
 ];
 
@@ -53,7 +54,7 @@ export default function Navigation() {
 
           <nav className="nav-links" aria-label="Hlavní menu">
             {LINKS.map((l) => {
-              const active = pathname === l.href;
+              const active = pathname === l.href || pathname.startsWith(`${l.href}/`);
               return (
                 <Link
                   key={l.href}

@@ -7,6 +7,8 @@ import Navigation from './Navigation';
 import Cta from './home/Cta';
 import Gallery from './Gallery';
 import FaqList from './FaqList';
+import ArticleCards from './poradna/ArticleCards';
+import { ARTICLES } from '@/content/articles';
 import { SERVICES, type Service } from './services';
 import { breadcrumbLd, ld, serviceLd } from './seo';
 
@@ -17,6 +19,7 @@ export default function ServicePage({ slug }: { slug: Service['slug'] }) {
   const s = SERVICES.find((x) => x.slug === slug)!;
   const others = SERVICES.filter((x) => x.slug !== slug);
   const { Anim } = s;
+  const articles = ARTICLES.filter((a) => a.service === slug);
 
   return (
     <div className="page">
@@ -88,6 +91,16 @@ export default function ServicePage({ slug }: { slug: Service['slug'] }) {
       </section>
 
       <FaqList items={s.faq} accent={s.accent} bg={s.bg} />
+
+      {articles.length > 0 && (
+        <section className="svc-articles">
+          <div className="section-head">
+            <p className="eyebrow">Poradna</p>
+            <h2 className="section-title">Chcete vědět víc?</h2>
+          </div>
+          <ArticleCards articles={articles} />
+        </section>
+      )}
 
       <section className="others">
         <p className="eyebrow">Další obory</p>
