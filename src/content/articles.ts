@@ -10,6 +10,7 @@ export type Article = {
   published: string; // ISO datum
   updated?: string;
   minutes: number;
+  imageAlt: string; // hero fotka je v public/poradna/<slug>.webp
   faq?: Faq[];
 };
 
@@ -25,6 +26,7 @@ export const ARTICLES: Article[] = [
     service: 'tiskoviny',
     published: '2026-10-02',
     minutes: 4,
+    imageAlt: 'Listy papíru od A3 po A7 seřazené podle velikosti, vedle ocelové pravítko a tužka',
     faq: [
       {
         q: 'Kolik pixelů má A4?',
@@ -50,6 +52,7 @@ export const ARTICLES: Article[] = [
     service: 'tiskoviny',
     published: '2026-10-02',
     minutes: 4,
+    imageAlt: 'Notebook s rozpixelovaným kruhem a vedle stejný kruh ostře vytištěný na papíře pod lupou',
     faq: [
       {
         q: 'Kolik pixelů je 1 mm?',
@@ -75,6 +78,7 @@ export const ARTICLES: Article[] = [
     service: 'tiskoviny',
     published: '2026-10-02',
     minutes: 5,
+    imageAlt: 'Stoh vizitek s oranžovou ořízkou a vizitka přeměřená ocelovým pravítkem na řezací podložce',
     faq: [
       {
         q: 'Jaký je standardní rozměr vizitky?',
@@ -100,6 +104,7 @@ export const ARTICLES: Article[] = [
     service: 'tiskoviny',
     published: '2026-10-02',
     minutes: 5,
+    imageAlt: 'Tiskový arch s oranžovými letáky, ořezovými značkami a spadávkou, vedle oříznutý leták a odřezky',
     faq: [
       {
         q: 'Jak velká má být spadávka?',
@@ -125,6 +130,7 @@ export const ARTICLES: Article[] = [
     service: 'dtp',
     published: '2026-10-02',
     minutes: 6,
+    imageAlt: 'Monitor se sazbou dvoustrany a vytištěný nátisk s ořezovými značkami a barevnou škálou, vedle lupa a vzorník',
     faq: [
       {
         q: 'V jakém formátu poslat data do tiskárny?',
@@ -150,6 +156,7 @@ export const ARTICLES: Article[] = [
     service: 'tiskoviny',
     published: '2026-10-02',
     minutes: 5,
+    imageAlt: 'Tablet se zářivou barevnou grafikou vedle stejného motivu vytištěného na papíře, vzorník a kelímky s barvami CMYK',
     faq: [
       {
         q: 'Mám logo navrhovat v RGB, nebo v CMYK?',
@@ -175,6 +182,7 @@ export const ARTICLES: Article[] = [
     service: 'grafika',
     published: '2026-10-02',
     minutes: 4,
+    imageAlt: 'Stejné korálové logo na plakátu, vizitce, mobilu, vyšívané nášivce a jako vektor v grafickém programu',
     faq: [
       {
         q: 'Jaký formát loga poslat do tiskárny?',
@@ -191,5 +199,7 @@ export const ARTICLES: Article[] = [
     ],
   },
 ];
+
+export const articleImage = (slug: string) => `/poradna/${slug}.webp`;
 
 export const articleBySlug = (slug: string) => ARTICLES.find((a) => a.slug === slug);

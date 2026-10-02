@@ -134,7 +134,7 @@ export function articleLd(a: { slug: string; title: string; description: string;
     inLanguage: 'cs-CZ',
     datePublished: a.published,
     dateModified: a.updated ?? a.published,
-    image: `${url}/opengraph-image`,
+    image: [`${SITE_URL}/poradna/${a.slug}.webp`, `${url}/opengraph-image`],
     author: { '@id': `${SITE_URL}/#person`, '@type': 'Person', name: NAME, url: `${SITE_URL}/o-mne` },
     publisher: { '@id': `${SITE_URL}/#person` },
     isPartOf: { '@id': `${SITE_URL}/#website` },

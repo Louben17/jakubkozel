@@ -1,7 +1,8 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import { SERVICES } from '../services';
-import type { Article } from '@/content/articles';
+import { articleImage, type Article } from '@/content/articles';
 
 // Karty článků z poradny (výpis, související články, podstránky oborů)
 export default function ArticleCards({ articles, headingLevel = 3 }: { articles: Article[]; headingLevel?: 2 | 3 }) {
@@ -17,6 +18,9 @@ export default function ArticleCards({ articles, headingLevel = 3 }: { articles:
             className="art-card"
             style={{ '--bg': s.bg, '--accent': s.accent } as CSSProperties}
           >
+            <span className="art-card-photo">
+              <Image src={articleImage(a.slug)} alt="" fill sizes="(max-width: 560px) 100vw, (max-width: 960px) 50vw, 380px" style={{ objectFit: 'cover' }} />
+            </span>
             <span className="art-card-tag" style={{ color: s.ink }}>
               {s.title}
             </span>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { CSSProperties } from 'react';
@@ -7,7 +8,7 @@ import FaqList from '@/components/FaqList';
 import ArticleCards from '@/components/poradna/ArticleCards';
 import { SERVICES } from '@/components/services';
 import { articleLd, breadcrumbLd, ld, pageMetadata } from '@/components/seo';
-import { ARTICLES, articleBySlug } from '@/content/articles';
+import { ARTICLES, articleBySlug, articleImage } from '@/content/articles';
 import { BODIES } from '@/content/poradna';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -59,20 +60,32 @@ export default async function ArticlePage({ params }: Props) {
       <article>
         <header className="art-hero">
           <div className="art-hero-card">
-            <nav className="art-crumbs" aria-label="Drobečková navigace">
-              <Link href="/poradna">Poradna</Link>
-              <span aria-hidden="true">/</span>
-              <Link href={s.href}>{s.title}</Link>
-            </nav>
-            <h1 className="art-title">{a.title}</h1>
-            <p className="art-lead">{a.lead}</p>
-            <p className="art-meta">
-              <Link href="/o-mne">Jakub Kozel</Link>
-              <span aria-hidden="true">·</span>
-              <time dateTime={a.updated ?? a.published}>{date(a.updated ?? a.published)}</time>
-              <span aria-hidden="true">·</span>
-              <span>{a.minutes} min čtení</span>
-            </p>
+            <div className="art-hero-text">
+              <nav className="art-crumbs" aria-label="Drobečková navigace">
+                <Link href="/poradna">Poradna</Link>
+                <span aria-hidden="true">/</span>
+                <Link href={s.href}>{s.title}</Link>
+              </nav>
+              <h1 className="art-title">{a.title}</h1>
+              <p className="art-lead">{a.lead}</p>
+              <p className="art-meta">
+                <Link href="/o-mne">Jakub Kozel</Link>
+                <span aria-hidden="true">·</span>
+                <time dateTime={a.updated ?? a.published}>{date(a.updated ?? a.published)}</time>
+                <span aria-hidden="true">·</span>
+                <span>{a.minutes} min čtení</span>
+              </p>
+            </div>
+            <div className="art-hero-photo">
+              <Image
+                src={articleImage(a.slug)}
+                alt={a.imageAlt}
+                fill
+                priority
+                sizes="(max-width: 860px) 100vw, 560px"
+                style={{ objectFit: 'cover' }}
+              />
+            </div>
           </div>
         </header>
 

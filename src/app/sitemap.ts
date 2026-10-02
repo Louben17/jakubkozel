@@ -40,7 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(a.updated ?? a.published),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
-      images: [`${SITE_URL}/poradna/${a.slug}/opengraph-image`],
+      images: [`${SITE_URL}/poradna/${a.slug}.webp`],
     })),
   ];
 }
