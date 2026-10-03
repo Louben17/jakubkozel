@@ -17,6 +17,7 @@ npm run build    # produkční build
   API pro poptávku (`api/poptavka`), SEO (`sitemap.ts`, `robots.ts`, `opengraph-image.tsx`), styly
 - `src/components/services.tsx` – obsah oborů (texty, dlaždice, galerie, FAQ) na jednom místě
 - `src/components/home/` – sekce úvodní stránky a animované ilustrace
+- `src/components/capacityData.ts` – **aktuální vytíženost** (`load` v %, `from` = od kdy můžu začít); ukazatel je v tmavé výzvě na konci stránek a na /kontakt
 - `public/portfolio/` – fotky do galerií (WebP)
 - `src/content/articles.ts` – seznam článků poradny (`/poradna/*`): názvy, popisy, obor, FAQ
 - `src/content/poradna/` – těla článků; nový článek = záznam v `articles.ts` + soubor zde + řádek v `poradna/index.ts`

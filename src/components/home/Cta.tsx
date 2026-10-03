@@ -3,6 +3,7 @@
 import { useRef, type ReactNode } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { brandColor } from '../brand';
+import Capacity from '../Capacity';
 
 // Tlačítko, které se lehce „přisaje" ke kurzoru
 export function Magnetic({ href, children, variant }: { href: string; children: ReactNode; variant: 'solid' | 'ghost' }) {
@@ -75,6 +76,7 @@ export default function Cta() {
         <Letters text={LINE_1} className="cta-l1" />
         <Letters text={LINE_2} delay={0.3} className="cta-l2" gradient />
       </h2>
+      <Capacity delay={0.5} />
       <motion.div
         className="cta-actions"
         initial={{ opacity: 0, y: 20 }}

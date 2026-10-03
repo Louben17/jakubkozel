@@ -7,6 +7,7 @@ import { breadcrumbLd, ld } from './seo';
 import { Letters } from './home/Cta';
 import { SERVICES } from './services';
 import InquiryForm from './InquiryForm';
+import Capacity from './Capacity';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -65,6 +66,8 @@ export default function Contact() {
           <Letters text="Napište mi," className="cta-l1" />
           <Letters text="nebo zavolejte." delay={0.25} className="cta-l2" gradient />
         </h1>
+
+        <Capacity delay={0.6} />
 
         <div className="channels">
           {CHANNELS.map((c, i) => (
