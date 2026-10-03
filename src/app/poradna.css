@@ -75,6 +75,12 @@
 .fmt-table.nums th, .fmt-table.nums td { white-space: nowrap; }
 .fmt-table td { min-width: 12ch; }
 
+/* fotka v textu */
+.art-photo { margin: 2.25rem 0 2.5rem; }
+.art-photo-img { position: relative; aspect-ratio: 3 / 2; border-radius: 22px; overflow: hidden; background: var(--bg); }
+.art-photo figcaption { margin-top: 0.75rem; text-align: center; font-size: 0.9rem; line-height: 1.5; color: var(--ink-soft); }
+@media (min-width: 940px) { .art-photo { margin-inline: -66px; } }
+
 /* tip, schéma, checklist */
 .callout { margin: 2rem 0; padding: 1.5rem 1.6rem; border-radius: 22px; background: var(--bg); }
 .callout .callout-title { margin: 0 0 0.5rem; font-weight: 800; color: var(--ink); letter-spacing: -0.01em; }

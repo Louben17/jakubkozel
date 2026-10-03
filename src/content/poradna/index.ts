@@ -6,6 +6,7 @@ import Spadavka from './spadavka';
 import TiskovaData from './tiskova-data';
 import RgbVsCmyk from './rgb-vs-cmyk';
 import FormatyLoga from './formaty-loga';
+import GramazPapiru from './gramaz-papiru';
 
 // Těla článků podle slugu (metadata jsou v ../articles.ts)
 export const BODIES: Record<string, ComponentType> = {
@@ -16,4 +17,5 @@ export const BODIES: Record<string, ComponentType> = {
   'tiskova-data': TiskovaData,
   'rgb-vs-cmyk': RgbVsCmyk,
   'formaty-loga': FormatyLoga,
+  'gramaz-papiru': GramazPapiru,
 };

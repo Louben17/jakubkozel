@@ -17,6 +17,36 @@ export type Article = {
 // Poradna – jen metadata (těla článků jsou v ./poradna/*.tsx, ať se nenačítají do podstránek oborů)
 export const ARTICLES: Article[] = [
   {
+    slug: 'gramaz-papiru',
+    title: 'Gramáž papíru: jaký papír na vizitky, letáky, plakáty i knihy',
+    short: 'Gramáž papíru',
+    description:
+      'Co znamená gramáž papíru, jakou gramáž zvolit na vizitky, letáky, brožury, plakáty a knihy a jaký je rozdíl mezi křídovým, ofsetovým a recyklovaným papírem. Přehledná tabulka a tipy z praxe.',
+    lead: '80, 135, nebo 350 g/m²? Lesk, nebo mat? Tabulka gramáží pro běžné tiskoviny a vysvětlení, proč těžší papír není vždycky lepší.',
+    service: 'tiskoviny',
+    published: '2026-10-03',
+    minutes: 6,
+    imageAlt: 'Vějíř vzorků papírů různých barev a povrchů, stohy kartonů a vizitek různé tloušťky a kuchyňská váha s listem papíru',
+    faq: [
+      {
+        q: 'Co znamená gramáž papíru?',
+        a: 'Hmotnost jednoho metru čtverečního papíru v gramech (g/m²). Běžný kancelářský papír má 80 g/m², list A4 tedy váží asi 5 gramů.',
+      },
+      {
+        q: 'Jakou gramáž zvolit na leták?',
+        a: 'Nejčastěji 115–170 g/m² na křídovém papíře. 135 g/m² je univerzální volba, 170 g/m² působí pevněji a hodí se pro letáky, které mají vydržet. Skládané letáky od 170 g/m² je potřeba bigovat.',
+      },
+      {
+        q: 'Jakou gramáž mají vizitky?',
+        a: 'Standard je 300–350 g/m². Od 400 g/m² působí vizitka luxusně a pevně, silnější papíry se často i lepí ze dvou vrstev.',
+      },
+      {
+        q: 'Je vyšší gramáž vždycky lepší?',
+        a: 'Ne. Těžší papír je dražší, zvyšuje poštovné a hůř se skládá. Gramáž volte podle účelu tiskoviny a toho, jak dlouho má vydržet.',
+      },
+    ],
+  },
+  {
     slug: 'formaty-papiru',
     title: 'Formáty papíru A, B, C a DL – rozměry v mm i pixelech',
     short: 'Formáty papíru',

@@ -1,5 +1,18 @@
 import type { ReactNode } from 'react';
+import Image from 'next/image';
 import { mmToPx, num, type Format } from '../paper';
+
+// Fotka v textu článku (soubory public/poradna/<slug>-2.webp, -3.webp)
+export function Photo({ src, alt, caption }: { src: string; alt: string; caption?: string }) {
+  return (
+    <figure className="art-photo">
+      <div className="art-photo-img">
+        <Image src={src} alt={alt} fill sizes="(max-width: 800px) 100vw, 860px" style={{ objectFit: 'cover' }} />
+      </div>
+      {caption && <figcaption>{caption}</figcaption>}
+    </figure>
+  );
+}
 
 // Zvýrazněný tip nebo upozornění v článku
 export function Callout({ title, children }: { title: string; children: ReactNode }) {
