@@ -28,6 +28,7 @@ export const C_FORMATS: Format[] = [
   { name: 'C5', w: 162, h: 229, note: 'obálka na A5 / A4 přeložené napůl' },
   { name: 'C6', w: 114, h: 162, note: 'obálka na A6 / A4 přeložené na čtvrtiny' },
   { name: 'DL', w: 110, h: 220, note: 'obálka na A4 přeložené na třetiny' },
+  { name: 'C6/5', w: 114, h: 229, note: 'větší obálka na A4 přeložené na třetiny' },
 ];
 
 export const OTHER_FORMATS: Format[] = [

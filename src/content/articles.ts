@@ -48,13 +48,14 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: 'formaty-papiru',
-    title: 'Formáty papíru A, B, C a DL – rozměry v mm i pixelech',
+    title: 'Formáty papíru A4, A5, DL a další – rozměry v mm i pixelech',
     short: 'Formáty papíru',
     description:
-      'Přehledná tabulka formátů papíru A0–A8, B0–B6, C4–C6 a DL: rozměry v milimetrech a v pixelech pro 300, 150 i 72 DPI. Kolik pixelů má A4 a jak velký soubor připravit pro tisk.',
-    lead: 'Kolik milimetrů má A5, kolik pixelů potřebujete na plakát A2 a čím se liší B a C. Všechno v jedné tabulce.',
+      'Rozměry formátů papíru A0–A8, B0–B6 a obálek C a DL v mm i pixelech. Formát DL 99 × 210 mm, skládačka A4 do DL (do Z i do C) s interaktivní ukázkou a výkresem.',
+    lead: 'Kolik milimetrů má A5, kolik pixelů má A4 a jaké rozměry má DL leták, obálka i skládačka. Všechno v tabulkách, skládání DL si můžete vyzkoušet.',
     service: 'tiskoviny',
     published: '2026-10-02',
+    updated: '2026-10-04',
     minutes: 4,
     imageAlt: 'Listy papíru od A3 po A7 seřazené podle velikosti, vedle ocelové pravítko a tužka',
     faq: [
@@ -68,7 +69,19 @@ export const ARTICLES: Article[] = [
       },
       {
         q: 'Jaký rozměr má formát DL?',
-        a: 'Obálka DL má 110 × 220 mm. Leták nebo pozvánka ve formátu DL, která se do ní vejde, má 99 × 210 mm, tedy třetinu A4.',
+        a: 'Leták, pozvánka nebo menu ve formátu DL má 99 × 210 mm, tedy třetinu A4. Obálka DL má 110 × 220 mm. Data letáku DL se spadávkou 3 mm mají 105 × 216 mm.',
+      },
+      {
+        q: 'Co znamená zkratka DL?',
+        a: 'DL pochází z německého DIN lang, „dlouhý DIN“. Původně šlo o obálku na list A4 přeložený na třetiny, dnes se tak označují i letáky 99 × 210 mm.',
+      },
+      {
+        q: 'Kolik pixelů má formát DL?',
+        a: 'Při 300 DPI má DL (99 × 210 mm) rozměr 1169 × 2480 px, se spadávkou 3 mm 1240 × 2551 px.',
+      },
+      {
+        q: 'Jaké rozměry mají díly skládačky A4 do DL?',
+        a: 'Při skládání do Z (leporelo) má každý díl 99 mm. Při skládání do C (role) mají díly 100, 100 a 97 mm. Užší díl se zasouvá dovnitř, jinak by se leták v lomu vlnil.',
       },
     ],
   },

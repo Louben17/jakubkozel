@@ -180,3 +180,75 @@
   .checklist li::before { left: 1rem; }
 }
 @media (max-width: 560px) { .art-cards { grid-template-columns: 1fr; } }
+
+/* ---------- 3D skládačka DL ---------- */
+.fold { margin: 1.5rem 0 2rem; padding: clamp(1.1rem, 3vw, 1.75rem); border-radius: 28px; background: var(--bg); line-height: 1.5; }
+.fold-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.fold-toggle { border: none; cursor: pointer; font: inherit; font-weight: 600; background: var(--accent); }
+.fold-stage { perspective: 1800px; padding: clamp(1.5rem, 5vw, 2.75rem) 0 clamp(1.25rem, 4vw, 2.25rem); }
+.fold-sheet {
+  position: relative;
+  width: min(100%, 600px);
+  aspect-ratio: 297 / 210;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  transform: rotateX(16deg);
+  transition: transform 0.9s var(--ease);
+}
+.fold-sheet.is-folded { transform: rotateX(16deg) rotateY(-14deg); }
+.fold-panel { position: absolute; top: 0; height: 100%; transform-style: preserve-3d; transition: transform 0.8s var(--ease); }
+.fold-left { left: 0; width: calc(var(--l) * 100%); transform-origin: right center; }
+.fold-mid { left: calc(var(--l) * 100%); width: calc(var(--m) * 100%); }
+.fold-right { left: calc((var(--l) + var(--m)) * 100%); width: calc(var(--r) * 100%); transform-origin: left center; }
+.fold-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.2rem;
+  padding: 0.5rem;
+  text-align: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(29, 29, 36, 0.08);
+  font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+}
+.fold-face b { font-weight: 800; letter-spacing: -0.01em; }
+.fold-face span { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.fold-face.back { transform: rotateY(180deg); background: var(--accent); color: #fff; }
+.fold-left .front { border-radius: 6px 0 0 6px; }
+.fold-right .front { border-radius: 0 6px 6px 0; }
+.fold-mid .front { background: linear-gradient(90deg, rgba(29, 29, 36, 0.05), transparent 12%, transparent 88%, rgba(29, 29, 36, 0.05)), #fff; }
+/* do Z: levý díl k nám, pravý od nás, současně */
+.fold-z.is-folded .fold-left { transform: translateZ(1px) rotateY(180deg); }
+.fold-z.is-folded .fold-right { transform: translateZ(-1px) rotateY(180deg); }
+/* do C: nejdřív užší záložka, pak titulní díl přes ni (při rozkládání obráceně) */
+.fold-c .fold-right { transition-delay: 0.5s; }
+.fold-c.is-folded .fold-right { transform: translateZ(1px) rotateY(-180deg); transition-delay: 0s; }
+.fold-c.is-folded .fold-left { transform: translateZ(2px) rotateY(180deg); transition-delay: 0.5s; }
+.prose .fold-info { margin: 0 0 1.25rem; font-size: 0.95rem; color: var(--ink-soft); }
+.prose .fold-info strong { color: var(--ink); }
+
+.spec { display: block; width: 100%; max-width: 520px; height: auto; margin: 0 auto; font-family: var(--font-inter), sans-serif; }
+.spec-label { font-size: 19px; font-weight: 800; fill: var(--ink); }
+.spec-bleed { fill: color-mix(in srgb, var(--accent) 35%, #fff); }
+.spec-sheet { fill: #fff; stroke: var(--ink); stroke-width: 1.2; }
+.spec-fold { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 7 5; }
+.spec-safe { fill: none; stroke: #b5b8c4; stroke-width: 1; stroke-dasharray: 3 3; }
+.spec-name { font-size: 17px; font-weight: 700; fill: var(--ink); text-anchor: middle; }
+.spec-mm { font-size: 20px; font-weight: 800; fill: var(--ink-accent, var(--accent)); text-anchor: middle; }
+.fold-scroll { border-radius: 18px; background: #fff; padding: 0.5rem 0; }
+.prose .fold-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.6rem; margin: 0.9rem 0 0; font-size: 0.85rem; color: var(--ink-soft); }
+.fold-legend > span { display: inline-flex; align-items: center; gap: 0.45rem; margin-right: 0.9rem; }
+.fold-legend i { display: inline-block; width: 22px; height: 10px; border-radius: 3px; }
+.lg-fold { border-top: 2px dashed var(--accent); height: 0 !important; }
+.lg-safe { border: 1px dashed #b5b8c4; background: #fff; }
+.lg-bleed { background: color-mix(in srgb, var(--accent) 35%, #fff); border: 1px solid color-mix(in srgb, var(--accent) 45%, #fff); }
+.prose .toc { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 2rem; padding: 0; list-style: none; }
+.prose .toc li { margin: 0; }
+.prose .toc a { display: inline-block; padding: 0.4rem 0.85rem; border-radius: 999px; background: #F4F4F8; font-size: 0.88rem; font-weight: 600; text-decoration: none; }
+.prose .toc a:hover { background: var(--bg); }
+@media (prefers-reduced-motion: reduce) {
+  .fold-panel, .fold-sheet { transition: none; }
+}
