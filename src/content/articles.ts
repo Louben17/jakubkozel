@@ -17,6 +17,36 @@ export type Article = {
 // Poradna – jen metadata (těla článků jsou v ./poradna/*.tsx, ať se nenačítají do podstránek oborů)
 export const ARTICLES: Article[] = [
   {
+    slug: 'graficke-programy',
+    title: 'Grafické programy 2026: co je zdarma, co se vyplatí platit a co umí AI',
+    short: 'Grafické programy',
+    description:
+      'Srovnání grafických programů 2026: Adobe Creative Cloud, Affinity zdarma, Canva, Figma, CorelDRAW, GIMP, Inkscape, Photopea a další. Ceny, AI funkce a interaktivní průvodce výběrem.',
+    lead: 'Photoshop, nebo Affinity zdarma? Canva, nebo Figma? Srovnání placených a bezplatných programů včetně AI funkcí a průvodce, který vám vybere ten pravý.',
+    service: 'grafika',
+    published: '2026-10-05',
+    minutes: 8,
+    imageAlt: 'Pracovní stůl grafika s notebookem a tabletem, na obou rozpracovaný korálový design, vedle pero a vzorník barev',
+    faq: [
+      {
+        q: 'Jaký grafický program je zdarma?',
+        a: 'Nejlepší profesionální program zdarma je dnes Affinity, který spojuje úpravu fotek, vektory i sazbu. Zdarma jsou také Canva (základní verze), GIMP na fotky, Inkscape na vektory, Krita na kreslení a Photopea v prohlížeči.',
+      },
+      {
+        q: 'Je Affinity opravdu zdarma?',
+        a: 'Ano. Od podzimu 2025 je Affinity od Canvy zdarma pro Windows i Mac, včetně profesionálních funkcí. Platí se jen za AI nástroje, které jsou součástí předplatného Canva Pro.',
+      },
+      {
+        q: 'Vyplatí se Adobe Creative Cloud Pro, nebo stačí Standard?',
+        a: 'Standard obsahuje všechny desktopové aplikace a 25 AI kreditů měsíčně, což na občasné použití stačí. Pro se 4 000 kredity se vyplatí, když generativní AI používáte denně nebo pracujete i s videem.',
+      },
+      {
+        q: 'Jaká je nejlepší alternativa k Photoshopu zdarma?',
+        a: 'Pro většinu lidí Affinity. Kdo potřebuje jen rychlou úpravu v prohlížeči, sáhne po Photopee, která otevře i soubory PSD. GIMP je zdarma a open source.',
+      },
+    ],
+  },
+  {
     slug: 'gramaz-papiru',
     title: 'Gramáž papíru: jaký papír na vizitky, letáky, plakáty i knihy',
     short: 'Gramáž papíru',

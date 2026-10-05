@@ -252,3 +252,26 @@
 @media (prefers-reduced-motion: reduce) {
   .fold-panel, .fold-sheet { transition: none; }
 }
+
+/* ---------- průvodce výběrem programu ---------- */
+.prose h3.art-sub { margin: 2rem 0 0.6rem; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.025em; }
+.pg { margin: 1.5rem 0 1rem; padding: clamp(1.1rem, 3vw, 1.75rem); border-radius: 28px; background: var(--bg); line-height: 1.45; }
+.pg-filters { display: grid; gap: 1rem; }
+.pg-filter .calc-seg button { font-size: 0.88rem; padding: 0.45rem 0.8rem; }
+.prose .pg-count { margin: 1.25rem 0 0.75rem; font-size: 0.9rem; font-weight: 600; color: var(--ink-soft); }
+.pg-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.pg-card { padding: 1.15rem 1.25rem; border-radius: 20px; background: #fff; }
+.pg-card header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.4rem 0.75rem; }
+.prose .pg-card h3 { margin: 0; font-size: 1.1rem; font-weight: 800; }
+.pg-tags { display: flex; gap: 0.3rem; }
+.pg-tag { padding: 0.15rem 0.55rem; border-radius: 999px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.02em; }
+.pg-free { background: #DDF5EC; color: #1D7968; }
+.pg-once { background: #E4E8FA; color: #4957C0; }
+.pg-sub { background: #FFEBD6; color: #A3570C; }
+.prose .pg-best { margin: 0.5rem 0 0.75rem; font-size: 0.92rem; color: var(--ink); }
+.pg-card dl { margin: 0; display: grid; gap: 0.45rem; }
+.pg-card dl div { display: grid; grid-template-columns: 4.2rem 1fr; gap: 0.5rem; }
+.pg-card dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); padding-top: 0.15rem; }
+.pg-card dd { margin: 0; font-size: 0.88rem; color: #33343f; }
+.prose .pg-note { font-size: 0.85rem; color: var(--ink-soft); }
+@media (max-width: 640px) { .pg-list { grid-template-columns: 1fr; } }
