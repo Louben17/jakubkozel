@@ -6,7 +6,7 @@ function Swatches() {
   return (
     <figure className="diagram swatches">
       <div>
-        <p className="swatch-label">RGB – světlo z obrazovky</p>
+        <p className="swatch-label">RGB: světlo z obrazovky</p>
         <div className="swatch-row">
           <span style={{ background: '#ff0000' }}>R</span>
           <span style={{ background: '#00ff00', color: '#1d1d24' }}>G</span>
@@ -14,7 +14,7 @@ function Swatches() {
         </div>
       </div>
       <div>
-        <p className="swatch-label">CMYK – inkoust na papíře</p>
+        <p className="swatch-label">CMYK: inkoust na papíře</p>
         <div className="swatch-row">
           <span style={{ background: '#00a0e3', color: '#1d1d24' }}>C</span>
           <span style={{ background: '#e5007e' }}>M</span>
@@ -32,9 +32,9 @@ export default function RgbVsCmyk() {
     <>
       <h2 id="rozdil">Světlo versus inkoust</h2>
       <p>
-        Monitor, telefon i televize barvy <strong>vyzařují</strong>. Skládají je ze tří světel: červeného, zeleného
-        a modrého (<strong>RGB</strong>). Když svítí všechna naplno, vznikne bílá. Papír naopak světlo jen{' '}
-        <strong>odráží</strong> a barvu na něm tvoří inkousty, které část světla pohltí. Tiskárny používají čtyři:
+        Monitor, telefon i televize barvy vyzařují. Skládají je ze tří světel: červeného, zeleného
+        a modrého (<strong>RGB</strong>). Když svítí všechna naplno, vznikne bílá. Papír naopak světlo jen odráží
+        a barvu na něm tvoří inkousty, které část světla pohltí. Tiskárny používají čtyři:
         azurovou, purpurovou, žlutou a černou (<strong>CMYK</strong>). Čím víc inkoustu, tím tmavší výsledek.
       </p>
       <Swatches />

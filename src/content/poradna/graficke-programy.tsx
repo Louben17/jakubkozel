@@ -111,8 +111,8 @@ export default function GrafickeProgramy() {
 
       <h2 id="zdarma">Programy zdarma</h2>
       <p>
-        Největší změna posledních let: <strong>Affinity je zdarma</strong>. Canva, která ho koupila, sloučila Affinity
-        Photo, Designer a Publisher do jedné aplikace pro Windows a Mac a uvolnila ji bez poplatku. Dostanete
+        Affinity je od podzimu 2025 zdarma. Canva, která ho koupila, sloučila Affinity Photo, Designer a Publisher do
+        jedné aplikace pro Windows a Mac a uvolnila ji bez poplatku. Dostanete
         profesionální úpravy fotek, vektorovou grafiku i sazbu s podporou CMYK. Platí se jen za AI nástroje, které jsou
         součástí předplatného Canva Pro.
       </p>
@@ -139,7 +139,7 @@ export default function GrafickeProgramy() {
       <Photo
         src="/poradna/graficke-programy-3.webp"
         alt="Ruka s perem kreslí korálovou ilustraci na tabletu, vedle otevřený skicák s náčrty a pastelky"
-        caption="Na kreslení stačí program za pár stovek, nebo zdarma. Rozhoduje ruka, ne předplatné."
+        caption="Na kreslení stačí Procreate za pár stovek, Krita je dokonce zdarma."
       />
 
       <h2 id="ai">AI funkce: co opravdu pomáhá</h2>
@@ -168,17 +168,14 @@ export default function GrafickeProgramy() {
       />
       <Callout title="Na co si dát u AI pozor">
         <ul>
+          <li>AI funkce se většinou platí kredity. Levnější plány jich mají málo a další se dokupují.</li>
           <li>
-            <strong>Kredity:</strong> AI funkce se většinou platí kredity. Levnější plány jich mají málo a po vyčerpání
-            se dokupují.
+            U loga nebo ilustrace vygenerované AI nemáte jistotu originality ani autorských práv. Značku, kterou chcete
+            chránit, je bezpečnější nechat nakreslit.
           </li>
           <li>
-            <strong>Práva:</strong> u loga nebo ilustrace vygenerované AI nemáte jistotu originality ani autorských práv.
-            Na značku, kterou chcete chránit, je bezpečnější autorská práce.
-          </li>
-          <li>
-            <strong>Kvalita:</strong> AI dělá přesvědčivé detaily, ale nerozumí vaší značce ani tiskovým datům. Výstup
-            je potřeba zkontrolovat a doladit.
+            AI umí přesvědčivé detaily, ale o vaší značce ani o tiskových datech nic neví. Výstup je potřeba zkontrolovat
+            a doladit.
           </li>
         </ul>
       </Callout>

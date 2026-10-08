@@ -44,7 +44,7 @@ export default function About() {
             transition={{ delay: 0.8, duration: 0.7, ease: EASE }}
           >
             Grafickému designu se věnuji více než 10 let. Navrhuji loga a vizuální identity, sázím knihy a katalogy,
-            stavím weby a připravuji tiskoviny — od první skici až po hotová data pro tiskárnu.
+            stavím weby a připravuji tiskoviny, od první skici až po hotová data pro tiskárnu.
           </motion.p>
           <motion.div
             className="about-actions"
@@ -105,7 +105,7 @@ export default function About() {
           {[
             'Začínal jsem jako freelancer a postupně jsem si vybudoval portfolio klientů od malých podniků až po větší společnosti.',
             'Specializuji se na kompletní vizuální identity, moderní weby a precizní DTP sazbu. Ke každému projektu přistupuji s důrazem na detail a funkčnost.',
-            'Věřím, že design má pomáhat komunikovat správné poselství. Proto začínám tím, že poslouchám — a teprve pak kreslím.',
+            'Věřím, že design má pomáhat sdělit to správné. Proto nejdřív poslouchám a kreslit začínám až potom.',
           ].map((t, i) => (
             <motion.p
               key={i}

@@ -97,7 +97,7 @@ export default function RozmerVizitky() {
 
       <h2 id="obsah">Co na vizitku napsat</h2>
       <p>
-        Méně je víc. Jméno, pozice, telefon, e-mail a web. Adresu jen tehdy, když za vámi lidé opravdu chodí. Na rub
+        Stačí jméno, pozice, telefon, e-mail a web. Adresu jen tehdy, když za vámi lidé opravdu chodí. Na rub
         se hodí logo nebo QR kód, třeba na váš web nebo s kontaktem ve formátu vCard. Text pod 7 bodů už je na vizitce
         špatně čitelný.
       </p>

@@ -72,8 +72,8 @@ export default function TiskovaData() {
     <>
       <p>
         Tiskárna vám data skoro vždy zkontroluje (preflight) a s chybou je vrátí. To ale znamená zdržení a někdy
-        i příplatek za opravu. Horší je, když se chyba nenajde a projeví se až na hotových výtiscích. Následující
-        seznam pokrývá naprostou většinu problémů, které v praxi vidím.
+        i příplatek za opravu. Horší je, když se chyba nenajde a projeví se až na hotových výtiscích. Skoro všechny
+        chyby, které v praxi vidím, spadají do těchto deseti bodů.
       </p>
 
       <h2 id="checklist">Checklist tiskových dat</h2>

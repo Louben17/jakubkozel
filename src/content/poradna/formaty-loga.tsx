@@ -82,8 +82,8 @@ export default function FormatyLoga() {
 
       <Callout title="Máte logo jen jako obrázek?">
         <p>
-          Častá situace: logo existuje jen jako JPG z webu nebo z dokumentu. Do tisku nebo na velkou plochu se pak nedá
-          kvalitně použít. Řešením je překreslení do vektoru. Logo vypadá stejně, ale je ostré v jakékoli velikosti
+          Logo často existuje jen jako JPG z webu nebo z dokumentu a do tisku nebo na velkou plochu se pak nedá
+          kvalitně použít. Pomůže překreslení do vektoru. Logo vypadá stejně, ale je ostré v jakékoli velikosti
           a dostanete ho ve všech formátech z tabulky výše. S tím vám rád pomůžu.
         </p>
       </Callout>

@@ -1,0 +1,592 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-08T06:13:27.777802+00:00",
+  "title": "Design System: Jakub Kozel",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Grafitová noc",
+        "canonical": "#1d1d24",
+        "tonalRamp": [
+          "#22222A",
+          "#3B3B49",
+          "#545469",
+          "#6D6D88",
+          "#8B8BA2",
+          "#AAAABB",
+          "#CCCCD6",
+          "#F1F1F4"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Břidlicová šeď",
+        "canonical": "#5d6070",
+        "tonalRamp": [
+          "#23242A",
+          "#3C3E48",
+          "#565867",
+          "#6F7386",
+          "#8D90A0",
+          "#ABAEBA",
+          "#CDCED5",
+          "#F1F1F3"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Bílý papír",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#262626",
+          "#424242",
+          "#5E5E5E",
+          "#7A7A7A",
+          "#969696",
+          "#B2B2B2",
+          "#D1D1D1",
+          "#F2F2F2"
+        ]
+      },
+      "paper-mist": {
+        "role": "neutral",
+        "displayName": "Mlhový papír",
+        "canonical": "#F4F4F8",
+        "tonalRamp": [
+          "#1E1E2F",
+          "#343451",
+          "#494973",
+          "#5F5F96",
+          "#7F7FAE",
+          "#A2A2C3",
+          "#C7C7DB",
+          "#EFEFF5"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Vlasová linka",
+        "canonical": "#ececf0",
+        "tonalRamp": [
+          "#22222B",
+          "#3B3B4A",
+          "#535369",
+          "#6C6C89",
+          "#8A8AA3",
+          "#AAAABB",
+          "#CCCCD6",
+          "#F1F1F4"
+        ]
+      },
+      "coral": {
+        "role": "primary",
+        "displayName": "Korálový inkoust",
+        "canonical": "#FF6B73",
+        "tonalRamp": [
+          "#4C0004",
+          "#850007",
+          "#BD000A",
+          "#F5000D",
+          "#FF2E39",
+          "#FF666E",
+          "#FFA3A8",
+          "#FFE5E7"
+        ]
+      },
+      "teal": {
+        "role": "secondary",
+        "displayName": "Tyrkysová",
+        "canonical": "#4ECDC4",
+        "tonalRamp": [
+          "#113C39",
+          "#1D6762",
+          "#2A938C",
+          "#36BFB5",
+          "#5CD1C9",
+          "#88DDD7",
+          "#B7EBE7",
+          "#EBF9F8"
+        ]
+      },
+      "gradient-coral": {
+        "role": "secondary",
+        "displayName": "Přechod – korál",
+        "canonical": "hsl(357 88% 70%)",
+        "tonalRamp": [
+          "#480408",
+          "#7D080E",
+          "#B20B14",
+          "#E60E1A",
+          "#F33A44",
+          "#F66F76",
+          "#FAA9AD",
+          "#FEE7E8"
+        ]
+      },
+      "gradient-orchid": {
+        "role": "secondary",
+        "displayName": "Přechod – orchidej",
+        "canonical": "hsl(297 78% 66%)",
+        "tonalRamp": [
+          "#410844",
+          "#710F76",
+          "#A115A8",
+          "#D11BDA",
+          "#E145E8",
+          "#E977EE",
+          "#F2ADF5",
+          "#FBE8FC"
+        ]
+      },
+      "gradient-indigo": {
+        "role": "secondary",
+        "displayName": "Přechod – indigo",
+        "canonical": "hsl(236 68% 62%)",
+        "tonalRamp": [
+          "#0C0F40",
+          "#15196F",
+          "#1E249F",
+          "#272FCE",
+          "#4F56DE",
+          "#7E83E7",
+          "#B2B5F0",
+          "#EAEAFB"
+        ]
+      },
+      "gradient-aqua": {
+        "role": "secondary",
+        "displayName": "Přechod – akvamarín",
+        "canonical": "hsl(176 58% 58%)",
+        "tonalRamp": [
+          "#103C3A",
+          "#1C6964",
+          "#28958E",
+          "#33C1B8",
+          "#5AD3CB",
+          "#86DFD9",
+          "#B7ECE8",
+          "#EBFAF9"
+        ]
+      },
+      "grafika-paper": {
+        "role": "tertiary",
+        "displayName": "Růžový papír",
+        "canonical": "#FFE3E0",
+        "tonalRamp": [
+          "#4C0700",
+          "#850D00",
+          "#BD1200",
+          "#F51800",
+          "#FF422E",
+          "#FF7566",
+          "#FFACA3",
+          "#FFE8E5"
+        ]
+      },
+      "grafika-accent": {
+        "role": "tertiary",
+        "displayName": "Korál",
+        "canonical": "#FF6B73",
+        "tonalRamp": [
+          "#4C0004",
+          "#850007",
+          "#BD000A",
+          "#F5000D",
+          "#FF2E39",
+          "#FF666E",
+          "#FFA3A8",
+          "#FFE5E7"
+        ]
+      },
+      "grafika-ink": {
+        "role": "tertiary",
+        "displayName": "Malinový inkoust",
+        "canonical": "#B8313B",
+        "tonalRamp": [
+          "#3C1013",
+          "#691C22",
+          "#952830",
+          "#C1333E",
+          "#D35A63",
+          "#DF868D",
+          "#ECB7BA",
+          "#FAEBEC"
+        ]
+      },
+      "dtp-paper": {
+        "role": "tertiary",
+        "displayName": "Levandulový papír",
+        "canonical": "#E4E8FA",
+        "tonalRamp": [
+          "#0C1641",
+          "#152570",
+          "#1D359F",
+          "#2645CF",
+          "#4F69DE",
+          "#7E91E7",
+          "#B2BDF1",
+          "#E9EDFB"
+        ]
+      },
+      "dtp-accent": {
+        "role": "tertiary",
+        "displayName": "Barvínek",
+        "canonical": "#6C7BD0",
+        "tonalRamp": [
+          "#13183A",
+          "#202A64",
+          "#2E3C8F",
+          "#3B4EB9",
+          "#6171CC",
+          "#8B97DA",
+          "#B9C1E9",
+          "#ECEEF9"
+        ]
+      },
+      "dtp-ink": {
+        "role": "tertiary",
+        "displayName": "Indigový inkoust",
+        "canonical": "#4957C0",
+        "tonalRamp": [
+          "#141839",
+          "#222A63",
+          "#313B8C",
+          "#3F4DB6",
+          "#6470C9",
+          "#8D96D8",
+          "#BBC0E7",
+          "#ECEEF8"
+        ]
+      },
+      "dtp-button": {
+        "role": "tertiary",
+        "displayName": "Světlý barvínek",
+        "canonical": "#8591DE",
+        "tonalRamp": [
+          "#10163C",
+          "#1C2668",
+          "#283795",
+          "#3447C1",
+          "#5A6BD2",
+          "#8792DE",
+          "#B7BEEB",
+          "#EBEDFA"
+        ]
+      },
+      "web-paper": {
+        "role": "tertiary",
+        "displayName": "Mátový papír",
+        "canonical": "#DDF5EC",
+        "tonalRamp": [
+          "#113B2B",
+          "#1E664B",
+          "#2B926B",
+          "#38BD8B",
+          "#5DCFA5",
+          "#89DCBD",
+          "#B8EAD7",
+          "#EBF9F4"
+        ]
+      },
+      "web-accent": {
+        "role": "tertiary",
+        "displayName": "Nefrit",
+        "canonical": "#2BB39A",
+        "tonalRamp": [
+          "#0F3E35",
+          "#1A6B5C",
+          "#259883",
+          "#2FC5AA",
+          "#56D6BF",
+          "#84E1D0",
+          "#B5EDE3",
+          "#EAFAF7"
+        ]
+      },
+      "web-ink": {
+        "role": "tertiary",
+        "displayName": "Lahvově zelený inkoust",
+        "canonical": "#1D7968",
+        "tonalRamp": [
+          "#0F3E35",
+          "#1A6B5C",
+          "#249883",
+          "#2FC5AA",
+          "#56D7BF",
+          "#84E1D0",
+          "#B5EDE3",
+          "#EAFAF7"
+        ]
+      },
+      "print-paper": {
+        "role": "tertiary",
+        "displayName": "Meruňkový papír",
+        "canonical": "#FFEBD6",
+        "tonalRamp": [
+          "#4C2700",
+          "#854400",
+          "#BD6100",
+          "#F57D00",
+          "#FF992E",
+          "#FFB466",
+          "#FFD2A3",
+          "#FFF3E5"
+        ]
+      },
+      "print-accent": {
+        "role": "tertiary",
+        "displayName": "Pomeranč",
+        "canonical": "#F29E4C",
+        "tonalRamp": [
+          "#472605",
+          "#7C4209",
+          "#B05D0D",
+          "#E47911",
+          "#F1953C",
+          "#F5B270",
+          "#F9D1A9",
+          "#FDF2E7"
+        ]
+      },
+      "print-ink": {
+        "role": "tertiary",
+        "displayName": "Karamelový inkoust",
+        "canonical": "#A3570C",
+        "tonalRamp": [
+          "#472605",
+          "#7C4209",
+          "#B05E0D",
+          "#E47A11",
+          "#F1963C",
+          "#F5B270",
+          "#F9D1A9",
+          "#FDF2E7"
+        ]
+      },
+      "about-accent": {
+        "role": "tertiary",
+        "displayName": "Orchidej",
+        "canonical": "#B872D6",
+        "tonalRamp": [
+          "#2F113B",
+          "#511E67",
+          "#732B92",
+          "#9537BE",
+          "#AD5DD0",
+          "#C388DD",
+          "#DBB8EA",
+          "#F5EBF9"
+        ]
+      },
+      "poradna-accent": {
+        "role": "tertiary",
+        "displayName": "Růžová pivoňka",
+        "canonical": "#E58AC8",
+        "tonalRamp": [
+          "#3F0E2F",
+          "#6C1852",
+          "#9A2274",
+          "#C82D97",
+          "#D954AF",
+          "#E382C4",
+          "#EEB4DC",
+          "#FAEAF5"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Závěrečná výzva, titulky kontaktu a O mně, často animované po písmenech."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Nadpisy sekcí; titulky oborů a článků ve větších či menších variantách."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Dlaždice, karty článků, otázky FAQ."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Text; v článcích čtecí sloupec 760 px."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Štítky nad sekcemi a záhlaví tabulek, verzálky."
+      }
+    },
+    "shadows": [
+      {
+        "name": "hover-lift",
+        "value": "0 10px 24px -10px rgba(0,0,0,0.35)",
+        "purpose": "Tlačítka oborů při hoveru spolu s posunem o -2 px."
+      },
+      {
+        "name": "floating-bar",
+        "value": "0 10px 30px -18px rgba(30,30,50,0.35)",
+        "purpose": "Menu po odscrollování."
+      },
+      {
+        "name": "stacked-sheet",
+        "value": "0 -10px 40px -20px rgba(30,30,50,0.25)",
+        "purpose": "Karty oborů ve stohu."
+      },
+      {
+        "name": "floating-dialog",
+        "value": "0 24px 60px -24px rgba(30,30,50,0.45)",
+        "purpose": "Cookie lišta."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-paper",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Výchozí exponenciální dojezd všech přechodů a animací."
+      },
+      {
+        "name": "signature-draw",
+        "value": "1.4s ease-out stroke-dashoffset, výplň od 1.1 s",
+        "purpose": "Kreslení podpisu jednou za návštěvu."
+      },
+      {
+        "name": "fold",
+        "value": "0.8s ease-paper, druhý díl se zpožděním 0.5 s",
+        "purpose": "3D skládačka DL."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "560px"
+      },
+      {
+        "name": "md",
+        "value": "860px"
+      },
+      {
+        "name": "lg",
+        "value": "960px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Tmavá pilulka – Kontakt v menu, hlavní akce.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Kontakt <span aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.25rem;border-radius:999px;background:#1d1d24;color:#fff;font-family:Inter, -apple-system, BlinkMacSystemFont, sans-serif;font-size:.95rem;font-weight:600;text-decoration:none;transition:box-shadow .25s ease} .ds-btn-primary span{transition:transform .25s ease} .ds-btn-primary:hover{box-shadow:0 10px 24px -12px rgba(29,29,36,.6)} .ds-btn-primary:hover span{transform:translateX(3px)} .ds-btn-primary:focus-visible{outline:2px solid #FF6B73;outline-offset:3px}"
+    },
+    {
+      "name": "Service Button",
+      "kind": "button",
+      "refersTo": "button-service",
+      "description": "Pilulka v akcentu oboru s tmavým textem – „Nezávazně poptat“.",
+      "html": "<a class=\"ds-btn-service\" href=\"#\">Nezávazně poptat <span aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-btn-service{display:inline-flex;align-items:center;gap:.6rem;padding:.8rem 1.4rem;border-radius:999px;background:#F29E4C;color:#1d1d24;font-family:Inter, -apple-system, BlinkMacSystemFont, sans-serif;font-weight:600;font-size:.95rem;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease} .ds-btn-service span{transition:transform .25s ease} .ds-btn-service:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(0,0,0,.35)} .ds-btn-service:hover span{transform:translateX(4px)} .ds-btn-service:focus-visible{outline:2px solid #FF6B73;outline-offset:3px}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Poloprůhledná bílá pilulka na pastelovém papíru oboru.",
+      "html": "<div class=\"ds-ghost-wrap\"><a class=\"ds-btn-ghost\" href=\"#\">Co přesně dělám</a></div>",
+      "css": ".ds-ghost-wrap{background:#FFEBD6;padding:1.5rem;border-radius:24px} .ds-btn-ghost{display:inline-flex;padding:.8rem 1.4rem;border-radius:999px;background:rgba(255,255,255,.7);color:#1d1d24;font-family:Inter, -apple-system, BlinkMacSystemFont, sans-serif;font-weight:600;font-size:.95rem;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease} .ds-btn-ghost:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(0,0,0,.35)} .ds-btn-ghost:focus-visible{outline:2px solid #FF6B73;outline-offset:3px}"
+    },
+    {
+      "name": "Service Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Štítek položky oboru s obrysem v akcentu.",
+      "html": "<ul class=\"ds-chips\"><li>Vizitky</li><li>Letáky</li><li>Plakáty</li></ul>",
+      "css": ".ds-chips{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;padding:1rem;margin:0;background:#FFEBD6;border-radius:24px} .ds-chips li{font-family:Inter, -apple-system, BlinkMacSystemFont, sans-serif;font-size:.9rem;font-weight:500;padding:.4rem .9rem;border-radius:999px;border:1px solid #F29E4C;background:rgba(255,255,255,.6);color:#1d1d24}"
+    },
+    {
+      "name": "Tile Card",
+      "kind": "card",
+      "refersTo": "card-tile",
+      "description": "Dlaždice nabídky – Mlhový papír, při hoveru papír oboru a zvednutí.",
+      "html": "<article class=\"ds-tile\"><span class=\"ds-tile-icon\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"6\" width=\"18\" height=\"12\" rx=\"2\"/><path d=\"M7 10h6M7 14h4\"/></svg></span><h3>Vizitky</h3><p>Vizitky, které se neztratí v šuplíku.</p></article>",
+      "css": ".ds-tile{padding:1.75rem;border-radius:24px;background:#F4F4F8;font-family:Inter, -apple-system, BlinkMacSystemFont, sans-serif;color:#1d1d24;transition:background .3s ease,transform .3s cubic-bezier(.22,1,.36,1)} .ds-tile:hover{background:#FFEBD6;transform:translateY(-4px)} .ds-tile-icon{display:inline-grid;place-items:center;width:3rem;height:3rem;border-radius:16px;background:#F29E4C;color:#fff} .ds-tile h3{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;margin:1.25rem 0 .4rem} .ds-tile p{margin:0;color:#5d6070;line-height:1.55}"
+    },
+    {
+      "name": "Dark Input",
+      "kind": "input",
+      "refersTo": "input-dark",
+      "description": "Pole poptávkového formuláře na tmavé desce.",
+      "html": "<div class=\"ds-dark\"><label class=\"ds-field\"><span>Jméno *</span><input placeholder=\"Jan Novák\"></label></div>",
+      "css": ".ds-dark{background:#1d1d24;padding:1.5rem;border-radius:24px} .ds-field{display:grid;gap:.5rem;font-family:Inter, -apple-system, BlinkMacSystemFont, sans-serif} .ds-field span{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)} .ds-field input{padding:.95rem 1.1rem;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:1rem;caret-color:#FF6B73;transition:border-color .25s ease,background .25s ease} .ds-field input::placeholder{color:rgba(255,255,255,.5)} .ds-field input:focus{outline:none;border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.1)}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Pilulková lišta: podpis, obory s tečkou aktivního oboru, tmavý Kontakt.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-logo\">jakub kozel</span><a class=\"ds-link is-active\" href=\"#\">Grafika</a><a class=\"ds-link\" href=\"#\">DTP</a><a class=\"ds-link\" href=\"#\">Poradna</a><a class=\"ds-cta\" href=\"#\">Kontakt →</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:.25rem;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(255,255,255,.8);backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(29,29,36,.06);box-shadow:0 10px 30px -18px rgba(30,30,50,.35);font-family:Inter, -apple-system, BlinkMacSystemFont, sans-serif} .ds-logo{margin-right:auto;font-weight:800;font-style:italic;background:linear-gradient(100deg,hsl(357 88% 70%),hsl(297 78% 66%) 35%,hsl(236 68% 62%) 68%,hsl(176 58% 58%));-webkit-background-clip:text;background-clip:text;color:transparent} .ds-link{position:relative;padding:.6rem .95rem;border-radius:999px;color:#1d1d24;font-size:.95rem;font-weight:500;text-decoration:none;transition:background .25s ease} .ds-link:hover{background:rgba(29,29,36,.05)} .ds-link.is-active{font-weight:700} .ds-link.is-active::after{content:\"\";position:absolute;left:50%;bottom:2px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#FF6B73} .ds-cta{margin-left:.5rem;padding:.7rem 1.25rem;border-radius:999px;background:#1d1d24;color:#fff;font-weight:600;font-size:.95rem;text-decoration:none}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Živý papír",
+    "overview": "Web se chová jako papír, který ožívá pod rukama grafika. Podpis se na úvodu kreslí tahem pera, karty oborů se při scrollu vrší jako archy na stole, skládačka DL se v Poradně skutečně složí a ořezové značky rámují úvod jako tiskový arch. Pohyb nikdy není ozdoba pro sebe. Vždy předvádí něco, co se s papírem v tiskárně opravdu děje.\n\nNálada je **hravá** a komponenty **sebevědomé a výrazné**. Velké, těžké nadpisy v Inter Extra Bold se staženými mezerami, plné pastelové plochy oborů, tlačítka jako barevné pilulky a každá stránka končí tmavou „finální“ deskou. Bílý papír nese obsah, barva patří oborům a přechod značky (korálová, orchidejová, indigová, tyrkysová) je podpis. Objevuje se střídmě, ale vždy viditelně.\n\nHustota je velkorysá: široké sekce, hodně vzduchu nad nadpisy, obsah v kontejneru 1200 px. V Poradně se tempo zklidní do čtecího sloupce 760 px s tabulkami a interaktivními nástroji.",
+    "keyCharacteristics": [
+      "Ručně psaný podpis jako logo a hlavní moment pohybu (kreslí se jednou za návštěvu)",
+      "Čtyři obory = čtyři barevné papíry (pastelová plocha, sytý akcent, tmavý inkoust)",
+      "Přechod značky jen pro podpis a jednu zdůrazněnou frázi",
+      "Pilulková tlačítka, zaoblené desky 24–32 px",
+      "Tmavá závěrečná deska s výzvou na konci každé stránky",
+      "Česká typografie: vlna, tabulková čísla, správné uvozovky"
+    ],
+    "rules": [
+      {
+        "name": "The Four Papers Rule",
+        "body": "Každá plocha patří jednomu oboru a používá jen jeho trojici papír, akcent a inkoust. Barvy dvou oborů se v jedné kartě nikdy nemíchají. Neutrální obsah (Poradna, FAQ) stojí na Mlhovém papíru a barvu oboru dostane až při hoveru.",
+        "section": "colors"
+      },
+      {
+        "name": "The Signature Gradient Rule",
+        "body": "Přechod značky je podpis, ne výplň. Na jedné obrazovce se objeví nejvýš jednou nebo dvakrát: logo nebo podpis a jedna fráze či číslo. Nikdy ne na odstavcovém textu, tlačítku ani pozadí karty.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink-On-Pastel Rule",
+        "body": "Text na pastelovém papíře je vždy Grafitová noc nebo inkoust oboru, nikdy šedá. Kontrast aspoň 4,5:1.",
+        "section": "colors"
+      },
+      {
+        "name": "The Heavy Headline Rule",
+        "body": "Nadpisy jsou vždy 800 se staženým prostrkáním (-0.03 až -0.05em) a `text-wrap: balance`. Střední tloušťky do nadpisů nepatří, hierarchii nese velikost.",
+        "section": "typography"
+      },
+      {
+        "name": "The Czech Typesetter Rule",
+        "body": "Jednopísmenné předložky a spojky se nikdy nezalomí na konec řádku (komponenta `Vlna`). Čísla v tabulkách a měřidlech jsou tabulková (`font-variant-numeric: tabular-nums`), rozměry se píší s mezerou a znakem × („99 × 210 mm“).",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-Until-Touched Rule",
+        "body": "Plochy jsou v klidu ploché. Stín nebo posun přichází až s hoverem, scrollem nebo vrstvením. Nikdy barevná záře bez posunu.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do dávej každé nové ploše jeden obor a jeho trojici papír / akcent / inkoust (The Four Papers Rule).",
+      "Do používej nadpisy 800 s prostrkáním -0.03 až -0.05em a `text-wrap: balance`.",
+      "Do dělej klikací prvky jako pilulky (999px) a obsahové kontejnery jako desky (24–32px).",
+      "Do animuj jako papír: kreslení, skládání, vrstvení, ořez. Easing `cubic-bezier(0.22, 1, 0.36, 1)`, vždy s variantou pro omezený pohyb.",
+      "Do končí stránku tmavou deskou s výzvou a kontaktem.",
+      "Do dodržuj českou sazbu: vlna, tabulková čísla, „99 × 210 mm“, uvozovky „…“."
+    ],
+    "donts": [
+      "Don't používej přechod značky na odstavcích, tlačítkách nebo pozadích karet. Patří jen podpisu a jedné frázi.",
+      "Don't dávej šedý text na pastelový papír. Použij inkoust oboru nebo Grafitovou noc.",
+      "Don't míchej barvy dvou oborů v jedné kartě.",
+      "Don't přidávej stíny bez posunu ani barevné záře. Hloubka vzniká tónem a reakcí na dotyk.",
+      "Don't přehrávej kreslení podpisu znovu během jedné návštěvy.",
+      "Don't používej ostré rohy mimo tiskové výkresy a tabulky."
+    ]
+  }
+}

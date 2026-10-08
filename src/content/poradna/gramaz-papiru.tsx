@@ -6,9 +6,9 @@ const USES: { use: string; weight: string; paper: string }[] = [
   { use: 'Letáky', weight: '115–170 g/m²', paper: 'křídový matný nebo lesklý' },
   { use: 'Skládačky (zalomené letáky)', weight: '135–170 g/m²', paper: 'křídový, od 170 g/m² bigovat' },
   { use: 'Plakáty do interiéru', weight: '135–170 g/m²', paper: 'křídový, často lesklý' },
-  { use: 'Brožury a katalogy – vnitřek', weight: '115–150 g/m²', paper: 'křídový matný' },
-  { use: 'Brožury a katalogy – obálka', weight: '250–300 g/m²', paper: 'křídový, ideálně s laminací' },
-  { use: 'Knihy – vnitřek', weight: '80–100 g/m²', paper: 'ofsetový nebo objemový' },
+  { use: 'Brožury a katalogy (vnitřek)', weight: '115–150 g/m²', paper: 'křídový matný' },
+  { use: 'Brožury a katalogy (obálka)', weight: '250–300 g/m²', paper: 'křídový, ideálně s laminací' },
+  { use: 'Knihy (vnitřek)', weight: '80–100 g/m²', paper: 'ofsetový nebo objemový' },
   { use: 'Pohlednice, pozvánky', weight: '300–350 g/m²', paper: 'křídový nebo strukturovaný' },
   { use: 'Vizitky', weight: '300–400 g/m²', paper: 'křídový matný, přírodní, designový' },
   { use: 'Krabičky, visačky, obaly', weight: '300–400 g/m²', paper: 'kartón' },
@@ -19,7 +19,7 @@ export default function GramazPapiru() {
     <>
       <h2 id="co-je">Co je gramáž</h2>
       <p>
-        Gramáž udává, kolik váží <strong>jeden metr čtvereční</strong> papíru, a zapisuje se v g/m². Běžný kancelářský
+        Gramáž udává, kolik váží jeden metr čtvereční papíru, a zapisuje se v g/m². Běžný kancelářský
         papír má 80 g/m². List A4 je šestnáctina metru čtverečního, takže váží zhruba 5 gramů. Vizitka na papíře
         350 g/m² je na stejné ploše víc než čtyřikrát těžší.
       </p>

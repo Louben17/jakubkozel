@@ -78,7 +78,7 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: 'formaty-papiru',
-    title: 'Formáty papíru A4, A5, DL a další – rozměry v mm i pixelech',
+    title: 'Formáty papíru A4, A5, DL a další: rozměry v mm i pixelech',
     short: 'Formáty papíru',
     description:
       'Rozměry formátů papíru A0–A8, B0–B6 a obálek C a DL v mm i pixelech. Formát DL 99 × 210 mm, skládačka A4 do DL (do Z i do C) s interaktivní ukázkou a výkresem.',
@@ -117,7 +117,7 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: 'prevod-px-na-mm',
-    title: 'Převod pixelů na milimetry a zpět – kalkulačka px / mm s DPI',
+    title: 'Převod pixelů na milimetry a zpět: kalkulačka px / mm s DPI',
     short: 'Převod px na mm',
     description:
       'Online kalkulačka pro převod pixelů na milimetry, centimetry a palce a zpět. Zjistěte, kolik pixelů potřebujete pro tisk při 300 DPI a jak velký obrázek se dá kvalitně vytisknout.',

@@ -54,7 +54,7 @@ export default function Spadavka() {
 
       <h2 id="bezpecny-okraj">Bezpečný okraj</h2>
       <p>
-        Opačná strana téže mince. Stejně jako může řez ujet ven, může ujet i dovnitř. Texty, loga, čísla stránek a
+        Řez může ujet ven i dovnitř. Texty, loga, čísla stránek a
         QR kódy proto držte aspoň 3–5 mm od hrany čistého formátu. U brožur s vazbou V1 (sešité skobami) počítejte
         s větším okrajem, vnitřní listy se při ořezu mírně posouvají.
       </p>

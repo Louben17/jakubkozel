@@ -47,12 +47,12 @@ export const SERVICES: Service[] = [
     button: '#FF6B73',
     Anim: GrafikaAnim,
     tiles: [
-      { title: 'Loga', description: 'Unikátní loga, která zanechají dojem.', icon: <FaPenNib /> },
-      { title: 'Vizuální identity', description: 'Kompletní branding pro vaši značku.', icon: <FaPalette /> },
+      { title: 'Loga', description: 'Návrh loga od první skici po hotové soubory.', icon: <FaPenNib /> },
+      { title: 'Vizuální identity', description: 'Logo, barvy, písma a pravidla, jak je používat.', icon: <FaPalette /> },
       { title: 'Firemní tiskoviny', description: 'Vizitky, hlavičkové papíry a další.', icon: <FaFileAlt /> },
-      { title: 'Plakáty', description: 'Poutavé plakáty pro akce i kampaně.', icon: <FaBullhorn /> },
-      { title: 'Print design', description: 'Kvalitní tiskoviny na míru.', icon: <FaPrint /> },
-      { title: 'Katalogy', description: 'Profesionální katalogy a brožury.', icon: <FaBook /> },
+      { title: 'Plakáty', description: 'Plakáty na akce a kampaně.', icon: <FaBullhorn /> },
+      { title: 'Print design', description: 'Tiskoviny navržené na míru a připravené pro tiskárnu.', icon: <FaPrint /> },
+      { title: 'Katalogy', description: 'Katalogy a brožury.', icon: <FaBook /> },
     ],
     gallery: [
       {
@@ -95,7 +95,7 @@ export const SERVICES: Service[] = [
     no: '02',
     label: 'DTP',
     title: 'DTP & sazba',
-    lead: 'Knihy, časopisy a katalogy sázené s citem pro typografii — připravené přesně pro tiskárnu.',
+    lead: 'Knihy, časopisy a katalogy sázené s citem pro typografii a připravené přesně pro tiskárnu.',
     items: ['Sazba knih', 'Časopisy', 'Katalogy', 'Výroční zprávy'],
     href: '/dtp',
     cta: 'Více o DTP',
@@ -105,12 +105,12 @@ export const SERVICES: Service[] = [
     button: '#8591DE',
     Anim: DtpAnim,
     tiles: [
-      { title: 'Sazba knih', description: 'Profesionální sazba knih s důrazem na typografii.', icon: <FaBook /> },
-      { title: 'Časopisy', description: 'Kompletní sazba časopisů a periodik.', icon: <FaNewspaper /> },
-      { title: 'Katalogy', description: 'Atraktivní katalogy produktů a služeb.', icon: <FaLayerGroup /> },
+      { title: 'Sazba knih', description: 'Sazba knih s pečlivou typografií.', icon: <FaBook /> },
+      { title: 'Časopisy', description: 'Sazba časopisů a dalších periodik.', icon: <FaNewspaper /> },
+      { title: 'Katalogy', description: 'Katalogy produktů a služeb.', icon: <FaLayerGroup /> },
       { title: 'Brožury', description: 'Informační brožury a prezentační materiály.', icon: <FaFileAlt /> },
-      { title: 'Výroční zprávy', description: 'Reprezentativní zpracování výročních zpráv.', icon: <FaPrint /> },
-      { title: 'Typografie', description: 'Odborná úprava textu a typografické řešení.', icon: <FaFont /> },
+      { title: 'Výroční zprávy', description: 'Grafika a sazba výročních zpráv.', icon: <FaPrint /> },
+      { title: 'Typografie', description: 'Úprava textu podle pravidel české sazby.', icon: <FaFont /> },
     ],
     gallery: [
       {
@@ -132,11 +132,11 @@ export const SERVICES: Service[] = [
     faq: [
       {
         q: 'V jakém formátu mám dodat texty a obrázky?',
-        a: 'Texty stačí ve Wordu nebo Google Docs, obrázky v co nejvyšším rozlišení – ideálně originály z fotoaparátu nebo od fotografa. Když si nejste jistí, pošlete, co máte, a domluvíme se.',
+        a: 'Texty stačí ve Wordu nebo Google Docs, obrázky v co nejvyšším rozlišení, ideálně originály z fotoaparátu nebo od fotografa. Když si nejste jistí, pošlete, co máte, a domluvíme se.',
       },
       {
         q: 'Připravíte data přímo pro tiskárnu?',
-        a: 'Ano. Připravím tiskové PDF podle požadavků konkrétní tiskárny – se spadávkou, ořezovými značkami a správně převedenými barvami.',
+        a: 'Ano. Připravím tiskové PDF podle požadavků konkrétní tiskárny, se spadávkou, ořezovými značkami a správně převedenými barvami.',
       },
       {
         q: 'Co když je potřeba text upravit až po sazbě?',
@@ -153,7 +153,7 @@ export const SERVICES: Service[] = [
     no: '03',
     label: 'Weby',
     title: 'Stavba webů',
-    lead: 'Rychlé, moderní a responzivní weby, které dobře vypadají na mobilu i na monitoru.',
+    lead: 'Rychlé weby, které dobře vypadají a fungují na mobilu i na monitoru.',
     items: ['Responzivní weby', 'UI/UX design', 'E-shopy', 'SEO'],
     href: '/webdesign',
     cta: 'Více o webech',
@@ -163,12 +163,12 @@ export const SERVICES: Service[] = [
     button: '#2BB39A',
     Anim: WebAnim,
     tiles: [
-      { title: 'Responzivní weby', description: 'Weby, které perfektně fungují na všech zařízeních.', icon: <FaLaptopCode /> },
-      { title: 'UI/UX design', description: 'Intuitivní rozhraní zaměřené na uživatele.', icon: <FaUsers /> },
-      { title: 'E-commerce', description: 'Online obchody, které skutečně prodávají.', icon: <FaShoppingCart /> },
-      { title: 'Landing pages', description: 'Stránky s vysokou mírou konverze.', icon: <FaRocket /> },
-      { title: 'Mobilní optimalizace', description: 'Perfektní zobrazení na mobilních zařízeních.', icon: <FaMobileAlt /> },
-      { title: 'SEO optimalizace', description: 'Weby připravené pro vyhledávače.', icon: <FaSearch /> },
+      { title: 'Responzivní weby', description: 'Weby, které se přizpůsobí mobilu, tabletu i monitoru.', icon: <FaLaptopCode /> },
+      { title: 'UI/UX design', description: 'Návrh rozhraní, ve kterém se návštěvník snadno zorientuje.', icon: <FaUsers /> },
+      { title: 'E-commerce', description: 'Návrh a stavba online obchodů.', icon: <FaShoppingCart /> },
+      { title: 'Landing pages', description: 'Jednostránkové weby pro konkrétní produkt nebo kampaň.', icon: <FaRocket /> },
+      { title: 'Mobilní optimalizace', description: 'Rychlé načítání a pohodlné ovládání na telefonu.', icon: <FaMobileAlt /> },
+      { title: 'SEO optimalizace', description: 'Technický základ, aby web našel Google i Seznam.', icon: <FaSearch /> },
     ],
     gallery: [
       {
@@ -260,7 +260,7 @@ export const SERVICES: Service[] = [
       },
       {
         q: 'Pomůžete s výběrem papíru?',
-        a: 'Ano. Doporučím papír i povrchovou úpravu podle účelu – jinak se chová vizitka, jinak leták nebo obal.',
+        a: 'Ano. Doporučím papír i povrchovou úpravu podle účelu. Jinak se chová vizitka, jinak leták nebo obal.',
       },
     ],
   },
