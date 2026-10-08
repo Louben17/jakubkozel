@@ -3,6 +3,7 @@ import Link from "next/link";
 import { jsonLd, NAME, SITE_URL } from "@/components/seo";
 import Consent, { CookieSettings } from "@/components/Consent";
 import { CONSENT_BOOT, SIG_BOOT } from "@/components/consentKey";
+import Vlna from "@/components/Vlna";
 import { Inter } from 'next/font/google';
 import "./globals.css";
 import "./site.css";
@@ -106,6 +107,7 @@ export default function RootLayout({
         </p>
       </footer>
       <Consent />
+      <Vlna />
      </body>
    </html>   
  );

@@ -17,10 +17,17 @@ html, body {
   box-sizing: border-box;
 }
 
+/* prvky prohlížeče v barvách webu */
+html { scrollbar-color: #c9cad3 #f4f4f8; accent-color: #FF6B73; }
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #f1f1f1; }
-::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #999; }
+::-webkit-scrollbar-track { background: #f4f4f8; }
+::-webkit-scrollbar-thumb { background: #c9cad3; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #9a9dab; }
+::selection { background: #FFD1D4; color: #1d1d24; }
+input, textarea { caret-color: #FF6B73; }
+
+/* odstavce bez osamoceného slova na posledním řádku */
+p, li, dd { text-wrap: pretty; }
 
 a:focus-visible, button:focus-visible {
   outline: 2px solid #FF6B73;
@@ -29,6 +36,7 @@ a:focus-visible, button:focus-visible {
 
 /* Patička */
 .site-footer { padding: 1.5rem 16px; text-align: center; }
+.site-footer p { line-height: 1.7; }
 .site-footer p { margin: 0; font-size: 0.75rem; font-weight: 400; color: #6b7280; }
 .cookie-settings { border: none; background: none; padding: 0; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
 .cookie-settings:hover { color: #1d1d24; }

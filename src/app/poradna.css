@@ -5,7 +5,7 @@
 .pr-list { max-width: 1200px; margin: 0 auto; padding: 1rem 16px 6rem; }
 
 /* karty článků */
-.art-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.art-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 376px)); justify-content: center; gap: 1rem; }
 .art-card {
   display: flex;
   flex-direction: column;
@@ -163,7 +163,6 @@
 .prose .calc-note { margin: 1rem 0 0; font-size: 0.95rem; color: var(--ink-soft); }
 .prose .calc-out > .calc-note:only-child { margin: 0; }
 
-@media (max-width: 960px) { .art-cards { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 860px) {
   .art-hero { padding-top: 84px; }
   .art-hero-card { grid-template-columns: 1fr; border-radius: 24px; }
@@ -179,7 +178,6 @@
   .checklist li { padding-left: 3.8rem; }
   .checklist li::before { left: 1rem; }
 }
-@media (max-width: 560px) { .art-cards { grid-template-columns: 1fr; } }
 
 /* ---------- 3D skládačka DL ---------- */
 .fold { margin: 1.5rem 0 2rem; padding: clamp(1.1rem, 3vw, 1.75rem); border-radius: 28px; background: var(--bg); line-height: 1.5; }
