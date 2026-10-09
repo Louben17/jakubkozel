@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { SERVICES } from './services';
 import { track } from './Consent';
+import { BRIEF_KEY } from './consentKey';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const BUDGETS = ['do 10 000 Kč', '10–30 000 Kč', '30–80 000 Kč', 'nad 80 000 Kč', 'nevím'];
@@ -42,12 +43,19 @@ export default function InquiryForm() {
   const [deadline, setDeadline] = useState('');
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState('');
+  const messageRef = useRef<HTMLTextAreaElement>(null);
 
   // /kontakt?obor=grafika → obor rovnou předvybraný (tlačítka „Nezávazně poptat")
   useEffect(() => {
     const slug = new URLSearchParams(window.location.search).get('obor');
     const s = SERVICES.find((x) => x.slug === slug);
     if (s) setServices([s.label]);
+    // zadání složené v článku Zadání pro grafika se vloží do zprávy
+    try {
+      const brief = sessionStorage.getItem(BRIEF_KEY);
+      if (brief && messageRef.current && !messageRef.current.value) messageRef.current.value = brief;
+      sessionStorage.removeItem(BRIEF_KEY);
+    } catch {}
   }, []);
 
   const toggle = (label: string) =>
@@ -171,6 +179,7 @@ export default function InquiryForm() {
             <label className="field">
               <span>Zpráva *</span>
               <textarea
+                ref={messageRef}
                 name="message"
                 required
                 minLength={10}

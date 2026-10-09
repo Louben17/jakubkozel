@@ -273,3 +273,67 @@
 .pg-card dd { margin: 0; font-size: 0.88rem; color: #33343f; }
 .prose .pg-note { font-size: 0.85rem; color: var(--ink-soft); }
 @media (max-width: 640px) { .pg-list { grid-template-columns: 1fr; } }
+
+/* ---------- průvodce zadáním, kontrola typografie, kontrolní seznam webu ---------- */
+.brief-field { width: 100%; }
+.brief-field input, .brief-field textarea, .brief-text {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.5;
+  resize: vertical;
+}
+.brief-field input:focus, .brief-field textarea:focus { outline: none; border-color: var(--accent); }
+.brief-field input::placeholder, .brief-field textarea::placeholder { color: #8b8e9c; font-weight: 400; }
+.prose .brief-field small { font-size: 0.85rem; color: var(--ink-soft); }
+.brief .calc-seg button { font-size: 0.88rem; padding: 0.45rem 0.8rem; }
+.brief-two { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.brief-text { padding: 0; border: none; background: none; font-size: 0.95rem; white-space: pre-wrap; }
+.brief-text:focus { outline: none; }
+.brief-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin-top: 1rem; }
+.brief-btn { padding: 0.65rem 1.1rem; background: #F4F4F8; font-size: 0.92rem; }
+.brief-btn:hover { background: #EBEBF1; }
+.brief-btn.solid { background: var(--ink); color: #fff; }
+.brief-btn.solid:hover { background: #33343f; }
+
+.prose .typo-sum { margin: 0 0 0.75rem; font-weight: 800; color: var(--ink); }
+.prose .typo-list { margin: 0 0 1rem; padding: 0; list-style: none; display: grid; gap: 0.5rem; }
+.prose .typo-list li { margin: 0; font-size: 0.92rem; line-height: 1.5; color: var(--ink-soft); }
+.typo-list strong { display: block; color: var(--ink); }
+.typo-count { margin-left: 0.3rem; padding: 0.05rem 0.45rem; border-radius: 999px; background: var(--bg); color: var(--ink-accent, var(--ink)); font-size: 0.78rem; }
+.prose .typo-list .typo-hint strong { color: #A3570C; }
+.typo-preview {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border-radius: 14px;
+  background: #F6F6F9;
+  font: inherit;
+  font-size: 0.98rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.typo-preview mark { padding: 0.05rem 0.1rem; border-radius: 4px; background: var(--bg); color: var(--ink-accent, var(--ink)); font-weight: 700; }
+.typo-nb { color: var(--accent); font-weight: 800; }
+.typo-toggle { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.9rem; color: var(--ink-soft); cursor: pointer; }
+.typo-toggle input { width: 1.05rem; height: 1.05rem; accent-color: var(--accent); }
+.fmt-table td.typo-bad { color: #9a9dab; text-decoration: line-through; text-decoration-color: rgba(184, 49, 59, 0.6); }
+
+.webcheck-head { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
+.prose .webcheck-head .typo-sum { margin: 0; }
+.webcheck-bar { flex: 1 1 10rem; height: 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.7); overflow: hidden; }
+.webcheck-bar span { display: block; height: 100%; border-radius: inherit; background: var(--accent); transition: width 0.3s ease; }
+.webcheck-group { margin: 0; padding: 0; border: none; display: grid; gap: 0.4rem; }
+.webcheck-group legend { margin-bottom: 0.5rem; padding: 0; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.webcheck-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.8rem 1rem; border-radius: 14px; background: #fff; font-size: 0.98rem; line-height: 1.45; cursor: pointer; transition: background 0.2s ease; }
+.webcheck-item input { flex: none; width: 1.2rem; height: 1.2rem; margin: 0.1rem 0 0; accent-color: var(--ink-accent, var(--accent)); }
+.webcheck-item.on span { color: var(--ink-soft); text-decoration: line-through; text-decoration-color: var(--accent); }
+.webcheck-item:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 640px) { .brief-two { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .webcheck-bar span { transition: none; } }

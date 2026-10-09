@@ -17,6 +17,96 @@ export type Article = {
 // Poradna – jen metadata (těla článků jsou v ./poradna/*.tsx, ať se nenačítají do podstránek oborů)
 export const ARTICLES: Article[] = [
   {
+    slug: 'zadani-pro-grafika',
+    title: 'Zadání pro grafika: co připravit, aby logo nebo leták vyšly napoprvé',
+    short: 'Zadání pro grafika',
+    description:
+      'Jak napsat zadání pro grafika na logo, vizitky, leták nebo web. Co do zadání patří, jak popsat, co se vám líbí, časté chyby a průvodce, který zadání složí za vás.',
+    lead: 'Grafik ví jen to, co mu napíšete. Co do zadání patří, jak popsat, co se vám líbí, a průvodce, ze kterého vypadne hotový text pro poptávku.',
+    service: 'grafika',
+    published: '2026-10-09',
+    minutes: 7,
+    imageAlt: 'Pracovní stůl grafika: vytištěné zadání se zaškrtanými body, skicák se skicami log, vějíř korálových a tyrkysových vzorků barev a káva',
+    faq: [
+      {
+        q: 'Co má obsahovat zadání pro grafika?',
+        a: 'Co přesně potřebujete a kde se to použije, kdo jste a pro koho výsledek je, jaký dojem má dělat, ukázky toho, co se vám líbí i nelíbí, dostupné podklady (logo, texty, fotky), termín a rozpočet.',
+      },
+      {
+        q: 'Musím mít v zadání rozpočet?',
+        a: 'Přesné číslo ne, ale i rozpětí pomůže. Grafik pak navrhne řešení, které do rozpočtu vejde, místo aby začínal od nejdražší varianty.',
+      },
+      {
+        q: 'Co když nevím, co chci?',
+        a: 'Napište, co víte, a přidejte pár ukázek, které se vám líbí, i z jiných oborů. Zbytek se doladí v rozhovoru. Pomůže i seznam toho, co nechcete.',
+      },
+      {
+        q: 'Jaké podklady poslat k zadání na tiskoviny?',
+        a: 'Hotové texty, logo ve vektoru (SVG, PDF nebo AI), fotky v plném rozlišení, rozměr, počet stran, náklad a případně technické požadavky tiskárny.',
+      },
+    ],
+  },
+  {
+    slug: 'typograficke-chyby',
+    title: 'Česká typografie: nejčastější chyby v textech a jak je opravit',
+    short: 'Typografické chyby',
+    description:
+      'Pomlčka, nebo spojovník? České uvozovky, mezery v datu a číslech, procenta, nezlomitelná mezera. Přehled nejčastějších typografických chyb a kontrola, která je v textu opraví.',
+    lead: 'Spojovník místo pomlčky, anglické uvozovky, „1.500,- Kč“. Přehled chyb, které na letáku nebo webu působí neuspořádaně, a kontrola, která je v textu opraví.',
+    service: 'dtp',
+    published: '2026-10-09',
+    minutes: 7,
+    imageAlt: 'Korektura knižní dvoustrany s modrými korekturními značkami na okrajích, na textu stojí typografická lupa a vedle leží tužka a kovové literky',
+    faq: [
+      {
+        q: 'Jaký je rozdíl mezi pomlčkou a spojovníkem?',
+        a: 'Spojovník (-) je krátký a patří dovnitř slov, například e-mail. Pomlčka (–) je delší a píše se ve větě s mezerami a v rozsazích bez mezer, například 9–17 h.',
+      },
+      {
+        q: 'Píše se 20 % s mezerou, nebo bez?',
+        a: 'Obojí je správně, ale znamená něco jiného. 20 % s mezerou je dvacet procent, 20% bez mezery je dvacetiprocentní. Správně je tedy „sleva 20 %“ i „20% sleva“.',
+      },
+      {
+        q: 'Jak se správně píše datum?',
+        a: 'S mezerami za tečkami: 12. 10. 2026. Mezery by měly být nezlomitelné, aby se datum nerozdělilo na dva řádky.',
+      },
+      {
+        q: 'Jak napsat české uvozovky na klávesnici?',
+        a: 'Na Windows Alt + 0132 pro „ a Alt + 0147 pro “. Word je při nastavené češtině vkládá automaticky.',
+      },
+    ],
+  },
+  {
+    slug: 'web-pro-zivnostnika',
+    title: 'Co musí mít web živnostníka a malé firmy: povinné údaje, GDPR a cookies',
+    short: 'Web pro živnostníka',
+    description:
+      'Povinné údaje na webu podle § 435 občanského zákoníku, GDPR u kontaktního formuláře, cookie lišta, přístupnost e-shopů a co na webu hledají zákazníci. S kontrolním seznamem k odškrtání.',
+    lead: 'IČO v patičce, informace k formuláři, cookie lišta s tlačítkem Odmítnout. Co web malé firmy musí mít ze zákona, co potřebuje kvůli zákazníkům a kontrolní seznam k odškrtání.',
+    service: 'webdesign',
+    published: '2026-10-09',
+    minutes: 8,
+    imageAlt: 'Pult řemeslné pekárny s notebookem a telefonem, na obou jednoduchý web pekárny s fotkou chleba a mátovými tlačítky',
+    faq: [
+      {
+        q: 'Jaké údaje musí být na webu živnostníka?',
+        a: 'Jméno a příjmení, sídlo (místo podnikání), IČO a údaj o zápisu v živnostenském rejstříku. U firmy v obchodním rejstříku i soud, oddíl a vložka. Vyplývá to z § 435 občanského zákoníku.',
+      },
+      {
+        q: 'Musí být na webu DIČ?',
+        a: 'Ne. Občanský zákoník DIČ mezi povinnými údaji na webu neuvádí. Povinné je hlavně na daňových dokladech plátců DPH.',
+      },
+      {
+        q: 'Potřebuji cookie lištu?',
+        a: 'Jen pokud web používá cookies, které nejsou technicky nezbytné, typicky Google Analytics nebo reklamní pixely. Ty se smí spustit až po souhlasu a odmítnout musí jít stejně snadno jako přijmout.',
+      },
+      {
+        q: 'Týká se zákon o přístupnosti i mého webu?',
+        a: 'Zákon č. 424/2023 Sb. se od 28. 6. 2025 týká hlavně e-shopů a dalších služeb pro spotřebitele. Mikropodniky s méně než 10 zaměstnanci a obratem nebo bilanční sumou do 2 milionů eur mají u služeb výjimku.',
+      },
+    ],
+  },
+  {
     slug: 'graficke-programy',
     title: 'Grafické programy 2026: co je zdarma, co se vyplatí platit a co umí AI',
     short: 'Grafické programy',

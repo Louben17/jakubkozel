@@ -8,6 +8,9 @@ import RgbVsCmyk from './rgb-vs-cmyk';
 import FormatyLoga from './formaty-loga';
 import GramazPapiru from './gramaz-papiru';
 import GrafickeProgramy from './graficke-programy';
+import ZadaniProGrafika from './zadani-pro-grafika';
+import TypografickeChyby from './typograficke-chyby';
+import WebProZivnostnika from './web-pro-zivnostnika';
 
 // Těla článků podle slugu (metadata jsou v ../articles.ts)
 export const BODIES: Record<string, ComponentType> = {
@@ -20,4 +23,7 @@ export const BODIES: Record<string, ComponentType> = {
   'formaty-loga': FormatyLoga,
   'gramaz-papiru': GramazPapiru,
   'graficke-programy': GrafickeProgramy,
+  'zadani-pro-grafika': ZadaniProGrafika,
+  'typograficke-chyby': TypografickeChyby,
+  'web-pro-zivnostnika': WebProZivnostnika,
 };
