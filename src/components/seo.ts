@@ -5,6 +5,10 @@ export const NAME = 'Jakub Kozel';
 export const EMAIL = 'jakubkozel@seznam.cz';
 export const PHONE = '+420728890062';
 
+// Povinné údaje podnikatele (§ 435 občanského zákoníku) – patička a strukturovaná data
+export const ICO = '88651011';
+export const ADDRESS = { street: 'Severní 764/50', zip: '500 03', city: 'Hradec Králové' };
+
 // Strukturovaná data (schema.org) – Google z nich pozná, kdo je Jakub Kozel a co dělá
 export const jsonLd = {
   '@context': 'https://schema.org',
@@ -42,6 +46,14 @@ export const jsonLd = {
       telephone: PHONE,
       image: `${SITE_URL}/opengraph-image`,
       founder: { '@id': `${SITE_URL}/#person` },
+      identifier: { '@type': 'PropertyValue', propertyID: 'IČO', value: ICO },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: ADDRESS.street,
+        postalCode: ADDRESS.zip,
+        addressLocality: ADDRESS.city,
+        addressCountry: 'CZ',
+      },
       areaServed: { '@type': 'Country', name: 'Česko' },
       hasOfferCatalog: {
         '@type': 'OfferCatalog',

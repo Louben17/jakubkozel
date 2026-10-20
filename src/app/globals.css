@@ -38,5 +38,6 @@ a:focus-visible, button:focus-visible {
 .site-footer { padding: 1.5rem 16px; text-align: center; }
 .site-footer p { line-height: 1.7; }
 .site-footer p { margin: 0; font-size: 0.75rem; font-weight: 400; color: #6b7280; }
+.site-footer .footer-legal { margin-top: 0.15rem; font-size: 0.7rem; color: #6b7280; }
 .cookie-settings { border: none; background: none; padding: 0; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
 .cookie-settings:hover { color: #1d1d24; }

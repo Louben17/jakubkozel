@@ -11,7 +11,7 @@ web
 - **Malé firmy a živnostníci** z celé ČR, kteří nemají vlastního grafika. Potřebují logo, vizitky, letáky, web nebo jinou tiskovinu, často poprvé. Na web přicházejí z vyhledávání (Google, Seznam), hlavně přes články v Poradně, a rozhodují se, komu zakázku svěří.
 - **Agentury a tiskárny**, které hledají spolehlivého subdodavatele grafiky a DTP. Rozhoduje pro ně, že data projdou kontrolou tiskárny napoprvé a že domluva je rychlá.
 
-Spolupráce probíhá na dálku po celé ČR. Konkrétní město se zatím neuvádí.
+Spolupráce probíhá na dálku po celé ČR. Sídlo (Hradec Králové) je jen v povinných údajích v patičce a ve strukturovaných datech, v textech webu se region nepropaguje.
 
 ## Product Purpose
 
@@ -36,7 +36,8 @@ Osobní web grafického designéra Jakuba Kozla (přes 10 let praxe). Prezentuje
 - Next.js 15 na Vercelu, push do `main` = produkce. Klíč Resend jen v proměnných prostředí, nikdy v kódu ani ve výstupu.
 - Google Analytics (GA4) se načte až po souhlasu v cookie liště.
 - Podpis v úvodu se kreslí jen jednou za návštěvu (výslovné přání).
-- **Neurčeno:** ceník a orientační ceny, lhůty dodání a odpovědi, město nebo region. Nevymýšlet, dodá je Jakub.
+- **Neurčeno:** ceník a orientační ceny, lhůty dodání a odpovědi, cílový region pro marketing. Nevymýšlet, dodá je Jakub.
+- Povinné údaje podnikatele (§ 435 OZ): IČO 88651011, Severní 764/50, 500 03 Hradec Králové, živnostenský rejstřík. Konstanty `ICO` a `ADDRESS` v `src/components/seo.ts`, zobrazené nenápadně v patičce.
 
 ## Brand Commitments
 

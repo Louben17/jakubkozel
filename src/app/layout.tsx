@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
-import { jsonLd, NAME, SITE_URL } from "@/components/seo";
+import { ADDRESS, ICO, jsonLd, NAME, SITE_URL } from "@/components/seo";
 import Consent, { CookieSettings } from "@/components/Consent";
 import { CONSENT_BOOT, SIG_BOOT } from "@/components/consentKey";
 import Vlna from "@/components/Vlna";
@@ -104,6 +104,9 @@ export default function RootLayout({
           © {new Date().getFullYear()} Jakub Kozel – grafika, DTP, weby a tiskoviny / jakubkozel@seznam.cz / 728 890 062
           {' / '}
           <CookieSettings />
+        </p>
+        <p className="footer-legal">
+          Jakub Kozel, IČO {ICO}, {ADDRESS.street}, {ADDRESS.zip} {ADDRESS.city}, zapsán v živnostenském rejstříku
         </p>
       </footer>
       <Consent />
