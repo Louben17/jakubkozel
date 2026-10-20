@@ -17,6 +17,100 @@ export type Article = {
 // Poradna – jen metadata (těla článků jsou v ./poradna/*.tsx, ať se nenačítají do podstránek oborů)
 export const ARTICLES: Article[] = [
   {
+    slug: 'a4-v-pixelech',
+    title: 'A4 v pixelech: kolik px má A4, A3 a A5 při 300, 150, 96 a 72 DPI',
+    short: 'A4 v pixelech',
+    description:
+      'A4 má při 300 DPI 2480 × 3508 px, ve Wordu a Canvě 794 × 1123 px. Rozměry A3, A4, A5 a A6 v pixelech, A4 se spadávkou, poměr stran a převodník formátu na pixely.',
+    lead: 'Pro tisk 2480 × 3508 px, ve Wordu a Canvě 794 × 1123 px. Kolik pixelů má A4, A3 a A5 při různém rozlišení a kterou hodnotu kdy použít.',
+    service: 'tiskoviny',
+    published: '2026-10-20',
+    minutes: 5,
+    imageAlt: 'Vytištěný list A4 s oranžovo-tyrkysovou grafikou vedle monitoru, na kterém je stejný motiv přiblížený až na jednotlivé pixely',
+    faq: [
+      {
+        q: 'Kolik pixelů má A4?',
+        a: 'Při 300 DPI, které se používá pro tisk, má A4 (210 × 297 mm) 2480 × 3508 px. Při 150 DPI 1240 × 1754 px, při 96 DPI (Word, Canva, prohlížeč) 794 × 1123 px a při 72 DPI 595 × 842 px.',
+      },
+      {
+        q: 'Kolik pixelů má A3?',
+        a: 'A3 (297 × 420 mm) má při 300 DPI 3508 × 4961 px a při 150 DPI 1754 × 2480 px.',
+      },
+      {
+        q: 'Kolik pixelů má A5?',
+        a: 'A5 (148 × 210 mm) má při 300 DPI 1748 × 2480 px a při 150 DPI 874 × 1240 px.',
+      },
+      {
+        q: 'Jaký poměr stran má A4?',
+        a: 'A4 má poměr stran 1 : √2, tedy přibližně 1 : 1,414. Stejný poměr mají všechny formáty řady A, proto se dají zmenšovat a zvětšovat bez ořezu.',
+      },
+      {
+        q: 'Kolik megapixelů potřebuje fotka na tisk A4?',
+        a: 'Zhruba 8,7 megapixelu (2480 × 3508 px) pro tisk při 300 DPI. Běžná fotka z telefonu s 12 megapixely stačí s rezervou.',
+      },
+    ],
+  },
+  {
+    slug: 'rozmery-obalek',
+    title: 'Rozměry obálek: C4, C5, C6, DL a B4 a co se do které vejde',
+    short: 'Rozměry obálek',
+    description:
+      'Rozměry obálek C4, C5, C6, DL, C6/5, B4, B5 a B6 v mm. Obálka DL 110 × 220 mm, okénko, zavírání a potisk. S výběrem obálky podle toho, co posíláte.',
+    lead: 'Obálka DL má 110 × 220 mm, C5 162 × 229 mm, C4 229 × 324 mm. Tabulka rozměrů, co se do které obálky vejde a na co myslet u okénka a potisku.',
+    service: 'tiskoviny',
+    published: '2026-10-20',
+    minutes: 5,
+    imageAlt: 'Obálky různých velikostí srovnané na stole od velké obálky na A4 po dlouhou obálku DL s okénkem, vedle přeložený dopis a pohlednice',
+    faq: [
+      {
+        q: 'Jaký rozměr má obálka DL?',
+        a: 'Obálka DL měří 110 × 220 mm. Vejde se do ní list A4 přeložený na třetiny nebo leták DL 99 × 210 mm.',
+      },
+      {
+        q: 'Jakou obálku na A4?',
+        a: 'Na nepřeložené A4 obálku C4 (229 × 324 mm), na silnější obsah B4 (250 × 353 mm). A4 přeložené napůl se vejde do C5, přeložené na třetiny do DL.',
+      },
+      {
+        q: 'Jaký rozměr má obálka C5 a C6?',
+        a: 'C5 měří 162 × 229 mm a je na A5 nebo A4 přeložené napůl. C6 měří 114 × 162 mm a je na A6, například pohlednice.',
+      },
+      {
+        q: 'Jaký je rozdíl mezi obálkou DL a letákem DL?',
+        a: 'Obálka DL má 110 × 220 mm, leták DL 99 × 210 mm. Leták je menší, aby se do obálky vešel. Data letáku proto připravujte na 99 × 210 mm.',
+      },
+    ],
+  },
+  {
+    slug: 'formaty-b',
+    title: 'Formáty B: rozměry B1, B2, B5 a B6 a k čemu se používají',
+    short: 'Formáty B',
+    description:
+      'Rozměry formátů B0–B6 v mm a pixelech. B5 176 × 250 mm, B1 707 × 1000 mm, plakáty 50 × 70 a 70 × 100 cm, rozdíl mezi ISO a japonským B5 (JIS) a porovnání s řadou A v měřítku.',
+    lead: 'B5 má 176 × 250 mm, B1 707 × 1000 mm. Rozměry řady B, k čemu se používá, proč se liší B5 ve Wordu a porovnání s formáty A v měřítku.',
+    service: 'tiskoviny',
+    published: '2026-10-20',
+    minutes: 5,
+    imageAlt: 'Velký plakát s oranžovým a tyrkysovým abstraktním motivem zavěšený na bílé stěně ateliéru, pod ním menší plakát a srolované plakáty v koši',
+    faq: [
+      {
+        q: 'Jaký rozměr má formát B5?',
+        a: 'Mezinárodní B5 měří 176 × 250 mm, je tedy mezi A5 a A4. Japonský B5 (JIS), který nabízí Word, má 182 × 257 mm.',
+      },
+      {
+        q: 'Jaký rozměr má B1?',
+        a: 'B1 měří 707 × 1000 mm. V praxi se plakáty a rámy prodávají v zaokrouhleném rozměru 70 × 100 cm.',
+      },
+      {
+        q: 'Jaký rozměr má B6?',
+        a: 'B6 měří 125 × 176 mm. Používá se u menších knih, bloků a obálek.',
+      },
+      {
+        q: 'Jaký je rozdíl mezi formáty A a B?',
+        a: 'Obě řady mají stejný poměr stran 1 : √2. Formáty B jsou větší: každý leží velikostí mezi dvěma sousedními formáty A, například B4 mezi A4 a A3.',
+      },
+    ],
+  },
+  {
     slug: 'zadani-pro-grafika',
     title: 'Zadání pro grafika: co připravit, aby logo nebo leták vyšly napoprvé',
     short: 'Zadání pro grafika',
@@ -175,7 +269,7 @@ export const ARTICLES: Article[] = [
     lead: 'Kolik milimetrů má A5, kolik pixelů má A4 a jaké rozměry má DL leták, obálka i skládačka. Všechno v tabulkách, skládání DL si můžete vyzkoušet.',
     service: 'tiskoviny',
     published: '2026-10-02',
-    updated: '2026-10-04',
+    updated: '2026-10-20',
     minutes: 4,
     imageAlt: 'Listy papíru od A3 po A7 seřazené podle velikosti, vedle ocelové pravítko a tužka',
     faq: [

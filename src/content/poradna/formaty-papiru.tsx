@@ -117,6 +117,10 @@ export default function FormatyPapiru() {
         plakátů a v tiskárnách jako formát archů.
       </p>
       <FormatTable caption="Rozměry formátů B0–B6" formats={B_FORMATS} />
+      <p>
+        Rozdíl mezi mezinárodním a japonským B5 a porovnání formátů v měřítku najdete v článku{' '}
+        <Link href="/poradna/formaty-b">Formáty B</Link>.
+      </p>
 
       <h2 id="obalky">Obálky: formáty C a DL</h2>
       <p>
@@ -124,6 +128,10 @@ export default function FormatyPapiru() {
         obálka DL na A4 přeložené na třetiny, nebo na leták DL. Pro silnější skládačky je bezpečnější obálka C6/5.
       </p>
       <FormatTable caption="Rozměry obálek C4–C6, DL a C6/5" formats={C_FORMATS} />
+      <p>
+        Jakou obálku zvolit podle toho, co posíláte, a jak je to s okénkem, popisuje článek{' '}
+        <Link href="/poradna/rozmery-obalek">Rozměry obálek</Link>.
+      </p>
 
       <h2 id="dalsi">Další běžné tiskoviny</h2>
       <FormatTable caption="Leták DL, vizitky a karta" formats={OTHER_FORMATS} />
@@ -140,7 +148,9 @@ export default function FormatyPapiru() {
         orientační pro obrazovku, na tisk nestačí.
       </p>
       <p>
-        Jiný rozměr si přepočítáte v <Link href="/poradna/prevod-px-na-mm">kalkulačce px ↔ mm</Link>.
+        Pixely pro A4, A3 a A5 včetně 96 DPI pro Word a Canvu najdete v článku{' '}
+        <Link href="/poradna/a4-v-pixelech">A4 v pixelech</Link>. Jiný rozměr si přepočítáte v{' '}
+        <Link href="/poradna/prevod-px-na-mm">kalkulačce px ↔ mm</Link>.
       </p>
 
       <Callout title="Nezapomeňte na spadávku">
