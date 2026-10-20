@@ -8,7 +8,10 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 // Ukazatel vytíženosti – lišta v přechodu značky se naplní při zobrazení
 export default function Capacity({ delay = 0 }: { delay?: number }) {
-  const { load, status, start } = capacityInfo();
+  // dnešní datum až po hydrataci, aby se HTML ze serveru shodovalo s prvním vykreslením
+  const [now, setNow] = useState<Date>();
+  useEffect(() => setNow(new Date()), []);
+  const { load, status, start } = capacityInfo(now);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-10% 0px' });
   const reduce = useReducedMotion();

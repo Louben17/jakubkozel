@@ -896,3 +896,4 @@
 @media (prefers-reduced-motion: reduce) {
   .cap-dot::after, .cap-fill::after { animation: none; }
 }
+.nf-retry { border: none; background: none; padding: 0; font: inherit; cursor: pointer; }
