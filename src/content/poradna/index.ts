@@ -14,6 +14,9 @@ import WebProZivnostnika from './web-pro-zivnostnika';
 import A4VPixelech from './a4-v-pixelech';
 import RozmeryObalek from './rozmery-obalek';
 import FormatyB from './formaty-b';
+import VelikostQrKodu from './velikost-qr-kodu';
+import VelikostPisma from './velikost-pisma';
+import RozmeryRollUpu from './rozmery-roll-upu';
 
 // Těla článků podle slugu (metadata jsou v ../articles.ts)
 export const BODIES: Record<string, ComponentType> = {
@@ -32,4 +35,7 @@ export const BODIES: Record<string, ComponentType> = {
   'a4-v-pixelech': A4VPixelech,
   'rozmery-obalek': RozmeryObalek,
   'formaty-b': FormatyB,
+  'velikost-qr-kodu': VelikostQrKodu,
+  'velikost-pisma': VelikostPisma,
+  'rozmery-roll-upu': RozmeryRollUpu,
 };

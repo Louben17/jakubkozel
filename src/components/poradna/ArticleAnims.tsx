@@ -319,3 +319,305 @@ export function FormatsAnim() {
     </svg>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/* QR kód – telefon couvá, kód roste: velikost = vzdálenost / 10       */
+/* ------------------------------------------------------------------ */
+
+// pevný „QR“ 21 × 21 (verze 1): tři hledací čtverce + pseudonáhodné moduly (deterministicky kvůli hydrataci)
+const QR_N = 21;
+const QR_CELLS = (() => {
+  const cells: [number, number][] = [];
+  let seed = 7;
+  const rnd = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+  const inFinder = (x: number, y: number) => (x < 8 && y < 8) || (x > 12 && y < 8) || (x < 8 && y > 12);
+  for (let y = 0; y < QR_N; y++) for (let x = 0; x < QR_N; x++) if (!inFinder(x, y) && rnd() < 0.48) cells.push([x, y]);
+  return cells;
+})();
+
+const QrGlyph = memo(function QrGlyph() {
+  const finder = (x: number, y: number) => (
+    <g key={`${x}-${y}`}>
+      <path d={`M${x} ${y}h7v7h-7Z M${x + 1} ${y + 1}v5h5v-5Z`} fillRule="evenodd" fill={INK} />
+      <rect x={x + 2} y={y + 2} width={3} height={3} fill={INK} />
+    </g>
+  );
+  return (
+    <g>
+      <rect x={-1} y={-1} width={QR_N + 2} height={QR_N + 2} fill="#fff" />
+      {finder(0, 0)}
+      {finder(14, 0)}
+      {finder(0, 14)}
+      {QR_CELLS.map(([x, y]) => (
+        <rect key={`${x}-${y}`} x={x} y={y} width={1.04} height={1.04} fill={INK} />
+      ))}
+    </g>
+  );
+});
+
+export function QrAnim() {
+  const [ref, t] = useLoop<SVGSVGElement>(10, 0.84);
+  const out = 1 - ramp(t, 0.92, 0.98);
+  const intro = easeOut(ramp(t, 0, 0.07));
+  const d = 30 + 70 * easeInOut(ramp(t, 0.28, 0.38)) + 100 * easeInOut(ramp(t, 0.58, 0.68)); // cm
+  const s = d * 0.8; // strana kódu v px (svisle zveličeno, poměr drží popisky)
+  const QX = 400;
+  const CY = 140;
+  const px = QX - d * 1.6;
+  const dist = d < 99.5 ? `${Math.round(d)} cm` : `${(d / 100).toFixed(1).replace('.', ',')} m`;
+  const size = `${Math.round(d / 10)} cm`;
+
+  return (
+    <svg ref={ref} viewBox="0 0 600 300" className="illu" aria-hidden="true">
+      <g opacity={out * intro}>
+        <text x={24} y={34} fontSize={15} fontWeight={800} fill={INK}>
+          Vzdálenost : velikost = 10 : 1
+        </text>
+        <text x={24} y={54} fontSize={11.5} fontWeight={600} fill={SOFT}>
+          Telefon vidí kód pořád stejně velký
+        </text>
+
+        {/* zorný kužel z telefonu na hrany kódu */}
+        <path d={`M${px} ${CY} L${QX} ${CY - s / 2} L${QX} ${CY + s / 2} Z`} fill={ORANGE} fillOpacity={0.12} />
+        <g stroke={ORANGE} strokeWidth={1.4} strokeDasharray="4 4">
+          <line x1={px} y1={CY} x2={QX} y2={CY - s / 2} />
+          <line x1={px} y1={CY} x2={QX} y2={CY + s / 2} />
+        </g>
+
+        {/* telefon */}
+        <g transform={`translate(${px - 24} ${CY - 22})`}>
+          <rect width={24} height={44} rx={5} fill={INK} />
+          <rect x={2.5} y={4} width={19} height={34} rx={2.5} fill={TEAL} opacity={0.85} />
+          <rect x={7} y={14} width={10} height={10} rx={1} fill="#fff" />
+        </g>
+
+        {/* kód */}
+        <g transform={`translate(${QX} ${CY - s / 2}) scale(${s / QR_N})`}>
+          <QrGlyph />
+        </g>
+        <rect x={QX} y={CY - s / 2} width={s} height={s} fill="none" stroke={INK} strokeOpacity={0.15} />
+        <text x={QX + s / 2} y={CY - s / 2 - 10} textAnchor="middle" fontSize={15} fontWeight={800} fill={ORANGE_INK}>
+          {size}
+        </text>
+
+        {/* vzdálenost */}
+        <g stroke={SOFT} strokeOpacity={0.6} strokeWidth={1.2}>
+          <line x1={px - 12} y1={262} x2={QX} y2={262} />
+          <line x1={px - 12} y1={256} x2={px - 12} y2={268} />
+          <line x1={QX} y1={256} x2={QX} y2={268} />
+        </g>
+        <text x={(px - 12 + QX) / 2} y={284} textAnchor="middle" fontSize={14} fontWeight={800} fill={INK}>
+          {dist}
+        </text>
+      </g>
+    </svg>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Velikost písma – kuželka, verzálka, x-výška; stejné body, jiná x-výška */
+/* ------------------------------------------------------------------ */
+export function TypeSizeAnim() {
+  const [ref, t] = useLoop<SVGSVGElement>(10, 0.86);
+  const out = 1 - ramp(t, 0.92, 0.98);
+  const box = easeOut(ramp(t, 0, 0.1));
+  const H = easeOut(ramp(t, 0.08, 0.18));
+  const X = easeOut(ramp(t, 0.16, 0.26));
+  const cmp = easeOut(ramp(t, 0.52, 0.62));
+  const bars = easeInOut(ramp(t, 0.64, 0.74));
+  const per = 2 * (210 + 200);
+
+  // kuželka 200 px (y 40–240), účaří y 200, verzálka 70 % (y 60), x-výška 50 % (y 100)
+  const lines = [
+    { y: 60, label: 'výška verzálky ≈ 70 %', a: 0.28 },
+    { y: 100, label: 'x-výška', a: 0.34 },
+    { y: 200, label: 'účaří', a: 0.4 },
+  ];
+  const xs = [
+    { x: 410, xh: 0.44 },
+    { x: 500, xh: 0.56 },
+  ];
+
+  return (
+    <svg ref={ref} viewBox="0 0 600 300" className="illu" aria-hidden="true">
+      <g opacity={out}>
+        {/* kuželka */}
+        <rect
+          x={40}
+          y={40}
+          width={210}
+          height={200}
+          fill="#fff"
+          fillOpacity={0.7 * box}
+          stroke={INK}
+          strokeOpacity={0.35}
+          strokeWidth={1.3}
+          strokeDasharray={per}
+          strokeDashoffset={per * (1 - box)}
+        />
+        <text x={145} y={262} textAnchor="middle" fontSize={12} fontWeight={700} fill={SOFT} opacity={box}>
+          kuželka = velikost písma v bodech
+        </text>
+
+        {/* H a x poskládané z tahů, aby přesně seděly na linky */}
+        <g fill={INK} opacity={H} transform={`translate(0 ${(1 - H) * 10})`}>
+          <rect x={62} y={60} width={20} height={140} />
+          <rect x={132} y={60} width={20} height={140} />
+          <rect x={62} y={121} width={90} height={18} />
+        </g>
+        <clipPath id="ts-x">
+          <rect x={164} y={100} width={74} height={100} />
+        </clipPath>
+        <g opacity={X} transform={`translate(0 ${(1 - X) * 10})`}>
+          <g clipPath="url(#ts-x)" stroke={INK} strokeWidth={19}>
+            <line x1={170} y1={94} x2={232} y2={206} />
+            <line x1={232} y1={94} x2={170} y2={206} />
+          </g>
+        </g>
+
+        {lines.map((l) => {
+          const o = easeOut(ramp(t, l.a, l.a + 0.06));
+          return (
+            <g key={l.y} opacity={o}>
+              <line x1={40} y1={l.y} x2={lerp(40, 340, o)} y2={l.y} stroke={ORANGE} strokeWidth={1.4} strokeDasharray="5 4" />
+              <text x={262} y={l.y - 6} fontSize={11.5} fontWeight={700} fill={ORANGE_INK}>
+                {l.label}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* stejných 12 bodů, jiná x-výška */}
+        <g opacity={cmp} transform={`translate(${(1 - cmp) * 16} 0)`}>
+          <text x={490} y={104} textAnchor="middle" fontSize={13} fontWeight={800} fill={INK}>
+            obě 12 bodů
+          </text>
+          {xs.map((p) => {
+            const h = p.xh * 100;
+            return (
+              <g key={p.x}>
+                <rect x={p.x - 10} y={120} width={80} height={100} fill="none" stroke={INK} strokeOpacity={0.25} strokeDasharray="3 3" />
+                <rect x={p.x - 6} y={200 - h * bars} width={4} height={h * bars} rx={2} fill={TEAL} />
+                <clipPath id={`ts-c${p.x}`}>
+                  <rect x={p.x + 2} y={200 - h} width={h} height={h} />
+                </clipPath>
+                <g clipPath={`url(#ts-c${p.x})`} stroke={INK} strokeWidth={h * 0.18}>
+                  <line x1={p.x + 5} y1={196 - h} x2={p.x + h - 1} y2={204} />
+                  <line x1={p.x + h - 1} y1={196 - h} x2={p.x + 5} y2={204} />
+                </g>
+                <text x={p.x + 30} y={238} textAnchor="middle" fontSize={11.5} fontWeight={700} fill="#1D7968" opacity={bars}>
+                  x-výška {Math.round(p.xh * 100)} %
+                </text>
+              </g>
+            );
+          })}
+        </g>
+
+        <text x={490} y={276} textAnchor="middle" fontSize={12.5} fontWeight={800} fill={ORANGE_INK} opacity={easeOut(ramp(t, 0.44, 0.5))}>
+          1 bod = 0,353 mm
+        </text>
+      </g>
+    </svg>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Roll-up – vytažení z kazety, člověk pro měřítko, zóny viditelnosti   */
+/* ------------------------------------------------------------------ */
+const RU_FLOOR = 272;
+const ru = (cm: number) => RU_FLOOR - cm * 1.1; // výška nad zemí v cm → y
+
+export function RollupAnim() {
+  const [ref, t] = useLoop<SVGSVGElement>(10, 0.86);
+  const out = 1 - ramp(t, 0.92, 0.98);
+  const cas = easeOut(ramp(t, 0, 0.06));
+  const ext = easeInOut(ramp(t, 0.06, 0.3));
+  const person = easeOut(ramp(t, 0.28, 0.36));
+  const eye = easeOut(ramp(t, 0.36, 0.42));
+  const table = easeOut(ramp(t, 0.64, 0.72));
+  const BX = 153;
+  const BW = 94;
+  const top = ru(7) - 220 * ext;
+  const zones = [
+    { from: 140, to: 207, c: TEAL, label: '140–200 cm: logo, sdělení', ink: '#1D7968', a: 0.44 },
+    { from: 80, to: 140, c: ORANGE, label: '80–140 cm: text, QR kód', ink: ORANGE_INK, a: 0.52 },
+    { from: 7, to: 80, c: SOFT, label: 'pod 80 cm: schová stůl', ink: SOFT, a: 0.6 },
+  ];
+
+  return (
+    <svg ref={ref} viewBox="0 0 600 300" className="illu" aria-hidden="true">
+      <g opacity={out}>
+        <line x1={40} y1={RU_FLOOR} x2={560} y2={RU_FLOOR} stroke={INK} strokeOpacity={0.15} />
+
+        {/* banner se vysouvá z kazety: obsah jede nahoru s horní hranou */}
+        <clipPath id="ru-banner">
+          <rect x={BX} y={top} width={BW} height={Math.max(0, ru(7) - top)} />
+        </clipPath>
+        <g clipPath="url(#ru-banner)">
+          <g transform={`translate(0 ${top - ru(207)})`}>
+            <rect x={BX} y={ru(207)} width={BW} height={220} fill="#fff" />
+            <circle cx={BX + 72} cy={ru(186)} r={30} fill={ORANGE} />
+            <rect x={BX + 12} y={ru(172)} width={50} height={7} rx={3.5} fill={INK} opacity={0.75} />
+            <rect x={BX + 12} y={ru(162)} width={36} height={5} rx={2.5} fill={INK} opacity={0.4} />
+            <path d={`M${BX} ${ru(60)} Q${BX + 40} ${ru(90)} ${BX + BW} ${ru(70)} V${ru(0)} H${BX} Z`} fill={TEAL} />
+            <rect x={BX + 12} y={ru(118)} width={60} height={4} rx={2} fill={INK} opacity={0.3} />
+            <rect x={BX + 12} y={ru(111)} width={48} height={4} rx={2} fill={INK} opacity={0.3} />
+            <rect x={BX + 60} y={ru(104)} width={22} height={22} rx={2} fill={INK} opacity={0.7} />
+          </g>
+          {zones.map((z) => (
+            <rect
+              key={z.from}
+              x={BX}
+              y={ru(z.to)}
+              width={BW}
+              height={(z.to - z.from) * 1.1}
+              fill={z.c}
+              opacity={0.22 * easeOut(ramp(t, z.a, z.a + 0.06))}
+            />
+          ))}
+        </g>
+        <rect x={BX - 2} y={top - 3} width={BW + 4} height={4} rx={2} fill="#B9BCC6" opacity={cas} />
+        {/* kazeta */}
+        <rect x={BX - 6} y={ru(7)} width={BW + 12} height={RU_FLOOR - ru(7)} rx={3} fill="#C9CCD4" opacity={cas} />
+
+        {/* člověk 175 cm */}
+        <g opacity={person} fill={SOFT} fillOpacity={0.45} transform={`translate(0 ${(1 - person) * 8})`}>
+          <circle cx={292} cy={ru(164)} r={11} />
+          <rect x={276} y={ru(150)} width={32} height={60 * 1.1} rx={12} />
+          <rect x={279} y={ru(95)} width={11} height={95 * 1.1} rx={5} />
+          <rect x={294} y={ru(95)} width={11} height={95 * 1.1} rx={5} />
+        </g>
+        <text x={292} y={ru(180)} textAnchor="middle" fontSize={11} fontWeight={700} fill={SOFT} opacity={person}>
+          175 cm
+        </text>
+
+        {/* výška očí */}
+        <g opacity={eye}>
+          <line x1={112} y1={ru(160)} x2={lerp(112, 316, eye)} y2={ru(160)} stroke={INK} strokeOpacity={0.5} strokeDasharray="3 4" />
+          <text x={108} y={ru(160) + 4} textAnchor="end" fontSize={11} fontWeight={700} fill={INK}>
+            oči 160 cm
+          </text>
+        </g>
+
+        {/* stůl před roll-upem */}
+        <g opacity={table} transform={`translate(0 ${(1 - table) * 10})`}>
+          <rect x={118} y={ru(75)} width={150} height={8} rx={2} fill="#E7DCCD" />
+          <rect x={124} y={ru(75) + 8} width={138} height={75 * 1.1 - 8} fill="#F4EDE3" stroke="#E7DCCD" />
+        </g>
+
+        {/* legenda zón */}
+        {zones.map((z, i) => {
+          const o = easeOut(ramp(t, z.a, z.a + 0.06));
+          return (
+            <g key={z.label} opacity={o} transform={`translate(${lerp(388, 380, o)} ${[92, 160, 228][i]})`}>
+              <rect x={-16} y={-10} width={10} height={10} rx={2} fill={z.c} opacity={0.6} />
+              <text fontSize={12} fontWeight={700} fill={z.ink}>
+                {z.label}
+              </text>
+            </g>
+          );
+        })}
+      </g>
+    </svg>
+  );
+}

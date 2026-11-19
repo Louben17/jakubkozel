@@ -17,6 +17,108 @@ export type Article = {
 // Poradna – jen metadata (těla článků jsou v ./poradna/*.tsx, ať se nenačítají do podstránek oborů)
 export const ARTICLES: Article[] = [
   {
+    slug: 'velikost-qr-kodu',
+    title: 'Velikost QR kódu pro tisk: jak malý může být na vizitce, letáku i plakátu',
+    short: 'Velikost QR kódu',
+    description:
+      'Nejmenší QR kód pro tisk má 2 × 2 cm, větší podle pravidla vzdálenost / 10. Velikost pro vizitku, leták, plakát i výlohu, ochranná zóna, barvy, logo uprostřed a kalkulačka podle délky odkazu.',
+    lead: 'Na vizitce stačí 2 × 2 cm, plakát ve výloze potřebuje 20 cm. Jak velký QR kód tisknout, proč záleží na délce odkazu a co ho spolehlivě rozbije.',
+    service: 'tiskoviny',
+    published: '2026-11-19',
+    minutes: 6,
+    imageAlt: 'Ruka drží telefon a skenuje QR kód na plakátu s oranžovými a tyrkysovými tvary na stěně kavárny',
+    faq: [
+      {
+        q: 'Jaká je minimální velikost QR kódu?',
+        a: 'Pro tisk zhruba 2 × 2 cm bez ochranné zóny, a to jen s krátkým odkazem. Dlouhý odkaz udělá kód hustší a ten pak musí být větší, aby měl každý čtvereček aspoň 0,5 mm.',
+      },
+      {
+        q: 'Jak velký QR kód na vizitku?',
+        a: 'Na vizitku 2 až 2,5 cm. Vizitka se skenuje z 20 až 30 cm, takže větší kód není potřeba. Použijte co nejkratší odkaz.',
+      },
+      {
+        q: 'Jak velký QR kód na plakát?',
+        a: 'Strana kódu má být aspoň desetina vzdálenosti, ze které se skenuje. Plakát na nástěnce, ke kterému lidé přijdou na metr, potřebuje kód 10 cm, plakát ve výloze čtený ze dvou metrů 20 cm.',
+      },
+      {
+        q: 'Jak velká má být ochranná zóna kolem QR kódu?',
+        a: 'Okraj o šířce čtyř čtverečků kódu na každé straně. U malého kódu je to 3 až 4 mm. V té zóně nesmí být text ani grafika.',
+      },
+      {
+        q: 'Může být QR kód barevný?',
+        a: 'Ano, pokud jsou čtverečky tmavé a podklad světlý s dostatečným kontrastem. Tmavě modrá nebo hnědá fungují, žlutá a pastelové barvy ne.',
+      },
+    ],
+  },
+  {
+    slug: 'velikost-pisma',
+    title: 'Velikost písma v tisku: kolik bodů na vizitku, leták, knihu i plakát',
+    short: 'Velikost písma',
+    description:
+      'Běžný text v tisku má 9–12 bodů, kontakty na vizitce 7–9 bodů. Kolik milimetrů má bod, tabulka velikostí písma pro tiskoviny, proč 10 bodů nevypadá všude stejně a kalkulačka podle vzdálenosti čtení.',
+    lead: 'Leták a kniha se sází v 9 až 12 bodech, kontakty na vizitce v 7 až 9. Kolik to je milimetrů, proč stejná velikost vypadá v různých písmech jinak a jak velký nadpis potřebuje plakát.',
+    service: 'dtp',
+    published: '2026-11-19',
+    minutes: 6,
+    imageAlt: 'Dřevěné tiskařské typy seřazené od největšího po nejmenší na lněném ubrusu, vedle oranžový váleček a plechovka tyrkysové barvy',
+    faq: [
+      {
+        q: 'Jaká je běžná velikost písma v tisku?',
+        a: 'Pro souvislý text 9 až 12 bodů. Knihy se obvykle sází v 10 až 12 bodech, letáky a katalogy v 9 až 11 bodech.',
+      },
+      {
+        q: 'Kolik milimetrů má 12 bodů?',
+        a: 'Jeden bod má 0,353 mm, 12 bodů tedy 4,23 mm. To je ale výška kuželky. Velké písmeno je vysoké asi 70 % z toho, zhruba 3 mm.',
+      },
+      {
+        q: 'Jaká je nejmenší čitelná velikost písma?',
+        a: 'V tisku asi 6 bodů pro drobné písmo, jako jsou obchodní podmínky. Text, který mají lidé opravdu číst, by neměl mít méně než 8 bodů, kontakty na vizitce aspoň 7.',
+      },
+      {
+        q: 'Jak velké písmo na vizitku?',
+        a: 'Jméno 9 až 12 bodů, kontakty a ostatní text 7 až 9 bodů. U písma s nízkými malými písmeny volte horní hranici.',
+      },
+      {
+        q: 'Jak velké písmo na plakát?',
+        a: 'Záleží na vzdálenosti. Pro pohodlné čtení má být velké písmeno vysoké asi 1/120 vzdálenosti, nadpis asi trojnásobek. Plakát A3 čtený z metru potřebuje text aspoň 14 bodů a nadpis kolem 100 bodů.',
+      },
+    ],
+  },
+  {
+    slug: 'rozmery-roll-upu',
+    title: 'Rozměry roll-upu: 85 × 200, 100 × 200 i 120 × 200 cm a jak připravit grafiku',
+    short: 'Rozměry roll-upu',
+    description:
+      'Nejběžnější roll-up má 85 × 200 cm. Rozměry roll-upů, tisková data s přesahem do kazety, rozlišení v pixelech, kam dát logo a hlavní sdělení, jak velké písmo a plánovač v měřítku.',
+    lead: 'Nejběžnější roll-up má 85 × 200 cm, širší 100 nebo 120 × 200 cm. Jaký rozměr dat chce tiskárna, kterou část grafiky nikdo neuvidí a kam dát logo, aby bylo vidět i přes stůl.',
+    service: 'tiskoviny',
+    published: '2026-11-19',
+    minutes: 6,
+    imageAlt: 'Dva roll-upy s oranžovými a tyrkysovými geometrickými tvary ve světlém foyer konferenčního centra',
+    faq: [
+      {
+        q: 'Jaký je nejběžnější rozměr roll-upu?',
+        a: '85 × 200 cm (šířka × výška viditelné grafiky). Dál se běžně prodávají šířky 60, 80, 100, 120 a 150 cm.',
+      },
+      {
+        q: 'Jaký rozměr mají tisková data roll-upu?',
+        a: 'Záleží na tiskárně. K viditelným 850 × 2000 mm se často přidává 5 až 15 cm přesahu do kazety a případně spadávka. Vždy si stáhněte šablonu tiskárny, u které tisknete.',
+      },
+      {
+        q: 'V jakém rozlišení připravit grafiku na roll-up?',
+        a: 'V měřítku 1 : 1, fotky v rozlišení 100 až 150 DPI ve finální velikosti. Roll-up 85 × 200 cm má při 150 DPI 5020 × 11 811 px.',
+      },
+      {
+        q: 'Kam umístit logo na roll-upu?',
+        a: 'Do horní třetiny, zhruba 140 až 200 cm nad zemí. Tam je výška očí a logo nezakryje stůl ani lidé. K hornímu okraji ale nechte pár centimetrů kvůli liště.',
+      },
+      {
+        q: 'Jak velké písmo na roll-up?',
+        a: 'Nadpis 200 až 300 bodů, text 36 až 60 bodů, web a telefon aspoň 48 bodů. Text pod 30 bodů se z dálky skoro nečte.',
+      },
+    ],
+  },
+  {
     slug: 'a4-v-pixelech',
     title: 'A4 v pixelech: kolik px má A4, A3 a A5 při 300, 150, 96 a 72 DPI',
     short: 'A4 v pixelech',
